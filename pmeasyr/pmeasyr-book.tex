@@ -25,7 +25,7 @@
 \usepackage{hyperref}
 \hypersetup{unicode=true,
             pdftitle={Traitement des données PMSI avec R},
-            pdfauthor={Guillaume Pressiat},
+            pdfauthor={Guillaume Pressiat \textbar{}\textbar{} SIMAP / DOMU / Assistance Publique - Hôpitaux de Paris},
             pdfborder={0 0 0},
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
@@ -119,12 +119,13 @@
   \title{Traitement des données PMSI avec R}
   \pretitle{\vspace{\droptitle}\centering\huge}
   \posttitle{\par}
-  \author{Guillaume Pressiat}
+  \author{Guillaume Pressiat \textbar{}\textbar{} SIMAP / DOMU / Assistance
+Publique - Hôpitaux de Paris}
   \preauthor{\centering\large\emph}
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-02-10}
+  \date{2017-02-11}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -144,32 +145,27 @@
 }
 \chapter{Introduction}\label{introduction}
 
-Ce livre numérique présente des exemples de traitements de données PMSI
+Ce livret numérique présente des exemples de traitements de données PMSI
 avec R. L'objectif est de concentrer ici :
 
 \begin{itemize}
-\tightlist
 \item
   une documentation permettant de débuter avec l'import de données via
-  le package \emph{pmeasyr}
-\end{itemize}
+  le package \href{https://github.com/IM-APHP/pmeasyr}{\emph{pmeasyr}}
+\item
+  des exemples d'analyses PMSI :
 
-et des exemples d'analyses PMSI :
-
-\begin{itemize}
-\tightlist
-\item
-  étude de la durée moyenne de séjour
-\item
-  requêtes sur les diagnostics et les actes
-\item
-  analyse des files actives pour une pathologie
-\item
-  chainage PMSI de patients
-\item
-  reporting de l'activité
-\item
-  visualisation graphiques, cartographies
+  \begin{itemize}
+  \tightlist
+  \item
+    requêtes sur les diagnostics et les actes
+  \item
+    statistiques élementaires sur des variables du PMSI
+  \item
+    analyse des files actives pour une pathologie
+  \item
+    analyse du case-mix et de la dms par ghm
+  \end{itemize}
 \end{itemize}
 
 \chapter{Contexte et motivations}\label{contexte}
@@ -235,8 +231,8 @@ le logiciel :
   en équipe.
 \end{itemize}
 
-**NB: Données In / Out : données en entrée / sortie des logiciels de
-l'ATIH*
+\emph{NB: Données In / Out : données en entrée / sortie des logiciels de
+l'ATIH}
 
 \subsection{Des outils performants}\label{des-outils-performants}
 
@@ -427,7 +423,7 @@ en parametre le nom de l'archive\strut
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Dezippage uniquement des fichiers rss, dmi et med du in 2014}
+\CommentTok{# Dezippage uniquement des fichiers rss, dmi et med du in 2015}
 \CommentTok{# Ex: 750100042.2015.12.20160130.153012.out.zip}
 \NormalTok{pmeasyr::}\KeywordTok{adezip}\NormalTok{(}\DataTypeTok{finess =} \DecValTok{750100042}\NormalTok{, }
                 \DataTypeTok{annee =} \DecValTok{2015}\NormalTok{, }
@@ -445,11 +441,11 @@ en parametre le nom de l'archive\strut
 \emph{in}}
 \end{figure}
 
-\section{adelete : effacer}\label{adelete-effacer}
+\section{Suppression}\label{suppression}
 
 À la fin d'une étude, il est inutile de garder les fichiers dézippés
-hors de l'archives, on peut les effacern c'est ce que permet la fonction
-\texttt{adelete()}.
+hors de l'archives, on peut les effacer : c'est ce que permet la
+fonction \texttt{adelete()}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -891,8 +887,8 @@ la liste
 \end{Highlighting}
 \end{Shaded}
 
-\section{Exemple 2 : recherche de codes actes de pose de
-PAC}\label{exemple-2-recherche-de-codes-actes-de-pose-de-pac}
+\section{Exemple 2 : recherche de codes
+actes}\label{exemple-2-recherche-de-codes-actes}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -962,10 +958,6 @@ pathologie}\label{file-active-dune-pathologie}
 \KeywordTok{distinct}\NormalTok{(patients_cob, NOANON) %>%}\StringTok{ }\KeywordTok{nrow}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
-
-\chapter{Chaînage PMSI}\label{chainage-pmsi}
-
-Nous allons ici chaîner les données MCO aux données HAD.
 
 \chapter{Fichier TRA}\label{fichier-tra}
 
