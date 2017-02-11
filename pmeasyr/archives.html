@@ -114,7 +114,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.3" data-path="contexte.html"><a href="contexte.html#installation-du-package"><i class="fa fa-check"></i><b>2.3</b> Installation du package</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="archives.html"><a href="archives.html"><i class="fa fa-check"></i><b>3</b> Les archives PMSI</a><ul>
-<li class="chapter" data-level="3.1" data-path="archives.html"><a href="archives.html#gestion-des-archives-dans-des-repertoires"><i class="fa fa-check"></i><b>3.1</b> Gestion des archives dans des répertoires</a></li>
+<li class="chapter" data-level="3.1" data-path="archives.html"><a href="archives.html#arborescence-des-archives"><i class="fa fa-check"></i><b>3.1</b> Arborescence des archives</a></li>
 <li class="chapter" data-level="3.2" data-path="archives.html"><a href="archives.html#informations-sur-les-archives"><i class="fa fa-check"></i><b>3.2</b> Informations sur les archives</a></li>
 <li class="chapter" data-level="3.3" data-path="archives.html"><a href="archives.html#dezippage"><i class="fa fa-check"></i><b>3.3</b> Dézippage</a></li>
 <li class="chapter" data-level="3.4" data-path="archives.html"><a href="archives.html#suppression"><i class="fa fa-check"></i><b>3.4</b> Suppression</a></li>
@@ -132,7 +132,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.6" data-path="import-des-donnees.html"><a href="import-des-donnees.html#dictionnaire-de-variables"><i class="fa fa-check"></i><b>4.6</b> Dictionnaire de variables</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="requetes-sur-des-pathologies-actes.html"><a href="requetes-sur-des-pathologies-actes.html"><i class="fa fa-check"></i><b>5</b> Requêtes sur des pathologies / actes</a><ul>
-<li class="chapter" data-level="5.1" data-path="requetes-sur-des-pathologies-actes.html"><a href="requetes-sur-des-pathologies-actes.html#fonction-de-transposition-des-codes-diagnostics"><i class="fa fa-check"></i><b>5.1</b> Fonction de transposition des codes diagnostics</a></li>
+<li class="chapter" data-level="5.1" data-path="requetes-sur-des-pathologies-actes.html"><a href="requetes-sur-des-pathologies-actes.html#transposition-des-codes-diagnostics"><i class="fa fa-check"></i><b>5.1</b> Transposition des codes diagnostics</a></li>
 <li class="chapter" data-level="5.2" data-path="requetes-sur-des-pathologies-actes.html"><a href="requetes-sur-des-pathologies-actes.html#exemple-1-recherche-de-codes-diagnostics-depilepsie"><i class="fa fa-check"></i><b>5.2</b> Exemple 1 : recherche de codes diagnostics d’épilepsie</a></li>
 <li class="chapter" data-level="5.3" data-path="requetes-sur-des-pathologies-actes.html"><a href="requetes-sur-des-pathologies-actes.html#exemple-2-recherche-de-codes-actes"><i class="fa fa-check"></i><b>5.3</b> Exemple 2 : recherche de codes actes</a></li>
 </ul></li>
@@ -148,6 +148,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.4" data-path="fichier-tra.html"><a href="fichier-tra.html#ajout-du-tra-en-psy"><i class="fa fa-check"></i><b>7.4</b> Ajout du TRA en PSY</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="statistiques-du-pmsi.html"><a href="statistiques-du-pmsi.html"><i class="fa fa-check"></i><b>8</b> Statistiques du PMSI</a></li>
+<li class="chapter" data-level="9" data-path="help.html"><a href="help.html"><i class="fa fa-check"></i><b>9</b> Help</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Publié avec bookdown</a></li>
 
@@ -172,8 +173,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1><span class="header-section-number">3</span> Les archives PMSI</h1>
 <p>Cette partie aborde le point de départ des études PMSI : les archives PMSI. Ces archives sont les fichiers en entrées / sorties des logiciels de l’ATIH.</p>
 <p>Les manuels techniques de ces logiciels,relatifs aux champs MCO, SSR, HAD, PSY et RSF, respectivement <a href="http://atih.sante.fr/plateformes-de-transmission-et-logiciels/logiciels-espace-de-telechargement#G">Genrsa</a>, <a href="http://atih.sante.fr/plateformes-de-transmission-et-logiciels/logiciels-espace-de-telechargement#G">Genrha</a>, <a href="http://atih.sante.fr/plateformes-de-transmission-et-logiciels/logiciels-espace-de-telechargement#P">Paprica</a>, <a href="http://atih.sante.fr/plateformes-de-transmission-et-logiciels/logiciels-espace-de-telechargement#P">Pivoine</a> et <a href="http://atih.sante.fr/plateformes-de-transmission-et-logiciels/logiciels-espace-de-telechargement#P">Preface</a> sont disponibnles dans l’<a href="http://atih.sante.fr/plateformes-de-transmission-et-logiciels/logiciels-espace-de-telechargement">espace de telechargement</a> sur le site de l’ATIH.</p>
-<div id="gestion-des-archives-dans-des-repertoires" class="section level2">
-<h2><span class="header-section-number">3.1</span> Gestion des archives dans des répertoires</h2>
+<div id="arborescence-des-archives" class="section level2">
+<h2><span class="header-section-number">3.1</span> Arborescence des archives</h2>
 <p>Le package <em>pmeasyr</em> prend en charge les données des quatre champs PMSI MCO, SSR, HAD, PSY ainsi que les RSF.</p>
 <p>Placer les archives dans un répertoire, par exemple ici dans <code>~/Documents/data/mco</code> :</p>
 <div class="figure">
@@ -219,7 +220,7 @@ pmeasyr::<span class="kw">astat</span>(<span class="dt">path =</span> <span clas
 <li><code>finess.annee.mois.date_et_heure_de_creation.in.zip</code></li>
 <li><code>finess.annee.mois.date_et_heure_de_creation.out.zip</code></li>
 </ul>
-<p>Les fonctions permettent de dezipper les fichiers depuis <code>R</code> en ligne de commande, sans intervention manuelle de l’utilisateur. L’avantage est d’obtenir un processus ne relevant pas d’interventions externes au logiciel <code>R</code> (pour pouvoir garder trace des etapes, et faciliter la reproduction, tout est inscrit dans un programme, dans un flux de processus). Une fois que les traitements et analyses sur les fichiers sont faits, il est possible d’effacer les archives egalement en ligne de commande.</p>
+<p>Les fonctions permettent de dézipper les fichiers depuis <code>R</code> en ligne de commande, sans intervention manuelle de l’utilisateur. L’avantage est d’obtenir un processus ne relevant pas d’interventions externes au logiciel <code>R</code> (pour pouvoir garder trace des etapes, et faciliter la reproduction, tout est inscrit dans un programme, dans un flux de processus). Une fois que les traitements et analyses sur les fichiers sont faits, il est possible d’effacer les archives également en ligne de commande.</p>
 <p>Le nom des fonctions dont l’objectif est de manipuler les <strong>a</strong>rchives commence par <strong>a</strong>.</p>
 <table>
 <colgroup>
@@ -270,7 +271,7 @@ pmeasyr::<span class="kw">adezip</span>(<span class="dt">finess =</span> <span c
 </div>
 <div id="suppression" class="section level2">
 <h2><span class="header-section-number">3.4</span> Suppression</h2>
-<p>À la fin d’une étude, il est inutile de garder les fichiers dézippés hors de l’archives, on peut les effacer : c’est ce que permet la fonction <code>adelete()</code>.</p>
+<p>À la fin d’une étude, il est inutile de garder les fichiers dézippés hors de l’archive, on peut les effacer : c’est ce que permet la fonction <code>adelete()</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Effacer les fichiers</span>
 pmeasyr::<span class="kw">adelete</span>(<span class="dt">finess =</span> <span class="dv">750100042</span>, 
                  <span class="dt">annee =</span> <span class="dv">2015</span>, 

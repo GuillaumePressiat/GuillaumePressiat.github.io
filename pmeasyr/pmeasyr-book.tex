@@ -291,8 +291,7 @@ sont disponibnles dans
 l'\href{http://atih.sante.fr/plateformes-de-transmission-et-logiciels/logiciels-espace-de-telechargement}{espace
 de telechargement} sur le site de l'ATIH.
 
-\section{Gestion des archives dans des
-répertoires}\label{gestion-des-archives-dans-des-repertoires}
+\section{Arborescence des archives}\label{arborescence-des-archives}
 
 Le package \emph{pmeasyr} prend en charge les données des quatre champs
 PMSI MCO, SSR, HAD, PSY ainsi que les RSF.
@@ -366,13 +365,13 @@ fichiers de type :
   \texttt{finess.annee.mois.date\_et\_heure\_de\_creation.out.zip}
 \end{itemize}
 
-Les fonctions permettent de dezipper les fichiers depuis \texttt{R} en
+Les fonctions permettent de dézipper les fichiers depuis \texttt{R} en
 ligne de commande, sans intervention manuelle de l'utilisateur.
 L'avantage est d'obtenir un processus ne relevant pas d'interventions
 externes au logiciel \texttt{R} (pour pouvoir garder trace des etapes,
 et faciliter la reproduction, tout est inscrit dans un programme, dans
 un flux de processus). Une fois que les traitements et analyses sur les
-fichiers sont faits, il est possible d'effacer les archives egalement en
+fichiers sont faits, il est possible d'effacer les archives également en
 ligne de commande.
 
 Le nom des fonctions dont l'objectif est de manipuler les
@@ -444,8 +443,8 @@ en parametre le nom de l'archive\strut
 \section{Suppression}\label{suppression}
 
 À la fin d'une étude, il est inutile de garder les fichiers dézippés
-hors de l'archives, on peut les effacer : c'est ce que permet la
-fonction \texttt{adelete()}.
+hors de l'archive, on peut les effacer : c'est ce que permet la fonction
+\texttt{adelete()}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -502,11 +501,11 @@ Nom & Fonction\tabularnewline
 \bottomrule
 \end{longtable}
 
-Les donnees in / out sont prises en charge.
+Les données in / out sont prises en charge.
 
 \subsection{RSA}\label{rsa}
 
-Selon la nature des analyses a produire, plusieurs types d'imports sont
+Selon la nature des analyses à produire, plusieurs types d'imports sont
 possibles :
 
 \begin{longtable}[]{@{}rl@{}}
@@ -590,7 +589,7 @@ Les tables sont par défaut avec des libellés :
 \end{Highlighting}
 \end{Shaded}
 
-Selon la nature des analyses a produire, plusieurs types d'imports sont
+Selon la nature des analyses à produire, plusieurs types d'imports sont
 possibles :
 
 \begin{longtable}[]{@{}rl@{}}
@@ -685,10 +684,10 @@ Cle RSA & um\tabularnewline
 \texttt{rsa15\$rsa}}
 \end{figure}
 
-Pour les quatre autres champs PMSI, seules les donnees du \emph{out}
+Pour les quatre autres champs PMSI, seules les données du \emph{out}
 sont prises en charge par le package pour le moment.
 
-Les fonctions d'imports pour ces trois champs reposent sur le meme
+Les fonctions d'imports pour ces trois champs reposent sur le même
 principe qu'en MCO.
 
 \section{HAD}\label{had}
@@ -815,12 +814,12 @@ Nom & Fonction\tabularnewline
 \chapter{Requêtes sur des pathologies /
 actes}\label{requetes-sur-des-pathologies-actes}
 
-\section{Fonction de transposition des codes
-diagnostics}\label{fonction-de-transposition-des-codes-diagnostics}
+\section{Transposition des codes
+diagnostics}\label{transposition-des-codes-diagnostics}
 
 Les analyses sur les diagnostics CIM-10 sont parfois fastidieuses du
-fait des multiples positions de diagnostics : DP principal du sejour, DR
-principal du sejour, DPUM, DRUM, DAS. La fonction \emph{tdiag} permet de
+fait des multiples positions de diagnostics : DP principal du séjour, DR
+principal du séjour, DPUM, DRUM, DAS. La fonction \emph{tdiag} permet de
 rassembler tous les diagnostics dans une seule table.
 
 \begin{Shaded}
@@ -962,28 +961,28 @@ pathologie}\label{file-active-dune-pathologie}
 \chapter{Fichier TRA}\label{fichier-tra}
 
 Le fichier TRA est un fichier du \emph{out} qui permet de relier les
-donnees anonymes du \emph{out} aux donnees du \emph{in}, il comprend un
+données anonymes du \emph{out} aux données du \emph{in}, il comprend un
 lien entre :
 
 \begin{itemize}
 \tightlist
 \item
-  MCO : cle\_rsa, numero de rss, numero de sejour (nas), date d'entree
-  et date de sortie du sejour
+  MCO : clé rsa, numéro de rss, numéro de sejour (nas), date d'entrée et
+  date de sortie du séjour
 \item
-  SSR : numero sequentiel du sejour + noseqrhs et numero de sejour +
-  numero de semaine
+  SSR : numéro séquentiel du séjour + noseqrhs et numéro de séjour +
+  numéro de semaine
 \item
-  PSY RPSA : ipp, date d'entree et de fin du sejour, numero sequentiel
-  du sejour, numero de sequence et numero de sejour, dates de debut et
+  PSY RPSA : ipp, date d'entrée et de fin du sejour, numéro séquentiel
+  du séjour, numéro de séquence et numéro de séjour, dates de début et
   fin de sequence
 \item
-  PSY R3A : ipp, date de l'acte, numero d'ordre, forme activité, um,
+  PSY R3A : ipp, date de l'acte, numéro d'ordre, forme activité, um,
   nature et lieu de l'acte
 \item
-  HAD : numero sequentiel de sejour, numero de sequence, sous-sequence
-  et numero de sejour, dates de debut et fin des sequences et
-  sous-sequences, dates d'entree et de sortie du sejour, modes d'entree
+  HAD : numéro séquentiel de séjour, numéro de séquence, sous-sequence
+  et numéro de séjour, dates de début et fin des séquences et
+  sous-séquences, dates d'entrée et de sortie du séjour, modes d'entrée
   sortie provenance destination
 \end{itemize}
 
@@ -995,7 +994,7 @@ Type & Import\tabularnewline
 \href{https://github.com/IM-APHP/pmeasyr/tree/master/Rd_md/itra.Rmd}{itra}
 & \textasciitilde{} TRA - Import du TRA\tabularnewline
 \href{https://github.com/IM-APHP/pmeasyr/tree/master/Rd_md/inner_tra.Rmd}{inner\_tra}
-& \textasciitilde{} TRA - Ajout du TRA aux donnees Out\tabularnewline
+& \textasciitilde{} TRA - Ajout du TRA aux données Out\tabularnewline
 \bottomrule
 \end{longtable}
 
@@ -1118,6 +1117,20 @@ Type & Import\tabularnewline
 \CommentTok{# DMS par GHM / GHS}
 \NormalTok{rsa15$rsa %>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(GHM, NOGHS) %>%}
 \StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{dms =} \KeywordTok{mean}\NormalTok{(}\KeywordTok{if_else}\NormalTok{(DUREE>}\DecValTok{0}\NormalTok{, DUREE, }\OtherTok{NA}\NormalTok{), }\DataTypeTok{na.rm =} \NormalTok{T))}
+\end{Highlighting}
+\end{Shaded}
+
+\chapter{Help}\label{help}
+
+Toutes les fonctions du package ont une page d'aide :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{?irsa}
+
+\NormalTok{?irum}
+
+\NormalTok{?irapss}
 \end{Highlighting}
 \end{Shaded}
 

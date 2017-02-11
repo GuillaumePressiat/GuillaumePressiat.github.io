@@ -114,7 +114,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.3" data-path="contexte.html"><a href="contexte.html#installation-du-package"><i class="fa fa-check"></i><b>2.3</b> Installation du package</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="archives.html"><a href="archives.html"><i class="fa fa-check"></i><b>3</b> Les archives PMSI</a><ul>
-<li class="chapter" data-level="3.1" data-path="archives.html"><a href="archives.html#gestion-des-archives-dans-des-repertoires"><i class="fa fa-check"></i><b>3.1</b> Gestion des archives dans des répertoires</a></li>
+<li class="chapter" data-level="3.1" data-path="archives.html"><a href="archives.html#arborescence-des-archives"><i class="fa fa-check"></i><b>3.1</b> Arborescence des archives</a></li>
 <li class="chapter" data-level="3.2" data-path="archives.html"><a href="archives.html#informations-sur-les-archives"><i class="fa fa-check"></i><b>3.2</b> Informations sur les archives</a></li>
 <li class="chapter" data-level="3.3" data-path="archives.html"><a href="archives.html#dezippage"><i class="fa fa-check"></i><b>3.3</b> Dézippage</a></li>
 <li class="chapter" data-level="3.4" data-path="archives.html"><a href="archives.html#suppression"><i class="fa fa-check"></i><b>3.4</b> Suppression</a></li>
@@ -132,7 +132,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.6" data-path="import-des-donnees.html"><a href="import-des-donnees.html#dictionnaire-de-variables"><i class="fa fa-check"></i><b>4.6</b> Dictionnaire de variables</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="requetes-sur-des-pathologies-actes.html"><a href="requetes-sur-des-pathologies-actes.html"><i class="fa fa-check"></i><b>5</b> Requêtes sur des pathologies / actes</a><ul>
-<li class="chapter" data-level="5.1" data-path="requetes-sur-des-pathologies-actes.html"><a href="requetes-sur-des-pathologies-actes.html#fonction-de-transposition-des-codes-diagnostics"><i class="fa fa-check"></i><b>5.1</b> Fonction de transposition des codes diagnostics</a></li>
+<li class="chapter" data-level="5.1" data-path="requetes-sur-des-pathologies-actes.html"><a href="requetes-sur-des-pathologies-actes.html#transposition-des-codes-diagnostics"><i class="fa fa-check"></i><b>5.1</b> Transposition des codes diagnostics</a></li>
 <li class="chapter" data-level="5.2" data-path="requetes-sur-des-pathologies-actes.html"><a href="requetes-sur-des-pathologies-actes.html#exemple-1-recherche-de-codes-diagnostics-depilepsie"><i class="fa fa-check"></i><b>5.2</b> Exemple 1 : recherche de codes diagnostics d’épilepsie</a></li>
 <li class="chapter" data-level="5.3" data-path="requetes-sur-des-pathologies-actes.html"><a href="requetes-sur-des-pathologies-actes.html#exemple-2-recherche-de-codes-actes"><i class="fa fa-check"></i><b>5.3</b> Exemple 2 : recherche de codes actes</a></li>
 </ul></li>
@@ -148,6 +148,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.4" data-path="fichier-tra.html"><a href="fichier-tra.html#ajout-du-tra-en-psy"><i class="fa fa-check"></i><b>7.4</b> Ajout du TRA en PSY</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="statistiques-du-pmsi.html"><a href="statistiques-du-pmsi.html"><i class="fa fa-check"></i><b>8</b> Statistiques du PMSI</a></li>
+<li class="chapter" data-level="9" data-path="help.html"><a href="help.html"><i class="fa fa-check"></i><b>9</b> Help</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Publié avec bookdown</a></li>
 
@@ -170,13 +171,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="fichier-tra" class="section level1">
 <h1><span class="header-section-number">7</span> Fichier TRA</h1>
-<p>Le fichier TRA est un fichier du <em>out</em> qui permet de relier les donnees anonymes du <em>out</em> aux donnees du <em>in</em>, il comprend un lien entre :</p>
+<p>Le fichier TRA est un fichier du <em>out</em> qui permet de relier les données anonymes du <em>out</em> aux données du <em>in</em>, il comprend un lien entre :</p>
 <ul>
-<li>MCO : cle_rsa, numero de rss, numero de sejour (nas), date d’entree et date de sortie du sejour</li>
-<li>SSR : numero sequentiel du sejour + noseqrhs et numero de sejour + numero de semaine</li>
-<li>PSY RPSA : ipp, date d’entree et de fin du sejour, numero sequentiel du sejour, numero de sequence et numero de sejour, dates de debut et fin de sequence</li>
-<li>PSY R3A : ipp, date de l’acte, numero d’ordre, forme activité, um, nature et lieu de l’acte</li>
-<li>HAD : numero sequentiel de sejour, numero de sequence, sous-sequence et numero de sejour, dates de debut et fin des sequences et sous-sequences, dates d’entree et de sortie du sejour, modes d’entree sortie provenance destination</li>
+<li>MCO : clé rsa, numéro de rss, numéro de sejour (nas), date d’entrée et date de sortie du séjour</li>
+<li>SSR : numéro séquentiel du séjour + noseqrhs et numéro de séjour + numéro de semaine</li>
+<li>PSY RPSA : ipp, date d’entrée et de fin du sejour, numéro séquentiel du séjour, numéro de séquence et numéro de séjour, dates de début et fin de sequence</li>
+<li>PSY R3A : ipp, date de l’acte, numéro d’ordre, forme activité, um, nature et lieu de l’acte</li>
+<li>HAD : numéro séquentiel de séjour, numéro de séquence, sous-sequence et numéro de séjour, dates de début et fin des séquences et sous-séquences, dates d’entrée et de sortie du séjour, modes d’entrée sortie provenance destination</li>
 </ul>
 <table>
 <thead>
@@ -192,7 +193,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </tr>
 <tr class="even">
 <td align="right"><a href="https://github.com/IM-APHP/pmeasyr/tree/master/Rd_md/inner_tra.Rmd">inner_tra</a></td>
-<td align="left">~ TRA - Ajout du TRA aux donnees Out</td>
+<td align="left">~ TRA - Ajout du TRA aux données Out</td>
 </tr>
 </tbody>
 </table>

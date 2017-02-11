@@ -114,7 +114,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.3" data-path="contexte.html"><a href="contexte.html#installation-du-package"><i class="fa fa-check"></i><b>2.3</b> Installation du package</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="archives.html"><a href="archives.html"><i class="fa fa-check"></i><b>3</b> Les archives PMSI</a><ul>
-<li class="chapter" data-level="3.1" data-path="archives.html"><a href="archives.html#gestion-des-archives-dans-des-repertoires"><i class="fa fa-check"></i><b>3.1</b> Gestion des archives dans des répertoires</a></li>
+<li class="chapter" data-level="3.1" data-path="archives.html"><a href="archives.html#arborescence-des-archives"><i class="fa fa-check"></i><b>3.1</b> Arborescence des archives</a></li>
 <li class="chapter" data-level="3.2" data-path="archives.html"><a href="archives.html#informations-sur-les-archives"><i class="fa fa-check"></i><b>3.2</b> Informations sur les archives</a></li>
 <li class="chapter" data-level="3.3" data-path="archives.html"><a href="archives.html#dezippage"><i class="fa fa-check"></i><b>3.3</b> Dézippage</a></li>
 <li class="chapter" data-level="3.4" data-path="archives.html"><a href="archives.html#suppression"><i class="fa fa-check"></i><b>3.4</b> Suppression</a></li>
@@ -132,7 +132,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.6" data-path="import-des-donnees.html"><a href="import-des-donnees.html#dictionnaire-de-variables"><i class="fa fa-check"></i><b>4.6</b> Dictionnaire de variables</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="requetes-sur-des-pathologies-actes.html"><a href="requetes-sur-des-pathologies-actes.html"><i class="fa fa-check"></i><b>5</b> Requêtes sur des pathologies / actes</a><ul>
-<li class="chapter" data-level="5.1" data-path="requetes-sur-des-pathologies-actes.html"><a href="requetes-sur-des-pathologies-actes.html#fonction-de-transposition-des-codes-diagnostics"><i class="fa fa-check"></i><b>5.1</b> Fonction de transposition des codes diagnostics</a></li>
+<li class="chapter" data-level="5.1" data-path="requetes-sur-des-pathologies-actes.html"><a href="requetes-sur-des-pathologies-actes.html#transposition-des-codes-diagnostics"><i class="fa fa-check"></i><b>5.1</b> Transposition des codes diagnostics</a></li>
 <li class="chapter" data-level="5.2" data-path="requetes-sur-des-pathologies-actes.html"><a href="requetes-sur-des-pathologies-actes.html#exemple-1-recherche-de-codes-diagnostics-depilepsie"><i class="fa fa-check"></i><b>5.2</b> Exemple 1 : recherche de codes diagnostics d’épilepsie</a></li>
 <li class="chapter" data-level="5.3" data-path="requetes-sur-des-pathologies-actes.html"><a href="requetes-sur-des-pathologies-actes.html#exemple-2-recherche-de-codes-actes"><i class="fa fa-check"></i><b>5.3</b> Exemple 2 : recherche de codes actes</a></li>
 </ul></li>
@@ -148,6 +148,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.4" data-path="fichier-tra.html"><a href="fichier-tra.html#ajout-du-tra-en-psy"><i class="fa fa-check"></i><b>7.4</b> Ajout du TRA en PSY</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="statistiques-du-pmsi.html"><a href="statistiques-du-pmsi.html"><i class="fa fa-check"></i><b>8</b> Statistiques du PMSI</a></li>
+<li class="chapter" data-level="9" data-path="help.html"><a href="help.html"><i class="fa fa-check"></i><b>9</b> Help</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Publié avec bookdown</a></li>
 
@@ -218,10 +219,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </tr>
 </tbody>
 </table>
-<p>Les donnees in / out sont prises en charge.</p>
+<p>Les données in / out sont prises en charge.</p>
 <div id="rsa" class="section level3">
 <h3><span class="header-section-number">4.1.1</span> RSA</h3>
-<p>Selon la nature des analyses a produire, plusieurs types d’imports sont possibles :</p>
+<p>Selon la nature des analyses à produire, plusieurs types d’imports sont possibles :</p>
 <table>
 <colgroup>
 <col width="6%" />
@@ -284,7 +285,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
      <span class="dt">annee =</span> <span class="dv">2015</span>, 
      <span class="dt">mois =</span> <span class="dv">12</span>, 
      <span class="dt">path =</span> <span class="st">&#39;~/Documents/data/mco&#39;</span>)</code></pre></div>
-<p>Selon la nature des analyses a produire, plusieurs types d’imports sont possibles :</p>
+<p>Selon la nature des analyses à produire, plusieurs types d’imports sont possibles :</p>
 <table>
 <thead>
 <tr class="header">
@@ -411,8 +412,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <img src="images/rsa_stream.png" alt="Capture des zones stream de la table rsa15$rsa" />
 <p class="caption">Capture des zones <em>stream</em> de la table <code>rsa15$rsa</code></p>
 </div>
-<p>Pour les quatre autres champs PMSI, seules les donnees du <em>out</em> sont prises en charge par le package pour le moment.</p>
-<p>Les fonctions d’imports pour ces trois champs reposent sur le meme principe qu’en MCO.</p>
+<p>Pour les quatre autres champs PMSI, seules les données du <em>out</em> sont prises en charge par le package pour le moment.</p>
+<p>Les fonctions d’imports pour ces trois champs reposent sur le même principe qu’en MCO.</p>
 </div>
 </div>
 <div id="had" class="section level2">
