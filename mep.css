@@ -1,0 +1,110 @@
+
+<html>
+  <head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    
+  <style type="text/css">
+.main-container {
+  margin-left: 1px;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.08);
+}
+img { 
+  max-width:100%; 
+  height: auto; 
+}
+html { background-color:  #e6f2ff; }
+body { margin:5px; background-color: white;   }
+#preheader {
+	background-color:#2C256B;
+    color:white;
+	padding:2px;
+    text-align:center;
+	margin:auto;
+
+}
+#header {
+
+	background-image:  url(http://ghparis10.aphp.fr/wp-content/blogs.dir/43/files/2015/03/Logo-AP-HP-pantone293-Converti.png);
+	background-size: 300px ;
+    background-repeat: no-repeat;
+    background-position: left top;
+	border-radius:  0px 0px 0px 0px ;
+	border: 5px solid #0062AE;
+	background-color:#0062AE;
+    color:white;
+	padding:5px;
+    text-align:center;
+	margin:auto;
+}
+.span3{
+	background-color: #33adff;
+}
+
+.c {
+
+  margin-left: 23%;
+  margin-right: 2%;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+img { 
+  max-width:100%; 
+  height: auto; 
+}
+ h1{
+  color:#2C256B;
+}
+
+#autre{
+  color:white;
+}
+
+span{
+.sc{
+  font-size: 60pt;
+	color: white;
+}
+
+}
+#postheader {
+
+	  background-color:#272D31;
+	
+	  height:20px;
+    color:white;
+	  padding:1px;
+    text-align:center;
+	  margin:auto;
+
+}
+#prefooter {
+ border-radius:  25px 25px 0px 0px ;
+	  background-color:#272D31;
+	  
+    color:white;
+	  padding:3px;
+	  height:30px;
+    text-align:center;
+	  margin:auto;
+}
+
+#postfooter {
+ border-radius:  0px 0px 25px 25px;
+	  background-color:#0062AE;
+	  height:8px;
+    color:white;
+	  padding:1px;
+    text-align:center;
+	  margin:auto;
+}
+
+  </style>
+  </head>
+</html>
