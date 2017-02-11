@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="contexte.html">
+<link rel="prev" href="import-des-donnees.html">
+<link rel="next" href="etude-des-files-actives.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -169,35 +169,116 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Traitement des données PMSI avec R</h1>
-<h4 class="author"><em>Guillaume Pressiat</em></h4>
-<h4 class="date"><em>2017-02-10</em></h4>
+<div id="requetes-sur-des-pathologies-actes" class="section level1">
+<h1><span class="header-section-number">5</span> Requêtes sur des pathologies / actes</h1>
+<div id="fonction-de-transposition-des-codes-diagnostics" class="section level2">
+<h2><span class="header-section-number">5.1</span> Fonction de transposition des codes diagnostics</h2>
+<p>Les analyses sur les diagnostics CIM-10 sont parfois fastidieuses du fait des multiples positions de diagnostics : DP principal du sejour, DR principal du sejour, DPUM, DRUM, DAS. La fonction <em>tdiag</em> permet de rassembler tous les diagnostics dans une seule table.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Pour les objets rsa et rum du MCO</span>
+<span class="co"># Transbahuter tous les diagnostics dans une seule table</span>
+<span class="kw">tdiag</span>(rsa15) -&gt;<span class="st"> </span>rsa15 <span class="co"># &quot;Tidy diagnostics&quot;</span>
+<span class="kw">View</span>(rsa15$diags)
+<span class="co"># Tous les diagnostics sont dans une table, avec un numero selon leur position  </span>
+<span class="co"># 1:DP, 2:DR, 3:DPUM, 4:DRUM, 5:DAS</span></code></pre></div>
+<p>Exemple de résultat :</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">CLE_RSA</th>
+<th align="left">NSEQRUM</th>
+<th>position</th>
+<th>diag</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">0000000001</td>
+<td align="left">01</td>
+<td>1</td>
+<td>Z511</td>
+</tr>
+<tr class="even">
+<td align="left">0000000001</td>
+<td align="left">01</td>
+<td>2</td>
+<td>C18</td>
+</tr>
+<tr class="odd">
+<td align="left">0000000002</td>
+<td align="left">01</td>
+<td>1</td>
+<td>C501</td>
+</tr>
+<tr class="even">
+<td align="left">0000000002</td>
+<td align="left">01</td>
+<td>3</td>
+<td>C501</td>
+</tr>
+<tr class="odd">
+<td align="left">0000000002</td>
+<td align="left">02</td>
+<td>1</td>
+<td>D051</td>
+</tr>
+<tr class="even">
+<td align="left">0000000002</td>
+<td align="left">02</td>
+<td>5</td>
+<td>E109</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div id="introduction" class="section level1">
-<h1><span class="header-section-number">1</span> Introduction</h1>
-<p>Ce livre numérique présente des exemples de traitements de données PMSI avec R. L’objectif est de concentrer ici :</p>
-<ul>
-<li>une documentation permettant de débuter avec l’import de données via le package <em>pmeasyr</em></li>
-</ul>
-<p>et des exemples d’analyses PMSI :</p>
-<ul>
-<li>étude de la durée moyenne de séjour</li>
-<li>requêtes sur les diagnostics et les actes</li>
-<li>analyse des files actives pour une pathologie</li>
-<li>chainage PMSI de patients</li>
-<li>reporting de l’activité</li>
-<li>visualisation graphiques, cartographies</li>
-</ul>
+<div id="exemple-1-recherche-de-codes-diagnostics-depilepsie" class="section level2">
+<h2><span class="header-section-number">5.2</span> Exemple 1 : recherche de codes diagnostics d’épilepsie</h2>
+<p>L’objectif est de récupérer les séjours présentant un code diagnostic de la liste</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Liste D-0103 de la fonction groupage 2016 : Epilepsies</span>
+liste_diag =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;F803&#39;</span>, <span class="st">&#39;G400&#39;</span>, <span class="st">&#39;G401&#39;</span>, <span class="st">&#39;G402&#39;</span>, <span class="st">&#39;G403&#39;</span>, <span class="st">&#39;G404&#39;</span>, 
+               <span class="st">&#39;G405&#39;</span>, <span class="st">&#39;G406&#39;</span>, <span class="st">&#39;G407&#39;</span>, <span class="st">&#39;G408&#39;</span>, <span class="st">&#39;G409&#39;</span>, <span class="st">&#39;G410&#39;</span>, 
+               <span class="st">&#39;G411&#39;</span>, <span class="st">&#39;G412&#39;</span>, <span class="st">&#39;G418&#39;</span>, <span class="st">&#39;G419&#39;</span>, <span class="st">&#39;R568&#39;</span>)
 
+## En passant par la table diags
+<span class="kw">tdiag</span>(rsa15) -&gt;<span class="st"> </span>rsa15
+
+<span class="kw">library</span>(dplyr)
+<span class="co"># quelle que soit la position du diagnostic</span>
+rsa15$diags %&gt;%<span class="st"> </span><span class="kw">filter</span>(diag %in%<span class="st"> </span>liste_diag)
+<span class="co"># position en das</span>
+rsa15$diags %&gt;%<span class="st"> </span><span class="kw">filter</span>(diag %in%<span class="st"> </span>liste_diag, position ==<span class="st"> </span><span class="dv">5</span>)
+<span class="co"># position en dp dr</span>
+rsa15$diags %&gt;%<span class="st"> </span><span class="kw">filter</span>(diag %in%<span class="st"> </span>liste_diag, position &lt;<span class="st"> </span><span class="dv">5</span>)
+
+## En passant par les zones stream
+string_diags =<span class="st"> </span>
+<span class="st">  &#39;F803|G400|G401|G402|G403|G404|G405|G406|G407|G408|G409|G410|G411|G412|418|G419|R568&#39;</span>
+
+<span class="co"># quelle que soit la position du diagnostic</span>
+rsa15$rsa %&gt;%<span class="st"> </span><span class="kw">fiter</span>(<span class="kw">grepl</span>(string_diags, dpdrum)|<span class="kw">grepl</span>(string_diags, das))
+<span class="co"># position en das</span>
+rsa15$rsa %&gt;%<span class="st"> </span><span class="kw">fiter</span>(<span class="kw">grepl</span>(string_diags, das))
+<span class="co"># position en dpdr</span>
+rsa15$rsa %&gt;%<span class="st"> </span><span class="kw">fiter</span>(<span class="kw">grepl</span>(string_diags, dpdrum))</code></pre></div>
+</div>
+<div id="exemple-2-recherche-de-codes-actes-de-pose-de-pac" class="section level2">
+<h2><span class="header-section-number">5.3</span> Exemple 2 : recherche de codes actes de pose de PAC</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Code EBLA003</span>
+
+<span class="kw">library</span>(dplyr)
+<span class="co"># En passant par la table actes</span>
+rsa15$actes %&gt;%<span class="st"> </span><span class="kw">filter</span>(CDCCAM ==<span class="st"> &#39;EBLA003&#39;</span>)
+<span class="co"># En passant par la zone stream</span>
+rsa15$rsa %&gt;%<span class="st"> </span><span class="kw">filter</span>(<span class="kw">grepl</span>(<span class="st">&#39;EBLA003&#39;</span>, actes))</code></pre></div>
+
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="contexte.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="import-des-donnees.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="etude-des-files-actives.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -226,7 +307,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/index.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/04-requetes_pmsi.Rmd",
 "text": "Edit"
 },
 "download": ["pmeasyr-book.pdf"],

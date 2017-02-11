@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
+<link rel="prev" href="fichier-tra.html">
 
-<link rel="next" href="contexte.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -169,26 +169,34 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Traitement des données PMSI avec R</h1>
-<h4 class="author"><em>Guillaume Pressiat</em></h4>
-<h4 class="date"><em>2017-02-10</em></h4>
-</div>
-<div id="introduction" class="section level1">
-<h1><span class="header-section-number">1</span> Introduction</h1>
-<p>Ce livre numérique présente des exemples de traitements de données PMSI avec R. L’objectif est de concentrer ici :</p>
+<div id="statistiques-du-pmsi" class="section level1">
+<h1><span class="header-section-number">9</span> Statistiques du PMSI</h1>
 <ul>
-<li>une documentation permettant de débuter avec l’import de données via le package <em>pmeasyr</em></li>
+<li>âge moyen des patients</li>
+<li>Durée de séjour</li>
+<li>Nombre de séjours par catégorie majeure de diagnostics</li>
+<li>Case-mix MCO, DMS par GHM / GHS</li>
 </ul>
-<p>et des exemples d’analyses PMSI :</p>
-<ul>
-<li>étude de la durée moyenne de séjour</li>
-<li>requêtes sur les diagnostics et les actes</li>
-<li>analyse des files actives pour une pathologie</li>
-<li>chainage PMSI de patients</li>
-<li>reporting de l’activité</li>
-<li>visualisation graphiques, cartographies</li>
-</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Age moyen et DMS sur les plus de 0 jour</span>
+rsa15$rsa %&gt;%<span class="st"> </span><span class="kw">summarise</span>(<span class="dt">age_moyen =</span> <span class="kw">mean</span>(AGEAN),
+                        <span class="dt">dms =</span> <span class="kw">mean</span>(<span class="kw">if_else</span>(DUREE&gt;<span class="dv">0</span>, DUREE, <span class="ot">NA</span>), <span class="dt">na.rm =</span> T))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Nombre de séjours par catégorie majeure de diagnostics</span>
+rsa15$rsa %&gt;%<span class="st"> </span><span class="kw">count</span>(RSACMD)
+
+<span class="co"># Construire la variable GHM</span>
+rsa15$rsa %&gt;%<span class="st"> </span>tidyr::<span class="kw">unite</span>(GHM, 
+                           RSACMD, RSATYPE, RSANUM, RSACOMPX,
+                           <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>) -&gt;<span class="st"> </span>rsa15$rsa
+
+<span class="co"># Case-mix par GHM</span>
+rsa15$rsa %&gt;%<span class="st"> </span><span class="kw">count</span>(GHM)
+
+<span class="co"># Case-mix par GHM / GHS</span>
+rsa15$rsa %&gt;%<span class="st"> </span><span class="kw">count</span>(GHM, NOGHS)
+
+<span class="co"># DMS par GHM / GHS</span>
+rsa15$rsa %&gt;%<span class="st"> </span><span class="kw">group_by</span>(GHM, NOGHS) %&gt;%
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">dms =</span> <span class="kw">mean</span>(<span class="kw">if_else</span>(DUREE&gt;<span class="dv">0</span>, DUREE, <span class="ot">NA</span>), <span class="dt">na.rm =</span> T))</code></pre></div>
 
 </div>
             </section>
@@ -196,8 +204,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
+<a href="fichier-tra.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
-<a href="contexte.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -226,7 +234,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/index.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/07-statistiques_bases.Rmd",
 "text": "Edit"
 },
 "download": ["pmeasyr-book.pdf"],

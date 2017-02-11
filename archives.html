@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="contexte.html">
+<link rel="prev" href="contexte.html">
+<link rel="next" href="import-des-donnees.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -169,35 +169,137 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Traitement des données PMSI avec R</h1>
-<h4 class="author"><em>Guillaume Pressiat</em></h4>
-<h4 class="date"><em>2017-02-10</em></h4>
+<div id="archives" class="section level1">
+<h1><span class="header-section-number">3</span> Les archives PMSI</h1>
+<p>Cette partie aborde le point de départ des études PMSI : les archives PMSI. Ces archives sont les fichiers en entrées / sorties des logiciels de l’ATIH.</p>
+<p>Les manuels techniques de ces logiciels,relatifs aux champs MCO, SSR, HAD, PSY et RSF, respectivement <a href="http://atih.sante.fr/plateformes-de-transmission-et-logiciels/logiciels-espace-de-telechargement#G">Genrsa</a>, <a href="http://atih.sante.fr/plateformes-de-transmission-et-logiciels/logiciels-espace-de-telechargement#G">Genrha</a>, <a href="http://atih.sante.fr/plateformes-de-transmission-et-logiciels/logiciels-espace-de-telechargement#P">Paprica</a>, <a href="http://atih.sante.fr/plateformes-de-transmission-et-logiciels/logiciels-espace-de-telechargement#P">Pivoine</a> et <a href="http://atih.sante.fr/plateformes-de-transmission-et-logiciels/logiciels-espace-de-telechargement#P">Preface</a> sont disponibnles dans l’<a href="http://atih.sante.fr/plateformes-de-transmission-et-logiciels/logiciels-espace-de-telechargement">espace de telechargement</a> sur le site de l’ATIH.</p>
+<div id="gestion-des-archives-dans-des-repertoires" class="section level2">
+<h2><span class="header-section-number">3.1</span> Gestion des archives dans des répertoires</h2>
+<p>Le package <em>pmeasyr</em> prend en charge les données des quatre champs PMSI MCO, SSR, HAD, PSY ainsi que les RSF.</p>
+<p>Placer les archives dans un répertoire, par exemple ici dans <code>~/Documents/data/mco</code> :</p>
+<div class="figure">
+<img src="images/archives_mco.png" alt="Archives MCO" />
+<p class="caption">Archives MCO</p>
 </div>
-<div id="introduction" class="section level1">
-<h1><span class="header-section-number">1</span> Introduction</h1>
-<p>Ce livre numérique présente des exemples de traitements de données PMSI avec R. L’objectif est de concentrer ici :</p>
+<p>Vous noterez que pour chaque champ PMSI il est conseillé d’utiliser un répertoire indépendant, ceci est nécessaire dans la mesure où le nom des archives PMSI ne contient pas l’information champ MCO, RSF, etc., il faut organiser l’archivage champ par champ, dans des répertoires différents.</p>
+<div class="figure">
+<img src="images/champ_par_champ.png" alt="Un répertoire par champ PMSI" />
+<p class="caption">Un répertoire par champ PMSI</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Créer l&#39;arborescence à partir de R</span>
+champs =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;mco&#39;</span>, <span class="st">&#39;ssr&#39;</span>, <span class="st">&#39;had&#39;</span>, <span class="st">&#39;psy&#39;</span>, <span class="st">&#39;rsf&#39;</span>)
+emplacement &lt;-<span class="st"> &quot;~/Documents/data&quot;</span>
+<span class="kw">sapply</span>(champs, function(x){<span class="kw">dir.create</span>(<span class="kw">file.path</span>(emplacement, x))})</code></pre></div>
+</div>
+<div id="informations-sur-les-archives" class="section level2">
+<h2><span class="header-section-number">3.2</span> Informations sur les archives</h2>
+<p>La fonction <code>astat</code> permet d’éditer des statistiques sommaires sur les fichiers contenus dans une archive.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Nom</th>
+<th align="left">Fonction</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><a href="https://github.com/IM-APHP/pmeasyr/tree/master/Rd_md/astat.Rmd">astat</a></td>
+<td align="left">~ *.zip - Liste et volume des fichiers d’une archive PMSI</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Informations sur les fichiers : Date de creation, Taille</span>
+pmeasyr::<span class="kw">astat</span>(<span class="dt">path =</span> <span class="st">&#39;~/Documents/data/mco/&#39;</span>, 
+               <span class="dt">file =</span> <span class="st">&#39;750100042.2015.12.29012016174032.out.zip&#39;</span>, 
+               <span class="dt">view =</span> F)</code></pre></div>
+</div>
+<div id="dezippage" class="section level2">
+<h2><span class="header-section-number">3.3</span> Dézippage</h2>
+<p>Cette partie du package facilite la manipulation des archives PMSI, fichiers de type :</p>
 <ul>
-<li>une documentation permettant de débuter avec l’import de données via le package <em>pmeasyr</em></li>
+<li><code>finess.annee.mois.date_et_heure_de_creation.in.zip</code></li>
+<li><code>finess.annee.mois.date_et_heure_de_creation.out.zip</code></li>
 </ul>
-<p>et des exemples d’analyses PMSI :</p>
-<ul>
-<li>étude de la durée moyenne de séjour</li>
-<li>requêtes sur les diagnostics et les actes</li>
-<li>analyse des files actives pour une pathologie</li>
-<li>chainage PMSI de patients</li>
-<li>reporting de l’activité</li>
-<li>visualisation graphiques, cartographies</li>
-</ul>
+<p>Les fonctions permettent de dezipper les fichiers depuis <code>R</code> en ligne de commande, sans intervention manuelle de l’utilisateur. L’avantage est d’obtenir un processus ne relevant pas d’interventions externes au logiciel <code>R</code> (pour pouvoir garder trace des etapes, et faciliter la reproduction, tout est inscrit dans un programme, dans un flux de processus). Une fois que les traitements et analyses sur les fichiers sont faits, il est possible d’effacer les archives egalement en ligne de commande.</p>
+<p>Le nom des fonctions dont l’objectif est de manipuler les <strong>a</strong>rchives commence par <strong>a</strong>.</p>
+<table>
+<colgroup>
+<col width="11%" />
+<col width="88%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Nom</th>
+<th align="left">Fonction</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><a href="https://github.com/IM-APHP/pmeasyr/tree/master/Rd_md/adezip.Rmd">adezip</a></td>
+<td align="left">~ *.zip - Dezippe des fichiers de larchive PMSI</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="https://github.com/IM-APHP/pmeasyr/tree/master/Rd_md/adezip2.Rmd">adezip2</a></td>
+<td align="left">~ *.zip - Dezippe des fichiers de l’archive PMSI, avec en parametre le nom de l’archive</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Dezippage uniquement des fichiers rsa, ano et tra du out 2015</span>
+<span class="co"># Ex: 750100042.2015.12.20160130.153012.out.zip</span>
+pmeasyr::<span class="kw">adezip</span>(<span class="dt">finess =</span> <span class="dv">750100042</span>, 
+                <span class="dt">annee =</span> <span class="dv">2015</span>, 
+                <span class="dt">mois =</span> <span class="dv">12</span>, 
+                <span class="dt">path =</span> <span class="st">&#39;~/Documents/data/mco&#39;</span>, 
+                <span class="dt">liste =</span> <span class="kw">c</span>(<span class="st">&quot;rsa&quot;</span>, <span class="st">&quot;ano&quot;</span>, <span class="st">&quot;tra&quot;</span>), 
+                <span class="dt">type =</span> <span class="st">&quot;out&quot;</span>)</code></pre></div>
+<div class="figure">
+<img src="images/archives_dezip.png" alt="Après éxécution de adezip() sur des fichiers du out" />
+<p class="caption">Après éxécution de <code>adezip()</code> sur des fichiers du <em>out</em></p>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Dezippage uniquement des fichiers rss, dmi et med du in 2014</span>
+<span class="co"># Ex: 750100042.2015.12.20160130.153012.out.zip</span>
+pmeasyr::<span class="kw">adezip</span>(<span class="dt">finess =</span> <span class="dv">750100042</span>, 
+                <span class="dt">annee =</span> <span class="dv">2015</span>, 
+                <span class="dt">mois =</span> <span class="dv">12</span>, 
+                <span class="dt">path =</span> <span class="st">&#39;~/Documents/data/mco&#39;</span>, 
+                <span class="dt">liste =</span> <span class="kw">c</span>(<span class="st">&quot;rss&quot;</span>, <span class="st">&quot;dmi&quot;</span>, <span class="st">&quot;med&quot;</span>), 
+                <span class="dt">type =</span> <span class="st">&quot;in&quot;</span>)</code></pre></div>
+<div class="figure">
+<img src="images/archives_mco_in.png" alt="Après éxécution de adezip() sur des fichiers du in" />
+<p class="caption">Après éxécution de <code>adezip()</code> sur des fichiers du <em>in</em></p>
+</div>
+</div>
+<div id="adelete-effacer" class="section level2">
+<h2><span class="header-section-number">3.4</span> adelete : effacer</h2>
+<p>À la fin d’une étude, il est inutile de garder les fichiers dézippés hors de l’archives, on peut les effacern c’est ce que permet la fonction <code>adelete()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Effacer les fichiers</span>
+pmeasyr::<span class="kw">adelete</span>(<span class="dt">finess =</span> <span class="dv">750100042</span>, 
+                 <span class="dt">annee =</span> <span class="dv">2015</span>, 
+                 <span class="dt">mois =</span> <span class="dv">12</span>, 
+                 <span class="dt">path =</span> <span class="st">&#39;~/Documents/data/mco&#39;</span>, 
+                 <span class="dt">liste =</span> <span class="kw">c</span>(<span class="st">&quot;rsa&quot;</span>, <span class="st">&quot;ano&quot;</span>, <span class="st">&quot;tra&quot;</span>), 
+                 <span class="dt">type =</span> <span class="st">&quot;out&quot;</span>)
 
+pmeasyr::<span class="kw">adelete</span>(<span class="dt">finess =</span> <span class="dv">750100042</span>, 
+                 <span class="dt">annee =</span> <span class="dv">2015</span>, 
+                 <span class="dt">mois =</span> <span class="dv">12</span>, 
+                 <span class="dt">path =</span> <span class="st">&#39;~/Documents/data/mco&#39;</span>, 
+                 <span class="dt">liste =</span> <span class="kw">c</span>(<span class="st">&quot;rss&quot;</span>, <span class="st">&quot;med&quot;</span>, <span class="st">&quot;dmi&quot;</span>), 
+                 <span class="dt">type =</span> <span class="st">&quot;in&quot;</span>)</code></pre></div>
+<div class="figure">
+<img src="images/archives_mco.png" alt="Après éxécution de adelete()" />
+<p class="caption">Après éxécution de <code>adelete()</code></p>
+</div>
+
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="contexte.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="contexte.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="import-des-donnees.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -226,7 +328,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/index.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/02-archives.Rmd",
 "text": "Edit"
 },
 "download": ["pmeasyr-book.pdf"],

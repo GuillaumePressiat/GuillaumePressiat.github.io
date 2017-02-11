@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="contexte.html">
+<link rel="prev" href="requetes-sur-des-pathologies-actes.html">
+<link rel="next" href="chainage-pmsi.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -169,35 +169,59 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Traitement des données PMSI avec R</h1>
-<h4 class="author"><em>Guillaume Pressiat</em></h4>
-<h4 class="date"><em>2017-02-10</em></h4>
-</div>
-<div id="introduction" class="section level1">
-<h1><span class="header-section-number">1</span> Introduction</h1>
-<p>Ce livre numérique présente des exemples de traitements de données PMSI avec R. L’objectif est de concentrer ici :</p>
-<ul>
-<li>une documentation permettant de débuter avec l’import de données via le package <em>pmeasyr</em></li>
-</ul>
-<p>et des exemples d’analyses PMSI :</p>
-<ul>
-<li>étude de la durée moyenne de séjour</li>
-<li>requêtes sur les diagnostics et les actes</li>
-<li>analyse des files actives pour une pathologie</li>
-<li>chainage PMSI de patients</li>
-<li>reporting de l’activité</li>
-<li>visualisation graphiques, cartographies</li>
-</ul>
+<div id="etude-des-files-actives" class="section level1">
+<h1><span class="header-section-number">6</span> Étude des files actives</h1>
+<div id="import-des-donnees-anohosp" class="section level2">
+<h2><span class="header-section-number">6.1</span> Import des données Anohosp</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Import des données anohosp du out</span>
+<span class="kw">iano_mco</span>(<span class="dt">finess =</span> <span class="dv">750100042</span>, 
+         <span class="dt">annee =</span> <span class="dv">2015</span>,
+         <span class="dt">mois =</span> <span class="dv">12</span>,
+         <span class="dt">path =</span> <span class="st">&#39;~/Documents/data/mco&#39;</span>) -&gt;<span class="st"> </span>ano
 
+<span class="co"># Filtrer sur les patients chainables avec la variable cok</span>
+<span class="kw">library</span>(dplyr)
+ano %&gt;%<span class="st"> </span><span class="kw">filter</span>(cok) -&gt;<span class="st"> </span>ano
+
+<span class="co"># File active globale établissement</span>
+<span class="kw">distinct</span>(ano, NOANON) %&gt;%<span class="st"> </span><span class="kw">nrow</span>()</code></pre></div>
+</div>
+<div id="file-active-dune-pathologie" class="section level2">
+<h2><span class="header-section-number">6.2</span> File active d’une pathologie</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Codes diagnostics obésité </span>
+string_diags =<span class="st"> &#39;E66&#39;</span>
+
+<span class="co"># position en dpdr</span>
+rsa15$rsa %&gt;%<span class="st"> </span><span class="kw">filter</span>(<span class="kw">grepl</span>(string_diags, dpdrum)) -&gt;<span class="st"> </span>ob
+
+<span class="co"># File active obésité globale établissement</span>
+<span class="kw">inner_join</span>(ano, ob, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&#39;CLE_RSA&#39;</span>)) -&gt;<span class="st"> </span>patients_ob
+<span class="kw">distinct</span>(patients_ob, NOANON) %&gt;%<span class="st"> </span><span class="kw">nrow</span>()</code></pre></div>
+</div>
+<div id="file-active-dune-chirurgie" class="section level2">
+<h2><span class="header-section-number">6.3</span> File active d’une chirurgie</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Codes actes chirurgie bariatrique</span>
+liste_actes =<span class="st"> </span><span class="kw">c</span>((<span class="st">&#39;HFCA001&#39;</span>, <span class="st">&#39;HFCC003&#39;</span>, <span class="st">&#39;HFFC004&#39;</span>, <span class="st">&#39;HFFA001&#39;</span>, <span class="st">&#39;HFMA009&#39;</span>,
+                 <span class="st">&#39;HFMC007&#39;</span>, <span class="st">&#39;HFKA001&#39;</span>, <span class="st">&#39;HFKC001&#39;</span>, <span class="st">&#39;HFKA002&#39;</span>, <span class="st">&#39;HFMA011&#39;</span>,
+                 <span class="st">&#39;HFMC008&#39;</span>, <span class="st">&#39;HFMA010&#39;</span>, <span class="st">&#39;HFMC006&#39;</span>, <span class="st">&#39;HFLE002&#39;</span>, <span class="st">&#39;HFGC900&#39;</span>,
+                 <span class="st">&#39;HFLC900&#39;</span>, <span class="st">&#39;HFFA011&#39;</span>, <span class="st">&#39;HFFC018&#39;</span>, <span class="st">&#39;HGCA009&#39;</span>, <span class="st">&#39;HGCC027&#39;</span>))
+
+<span class="co"># acte codé activité 1 (chirurgical)</span>
+rsa15$actes %&gt;%<span class="st"> </span><span class="kw">filter</span>(CDCCAM %in%<span class="st"> </span>liste_actes, ACT ==<span class="st"> &#39;1&#39;</span>) -&gt;<span class="st"> </span>cob
+
+<span class="co"># File active chirurgie bariatrique globale établissement</span>
+<span class="kw">inner_join</span>(ano, cob, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&#39;CLE_RSA&#39;</span>)) -&gt;<span class="st"> </span>patients_cob
+<span class="kw">distinct</span>(patients_cob, NOANON) %&gt;%<span class="st"> </span><span class="kw">nrow</span>()</code></pre></div>
+
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="contexte.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="requetes-sur-des-pathologies-actes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="chainage-pmsi.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -226,7 +250,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/index.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/05-patients1.Rmd",
 "text": "Edit"
 },
 "download": ["pmeasyr-book.pdf"],

@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="contexte.html">
+<link rel="prev" href="chainage-pmsi.html">
+<link rel="next" href="statistiques-du-pmsi.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -169,35 +169,100 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Traitement des données PMSI avec R</h1>
-<h4 class="author"><em>Guillaume Pressiat</em></h4>
-<h4 class="date"><em>2017-02-10</em></h4>
+<div id="fichier-tra" class="section level1">
+<h1><span class="header-section-number">8</span> Fichier TRA</h1>
+<p>Le fichier TRA est un fichier du <em>out</em> qui permet de relier les donnees anonymes du <em>out</em> aux donnees du <em>in</em>, il comprend un lien entre :</p>
+<ul>
+<li>MCO : cle_rsa, numero de rss, numero de sejour (nas), date d’entree et date de sortie du sejour</li>
+<li>SSR : numero sequentiel du sejour + noseqrhs et numero de sejour + numero de semaine</li>
+<li>PSY RPSA : ipp, date d’entree et de fin du sejour, numero sequentiel du sejour, numero de sequence et numero de sejour, dates de debut et fin de sequence</li>
+<li>PSY R3A : ipp, date de l’acte, numero d’ordre, forme activité, um, nature et lieu de l’acte</li>
+<li>HAD : numero sequentiel de sejour, numero de sequence, sous-sequence et numero de sejour, dates de debut et fin des sequences et sous-sequences, dates d’entree et de sortie du sejour, modes d’entree sortie provenance destination</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Type</th>
+<th align="left">Import</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right"><a href="https://github.com/IM-APHP/pmeasyr/tree/master/Rd_md/itra.Rmd">itra</a></td>
+<td align="left">~ TRA - Import du TRA</td>
+</tr>
+<tr class="even">
+<td align="right"><a href="https://github.com/IM-APHP/pmeasyr/tree/master/Rd_md/inner_tra.Rmd">inner_tra</a></td>
+<td align="left">~ TRA - Ajout du TRA aux donnees Out</td>
+</tr>
+</tbody>
+</table>
+<div id="ajout-du-tra-en-mco" class="section level2">
+<h2><span class="header-section-number">8.1</span> Ajout du TRA en MCO</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># lecture du fichier tra et jointure aux rsa</span>
+<span class="kw">itra</span>(<span class="dv">750100042</span>, <span class="dv">2015</span>, <span class="dv">12</span>, <span class="st">&#39;~/Documents/data/mco&#39;</span>) -&gt;<span class="st"> </span>tra
+<span class="co"># Ajout du tra aux rsa :</span>
+<span class="kw">inner_tra</span>(rsa15$rsa, tra) -&gt;<span class="st"> </span>rsa15$rsa</code></pre></div>
 </div>
-<div id="introduction" class="section level1">
-<h1><span class="header-section-number">1</span> Introduction</h1>
-<p>Ce livre numérique présente des exemples de traitements de données PMSI avec R. L’objectif est de concentrer ici :</p>
-<ul>
-<li>une documentation permettant de débuter avec l’import de données via le package <em>pmeasyr</em></li>
-</ul>
-<p>et des exemples d’analyses PMSI :</p>
-<ul>
-<li>étude de la durée moyenne de séjour</li>
-<li>requêtes sur les diagnostics et les actes</li>
-<li>analyse des files actives pour une pathologie</li>
-<li>chainage PMSI de patients</li>
-<li>reporting de l’activité</li>
-<li>visualisation graphiques, cartographies</li>
-</ul>
+<div id="ajout-du-tra-en-had" class="section level2">
+<h2><span class="header-section-number">8.2</span> Ajout du TRA en HAD</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Import du TRA HAD</span>
+<span class="kw">itra</span>(<span class="dt">finess =</span> <span class="dv">750712184</span>,
+     <span class="dt">annee =</span> <span class="dv">2015</span>,
+     <span class="dt">mois =</span> <span class="dv">12</span>,
+     <span class="dt">path =</span> <span class="st">&#39;~/Documents/data/had&#39;</span>, 
+     <span class="dt">champ =</span> <span class="st">&quot;had&quot;</span>) -&gt;<span class="st"> </span>tra
 
+<span class="co"># Ajout du tra</span>
+<span class="kw">inner_tra</span>(data_had$rapss, tra, <span class="dt">champ =</span> <span class="st">&quot;had&quot;</span>) -&gt;<span class="st"> </span>data_had$rapss
+<span class="kw">inner_tra</span>(data_had$acdi,  tra, <span class="dt">champ =</span> <span class="st">&quot;had&quot;</span>) -&gt;<span class="st"> </span>data_had$acdi
+<span class="kw">inner_tra</span>(data_had$ght,   tra, <span class="dt">champ =</span> <span class="st">&quot;had&quot;</span>) -&gt;<span class="st"> </span>data_had$ght</code></pre></div>
+</div>
+<div id="ajout-du-tra-en-ssr" class="section level2">
+<h2><span class="header-section-number">8.3</span> Ajout du TRA en SSR</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Import du TRA SSR</span>
+<span class="kw">itra</span>(<span class="dt">finess =</span> <span class="dv">750712184</span>,
+     <span class="dt">annee =</span> <span class="dv">2015</span>,
+     <span class="dt">mois =</span> <span class="dv">12</span>,
+     <span class="dt">path =</span> <span class="st">&#39;~/Documents/data/ssr&#39;</span>, 
+     <span class="dt">champ =</span> <span class="st">&quot;ssr&quot;</span>) -&gt;<span class="st"> </span>tra
+
+<span class="co"># Ajout du tra</span>
+<span class="kw">inner_tra</span>(data_ssr$rha,  tra, <span class="dt">champ =</span> <span class="st">&quot;ssr&quot;</span>) -&gt;<span class="st"> </span>data_ssr$rha
+<span class="kw">inner_tra</span>(data_ssr$acdi, tra, <span class="dt">champ =</span> <span class="st">&quot;ssr&quot;</span>) -&gt;<span class="st"> </span>data_ssr$acdi</code></pre></div>
+</div>
+<div id="ajout-du-tra-en-psy" class="section level2">
+<h2><span class="header-section-number">8.4</span> Ajout du TRA en PSY</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Import du TRA PSY : fichiers RPSA</span>
+<span class="kw">itra</span>(<span class="dt">finess =</span> <span class="dv">750803454</span>,
+     <span class="dt">annee =</span> <span class="dv">2015</span>,
+     <span class="dt">mois =</span> <span class="dv">12</span>,
+     <span class="dt">path =</span> <span class="st">&#39;~/Documents/data/psy&#39;</span>, 
+     <span class="dt">champ =</span> <span class="st">&quot;tra_psy_rpsa&quot;</span>) -&gt;<span class="st"> </span>tra
+
+<span class="co"># Ajout du tra</span>
+<span class="kw">inner_tra</span>(rpsa_psy$rpsa, tra, <span class="dt">champ =</span> <span class="st">&quot;psyrpsa&quot;</span>) -&gt;<span class="st"> </span>rpsa_psy$rpsa
+<span class="kw">inner_tra</span>(rpsa_psy$das,  tra, <span class="dt">champ =</span> <span class="st">&quot;psyrpsa&quot;</span>) -&gt;<span class="st"> </span>rpsa_psy$das</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Import du TRA PSY : fichiers R3A</span>
+<span class="kw">itra</span>(<span class="dt">finess =</span> <span class="dv">750803454</span>,
+     <span class="dt">annee =</span> <span class="dv">2015</span>,
+     <span class="dt">mois =</span> <span class="dv">12</span>,
+     <span class="dt">path =</span> <span class="st">&#39;~/Documents/data/psy&#39;</span>, 
+     <span class="dt">champ =</span> <span class="st">&quot;tra_psy_r3a&quot;</span>) -&gt;<span class="st"> </span>tra
+
+<span class="co"># Ajout du tra</span>
+<span class="kw">inner_tra</span>(r3a_psy$r3a, tra, <span class="dt">champ =</span> <span class="st">&quot;psyr3a&quot;</span>) -&gt;<span class="st"> </span>r3a_psy$r3a
+<span class="kw">inner_tra</span>(r3a_psy$das, tra, <span class="dt">champ =</span> <span class="st">&quot;psyr3a&quot;</span>) -&gt;<span class="st"> </span>r3a_psy$das</code></pre></div>
+
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="contexte.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="chainage-pmsi.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="statistiques-du-pmsi.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -226,7 +291,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/index.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/07-fichier_tra.Rmd",
 "text": "Edit"
 },
 "download": ["pmeasyr-book.pdf"],
