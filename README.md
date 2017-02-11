@@ -1,2 +1,0 @@
-# GuillaumePressiat.github.io
-Documentations
