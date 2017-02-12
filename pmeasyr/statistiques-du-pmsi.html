@@ -25,7 +25,7 @@
 <meta name="author" content="Guillaume Pressiat || SIMAP / DOMU / Assistance Publique - Hôpitaux de Paris">
 
 
-<meta name="date" content="2017-02-11">
+<meta name="date" content="2017-02-12">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -133,8 +133,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="5" data-path="requetes-sur-des-pathologies-actes.html"><a href="requetes-sur-des-pathologies-actes.html"><i class="fa fa-check"></i><b>5</b> Requêtes sur des pathologies / actes</a><ul>
 <li class="chapter" data-level="5.1" data-path="requetes-sur-des-pathologies-actes.html"><a href="requetes-sur-des-pathologies-actes.html#transposition-des-codes-diagnostics"><i class="fa fa-check"></i><b>5.1</b> Transposition des codes diagnostics</a></li>
-<li class="chapter" data-level="5.2" data-path="requetes-sur-des-pathologies-actes.html"><a href="requetes-sur-des-pathologies-actes.html#exemple-1-recherche-de-codes-diagnostics-depilepsie"><i class="fa fa-check"></i><b>5.2</b> Exemple 1 : recherche de codes diagnostics d’épilepsie</a></li>
-<li class="chapter" data-level="5.3" data-path="requetes-sur-des-pathologies-actes.html"><a href="requetes-sur-des-pathologies-actes.html#exemple-2-recherche-de-codes-actes"><i class="fa fa-check"></i><b>5.3</b> Exemple 2 : recherche de codes actes</a></li>
+<li class="chapter" data-level="5.2" data-path="requetes-sur-des-pathologies-actes.html"><a href="requetes-sur-des-pathologies-actes.html#recherche-de-codes-diagnostics"><i class="fa fa-check"></i><b>5.2</b> Recherche de codes diagnostics</a></li>
+<li class="chapter" data-level="5.3" data-path="requetes-sur-des-pathologies-actes.html"><a href="requetes-sur-des-pathologies-actes.html#recherche-de-codes-actes"><i class="fa fa-check"></i><b>5.3</b> Recherche de codes actes</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="etude-des-files-actives.html"><a href="etude-des-files-actives.html"><i class="fa fa-check"></i><b>6</b> Étude des files actives</a><ul>
 <li class="chapter" data-level="6.1" data-path="etude-des-files-actives.html"><a href="etude-des-files-actives.html#import-des-donnees-anohosp"><i class="fa fa-check"></i><b>6.1</b> Import des données Anohosp</a></li>
@@ -147,11 +147,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.3" data-path="fichier-tra.html"><a href="fichier-tra.html#ajout-du-tra-en-ssr"><i class="fa fa-check"></i><b>7.3</b> Ajout du TRA en SSR</a></li>
 <li class="chapter" data-level="7.4" data-path="fichier-tra.html"><a href="fichier-tra.html#ajout-du-tra-en-psy"><i class="fa fa-check"></i><b>7.4</b> Ajout du TRA en PSY</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="statistiques-du-pmsi.html"><a href="statistiques-du-pmsi.html"><i class="fa fa-check"></i><b>8</b> Statistiques du PMSI</a></li>
+<li class="chapter" data-level="8" data-path="statistiques-du-pmsi.html"><a href="statistiques-du-pmsi.html"><i class="fa fa-check"></i><b>8</b> Statistiques du PMSI</a><ul>
+<li class="chapter" data-level="8.1" data-path="statistiques-du-pmsi.html"><a href="statistiques-du-pmsi.html#age-et-duree-de-sejour"><i class="fa fa-check"></i><b>8.1</b> Âge et durée de séjour</a></li>
+<li class="chapter" data-level="8.2" data-path="statistiques-du-pmsi.html"><a href="statistiques-du-pmsi.html#nombre-de-sejours-par-categorie-majeure-de-diagnostics"><i class="fa fa-check"></i><b>8.2</b> Nombre de séjours par catégorie majeure de diagnostics</a></li>
+<li class="chapter" data-level="8.3" data-path="statistiques-du-pmsi.html"><a href="statistiques-du-pmsi.html#case-mix-mco-dms-par-ghm-ghs"><i class="fa fa-check"></i><b>8.3</b> Case-mix MCO, DMS par GHM / GHS</a></li>
+</ul></li>
 <li class="chapter" data-level="9" data-path="help.html"><a href="help.html"><i class="fa fa-check"></i><b>9</b> Help</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Publié avec bookdown</a></li>
-
 </ul>
 
       </nav>
@@ -171,19 +174,31 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="statistiques-du-pmsi" class="section level1">
 <h1><span class="header-section-number">8</span> Statistiques du PMSI</h1>
-<ul>
-<li>âge moyen des patients</li>
-<li>Durée de séjour</li>
-<li>Nombre de séjours par catégorie majeure de diagnostics</li>
-<li>Case-mix MCO, DMS par GHM / GHS</li>
-</ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Age moyen et DMS sur les plus de 0 jour</span>
-rsa15$rsa %&gt;%<span class="st"> </span><span class="kw">summarise</span>(<span class="dt">age_moyen =</span> <span class="kw">mean</span>(AGEAN),
-                        <span class="dt">dms =</span> <span class="kw">mean</span>(<span class="kw">if_else</span>(DUREE&gt;<span class="dv">0</span>, DUREE, <span class="ot">NA</span>), <span class="dt">na.rm =</span> T))</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Nombre de séjours par catégorie majeure de diagnostics</span>
-rsa15$rsa %&gt;%<span class="st"> </span><span class="kw">count</span>(RSACMD)
+<div id="age-et-duree-de-sejour" class="section level2">
+<h2><span class="header-section-number">8.1</span> Âge et durée de séjour</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
 
-<span class="co"># Construire la variable GHM</span>
+<span class="co"># Age moyen et DMS sur les plus de 0 jour</span>
+rsa15$rsa %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">age_moyen =</span> <span class="kw">mean</span>(AGEAN, <span class="dt">na.rm =</span> T),
+            <span class="dt">dms =</span> <span class="kw">mean</span>(<span class="kw">if_else</span>(DUREE&gt;<span class="dv">0</span>, DUREE, <span class="ot">NA_integer_</span>), <span class="dt">na.rm =</span> T),
+            <span class="dt">effectif =</span> <span class="kw">n</span>())
+
+<span class="co"># Age moyen en prenant en compte les séjours des bébés </span>
+<span class="co"># (variable age en jour) </span>
+rsa15$rsa %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Age =</span> <span class="kw">if_else</span>(<span class="kw">is.na</span>(AGEAN), <span class="kw">as.integer</span>(AGEJR) /<span class="st"> </span><span class="fl">365.25</span>, <span class="kw">as.numeric</span>(AGEAN))) %&gt;%
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">age_moyen =</span> <span class="kw">mean</span>(Age),
+            <span class="dt">effectif =</span> <span class="kw">n</span>())</code></pre></div>
+</div>
+<div id="nombre-de-sejours-par-categorie-majeure-de-diagnostics" class="section level2">
+<h2><span class="header-section-number">8.2</span> Nombre de séjours par catégorie majeure de diagnostics</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Nombre de séjours par catégorie majeure de diagnostics</span>
+rsa15$rsa %&gt;%<span class="st"> </span><span class="kw">count</span>(RSACMD)</code></pre></div>
+</div>
+<div id="case-mix-mco-dms-par-ghm-ghs" class="section level2">
+<h2><span class="header-section-number">8.3</span> Case-mix MCO, DMS par GHM / GHS</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Construire la variable GHM</span>
 rsa15$rsa %&gt;%<span class="st"> </span>tidyr::<span class="kw">unite</span>(GHM, 
                            RSACMD, RSATYPE, RSANUM, RSACOMPX,
                            <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>) -&gt;<span class="st"> </span>rsa15$rsa
@@ -196,8 +211,10 @@ rsa15$rsa %&gt;%<span class="st"> </span><span class="kw">count</span>(GHM, NOGH
 
 <span class="co"># DMS par GHM / GHS</span>
 rsa15$rsa %&gt;%<span class="st"> </span><span class="kw">group_by</span>(GHM, NOGHS) %&gt;%
-<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">dms =</span> <span class="kw">mean</span>(<span class="kw">if_else</span>(DUREE&gt;<span class="dv">0</span>, DUREE, <span class="ot">NA</span>), <span class="dt">na.rm =</span> T))</code></pre></div>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">dms =</span> <span class="kw">mean</span>(<span class="kw">if_else</span>(DUREE&gt;<span class="dv">0</span>, DUREE, <span class="ot">NA_integer_</span>), <span class="dt">na.rm =</span> T),
+            <span class="dt">effectif =</span> <span class="kw">n</span>())</code></pre></div>
 
+</div>
 </div>
             </section>
 
@@ -234,8 +251,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/08-statistiques_bases.Rmd",
-"text": "Edit"
+"link": null,
+"text": null
 },
 "download": ["pmeasyr-book.pdf"],
 "toc": {

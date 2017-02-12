@@ -25,7 +25,7 @@
 <meta name="author" content="Guillaume Pressiat || SIMAP / DOMU / Assistance Publique - Hôpitaux de Paris">
 
 
-<meta name="date" content="2017-02-11">
+<meta name="date" content="2017-02-12">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -133,8 +133,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="5" data-path="requetes-sur-des-pathologies-actes.html"><a href="requetes-sur-des-pathologies-actes.html"><i class="fa fa-check"></i><b>5</b> Requêtes sur des pathologies / actes</a><ul>
 <li class="chapter" data-level="5.1" data-path="requetes-sur-des-pathologies-actes.html"><a href="requetes-sur-des-pathologies-actes.html#transposition-des-codes-diagnostics"><i class="fa fa-check"></i><b>5.1</b> Transposition des codes diagnostics</a></li>
-<li class="chapter" data-level="5.2" data-path="requetes-sur-des-pathologies-actes.html"><a href="requetes-sur-des-pathologies-actes.html#exemple-1-recherche-de-codes-diagnostics-depilepsie"><i class="fa fa-check"></i><b>5.2</b> Exemple 1 : recherche de codes diagnostics d’épilepsie</a></li>
-<li class="chapter" data-level="5.3" data-path="requetes-sur-des-pathologies-actes.html"><a href="requetes-sur-des-pathologies-actes.html#exemple-2-recherche-de-codes-actes"><i class="fa fa-check"></i><b>5.3</b> Exemple 2 : recherche de codes actes</a></li>
+<li class="chapter" data-level="5.2" data-path="requetes-sur-des-pathologies-actes.html"><a href="requetes-sur-des-pathologies-actes.html#recherche-de-codes-diagnostics"><i class="fa fa-check"></i><b>5.2</b> Recherche de codes diagnostics</a></li>
+<li class="chapter" data-level="5.3" data-path="requetes-sur-des-pathologies-actes.html"><a href="requetes-sur-des-pathologies-actes.html#recherche-de-codes-actes"><i class="fa fa-check"></i><b>5.3</b> Recherche de codes actes</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="etude-des-files-actives.html"><a href="etude-des-files-actives.html"><i class="fa fa-check"></i><b>6</b> Étude des files actives</a><ul>
 <li class="chapter" data-level="6.1" data-path="etude-des-files-actives.html"><a href="etude-des-files-actives.html#import-des-donnees-anohosp"><i class="fa fa-check"></i><b>6.1</b> Import des données Anohosp</a></li>
@@ -147,11 +147,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.3" data-path="fichier-tra.html"><a href="fichier-tra.html#ajout-du-tra-en-ssr"><i class="fa fa-check"></i><b>7.3</b> Ajout du TRA en SSR</a></li>
 <li class="chapter" data-level="7.4" data-path="fichier-tra.html"><a href="fichier-tra.html#ajout-du-tra-en-psy"><i class="fa fa-check"></i><b>7.4</b> Ajout du TRA en PSY</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="statistiques-du-pmsi.html"><a href="statistiques-du-pmsi.html"><i class="fa fa-check"></i><b>8</b> Statistiques du PMSI</a></li>
+<li class="chapter" data-level="8" data-path="statistiques-du-pmsi.html"><a href="statistiques-du-pmsi.html"><i class="fa fa-check"></i><b>8</b> Statistiques du PMSI</a><ul>
+<li class="chapter" data-level="8.1" data-path="statistiques-du-pmsi.html"><a href="statistiques-du-pmsi.html#age-et-duree-de-sejour"><i class="fa fa-check"></i><b>8.1</b> Âge et durée de séjour</a></li>
+<li class="chapter" data-level="8.2" data-path="statistiques-du-pmsi.html"><a href="statistiques-du-pmsi.html#nombre-de-sejours-par-categorie-majeure-de-diagnostics"><i class="fa fa-check"></i><b>8.2</b> Nombre de séjours par catégorie majeure de diagnostics</a></li>
+<li class="chapter" data-level="8.3" data-path="statistiques-du-pmsi.html"><a href="statistiques-du-pmsi.html#case-mix-mco-dms-par-ghm-ghs"><i class="fa fa-check"></i><b>8.3</b> Case-mix MCO, DMS par GHM / GHS</a></li>
+</ul></li>
 <li class="chapter" data-level="9" data-path="help.html"><a href="help.html"><i class="fa fa-check"></i><b>9</b> Help</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Publié avec bookdown</a></li>
-
 </ul>
 
       </nav>
@@ -172,7 +175,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="archives" class="section level1">
 <h1><span class="header-section-number">3</span> Les archives PMSI</h1>
 <p>Cette partie aborde le point de départ des études PMSI : les archives PMSI. Ces archives sont les fichiers en entrées / sorties des logiciels de l’ATIH.</p>
-<p>Les manuels techniques de ces logiciels,relatifs aux champs MCO, SSR, HAD, PSY et RSF, respectivement <a href="http://atih.sante.fr/plateformes-de-transmission-et-logiciels/logiciels-espace-de-telechargement#G">Genrsa</a>, <a href="http://atih.sante.fr/plateformes-de-transmission-et-logiciels/logiciels-espace-de-telechargement#G">Genrha</a>, <a href="http://atih.sante.fr/plateformes-de-transmission-et-logiciels/logiciels-espace-de-telechargement#P">Paprica</a>, <a href="http://atih.sante.fr/plateformes-de-transmission-et-logiciels/logiciels-espace-de-telechargement#P">Pivoine</a> et <a href="http://atih.sante.fr/plateformes-de-transmission-et-logiciels/logiciels-espace-de-telechargement#P">Preface</a> sont disponibnles dans l’<a href="http://atih.sante.fr/plateformes-de-transmission-et-logiciels/logiciels-espace-de-telechargement">espace de telechargement</a> sur le site de l’ATIH.</p>
+<p>Les manuels techniques de ces logiciels, relatifs aux champs MCO, SSR, HAD, PSY et RSF, respectivement <a href="http://atih.sante.fr/plateformes-de-transmission-et-logiciels/logiciels-espace-de-telechargement#G">Genrsa</a>, <a href="http://atih.sante.fr/plateformes-de-transmission-et-logiciels/logiciels-espace-de-telechargement#G">Genrha</a>, <a href="http://atih.sante.fr/plateformes-de-transmission-et-logiciels/logiciels-espace-de-telechargement#P">Paprica</a>, <a href="http://atih.sante.fr/plateformes-de-transmission-et-logiciels/logiciels-espace-de-telechargement#P">Pivoine</a> et <a href="http://atih.sante.fr/plateformes-de-transmission-et-logiciels/logiciels-espace-de-telechargement#P">Preface</a> sont disponibles dans l’<a href="http://atih.sante.fr/plateformes-de-transmission-et-logiciels/logiciels-espace-de-telechargement">espace de téléchargement</a> sur le site de l’ATIH.</p>
 <div id="arborescence-des-archives" class="section level2">
 <h2><span class="header-section-number">3.1</span> Arborescence des archives</h2>
 <p>Le package <em>pmeasyr</em> prend en charge les données des quatre champs PMSI MCO, SSR, HAD, PSY ainsi que les RSF.</p>
@@ -193,6 +196,7 @@ emplacement &lt;-<span class="st"> &quot;~/Documents/data&quot;</span>
 </div>
 <div id="informations-sur-les-archives" class="section level2">
 <h2><span class="header-section-number">3.2</span> Informations sur les archives</h2>
+<p>Le nom des fonctions dont l’objectif est de manipuler les <strong>a</strong>rchives commence par <strong>a</strong>.</p>
 <p>La fonction <code>astat</code> permet d’éditer des statistiques sommaires sur les fichiers contenus dans une archive.</p>
 <table>
 <thead>
@@ -221,7 +225,6 @@ pmeasyr::<span class="kw">astat</span>(<span class="dt">path =</span> <span clas
 <li><code>finess.annee.mois.date_et_heure_de_creation.out.zip</code></li>
 </ul>
 <p>Les fonctions permettent de dézipper les fichiers depuis <code>R</code> en ligne de commande, sans intervention manuelle de l’utilisateur. L’avantage est d’obtenir un processus ne relevant pas d’interventions externes au logiciel <code>R</code> (pour pouvoir garder trace des etapes, et faciliter la reproduction, tout est inscrit dans un programme, dans un flux de processus). Une fois que les traitements et analyses sur les fichiers sont faits, il est possible d’effacer les archives également en ligne de commande.</p>
-<p>Le nom des fonctions dont l’objectif est de manipuler les <strong>a</strong>rchives commence par <strong>a</strong>.</p>
 <table>
 <colgroup>
 <col width="11%" />
@@ -328,8 +331,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/02-archives.Rmd",
-"text": "Edit"
+"link": null,
+"text": null
 },
 "download": ["pmeasyr-book.pdf"],
 "toc": {

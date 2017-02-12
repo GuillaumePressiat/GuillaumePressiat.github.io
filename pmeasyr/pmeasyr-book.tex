@@ -125,10 +125,24 @@ Publique - Hôpitaux de Paris}
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-02-11}
+  \date{2017-02-12}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
+\renewcommand{\familydefault}{\sfdefault}
+\renewcommand{\chaptername}{}
+\renewcommand{\contentsname}{Tables des matières}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\hypersetup{
+    colorlinks = true,
+    linkcolor = CadetBlue,
+    citecolor = CadetBlue,
+    urlcolor  = Blue,
+    linkbordercolor = gray,
+    allbordercolors = CornflowerBlue
+}
+
 \makeatletter
 \def\thm@space@setup{%
   \thm@preskip=8pt plus 2pt minus 4pt
@@ -160,9 +174,9 @@ avec R. L'objectif est de concentrer ici :
   \item
     requêtes sur les diagnostics et les actes
   \item
-    statistiques élementaires sur des variables du PMSI
-  \item
     analyse des files actives pour une pathologie
+  \item
+    statistiques élementaires sur des variables du PMSI
   \item
     analyse du case-mix et de la dms par ghm
   \end{itemize}
@@ -170,7 +184,7 @@ avec R. L'objectif est de concentrer ici :
 
 \chapter{Contexte et motivations}\label{contexte}
 
-Les données du Programme de Médicalisation des Systèmes d'Informations
+Les données du Programme de Médicalisation des Systèmes d'Information
 (PMSI) sont souvent traitées via des logiciels spécifiques au PMSI (ou
 des outils statistiques / bases de données du marché) ne permettant pas
 de réaliser des traitements statistiques et des infographies
@@ -263,8 +277,6 @@ description des prises en charge.
 
 \section{Installation du package}\label{installation-du-package}
 
-\textbf{Depuis github avec devtools}
-
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{devtools::}\KeywordTok{install_github}\NormalTok{(}\StringTok{'IM-APHP/pmeasyr'}\NormalTok{)}
@@ -279,7 +291,7 @@ Cette partie aborde le point de départ des études PMSI : les archives
 PMSI. Ces archives sont les fichiers en entrées / sorties des logiciels
 de l'ATIH.
 
-Les manuels techniques de ces logiciels,relatifs aux champs MCO, SSR,
+Les manuels techniques de ces logiciels, relatifs aux champs MCO, SSR,
 HAD, PSY et RSF, respectivement
 \href{http://atih.sante.fr/plateformes-de-transmission-et-logiciels/logiciels-espace-de-telechargement\#G}{Genrsa},
 \href{http://atih.sante.fr/plateformes-de-transmission-et-logiciels/logiciels-espace-de-telechargement\#G}{Genrha},
@@ -287,9 +299,9 @@ HAD, PSY et RSF, respectivement
 \href{http://atih.sante.fr/plateformes-de-transmission-et-logiciels/logiciels-espace-de-telechargement\#P}{Pivoine}
 et
 \href{http://atih.sante.fr/plateformes-de-transmission-et-logiciels/logiciels-espace-de-telechargement\#P}{Preface}
-sont disponibnles dans
+sont disponibles dans
 l'\href{http://atih.sante.fr/plateformes-de-transmission-et-logiciels/logiciels-espace-de-telechargement}{espace
-de telechargement} sur le site de l'ATIH.
+de téléchargement} sur le site de l'ATIH.
 
 \section{Arborescence des archives}\label{arborescence-des-archives}
 
@@ -328,6 +340,9 @@ différents.
 
 \section{Informations sur les
 archives}\label{informations-sur-les-archives}
+
+Le nom des fonctions dont l'objectif est de manipuler les
+\textbf{a}rchives commence par \textbf{a}.
 
 La fonction \texttt{astat} permet d'éditer des statistiques sommaires
 sur les fichiers contenus dans une archive.
@@ -373,9 +388,6 @@ et faciliter la reproduction, tout est inscrit dans un programme, dans
 un flux de processus). Une fois que les traitements et analyses sur les
 fichiers sont faits, il est possible d'effacer les archives également en
 ligne de commande.
-
-Le nom des fonctions dont l'objectif est de manipuler les
-\textbf{a}rchives commence par \textbf{a}.
 
 \begin{longtable}[]{@{}ll@{}}
 \toprule
@@ -581,7 +593,7 @@ Les tables sont par défaut avec des libellés :
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Import des rsum 2015}
+\CommentTok{# Import des rum 2015}
 \KeywordTok{irum}\NormalTok{(}\DataTypeTok{finess =} \DecValTok{750100042}\NormalTok{, }
      \DataTypeTok{annee =} \DecValTok{2015}\NormalTok{, }
      \DataTypeTok{mois =} \DecValTok{12}\NormalTok{, }
@@ -687,7 +699,7 @@ Cle RSA & um\tabularnewline
 Pour les quatre autres champs PMSI, seules les données du \emph{out}
 sont prises en charge par le package pour le moment.
 
-Les fonctions d'imports pour ces trois champs reposent sur le même
+Les fonctions d'imports pour ces champs PMSI reposent sur le même
 principe qu'en MCO.
 
 \section{HAD}\label{had}
@@ -709,7 +721,7 @@ Nom & Fonction\tabularnewline
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(pmeasyr)}
-\CommentTok{# Import des RAPSS}
+\CommentTok{# Import des rapss 2015}
 \KeywordTok{irapss}\NormalTok{(}\DataTypeTok{finess =} \DecValTok{750712184}\NormalTok{,}
        \DataTypeTok{annee =} \DecValTok{2015}\NormalTok{,}
        \DataTypeTok{mois =} \DecValTok{12}\NormalTok{,}
@@ -735,6 +747,7 @@ Nom & Fonction\tabularnewline
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{# Import des rha 2015}
 \KeywordTok{irha}\NormalTok{(}\DataTypeTok{finess =} \DecValTok{750041543}\NormalTok{,}
      \DataTypeTok{annee =} \DecValTok{2015}\NormalTok{,}
      \DataTypeTok{mois =} \DecValTok{12}\NormalTok{,}
@@ -760,11 +773,13 @@ Nom & Fonction\tabularnewline
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{# Import des rpsa 2015}
 \KeywordTok{irpsa}\NormalTok{(}\DataTypeTok{finess =} \DecValTok{750803454}\NormalTok{,}
       \DataTypeTok{annee =} \DecValTok{2015}\NormalTok{,}
       \DataTypeTok{mois =} \DecValTok{12}\NormalTok{,}
       \DataTypeTok{path =} \StringTok{'~/Documents/data/psy'}\NormalTok{) ->}\StringTok{ }\NormalTok{rpsa_psy}
 
+\CommentTok{# Import des r3a 2015}
 \KeywordTok{ir3a}\NormalTok{(}\DataTypeTok{finess =} \DecValTok{750803454}\NormalTok{,}
       \DataTypeTok{annee =} \DecValTok{2015}\NormalTok{,}
       \DataTypeTok{mois =} \DecValTok{12}\NormalTok{,}
@@ -788,6 +803,7 @@ Nom & Fonction\tabularnewline
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{# Import des rsfa 2015}
 \KeywordTok{irafael}\NormalTok{(}\DataTypeTok{finess =} \DecValTok{750712184}\NormalTok{,}
         \DataTypeTok{annee =} \DecValTok{2015}\NormalTok{,}
         \DataTypeTok{mois =} \DecValTok{12}\NormalTok{,}
@@ -849,8 +865,8 @@ CLE\_RSA & NSEQRUM & position & diag\tabularnewline
 \bottomrule
 \end{longtable}
 
-\section{Exemple 1 : recherche de codes diagnostics
-d'épilepsie}\label{exemple-1-recherche-de-codes-diagnostics-depilepsie}
+\section{Recherche de codes
+diagnostics}\label{recherche-de-codes-diagnostics}
 
 L'objectif est de récupérer les séjours présentant un code diagnostic de
 la liste
@@ -862,7 +878,7 @@ la liste
                \StringTok{'G405'}\NormalTok{, }\StringTok{'G406'}\NormalTok{, }\StringTok{'G407'}\NormalTok{, }\StringTok{'G408'}\NormalTok{, }\StringTok{'G409'}\NormalTok{, }\StringTok{'G410'}\NormalTok{, }
                \StringTok{'G411'}\NormalTok{, }\StringTok{'G412'}\NormalTok{, }\StringTok{'G418'}\NormalTok{, }\StringTok{'G419'}\NormalTok{, }\StringTok{'R568'}\NormalTok{)}
 
-\NormalTok{## En passant par la table diags}
+\CommentTok{# En passant par la table diags}
 \KeywordTok{tdiag}\NormalTok{(rsa15) ->}\StringTok{ }\NormalTok{rsa15}
 
 \KeywordTok{library}\NormalTok{(dplyr)}
@@ -873,7 +889,7 @@ la liste
 \CommentTok{# position en dp dr}
 \NormalTok{rsa15$diags %>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(diag %in%}\StringTok{ }\NormalTok{liste_diag, position <}\StringTok{ }\DecValTok{5}\NormalTok{)}
 
-\NormalTok{## En passant par les zones stream}
+\CommentTok{# En passant par les zones stream}
 \NormalTok{string_diags =}\StringTok{ }
 \StringTok{  'F803|G400|G401|G402|G403|G404|G405|G406|G407|G408|G409|G410|G411|G412|418|G419|R568'}
 
@@ -886,8 +902,7 @@ la liste
 \end{Highlighting}
 \end{Shaded}
 
-\section{Exemple 2 : recherche de codes
-actes}\label{exemple-2-recherche-de-codes-actes}
+\section{Recherche de codes actes}\label{recherche-de-codes-actes}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -930,6 +945,7 @@ pathologie}\label{file-active-dune-pathologie}
 \CommentTok{# Codes diagnostics obésité }
 \NormalTok{string_diags =}\StringTok{ 'E66'}
 
+\KeywordTok{library}\NormalTok{(dplyr)}
 \CommentTok{# position en dpdr}
 \NormalTok{rsa15$rsa %>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(}\KeywordTok{grepl}\NormalTok{(string_diags, dpdrum)) ->}\StringTok{ }\NormalTok{ob}
 
@@ -949,6 +965,7 @@ pathologie}\label{file-active-dune-pathologie}
                  \StringTok{'HFMC008'}\NormalTok{, }\StringTok{'HFMA010'}\NormalTok{, }\StringTok{'HFMC006'}\NormalTok{, }\StringTok{'HFLE002'}\NormalTok{, }\StringTok{'HFGC900'}\NormalTok{,}
                  \StringTok{'HFLC900'}\NormalTok{, }\StringTok{'HFFA011'}\NormalTok{, }\StringTok{'HFFC018'}\NormalTok{, }\StringTok{'HGCA009'}\NormalTok{, }\StringTok{'HGCC027'}\NormalTok{))}
 
+\KeywordTok{library}\NormalTok{(dplyr)}
 \CommentTok{# acte codé activité 1 (chirurgical)}
 \NormalTok{rsa15$actes %>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(CDCCAM %in%}\StringTok{ }\NormalTok{liste_actes, ACT ==}\StringTok{ '1'}\NormalTok{) ->}\StringTok{ }\NormalTok{cob}
 
@@ -1004,8 +1021,15 @@ Type & Import\tabularnewline
 \begin{Highlighting}[]
 \CommentTok{# lecture du fichier tra et jointure aux rsa}
 \KeywordTok{itra}\NormalTok{(}\DecValTok{750100042}\NormalTok{, }\DecValTok{2015}\NormalTok{, }\DecValTok{12}\NormalTok{, }\StringTok{'~/Documents/data/mco'}\NormalTok{) ->}\StringTok{ }\NormalTok{tra}
+
 \CommentTok{# Ajout du tra aux rsa :}
 \KeywordTok{inner_tra}\NormalTok{(rsa15$rsa, tra) ->}\StringTok{ }\NormalTok{rsa15$rsa}
+\CommentTok{# Ajout du tra à la partie um des rsa :}
+\KeywordTok{inner_tra}\NormalTok{(rsa15$rsa_um, tra) ->}\StringTok{ }\NormalTok{rsa15$rsa_um}
+\CommentTok{# Ajout du tra à la partie actes des rsa :}
+\KeywordTok{inner_tra}\NormalTok{(rsa15$actes, tra) ->}\StringTok{ }\NormalTok{rsa15$actes}
+\CommentTok{# Ajout du tra à la partie das des rsa :}
+\KeywordTok{inner_tra}\NormalTok{(rsa15$das, tra) ->}\StringTok{ }\NormalTok{rsa15$das}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1078,31 +1102,42 @@ Type & Import\tabularnewline
 
 \chapter{Statistiques du PMSI}\label{statistiques-du-pmsi}
 
-\begin{itemize}
-\tightlist
-\item
-  âge moyen des patients
-\item
-  Durée de séjour
-\item
-  Nombre de séjours par catégorie majeure de diagnostics
-\item
-  Case-mix MCO, DMS par GHM / GHS
-\end{itemize}
+\section{Âge et durée de séjour}\label{age-et-duree-de-sejour}
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(dplyr)}
+
 \CommentTok{# Age moyen et DMS sur les plus de 0 jour}
-\NormalTok{rsa15$rsa %>%}\StringTok{ }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{age_moyen =} \KeywordTok{mean}\NormalTok{(AGEAN),}
-                        \DataTypeTok{dms =} \KeywordTok{mean}\NormalTok{(}\KeywordTok{if_else}\NormalTok{(DUREE>}\DecValTok{0}\NormalTok{, DUREE, }\OtherTok{NA}\NormalTok{), }\DataTypeTok{na.rm =} \NormalTok{T))}
+\NormalTok{rsa15$rsa %>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{age_moyen =} \KeywordTok{mean}\NormalTok{(AGEAN, }\DataTypeTok{na.rm =} \NormalTok{T),}
+            \DataTypeTok{dms =} \KeywordTok{mean}\NormalTok{(}\KeywordTok{if_else}\NormalTok{(DUREE>}\DecValTok{0}\NormalTok{, DUREE, }\OtherTok{NA_integer_}\NormalTok{), }\DataTypeTok{na.rm =} \NormalTok{T),}
+            \DataTypeTok{effectif =} \KeywordTok{n}\NormalTok{())}
+
+\CommentTok{# Age moyen en prenant en compte les séjours des bébés }
+\CommentTok{# (variable age en jour) }
+\NormalTok{rsa15$rsa %>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Age =} \KeywordTok{if_else}\NormalTok{(}\KeywordTok{is.na}\NormalTok{(AGEAN), }\KeywordTok{as.integer}\NormalTok{(AGEJR) /}\StringTok{ }\FloatTok{365.25}\NormalTok{, }\KeywordTok{as.numeric}\NormalTok{(AGEAN))) %>%}
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{age_moyen =} \KeywordTok{mean}\NormalTok{(Age),}
+            \DataTypeTok{effectif =} \KeywordTok{n}\NormalTok{())}
 \end{Highlighting}
 \end{Shaded}
+
+\section{Nombre de séjours par catégorie majeure de
+diagnostics}\label{nombre-de-sejours-par-categorie-majeure-de-diagnostics}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# Nombre de séjours par catégorie majeure de diagnostics}
 \NormalTok{rsa15$rsa %>%}\StringTok{ }\KeywordTok{count}\NormalTok{(RSACMD)}
+\end{Highlighting}
+\end{Shaded}
 
+\section{Case-mix MCO, DMS par GHM /
+GHS}\label{case-mix-mco-dms-par-ghm-ghs}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \CommentTok{# Construire la variable GHM}
 \NormalTok{rsa15$rsa %>%}\StringTok{ }\NormalTok{tidyr::}\KeywordTok{unite}\NormalTok{(GHM, }
                            \NormalTok{RSACMD, RSATYPE, RSANUM, RSACOMPX,}
@@ -1116,7 +1151,8 @@ Type & Import\tabularnewline
 
 \CommentTok{# DMS par GHM / GHS}
 \NormalTok{rsa15$rsa %>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(GHM, NOGHS) %>%}
-\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{dms =} \KeywordTok{mean}\NormalTok{(}\KeywordTok{if_else}\NormalTok{(DUREE>}\DecValTok{0}\NormalTok{, DUREE, }\OtherTok{NA}\NormalTok{), }\DataTypeTok{na.rm =} \NormalTok{T))}
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{dms =} \KeywordTok{mean}\NormalTok{(}\KeywordTok{if_else}\NormalTok{(DUREE>}\DecValTok{0}\NormalTok{, DUREE, }\OtherTok{NA_integer_}\NormalTok{), }\DataTypeTok{na.rm =} \NormalTok{T),}
+            \DataTypeTok{effectif =} \KeywordTok{n}\NormalTok{())}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1126,11 +1162,8 @@ Toutes les fonctions du package ont une page d'aide :
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{# Exemple : aide sur la fonction d'import des rsa}
 \NormalTok{?irsa}
-
-\NormalTok{?irum}
-
-\NormalTok{?irapss}
 \end{Highlighting}
 \end{Shaded}
 

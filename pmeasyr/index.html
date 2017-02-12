@@ -25,7 +25,7 @@
 <meta name="author" content="Guillaume Pressiat || SIMAP / DOMU / Assistance Publique - Hôpitaux de Paris">
 
 
-<meta name="date" content="2017-02-11">
+<meta name="date" content="2017-02-12">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -133,8 +133,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="5" data-path="requetes-sur-des-pathologies-actes.html"><a href="requetes-sur-des-pathologies-actes.html"><i class="fa fa-check"></i><b>5</b> Requêtes sur des pathologies / actes</a><ul>
 <li class="chapter" data-level="5.1" data-path="requetes-sur-des-pathologies-actes.html"><a href="requetes-sur-des-pathologies-actes.html#transposition-des-codes-diagnostics"><i class="fa fa-check"></i><b>5.1</b> Transposition des codes diagnostics</a></li>
-<li class="chapter" data-level="5.2" data-path="requetes-sur-des-pathologies-actes.html"><a href="requetes-sur-des-pathologies-actes.html#exemple-1-recherche-de-codes-diagnostics-depilepsie"><i class="fa fa-check"></i><b>5.2</b> Exemple 1 : recherche de codes diagnostics d’épilepsie</a></li>
-<li class="chapter" data-level="5.3" data-path="requetes-sur-des-pathologies-actes.html"><a href="requetes-sur-des-pathologies-actes.html#exemple-2-recherche-de-codes-actes"><i class="fa fa-check"></i><b>5.3</b> Exemple 2 : recherche de codes actes</a></li>
+<li class="chapter" data-level="5.2" data-path="requetes-sur-des-pathologies-actes.html"><a href="requetes-sur-des-pathologies-actes.html#recherche-de-codes-diagnostics"><i class="fa fa-check"></i><b>5.2</b> Recherche de codes diagnostics</a></li>
+<li class="chapter" data-level="5.3" data-path="requetes-sur-des-pathologies-actes.html"><a href="requetes-sur-des-pathologies-actes.html#recherche-de-codes-actes"><i class="fa fa-check"></i><b>5.3</b> Recherche de codes actes</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="etude-des-files-actives.html"><a href="etude-des-files-actives.html"><i class="fa fa-check"></i><b>6</b> Étude des files actives</a><ul>
 <li class="chapter" data-level="6.1" data-path="etude-des-files-actives.html"><a href="etude-des-files-actives.html#import-des-donnees-anohosp"><i class="fa fa-check"></i><b>6.1</b> Import des données Anohosp</a></li>
@@ -147,11 +147,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.3" data-path="fichier-tra.html"><a href="fichier-tra.html#ajout-du-tra-en-ssr"><i class="fa fa-check"></i><b>7.3</b> Ajout du TRA en SSR</a></li>
 <li class="chapter" data-level="7.4" data-path="fichier-tra.html"><a href="fichier-tra.html#ajout-du-tra-en-psy"><i class="fa fa-check"></i><b>7.4</b> Ajout du TRA en PSY</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="statistiques-du-pmsi.html"><a href="statistiques-du-pmsi.html"><i class="fa fa-check"></i><b>8</b> Statistiques du PMSI</a></li>
+<li class="chapter" data-level="8" data-path="statistiques-du-pmsi.html"><a href="statistiques-du-pmsi.html"><i class="fa fa-check"></i><b>8</b> Statistiques du PMSI</a><ul>
+<li class="chapter" data-level="8.1" data-path="statistiques-du-pmsi.html"><a href="statistiques-du-pmsi.html#age-et-duree-de-sejour"><i class="fa fa-check"></i><b>8.1</b> Âge et durée de séjour</a></li>
+<li class="chapter" data-level="8.2" data-path="statistiques-du-pmsi.html"><a href="statistiques-du-pmsi.html#nombre-de-sejours-par-categorie-majeure-de-diagnostics"><i class="fa fa-check"></i><b>8.2</b> Nombre de séjours par catégorie majeure de diagnostics</a></li>
+<li class="chapter" data-level="8.3" data-path="statistiques-du-pmsi.html"><a href="statistiques-du-pmsi.html#case-mix-mco-dms-par-ghm-ghs"><i class="fa fa-check"></i><b>8.3</b> Case-mix MCO, DMS par GHM / GHS</a></li>
+</ul></li>
 <li class="chapter" data-level="9" data-path="help.html"><a href="help.html"><i class="fa fa-check"></i><b>9</b> Help</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Publié avec bookdown</a></li>
-
 </ul>
 
       </nav>
@@ -172,7 +175,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="header">
 <h1 class="title">Traitement des données PMSI avec R</h1>
 <h4 class="author"><em>Guillaume Pressiat || SIMAP / DOMU / Assistance Publique - Hôpitaux de Paris</em></h4>
-<h4 class="date"><em>2017-02-11</em></h4>
+<h4 class="date"><em>2017-02-12</em></h4>
 </div>
 <div id="introduction" class="section level1">
 <h1><span class="header-section-number">1</span> Introduction</h1>
@@ -182,8 +185,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>des exemples d’analyses PMSI :
 <ul>
 <li>requêtes sur les diagnostics et les actes</li>
-<li>statistiques élementaires sur des variables du PMSI</li>
 <li>analyse des files actives pour une pathologie</li>
+<li>statistiques élementaires sur des variables du PMSI</li>
 <li>analyse du case-mix et de la dms par ghm</li>
 </ul></li>
 </ul>
@@ -224,8 +227,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/index.Rmd",
-"text": "Edit"
+"link": null,
+"text": null
 },
 "download": ["pmeasyr-book.pdf"],
 "toc": {
@@ -234,9 +237,7 @@ gitbook.start({
 });
 });
 </script>
-</div>
-<p><br> <img src="http://www.tech2market.fr/wp-content/uploads/LOGO-BLEU-APHP1.jpg" title alt width="288" style="display: block; margin: auto;" /></p>
-</div>
+
 </body>
 
 </html>

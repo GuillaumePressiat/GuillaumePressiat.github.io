@@ -25,7 +25,7 @@
 <meta name="author" content="Guillaume Pressiat || SIMAP / DOMU / Assistance Publique - Hôpitaux de Paris">
 
 
-<meta name="date" content="2017-02-11">
+<meta name="date" content="2017-02-12">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -133,8 +133,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="5" data-path="requetes-sur-des-pathologies-actes.html"><a href="requetes-sur-des-pathologies-actes.html"><i class="fa fa-check"></i><b>5</b> Requêtes sur des pathologies / actes</a><ul>
 <li class="chapter" data-level="5.1" data-path="requetes-sur-des-pathologies-actes.html"><a href="requetes-sur-des-pathologies-actes.html#transposition-des-codes-diagnostics"><i class="fa fa-check"></i><b>5.1</b> Transposition des codes diagnostics</a></li>
-<li class="chapter" data-level="5.2" data-path="requetes-sur-des-pathologies-actes.html"><a href="requetes-sur-des-pathologies-actes.html#exemple-1-recherche-de-codes-diagnostics-depilepsie"><i class="fa fa-check"></i><b>5.2</b> Exemple 1 : recherche de codes diagnostics d’épilepsie</a></li>
-<li class="chapter" data-level="5.3" data-path="requetes-sur-des-pathologies-actes.html"><a href="requetes-sur-des-pathologies-actes.html#exemple-2-recherche-de-codes-actes"><i class="fa fa-check"></i><b>5.3</b> Exemple 2 : recherche de codes actes</a></li>
+<li class="chapter" data-level="5.2" data-path="requetes-sur-des-pathologies-actes.html"><a href="requetes-sur-des-pathologies-actes.html#recherche-de-codes-diagnostics"><i class="fa fa-check"></i><b>5.2</b> Recherche de codes diagnostics</a></li>
+<li class="chapter" data-level="5.3" data-path="requetes-sur-des-pathologies-actes.html"><a href="requetes-sur-des-pathologies-actes.html#recherche-de-codes-actes"><i class="fa fa-check"></i><b>5.3</b> Recherche de codes actes</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="etude-des-files-actives.html"><a href="etude-des-files-actives.html"><i class="fa fa-check"></i><b>6</b> Étude des files actives</a><ul>
 <li class="chapter" data-level="6.1" data-path="etude-des-files-actives.html"><a href="etude-des-files-actives.html#import-des-donnees-anohosp"><i class="fa fa-check"></i><b>6.1</b> Import des données Anohosp</a></li>
@@ -147,11 +147,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.3" data-path="fichier-tra.html"><a href="fichier-tra.html#ajout-du-tra-en-ssr"><i class="fa fa-check"></i><b>7.3</b> Ajout du TRA en SSR</a></li>
 <li class="chapter" data-level="7.4" data-path="fichier-tra.html"><a href="fichier-tra.html#ajout-du-tra-en-psy"><i class="fa fa-check"></i><b>7.4</b> Ajout du TRA en PSY</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="statistiques-du-pmsi.html"><a href="statistiques-du-pmsi.html"><i class="fa fa-check"></i><b>8</b> Statistiques du PMSI</a></li>
+<li class="chapter" data-level="8" data-path="statistiques-du-pmsi.html"><a href="statistiques-du-pmsi.html"><i class="fa fa-check"></i><b>8</b> Statistiques du PMSI</a><ul>
+<li class="chapter" data-level="8.1" data-path="statistiques-du-pmsi.html"><a href="statistiques-du-pmsi.html#age-et-duree-de-sejour"><i class="fa fa-check"></i><b>8.1</b> Âge et durée de séjour</a></li>
+<li class="chapter" data-level="8.2" data-path="statistiques-du-pmsi.html"><a href="statistiques-du-pmsi.html#nombre-de-sejours-par-categorie-majeure-de-diagnostics"><i class="fa fa-check"></i><b>8.2</b> Nombre de séjours par catégorie majeure de diagnostics</a></li>
+<li class="chapter" data-level="8.3" data-path="statistiques-du-pmsi.html"><a href="statistiques-du-pmsi.html#case-mix-mco-dms-par-ghm-ghs"><i class="fa fa-check"></i><b>8.3</b> Case-mix MCO, DMS par GHM / GHS</a></li>
+</ul></li>
 <li class="chapter" data-level="9" data-path="help.html"><a href="help.html"><i class="fa fa-check"></i><b>9</b> Help</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Publié avec bookdown</a></li>
-
 </ul>
 
       </nav>
@@ -230,15 +233,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </tbody>
 </table>
 </div>
-<div id="exemple-1-recherche-de-codes-diagnostics-depilepsie" class="section level2">
-<h2><span class="header-section-number">5.2</span> Exemple 1 : recherche de codes diagnostics d’épilepsie</h2>
+<div id="recherche-de-codes-diagnostics" class="section level2">
+<h2><span class="header-section-number">5.2</span> Recherche de codes diagnostics</h2>
 <p>L’objectif est de récupérer les séjours présentant un code diagnostic de la liste</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Liste D-0103 de la fonction groupage 2016 : Epilepsies</span>
 liste_diag =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;F803&#39;</span>, <span class="st">&#39;G400&#39;</span>, <span class="st">&#39;G401&#39;</span>, <span class="st">&#39;G402&#39;</span>, <span class="st">&#39;G403&#39;</span>, <span class="st">&#39;G404&#39;</span>, 
                <span class="st">&#39;G405&#39;</span>, <span class="st">&#39;G406&#39;</span>, <span class="st">&#39;G407&#39;</span>, <span class="st">&#39;G408&#39;</span>, <span class="st">&#39;G409&#39;</span>, <span class="st">&#39;G410&#39;</span>, 
                <span class="st">&#39;G411&#39;</span>, <span class="st">&#39;G412&#39;</span>, <span class="st">&#39;G418&#39;</span>, <span class="st">&#39;G419&#39;</span>, <span class="st">&#39;R568&#39;</span>)
 
-## En passant par la table diags
+<span class="co"># En passant par la table diags</span>
 <span class="kw">tdiag</span>(rsa15) -&gt;<span class="st"> </span>rsa15
 
 <span class="kw">library</span>(dplyr)
@@ -249,7 +252,7 @@ rsa15$diags %&gt;%<span class="st"> </span><span class="kw">filter</span>(diag %
 <span class="co"># position en dp dr</span>
 rsa15$diags %&gt;%<span class="st"> </span><span class="kw">filter</span>(diag %in%<span class="st"> </span>liste_diag, position &lt;<span class="st"> </span><span class="dv">5</span>)
 
-## En passant par les zones stream
+<span class="co"># En passant par les zones stream</span>
 string_diags =<span class="st"> </span>
 <span class="st">  &#39;F803|G400|G401|G402|G403|G404|G405|G406|G407|G408|G409|G410|G411|G412|418|G419|R568&#39;</span>
 
@@ -260,8 +263,8 @@ rsa15$rsa %&gt;%<span class="st"> </span><span class="kw">fiter</span>(<span cla
 <span class="co"># position en dpdr</span>
 rsa15$rsa %&gt;%<span class="st"> </span><span class="kw">fiter</span>(<span class="kw">grepl</span>(string_diags, dpdrum))</code></pre></div>
 </div>
-<div id="exemple-2-recherche-de-codes-actes" class="section level2">
-<h2><span class="header-section-number">5.3</span> Exemple 2 : recherche de codes actes</h2>
+<div id="recherche-de-codes-actes" class="section level2">
+<h2><span class="header-section-number">5.3</span> Recherche de codes actes</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Code EBLA003</span>
 
 <span class="kw">library</span>(dplyr)
@@ -307,8 +310,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/04-requetes_pmsi.Rmd",
-"text": "Edit"
+"link": null,
+"text": null
 },
 "download": ["pmeasyr-book.pdf"],
 "toc": {

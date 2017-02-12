@@ -16,8 +16,9 @@ img {
   max-width:100%; 
   height: auto; 
 }
-html { background-color:  #e6f2ff; }
-body { margin:5px; background-color: white;   }
+html {  background-color:  white; }
+body {  background-color: white ;}
+
 #preheader {
 	background-color:#2C256B;
     color:white;
@@ -25,6 +26,22 @@ body { margin:5px; background-color: white;   }
     text-align:center;
 	margin:auto;
 
+}
+
+#classe1 {
+ border-radius: 25px;
+ padding:2px 20px 2px 40px;
+ border-width:3px 1px 3px 1px;
+ border-style:solid;
+ text-align:center;
+ border-color:#33adff white #33adff   white;
+}
+#classe2 {
+ border-radius: 25px;
+ padding:2px 20px 2px 40px;
+ border-width:1px 2px 1px 1px;
+ border-style:solid;
+ border-color:white white white   white;
 }
 #header {
 
@@ -85,7 +102,7 @@ span{
 
 }
 #prefooter {
- border-radius:  25px 25px 0px 0px ;
+ border-radius:  0px 0px 0px 0px ;
 	  background-color:#272D31;
 	  
     color:white;
@@ -96,7 +113,7 @@ span{
 }
 
 #postfooter {
- border-radius:  0px 0px 25px 25px;
+ border-radius:  0px 0px 0px 0px;
 	  background-color:#0062AE;
 	  height:8px;
     color:white;
