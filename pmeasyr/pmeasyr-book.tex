@@ -232,10 +232,10 @@ le logiciel :
   la confrontation des données in* (reflet du codage des établissements)
   aux données out* (reflet de la valorisation accordée à
   l'établissement) est facilitée par l'import du fichier tra, cela peut
-  permettre aux équipes DIM d'améliorer leur recueil\\
+  permettre aux équipes DIM d'améliorer leur recueil
 \item
   le reporting de l'activité en excel, pdf, word, html, ou en créant des
-  applications (shiny)
+  applications (\href{http://shiny.rstudio.com}{shiny})
 \item
   l'utilisation des graphiques pour représenter des volumes d'activités
   et des cartographies interactives pour visualiser la localisation
@@ -251,16 +251,21 @@ l'ATIH}
 \subsection{Des outils performants}\label{des-outils-performants}
 
 L'engouement autour de R est lié au développement de packages intuitifs
-et performants : \emph{readr}, \emph{dplyr}, \emph{tidyr},
-\emph{magrittr}, pour n'en citer que quelques-uns. \emph{pmeasyr}
-s'appuie sur ces packages pour proposer des imports de données rapides
-sur des fichiers de taille importante (l'entité juridique de l'AP-HP est
-prise en charge sans problème avec un ordinateur récent).
+et performants : \href{http://readr.tidyverse.org}{\emph{readr}},
+\href{https://github.com/hadley/dplyr}{\emph{dplyr}},
+\href{http://tidyr.tidyverse.org}{\emph{tidyr}},
+\href{https://github.com/tidyverse/magrittr}{\emph{magrittr}}, pour n'en
+citer que quelques-uns.
+\href{https://github.com/IM-APHP/pmeasyr}{\emph{pmeasyr}} s'appuie sur
+ces packages pour proposer des imports de données rapides sur des
+fichiers de taille importante (l'entité juridique de l'AP-HP est prise
+en charge sans problème avec un ordinateur récent).
 
-Dans le cas de \emph{pmeasyr}, l'import de 100 000 rsa (partie fixe,
-parsing des passages unités médicales, des diagnostics associés et des
-actes) nécessite en moyenne 5 secondes avec un processeur i7 -- 16Go de
-ram.
+Dans le cas de
+\href{https://github.com/IM-APHP/pmeasyr}{\emph{pmeasyr}}, l'import de
+100 000 rsa (partie fixe, parsing des passages unités médicales, des
+diagnostics associés et des actes) nécessite en moyenne 5 secondes avec
+un processeur i7 -- 16Go de ram.
 
 En dernier ressort, R travaillant en mémoire vive, les exécutions de
 requêtes sont très rapides.
@@ -960,10 +965,10 @@ pathologie}\label{file-active-dune-pathologie}
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# Codes actes chirurgie bariatrique}
-\NormalTok{liste_actes =}\StringTok{ }\KeywordTok{c}\NormalTok{((}\StringTok{'HFCA001'}\NormalTok{, }\StringTok{'HFCC003'}\NormalTok{, }\StringTok{'HFFC004'}\NormalTok{, }\StringTok{'HFFA001'}\NormalTok{, }\StringTok{'HFMA009'}\NormalTok{,}
-                 \StringTok{'HFMC007'}\NormalTok{, }\StringTok{'HFKA001'}\NormalTok{, }\StringTok{'HFKC001'}\NormalTok{, }\StringTok{'HFKA002'}\NormalTok{, }\StringTok{'HFMA011'}\NormalTok{,}
-                 \StringTok{'HFMC008'}\NormalTok{, }\StringTok{'HFMA010'}\NormalTok{, }\StringTok{'HFMC006'}\NormalTok{, }\StringTok{'HFLE002'}\NormalTok{, }\StringTok{'HFGC900'}\NormalTok{,}
-                 \StringTok{'HFLC900'}\NormalTok{, }\StringTok{'HFFA011'}\NormalTok{, }\StringTok{'HFFC018'}\NormalTok{, }\StringTok{'HGCA009'}\NormalTok{, }\StringTok{'HGCC027'}\NormalTok{))}
+\NormalTok{liste_actes =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{'HFCA001'}\NormalTok{, }\StringTok{'HFCC003'}\NormalTok{, }\StringTok{'HFFC004'}\NormalTok{, }\StringTok{'HFFA001'}\NormalTok{, }\StringTok{'HFMA009'}\NormalTok{,}
+                \StringTok{'HFMC007'}\NormalTok{, }\StringTok{'HFKA001'}\NormalTok{, }\StringTok{'HFKC001'}\NormalTok{, }\StringTok{'HFKA002'}\NormalTok{, }\StringTok{'HFMA011'}\NormalTok{,}
+                \StringTok{'HFMC008'}\NormalTok{, }\StringTok{'HFMA010'}\NormalTok{, }\StringTok{'HFMC006'}\NormalTok{, }\StringTok{'HFLE002'}\NormalTok{, }\StringTok{'HFGC900'}\NormalTok{,}
+                \StringTok{'HFLC900'}\NormalTok{, }\StringTok{'HFFA011'}\NormalTok{, }\StringTok{'HFFC018'}\NormalTok{, }\StringTok{'HGCA009'}\NormalTok{, }\StringTok{'HGCC027'}\NormalTok{)}
 
 \KeywordTok{library}\NormalTok{(dplyr)}
 \CommentTok{# acte codé activité 1 (chirurgical)}
