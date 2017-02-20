@@ -182,7 +182,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 rsa15$rsa %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">summarise</span>(<span class="dt">age_moyen =</span> <span class="kw">mean</span>(AGEAN, <span class="dt">na.rm =</span> T),
             <span class="dt">dms =</span> <span class="kw">mean</span>(DUREE[DUREE &gt;<span class="dv">0</span>]),
-            <span class="dt">effectif =</span> <span class="kw">n</span>())
+            <span class="dt">effectif =</span> <span class="kw">n</span>(),
+            <span class="dt">effectif_h0j =</span> <span class="kw">sum</span>(DUREE &gt;<span class="st"> </span><span class="dv">0</span>))
 
 <span class="co"># Age moyen en prenant en compte les séjours des bébés </span>
 <span class="co"># (variable age en jour) </span>
@@ -209,10 +210,11 @@ rsa15$rsa %&gt;%<span class="st"> </span><span class="kw">count</span>(GHM)
 <span class="co"># Case-mix par GHM / GHS</span>
 rsa15$rsa %&gt;%<span class="st"> </span><span class="kw">count</span>(GHM, NOGHS)
 
-<span class="co"># DMS par GHM / GHS</span>
+<span class="co"># DMS par GHM / GHS et effectifs</span>
 rsa15$rsa %&gt;%<span class="st"> </span><span class="kw">group_by</span>(GHM, NOGHS) %&gt;%
 <span class="st">  </span><span class="kw">summarise</span>(<span class="dt">dms =</span> <span class="kw">mean</span>(DUREE[DUREE &gt;<span class="dv">0</span>]),
-            <span class="dt">effectif =</span> <span class="kw">n</span>())</code></pre></div>
+            <span class="dt">effectif =</span> <span class="kw">n</span>(),
+            <span class="dt">effectif_h0j =</span> <span class="kw">sum</span>(DUREE &gt;<span class="st"> </span><span class="dv">0</span>))</code></pre></div>
 
 </div>
 </div>
