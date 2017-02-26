@@ -4,13 +4,13 @@
 - title: "Blog"
   href: "/blog/"
 
-- title: "pmeasyr"
+- title: "pmeasyr-book"
   href: '/pmeasyr/'
 
 - title: "Divers"
   href: "/miscellany/"
   subcategories:
-    - subtitle: "Item 1"
+    - subtitle: "Divers 1"
       subhref: "/miscellany/item-1/"
     - subtitle: "à propos de ce site"
       subhref: "/miscellany/ce-site/"

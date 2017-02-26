@@ -25,7 +25,7 @@
 <meta name="author" content="Guillaume Pressiat || SIMAP / DOMU / Assistance Publique - Hôpitaux de Paris">
 
 
-<meta name="date" content="2017-02-12">
+<meta name="date" content="2017-02-26">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -181,8 +181,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="co"># Age moyen et DMS sur les plus de 0 jour</span>
 rsa15$rsa %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">summarise</span>(<span class="dt">age_moyen =</span> <span class="kw">mean</span>(AGEAN, <span class="dt">na.rm =</span> T),
-            <span class="dt">dms =</span> <span class="kw">mean</span>(<span class="kw">if_else</span>(DUREE&gt;<span class="dv">0</span>, DUREE, <span class="ot">NA_integer_</span>), <span class="dt">na.rm =</span> T),
-            <span class="dt">effectif =</span> <span class="kw">n</span>())
+            <span class="dt">dms =</span> <span class="kw">mean</span>(DUREE[DUREE &gt;<span class="st"> </span><span class="dv">0</span>]),
+            <span class="dt">effectif =</span> <span class="kw">n</span>(),
+            <span class="dt">effectif_sup0 =</span> <span class="kw">sum</span>(DUREE &gt;<span class="st"> </span><span class="dv">0</span>))
 
 <span class="co"># Age moyen en prenant en compte les séjours des bébés </span>
 <span class="co"># (variable age en jour) </span>
@@ -211,8 +212,9 @@ rsa15$rsa %&gt;%<span class="st"> </span><span class="kw">count</span>(GHM, NOGH
 
 <span class="co"># DMS par GHM / GHS</span>
 rsa15$rsa %&gt;%<span class="st"> </span><span class="kw">group_by</span>(GHM, NOGHS) %&gt;%
-<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">dms =</span> <span class="kw">mean</span>(<span class="kw">if_else</span>(DUREE&gt;<span class="dv">0</span>, DUREE, <span class="ot">NA_integer_</span>), <span class="dt">na.rm =</span> T),
-            <span class="dt">effectif =</span> <span class="kw">n</span>())</code></pre></div>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">dms =</span> <span class="dt">dms =</span> <span class="kw">mean</span>(DUREE[DUREE &gt;<span class="st"> </span><span class="dv">0</span>]),
+            <span class="dt">effectif =</span> <span class="kw">n</span>(),
+            <span class="dt">effectif_sup0 =</span> <span class="kw">sum</span>(DUREE &gt;<span class="st"> </span><span class="dv">0</span>))</code></pre></div>
 
 </div>
 </div>
