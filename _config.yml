@@ -15,6 +15,10 @@ permalink: blog/:year/:month/:title
 job.title: "statisticien"
 excerpt_separator: "<!--more-->"
 
+exclude:
+  - Gemfile
+  - Gemfile.lock
+
 # SEO stuff
 # google_author: ""
 # google_site_verification: ""
