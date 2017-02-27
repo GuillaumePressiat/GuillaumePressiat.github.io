@@ -10,7 +10,6 @@ url: "~/Documents/test-jek2" # the base hostname & protocol for your site
 github_username:  GuillaumePressiat
 
 # Build settings
-markdown: redcarpet
 highlighter: pygments
 
 # Other options
