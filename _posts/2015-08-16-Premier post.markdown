@@ -22,8 +22,6 @@ Bienvenue, ce blog rassemble les informations autour du package R *pmeasyr*.
 
 ## Un exemple de traitement en MCO
 
-
-
 {% highlight r %}
 library(pmeasyr)
 # Import des rsa, des passages um, des diagnostics associés et des actes
@@ -48,3 +46,19 @@ tables_rsa$actes %>% filter(ACT == '1')
 library(dplyr)
 tables_rsa$rsa_um %>% filter(grepl('16', TYPAUT1))
 {% endhighlight %}
+
+
+Pour plus d'exemples sur le MCO et sur les autres champs[^1] SSR, HAD, PSY et RSF, consulter le [livret en ligne](/pmeasyr/).
+<br>
+
+------
+
+[^1]: Champs PMSI :
+	* MCO : Médecine Chirurgie Obstétrique
+	* SSR : Soins de Suite et de Réadaptation
+	* HAD : Hospitalisation À Domicile
+	* PSY : Psychiatrie
+	* RSF : Résumés Standardisés de Financement (Rafael)
+
+
+<br>
