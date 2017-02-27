@@ -4,4 +4,4 @@ title: Divers
 permalink: /miscellany/
 ---
 
-Divers
+Ce qui n'est pas ailleurs est ici.

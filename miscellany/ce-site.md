@@ -1,6 +1,6 @@
 ---
 layout: page
-title: à propos de ce site
+title: À propos de ce site
 permalink: /miscellany/ce-site/
 ---
 
