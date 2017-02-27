@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 27 Feb 2017 13:18:55 +0100</pubDate>
-    <lastBuildDate>Mon, 27 Feb 2017 13:18:55 +0100</lastBuildDate>
+    <pubDate>Mon, 27 Feb 2017 15:15:09 +0100</pubDate>
+    <lastBuildDate>Mon, 27 Feb 2017 15:15:09 +0100</lastBuildDate>
     <generator>Jekyll v3.4.0</generator>
     
       <item>
@@ -16,7 +16,7 @@
 
 &lt;ul&gt;
   &lt;li&gt;Le package est hébergé sur le &lt;a href=&quot;https://github.com/IM-APHP/pmeasyr&quot;&gt;Github de l’Information Médicale AP-HP&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Un livret numérique qui présente le package et son utilisation est &lt;a href=&quot;/pmeasyr&quot;&gt;disponible&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Un &lt;a href=&quot;/pmeasyr&quot;&gt;livret numérique&lt;/a&gt; présente le package et son utilisation&lt;/li&gt;
   &lt;li&gt;Ce livret est aussi disponible au &lt;a href=&quot;/pmeasyr/pmeasyr-book.pdf&quot;&gt;format pdf&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Le &lt;a href=&quot;/assets/files/pmeasyr.pdf&quot;&gt;manuel pdf&lt;/a&gt; avec l’aide pour toutes les fonctions du package&lt;/li&gt;
 &lt;/ul&gt;

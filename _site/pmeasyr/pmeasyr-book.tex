@@ -125,7 +125,7 @@ Publique - Hôpitaux de Paris}
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-02-26}
+  \date{2017-02-27}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -1157,7 +1157,7 @@ GHS}\label{case-mix-mco-dms-par-ghm-ghs}
 
 \CommentTok{# DMS par GHM / GHS}
 \NormalTok{rsa15$rsa %>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(GHM, NOGHS) %>%}
-\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{dms =} \DataTypeTok{dms =} \KeywordTok{mean}\NormalTok{(DUREE[DUREE >}\StringTok{ }\DecValTok{0}\NormalTok{]),}
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{dms =} \KeywordTok{mean}\NormalTok{(DUREE[DUREE >}\StringTok{ }\DecValTok{0}\NormalTok{]),}
             \DataTypeTok{effectif =} \KeywordTok{n}\NormalTok{(),}
             \DataTypeTok{effectif_sup0 =} \KeywordTok{sum}\NormalTok{(DUREE >}\StringTok{ }\DecValTok{0}\NormalTok{))}
 \end{Highlighting}
