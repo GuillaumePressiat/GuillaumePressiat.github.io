@@ -8,6 +8,9 @@ author: Guillaume Pressiat
 
 Le fichier `rsfa` peut être volumineux car il contient tous les types de rafael (débuts de factures, actes externes, ATU, consultations, ...). Or il est rare d'avoir à utiliser tous les types de rafael en même temps dans un seul projet.
 
-Plutôt que de tout importer dans R et donc charger trop de données (c.-à.-d. remplir la mémoire vive inutilement), on peut diviser le fichier d'origine `rsfa` en plusieurs fichiers selon leur type. 
+Plutôt que de tout importer dans R et donc charger trop de données (c.-à.-d. remplir la mémoire vive inutilement), on peut :
 
-[Un notebook en ligne]({% link /assets/files/split_rsfa.nb.html %}) propose une méthode pour le faire, associant *pmeasyr* à un script Python, chose possible dans un même programme à l'aide des Notebook .Rmd de RStudio.
+- spécifier à *pmeasyr* que l'on ne souhaite pas garder tous les types de rsfa en mémoire dans R
+- diviser le fichier d'origine `rsfa` en plusieurs fichiers selon leur type avec python
+
+[Un notebook en ligne]({% link /assets/files/split_rsfa.nb.html %}) présente ces deux solutions.

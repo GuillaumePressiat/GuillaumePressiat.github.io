@@ -6,17 +6,22 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 27 Feb 2017 19:23:00 +0100</pubDate>
-    <lastBuildDate>Mon, 27 Feb 2017 19:23:00 +0100</lastBuildDate>
+    <pubDate>Mon, 27 Feb 2017 19:39:33 +0100</pubDate>
+    <lastBuildDate>Mon, 27 Feb 2017 19:39:33 +0100</lastBuildDate>
     <generator>Jekyll v3.4.0</generator>
     
       <item>
         <title>Split du fichier rsfa avec python et import dans R</title>
         <description>&lt;p&gt;Le fichier &lt;code class=&quot;highlighter-rouge&quot;&gt;rsfa&lt;/code&gt; peut être volumineux car il contient tous les types de rafael (débuts de factures, actes externes, ATU, consultations, …). Or il est rare d’avoir à utiliser tous les types de rafael en même temps dans un seul projet.&lt;/p&gt;
 
-&lt;p&gt;Plutôt que de tout importer dans R et donc charger trop de données (c.-à.-d. remplir la mémoire vive inutilement), on peut diviser le fichier d’origine &lt;code class=&quot;highlighter-rouge&quot;&gt;rsfa&lt;/code&gt; en plusieurs fichiers selon leur type.&lt;/p&gt;
+&lt;p&gt;Plutôt que de tout importer dans R et donc charger trop de données (c.-à.-d. remplir la mémoire vive inutilement), on peut :&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;/assets/files/split_rsfa.nb.html&quot;&gt;Un notebook en ligne&lt;/a&gt; propose une méthode pour le faire, associant &lt;em&gt;pmeasyr&lt;/em&gt; à un script Python, chose possible dans un même programme à l’aide des Notebook .Rmd de RStudio.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;spécifier à &lt;em&gt;pmeasyr&lt;/em&gt; que l’on ne souhaite pas garder tous les types de rsfa en mémoire dans R&lt;/li&gt;
+  &lt;li&gt;diviser le fichier d’origine &lt;code class=&quot;highlighter-rouge&quot;&gt;rsfa&lt;/code&gt; en plusieurs fichiers selon leur type avec python&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/files/split_rsfa.nb.html&quot;&gt;Un notebook en ligne&lt;/a&gt; présente ces deux solutions.&lt;/p&gt;
 </description>
         <pubDate>Mon, 27 Feb 2017 13:40:55 +0100</pubDate>
         <link>http://localhost:4000/blog/2017/02/Split-du-fichier-rsfa</link>

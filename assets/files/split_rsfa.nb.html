@@ -160,8 +160,8 @@ $(document).ready(function () {
 <ul class="dropdown-menu" style="min-width: 50px;">
 <li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
 <li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
-<!--<li role="separator" class="divider"></li>
-<li><a id="rmd-download-source" href="#">Download Rmd</a></li>-->
+<!-- <li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li> -->
 </ul>
 </div>
 
@@ -176,7 +176,11 @@ $(document).ready(function () {
 
 <!-- rnb-text-begin -->
 <p>Le fichier <code>rsfa</code> peut être volumineux car il contient tous les types de rafael (débuts de factures, actes externes, ATU, consultations, …). Or il est rare d’avoir à utiliser tous les types de rafael en même temps dans un seul projet.</p>
-<p>Plutôt que de tout importer dans R et donc charger trop de données (c.-à.-d. remplir la mémoire vive inutilement), on peut diviser le fichier d’origine <code>rsfa</code> en plusieurs fichiers selon leur type.</p>
+<p>Plutôt que de tout importer dans R et donc charger trop de données (c.-à.-d. remplir la mémoire vive inutilement), on peut :</p>
+<ul>
+<li>spécifier à <em>pmeasyr</em> que l’on ne souhaite pas garder tous les types de rsfa en mémoire dans R</li>
+<li>diviser le fichier d’origine <code>rsfa</code> en plusieurs fichiers selon leur type avec python</li>
+</ul>
 <p>Ce notebook détaille comment le faire en associant <em>pmeasyr</em> à un script Python, chose possible dans un même programme à l’aide des Notebook .Rmd de RStudio.</p>
 <div id="dezipage-des-fichiers-rsfa-et-rsfa-maj" class="section level3">
 <h3>Dézipage des fichiers rsfa et rsfa-maj</h3>
@@ -204,8 +208,21 @@ adezip(finess  = '750712184',
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
-<div id="verifier-le-path-dans-python" class="section level3">
-<h3>Vérifier le path dans python</h3>
+<div id="solution-uniquement-avec-pmeasyr" class="section level3">
+<h3>Solution uniquement avec <em>pmeasyr</em></h3>
+<p>Le paramêtre <code>lister</code> de la fonction <code>ìrafael()</code> permet de lister le type de rafael que l’on souhaite importer dans R</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaXJhZmFlbCgnNzUwNzEyMTg0JywgJzIwMTUnLCAnMTInLCAnfi9Eb2N1bWVudHMvZGF0YS9yc2YvJywgcHJvZ3Jlc3MgPSBGLCBsaXN0ZXIgPSBjKCdDJywgJ00nKSkgLT4gcmFmYWVsXG5gYGAifQ== -->
+<pre class="r"><code>irafael('750712184', '2015', '12', '~/Documents/data/rsf/', progress = F, lister = c('C', 'M')) -&gt; rafael</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="solution-en-passant-par-python" class="section level3">
+<h3>Solution en passant par python</h3>
+<div id="verifier-le-path-dans-python" class="section level4">
+<h4>Vérifier le path dans python</h4>
 <p>Changer de path dans un Notebook n’est pas conseillé, on vérifie que l’on est bien dans le répertoire où sont les fichiers.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
@@ -221,8 +238,8 @@ print(os.path.abspath(''))</code></pre>
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
-<div id="fonction-de-split-du-fichier-rsfa-par-type-de-rsf-a-b-c-m" class="section level3">
-<h3>Fonction de split du fichier rsfa par type de rsf (A, B, C, M, …)</h3>
+<div id="fonction-de-split-du-fichier-rsfa-par-type-de-rsf-a-b-c-m" class="section level4">
+<h4>Fonction de split du fichier rsfa par type de rsf (A, B, C, M, …)</h4>
 <p>La fonction permet de créer un nouveau fichier ne contenant que le type de rsf que l’on souhaite étudier.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
@@ -261,15 +278,19 @@ for i in ['C', 'M']:
   print('Split des rsfa ' + i + ' ok')
   #split_rsfa(i, chemin, '750712184','2015', '12', 'rsfa-maj')</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiU3BsaXQgZGVzIHJzZmEgQyBva1xuU3BsaXQgZGVzIHJzZmEgTSBva1xuIn0= -->
+<pre><code>Split des rsfa C ok
+Split des rsfa M ok</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
-<div id="les-fichiers-produits" class="section level3">
-<h3>Les fichiers produits</h3>
+<div id="les-fichiers-produits" class="section level4">
+<h4>Les fichiers produits</h4>
 <p>Vérifier les fichiers tout juste produits.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlzdC5maWxlcygpIC0+IGZpY2hpZXJzXG5jYXQoZmljaGllcnNbZ3JlcGwoJ1xcXFwucnNmYScsIGZpY2hpZXJzKV0sIHNlcCA9IFwiXFxuXCIpXG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyMjIyMjIyMjIyMgU2NyaXB0IFJcbiMjIyMjIyMjIyMjICMjIyMjIyMjXG5saXN0LmZpbGVzKCkgLT4gZmljaGllcnNcbmNhdChmaWNoaWVyc1tncmVwbCgnXFxcXC5yc2ZhJywgZmljaGllcnMpXSwgc2VwID0gXCJcXG5cIilcbmBgYCJ9 -->
 <pre class="r"><code>########### Script R
 ########### ########
 list.files() -&gt; fichiers
@@ -286,8 +307,8 @@ cat(fichiers[grepl('\\.rsfa', fichiers)], sep = &quot;\n&quot;)</code></pre>
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
-<div id="import-dans-r-avec-pmeasyr" class="section level3">
-<h3>Import dans R avec <em>pmeasyr</em></h3>
+<div id="import-dans-r-avec-pmeasyr" class="section level4">
+<h4>Import dans R avec <em>pmeasyr</em></h4>
 <p>L’import des rsf type par type est plus leger ensuite dans R :</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
@@ -306,8 +327,9 @@ irafael('750712184_M', '2015', '12', '~/Documents/data/rsf/', progress = F, list
 <a href="http://guillaumepressiat.github.io/blog/">retour</a></p>
 <!-- rnb-text-end -->
 </div>
+</div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiU3BsaXQgZGVzIFJTRkEgcGFyIHR5cGUgZCdlbnJlZ2lzdHJlbWVudCIKYXV0aG9yOiBHIFByZXNzaWF0CmRhdGU6IDI3LzAyLzIwMTcKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKCkxlIGZpY2hpZXIgYHJzZmFgIHBldXQgw6p0cmUgdm9sdW1pbmV1eCBjYXIgaWwgY29udGllbnQgdG91cyBsZXMgdHlwZXMgZGUgcmFmYWVsIChkw6lidXRzIGRlIGZhY3R1cmVzLCBhY3RlcyBleHRlcm5lcywgQVRVLCBjb25zdWx0YXRpb25zLCAuLi4pLiBPciBpbCBlc3QgcmFyZSBkJ2F2b2lyIMOgIHV0aWxpc2VyIHRvdXMgbGVzIHR5cGVzIGRlIHJhZmFlbCBlbiBtw6ptZSB0ZW1wcyBkYW5zIHVuIHNldWwgcHJvamV0LgogIApQbHV0w7R0IHF1ZSBkZSB0b3V0IGltcG9ydGVyIGRhbnMgUiBldCBkb25jIGNoYXJnZXIgdHJvcCBkZSBkb25uw6llcyAoYy4tw6AuLWQuIHJlbXBsaXIgbGEgbcOpbW9pcmUgdml2ZSBpbnV0aWxlbWVudCksIG9uIHBldXQgZGl2aXNlciBsZSBmaWNoaWVyIGQnb3JpZ2luZSBgcnNmYWAgZW4gcGx1c2lldXJzIGZpY2hpZXJzIHNlbG9uIGxldXIgdHlwZS4gCgpDZSBub3RlYm9vayBkw6l0YWlsbGUgY29tbWVudCBsZSBmYWlyZSBlbiBhc3NvY2lhbnQgKnBtZWFzeXIqIMOgIHVuIHNjcmlwdCBQeXRob24sIGNob3NlIHBvc3NpYmxlIGRhbnMgdW4gbcOqbWUgcHJvZ3JhbW1lIMOgIGwnYWlkZSBkZXMgTm90ZWJvb2sgLlJtZCBkZSBSU3R1ZGlvLgoKIyMjIETDqXppcGFnZSBkZXMgZmljaGllcnMgcnNmYSBldCByc2ZhLW1haiAKCkF2ZWMgbGUgcGFja2FnZSAqcG1lYXN5ciogb24gZMOpemlwcGUgZGVwdWlzIHVuIHNjcmlwdCBSIGxlcyBmaWNoaWVycyBgcnNmYWAgZXQgYHJzZmFfbWFqYC4KCmBgYHtyfQojIyMjIyMjIyMjIyBTY3JpcHQgUgojIyMjIyMjIyMjIyAjIyMjIyMjIwpsaWJyYXJ5KHBtZWFzeXIpCgphZGV6aXAoZmluZXNzICA9ICc3NTA3MTIxODQnLAogICAgICAgYW5uZWUgICA9IDIwMTUsCiAgICAgICBtb2lzICAgID0gMTIsCiAgICAgICBwYXRoICAgID0gJ34vRG9jdW1lbnRzL2RhdGEvcnNmJywKICAgICAgIHR5cGUgICAgPSAib3V0IiwKICAgICAgIGxpc3RlICAgPSBjKCdyc2ZhJywgJ3JzZmEtbWFqJykpCgpgYGAKCiMjIyBWw6lyaWZpZXIgbGUgcGF0aCBkYW5zIHB5dGhvbgoKQ2hhbmdlciBkZSBwYXRoIGRhbnMgdW4gTm90ZWJvb2sgbidlc3QgcGFzIGNvbnNlaWxsw6ksIG9uIHbDqXJpZmllIHF1ZSBsJ29uIGVzdCBiaWVuIGRhbnMgbGUgcsOpcGVydG9pcmUgb8O5IHNvbnQgbGVzIGZpY2hpZXJzLgoKYGBge3B5dGhvbn0KIyMjIyMjIyMjIyMgU2NyaXB0IFB5dGhvbgojIyMjIyMjIyMjIyAjIyMjIyMjIyMjIyMjCmltcG9ydCBvcwpwcmludChvcy5wYXRoLmFic3BhdGgoJycpKQpgYGAKCiMjIyBGb25jdGlvbiBkZSBzcGxpdCBkdSBmaWNoaWVyIHJzZmEgcGFyIHR5cGUgZGUgcnNmIChBLCBCLCBDLCBNLCAuLi4pCgpMYSBmb25jdGlvbiBwZXJtZXQgZGUgY3LDqWVyIHVuIG5vdXZlYXUgZmljaGllciBuZSBjb250ZW5hbnQgcXVlIGxlIHR5cGUgZGUgcnNmIHF1ZSBsJ29uIHNvdWhhaXRlIMOpdHVkaWVyLgoKYGBge3B5dGhvbn0KIyMjIyMjIyMjIyMgU2NyaXB0IFB5dGhvbgojIyMjIyMjIyMjIyAjIyMjIyMjIyMjIyMjCmltcG9ydCBvcwoKIyBGb25jdGlvbiBkZSBzcGxpdCBkdSBmaWNoaWVyIHJzZmEKZGVmIHNwbGl0X3JzZmEoZmlsdHJlLCBwYXRoLCBmaW5lc3MsIGFubmVlLCBtb2lzLCB0eXBlKToKICAjIEdlc3Rpb24gZGVzIGNoZW1pbnMgKGEgYWRhcHRlciBwb3VyIHdpbmRvd3MpCiAgIyBGaWNoaWVyIHJzZmEgYXUgZGVwYXJ0CiAgZmlsaW4gPSAnLycuam9pbigocGF0aCwgJy4nLmpvaW4oKGZpbmVzcywgYW5uZWUsIG1vaXMsIHR5cGUpKSkpCiAgIyBGaWNoaWVyIHJzZmEgZmlsdHJlIGVuIHNvcnRpZSwgb24gYWNjb2xlIGF1IGZpbmVzcyBsZSB0eXBlIGRlIHJzZmEsIGV4OiBmaW5lc3NfQwogIGZpbG91dCA9ICcvJy5qb2luKChwYXRoLCAnLicuam9pbigoZmluZXNzICsgJ18nICsgIGZpbHRyZSwgYW5uZWUsIG1vaXMsIHR5cGUpKSkpCiAgCiAgIyBQb3VyIGNoYXF1ZSBsaWduZSBkdSBmaWNoaWVyIGQnZW50cmVlIG9uIHRlc3RlIGxlIHR5cGUgZCdlbnJlZ2lzdHJlbWVudCBBLCBCLCBDLi4uIHNlbG9uCiAgIyBxdWUgbGUgZmljaGllciBzb2l0IC5yc2ZhIG91IC5yc2ZhLW1haiwgZG9uYyBlbiBjb2xvbm5lIDkgb3UgMjcgZHUgZmljaGllciB0ZXh0ZQogIGZvdXQgPSBvcGVuKGZpbG91dCwgJ3cnKQogIGZvciBsaW5lIGluIG9wZW4oZmlsaW4pOgogICAgaWYgdHlwZSA9PSAncnNmYSc6CiAgICAgIGlmIGxpbmVbOF0gPT0gZmlsdHJlOgogICAgICAgIGZvdXQud3JpdGUobGluZSkKICAgIGlmIHR5cGUgPT0gJ3JzZmEtbWFqJzoKICAgICAgaWYgbGluZVsyNl0gPT0gZmlsdHJlOgogICAgICAgIGZvdXQud3JpdGUobGluZSkKICBmb3V0LmNsb3NlKCkKCgojIEV4ZWN1dGlvbiBkYW5zIG5vdHJlIGNhcyBwb3VyIHVuIGZpY2hpZXIgcGxhY2UgaWNpIDoKY2hlbWluID0gb3MucGF0aC5hYnNwYXRoKCcnKQoKIyBFeGVtcGxlIHBvdXIgbGVzIHJzZmEgQyBldCBNIHN1ciBsZXMgZGV1eCB0eXBlcyBkZSBmaWNoaWVycyAocnNmYSBldC9vdSByc2ZhLW1haikKZm9yIGkgaW4gWydDJywgJ00nXToKICBzcGxpdF9yc2ZhKGksIGNoZW1pbiwgJzc1MDcxMjE4NCcsJzIwMTUnLCAnMTInLCAncnNmYScpCiAgcHJpbnQoJ1NwbGl0IGRlcyByc2ZhICcgKyBpICsgJyBvaycpCiAgI3NwbGl0X3JzZmEoaSwgY2hlbWluLCAnNzUwNzEyMTg0JywnMjAxNScsICcxMicsICdyc2ZhLW1haicpCmBgYAoKIyMjIExlcyBmaWNoaWVycyBwcm9kdWl0cwoKVsOpcmlmaWVyIGxlcyBmaWNoaWVycyB0b3V0IGp1c3RlIHByb2R1aXRzLgoKYGBge3J9Cmxpc3QuZmlsZXMoKSAtPiBmaWNoaWVycwpjYXQoZmljaGllcnNbZ3JlcGwoJ1xcLnJzZmEnLCBmaWNoaWVycyldLCBzZXAgPSAiXG4iKQpgYGAKCiMjIyBJbXBvcnQgZGFucyBSIGF2ZWMgKnBtZWFzeXIqCgpMJ2ltcG9ydCBkZXMgcnNmIHR5cGUgcGFyIHR5cGUgZXN0IHBsdXMgbGVnZXIgZW5zdWl0ZSBkYW5zIFIgOgoKYGBge3J9CiMjIyMjIyMjIyMjIFNjcmlwdCBSCiMjIyMjIyMjIyMjICMjIyMjIyMjCmxpYnJhcnkocG1lYXN5cikKIyBJbXBvcnQgZGUgbGEgdGFibGUgZGVzIGFjdGVzIENDQU0gZW4gZXh0ZXJuZXMgdW5pcXVlbWVudAppcmFmYWVsKCc3NTA3MTIxODRfTScsICcyMDE1JywgJzEyJywgJ34vRG9jdW1lbnRzL2RhdGEvcnNmLycsIHByb2dyZXNzID0gRiwgbGlzdGVyID0gJ00nKSRNIC0+IHJhZmFlbF9NCmBgYAoKQ2V0dGUgYXBwcm9jaGUgw6l2aXRlIGQnYWxvdXJkaXIgbGVzIGZpY2hpZXJzIGx1cyBwYXIgKnBtZWFzeXIqIGV0IGFsbMOoZ2UgZG9uYyBsZXMgdHJhaXRlbWVudHMuCgotLS0tLS0KMjcvMDIvMjAxNyAgCltyZXRvdXJdKGh0dHA6Ly9ndWlsbGF1bWVwcmVzc2lhdC5naXRodWIuaW8vYmxvZy8pCgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiU3BsaXQgZGVzIFJTRkEgcGFyIHR5cGUgZCdlbnJlZ2lzdHJlbWVudCIKYXV0aG9yOiBHIFByZXNzaWF0CmRhdGU6IDI3LzAyLzIwMTcKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKCkxlIGZpY2hpZXIgYHJzZmFgIHBldXQgw6p0cmUgdm9sdW1pbmV1eCBjYXIgaWwgY29udGllbnQgdG91cyBsZXMgdHlwZXMgZGUgcmFmYWVsIChkw6lidXRzIGRlIGZhY3R1cmVzLCBhY3RlcyBleHRlcm5lcywgQVRVLCBjb25zdWx0YXRpb25zLCAuLi4pLiBPciBpbCBlc3QgcmFyZSBkJ2F2b2lyIMOgIHV0aWxpc2VyIHRvdXMgbGVzIHR5cGVzIGRlIHJhZmFlbCBlbiBtw6ptZSB0ZW1wcyBkYW5zIHVuIHNldWwgcHJvamV0LgogIApQbHV0w7R0IHF1ZSBkZSB0b3V0IGltcG9ydGVyIGRhbnMgUiBldCBkb25jIGNoYXJnZXIgdHJvcCBkZSBkb25uw6llcyAoYy4tw6AuLWQuIHJlbXBsaXIgbGEgbcOpbW9pcmUgdml2ZSBpbnV0aWxlbWVudCksIG9uIHBldXQgOgoKLSBzcMOpY2lmaWVyIMOgICpwbWVhc3lyKiBxdWUgbCdvbiBuZSBzb3VoYWl0ZSBwYXMgZ2FyZGVyIHRvdXMgbGVzIHR5cGVzIGRlIHJzZmEgZW4gbcOpbW9pcmUgZGFucyBSCi0gZGl2aXNlciBsZSBmaWNoaWVyIGQnb3JpZ2luZSBgcnNmYWAgZW4gcGx1c2lldXJzIGZpY2hpZXJzIHNlbG9uIGxldXIgdHlwZSBhdmVjIHB5dGhvbgoKQ2Ugbm90ZWJvb2sgZMOpdGFpbGxlIGNvbW1lbnQgbGUgZmFpcmUgZW4gYXNzb2NpYW50ICpwbWVhc3lyKiDDoCB1biBzY3JpcHQgUHl0aG9uLCBjaG9zZSBwb3NzaWJsZSBkYW5zIHVuIG3Dqm1lIHByb2dyYW1tZSDDoCBsJ2FpZGUgZGVzIE5vdGVib29rIC5SbWQgZGUgUlN0dWRpby4KCiMjIyBEw6l6aXBhZ2UgZGVzIGZpY2hpZXJzIHJzZmEgZXQgcnNmYS1tYWogCgpBdmVjIGxlIHBhY2thZ2UgKnBtZWFzeXIqIG9uIGTDqXppcHBlIGRlcHVpcyB1biBzY3JpcHQgUiBsZXMgZmljaGllcnMgYHJzZmFgIGV0IGByc2ZhX21hamAuCgpgYGB7cn0KIyMjIyMjIyMjIyMgU2NyaXB0IFIKIyMjIyMjIyMjIyMgIyMjIyMjIyMKbGlicmFyeShwbWVhc3lyKQoKYWRlemlwKGZpbmVzcyAgPSAnNzUwNzEyMTg0JywKICAgICAgIGFubmVlICAgPSAyMDE1LAogICAgICAgbW9pcyAgICA9IDEyLAogICAgICAgcGF0aCAgICA9ICd+L0RvY3VtZW50cy9kYXRhL3JzZicsCiAgICAgICB0eXBlICAgID0gIm91dCIsCiAgICAgICBsaXN0ZSAgID0gYygncnNmYScsICdyc2ZhLW1haicpKQoKYGBgCgoKIyMjIFNvbHV0aW9uIHVuaXF1ZW1lbnQgYXZlYyAqcG1lYXN5cioKCkxlIHBhcmFtw6p0cmUgYGxpc3RlcmAgZGUgbGEgZm9uY3Rpb24gYMOscmFmYWVsKClgIHBlcm1ldCBkZSBsaXN0ZXIgbGUgdHlwZSBkZSByYWZhZWwgcXVlIGwnb24gc291aGFpdGUgaW1wb3J0ZXIgZGFucyBSCgpgYGB7cn0KaXJhZmFlbCgnNzUwNzEyMTg0JywgJzIwMTUnLCAnMTInLCAnfi9Eb2N1bWVudHMvZGF0YS9yc2YvJywgcHJvZ3Jlc3MgPSBGLCBsaXN0ZXIgPSBjKCdDJywgJ00nKSkgLT4gcmFmYWVsCmBgYAoKCiMjIyBTb2x1dGlvbiBlbiBwYXNzYW50IHBhciBweXRob24KCiMjIyMgVsOpcmlmaWVyIGxlIHBhdGggZGFucyBweXRob24KCkNoYW5nZXIgZGUgcGF0aCBkYW5zIHVuIE5vdGVib29rIG4nZXN0IHBhcyBjb25zZWlsbMOpLCBvbiB2w6lyaWZpZSBxdWUgbCdvbiBlc3QgYmllbiBkYW5zIGxlIHLDqXBlcnRvaXJlIG/DuSBzb250IGxlcyBmaWNoaWVycy4KCmBgYHtweXRob259CiMjIyMjIyMjIyMjIFNjcmlwdCBQeXRob24KIyMjIyMjIyMjIyMgIyMjIyMjIyMjIyMjIwppbXBvcnQgb3MKcHJpbnQob3MucGF0aC5hYnNwYXRoKCcnKSkKYGBgCgojIyMjIEZvbmN0aW9uIGRlIHNwbGl0IGR1IGZpY2hpZXIgcnNmYSBwYXIgdHlwZSBkZSByc2YgKEEsIEIsIEMsIE0sIC4uLikKCkxhIGZvbmN0aW9uIHBlcm1ldCBkZSBjcsOpZXIgdW4gbm91dmVhdSBmaWNoaWVyIG5lIGNvbnRlbmFudCBxdWUgbGUgdHlwZSBkZSByc2YgcXVlIGwnb24gc291aGFpdGUgw6l0dWRpZXIuCgpgYGB7cHl0aG9ufQojIyMjIyMjIyMjIyBTY3JpcHQgUHl0aG9uCiMjIyMjIyMjIyMjICMjIyMjIyMjIyMjIyMKaW1wb3J0IG9zCgojIEZvbmN0aW9uIGRlIHNwbGl0IGR1IGZpY2hpZXIgcnNmYQpkZWYgc3BsaXRfcnNmYShmaWx0cmUsIHBhdGgsIGZpbmVzcywgYW5uZWUsIG1vaXMsIHR5cGUpOgogICMgR2VzdGlvbiBkZXMgY2hlbWlucyAoYSBhZGFwdGVyIHBvdXIgd2luZG93cykKICAjIEZpY2hpZXIgcnNmYSBhdSBkZXBhcnQKICBmaWxpbiA9ICcvJy5qb2luKChwYXRoLCAnLicuam9pbigoZmluZXNzLCBhbm5lZSwgbW9pcywgdHlwZSkpKSkKICAjIEZpY2hpZXIgcnNmYSBmaWx0cmUgZW4gc29ydGllLCBvbiBhY2NvbGUgYXUgZmluZXNzIGxlIHR5cGUgZGUgcnNmYSwgZXg6IGZpbmVzc19DCiAgZmlsb3V0ID0gJy8nLmpvaW4oKHBhdGgsICcuJy5qb2luKChmaW5lc3MgKyAnXycgKyAgZmlsdHJlLCBhbm5lZSwgbW9pcywgdHlwZSkpKSkKICAKICAjIFBvdXIgY2hhcXVlIGxpZ25lIGR1IGZpY2hpZXIgZCdlbnRyZWUgb24gdGVzdGUgbGUgdHlwZSBkJ2VucmVnaXN0cmVtZW50IEEsIEIsIEMuLi4gc2Vsb24KICAjIHF1ZSBsZSBmaWNoaWVyIHNvaXQgLnJzZmEgb3UgLnJzZmEtbWFqLCBkb25jIGVuIGNvbG9ubmUgOSBvdSAyNyBkdSBmaWNoaWVyIHRleHRlCiAgZm91dCA9IG9wZW4oZmlsb3V0LCAndycpCiAgZm9yIGxpbmUgaW4gb3BlbihmaWxpbik6CiAgICBpZiB0eXBlID09ICdyc2ZhJzoKICAgICAgaWYgbGluZVs4XSA9PSBmaWx0cmU6CiAgICAgICAgZm91dC53cml0ZShsaW5lKQogICAgaWYgdHlwZSA9PSAncnNmYS1tYWonOgogICAgICBpZiBsaW5lWzI2XSA9PSBmaWx0cmU6CiAgICAgICAgZm91dC53cml0ZShsaW5lKQogIGZvdXQuY2xvc2UoKQoKCiMgRXhlY3V0aW9uIGRhbnMgbm90cmUgY2FzIHBvdXIgdW4gZmljaGllciBwbGFjZSBpY2kgOgpjaGVtaW4gPSBvcy5wYXRoLmFic3BhdGgoJycpCgojIEV4ZW1wbGUgcG91ciBsZXMgcnNmYSBDIGV0IE0gc3VyIGxlcyBkZXV4IHR5cGVzIGRlIGZpY2hpZXJzIChyc2ZhIGV0L291IHJzZmEtbWFqKQpmb3IgaSBpbiBbJ0MnLCAnTSddOgogIHNwbGl0X3JzZmEoaSwgY2hlbWluLCAnNzUwNzEyMTg0JywnMjAxNScsICcxMicsICdyc2ZhJykKICBwcmludCgnU3BsaXQgZGVzIHJzZmEgJyArIGkgKyAnIG9rJykKICAjc3BsaXRfcnNmYShpLCBjaGVtaW4sICc3NTA3MTIxODQnLCcyMDE1JywgJzEyJywgJ3JzZmEtbWFqJykKYGBgCgojIyMjIExlcyBmaWNoaWVycyBwcm9kdWl0cwoKVsOpcmlmaWVyIGxlcyBmaWNoaWVycyB0b3V0IGp1c3RlIHByb2R1aXRzLgoKYGBge3J9CiMjIyMjIyMjIyMjIFNjcmlwdCBSCiMjIyMjIyMjIyMjICMjIyMjIyMjCmxpc3QuZmlsZXMoKSAtPiBmaWNoaWVycwpjYXQoZmljaGllcnNbZ3JlcGwoJ1xcLnJzZmEnLCBmaWNoaWVycyldLCBzZXAgPSAiXG4iKQpgYGAKCiMjIyMgSW1wb3J0IGRhbnMgUiBhdmVjICpwbWVhc3lyKgoKTCdpbXBvcnQgZGVzIHJzZiB0eXBlIHBhciB0eXBlIGVzdCBwbHVzIGxlZ2VyIGVuc3VpdGUgZGFucyBSIDoKCmBgYHtyfQojIyMjIyMjIyMjIyBTY3JpcHQgUgojIyMjIyMjIyMjIyAjIyMjIyMjIwpsaWJyYXJ5KHBtZWFzeXIpCiMgSW1wb3J0IGRlIGxhIHRhYmxlIGRlcyBhY3RlcyBDQ0FNIGVuIGV4dGVybmVzIHVuaXF1ZW1lbnQKaXJhZmFlbCgnNzUwNzEyMTg0X00nLCAnMjAxNScsICcxMicsICd+L0RvY3VtZW50cy9kYXRhL3JzZi8nLCBwcm9ncmVzcyA9IEYsIGxpc3RlciA9ICdNJykkTSAtPiByYWZhZWxfTQpgYGAKCkNldHRlIGFwcHJvY2hlIMOpdml0ZSBkJ2Fsb3VyZGlyIGxlcyBmaWNoaWVycyBsdXMgcGFyICpwbWVhc3lyKiBldCBhbGzDqGdlIGRvbmMgbGVzIHRyYWl0ZW1lbnRzLgoKLS0tLS0tCjI3LzAyLzIwMTcgIApbcmV0b3VyXShodHRwOi8vZ3VpbGxhdW1lcHJlc3NpYXQuZ2l0aHViLmlvL2Jsb2cvKQoK</div>
 
 
 
