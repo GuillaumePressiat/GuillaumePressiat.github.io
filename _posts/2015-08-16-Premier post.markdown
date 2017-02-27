@@ -7,17 +7,21 @@ author: Guillaume Pressiat
 
 Bienvenue, ce blog rassemble les informations autour du package R *pmeasyr*. 
 
-- Le package est hébergé sur le [Github de l'Information Médicale AP-HP](https://github.com/IM-APHP/pmeasyr).
-- Un livret numérique présentant le package et son utilisation est [disponible](/pmeasyr).
+- Le package est hébergé sur le [Github de l'Information Médicale AP-HP](https://github.com/IM-APHP/pmeasyr)
+- Un livret numérique qui présente le package et son utilisation est [disponible](/pmeasyr)
+- Ce livret est aussi disponible au [format pdf](/pmeasyr/pmeasyr-book.pdf)
+- Le [manuel pdf]({% link /assets/files/pmeasyr.pdf %}) avec l'aide pour toutes les fonctions du package
 
-  
 <br>
 
 ----------
 <br>
 
 
-Ce package permet d'importer et d'analyser (avec `dplyr` par exemple) les données du PMSI dans R, exemples en MCO : 
+`pmeasyr` permet d'importer les données du PMSI dans R, il est alors possible de les analyser (en utilisant `dplyr` par exemple).
+
+## Un exemple de traitement en MCO
+
 
 
 {% highlight r %}

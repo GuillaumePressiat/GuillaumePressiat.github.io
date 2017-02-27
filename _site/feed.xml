@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 27 Feb 2017 12:50:45 +0100</pubDate>
-    <lastBuildDate>Mon, 27 Feb 2017 12:50:45 +0100</lastBuildDate>
+    <pubDate>Mon, 27 Feb 2017 13:06:09 +0100</pubDate>
+    <lastBuildDate>Mon, 27 Feb 2017 13:06:09 +0100</lastBuildDate>
     <generator>Jekyll v3.4.0</generator>
     
       <item>
@@ -15,8 +15,10 @@
         <description>&lt;p&gt;Bienvenue, ce blog rassemble les informations autour du package R &lt;em&gt;pmeasyr&lt;/em&gt;.&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Le package est hébergé sur le &lt;a href=&quot;https://github.com/IM-APHP/pmeasyr&quot;&gt;Github de l’Information Médicale AP-HP&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;Un livret numérique présentant le package et son utilisation est &lt;a href=&quot;/pmeasyr&quot;&gt;disponible&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Le package est hébergé sur le &lt;a href=&quot;https://github.com/IM-APHP/pmeasyr&quot;&gt;Github de l’Information Médicale AP-HP&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Un livret numérique qui présente le package et son utilisation est &lt;a href=&quot;/pmeasyr&quot;&gt;disponible&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Ce livret est aussi disponible au &lt;a href=&quot;/pmeasyr/pmeasyr-book.pdf&quot;&gt;format pdf&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Le &lt;a href=&quot;/assets/files/pmeasyr.pdf&quot;&gt;manuel pdf&lt;/a&gt; avec l’aide pour toutes les fonctions du package&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
@@ -24,7 +26,9 @@
 &lt;hr /&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;p&gt;Ce package permet d’importer et d’analyser (avec &lt;code class=&quot;highlighter-rouge&quot;&gt;dplyr&lt;/code&gt; par exemple) les données du PMSI dans R, exemples en MCO :&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;pmeasyr&lt;/code&gt; permet d’importer les données du PMSI dans R, il est alors possible de les analyser (en utilisant &lt;code class=&quot;highlighter-rouge&quot;&gt;dplyr&lt;/code&gt; par exemple).&lt;/p&gt;
+
+&lt;h2 id=&quot;un-exemple-de-traitement-en-mco&quot;&gt;Un exemple de traitement en MCO&lt;/h2&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pmeasyr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Import des rsa, des passages um, des diagnostics associés et des actes
