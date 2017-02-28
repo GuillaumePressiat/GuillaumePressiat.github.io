@@ -8,7 +8,7 @@ author: Guillaume Pressiat
 
 ### Quatre paramètres
 
-Les fonctions de dézippage et d'import de *pmeasyr* ont en commun de prendre quatre paramètres identiques :
+Les fonctions de dézippage et d'import de *pmeasyr* ont en commun quatre paramètres identiques :
 
 - le finess du fichier
 - l'année pmsi
