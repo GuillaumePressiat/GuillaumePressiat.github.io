@@ -6,15 +6,15 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 28 Feb 2017 17:36:09 +0100</pubDate>
-    <lastBuildDate>Tue, 28 Feb 2017 17:36:09 +0100</lastBuildDate>
+    <pubDate>Tue, 28 Feb 2017 17:49:59 +0100</pubDate>
+    <lastBuildDate>Tue, 28 Feb 2017 17:49:59 +0100</lastBuildDate>
     <generator>Jekyll v3.4.0</generator>
     
       <item>
         <title>Alléger les scripts utilisant pmeasyr avec do.call</title>
         <description>&lt;h3 id=&quot;quatre-paramètres&quot;&gt;Quatre paramètres&lt;/h3&gt;
 
-&lt;p&gt;Les fonctions de dézippage et d’import de &lt;em&gt;pmeasyr&lt;/em&gt; ont en commun de prendre quatre paramètres identiques :&lt;/p&gt;
+&lt;p&gt;Les fonctions de dézippage et d’import de &lt;em&gt;pmeasyr&lt;/em&gt; ont en commun quatre paramètres identiques :&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;le finess du fichier&lt;/li&gt;
@@ -97,8 +97,8 @@
 &lt;/div&gt;
 </description>
         <pubDate>Tue, 28 Feb 2017 13:40:55 +0100</pubDate>
-        <link>http://localhost:4000/blog/2017/02/do.call-pmeasyr</link>
-        <guid isPermaLink="true">http://localhost:4000/blog/2017/02/do.call-pmeasyr</guid>
+        <link>http://localhost:4000/blog/2017/02/do_call_pmeasyr</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/2017/02/do_call_pmeasyr</guid>
         
         
       </item>
@@ -117,8 +117,8 @@
 &lt;p&gt;&lt;a href=&quot;/assets/files/split_rsfa.nb.html&quot;&gt;Un notebook en ligne&lt;/a&gt; présente ces deux solutions.&lt;/p&gt;
 </description>
         <pubDate>Mon, 27 Feb 2017 13:40:55 +0100</pubDate>
-        <link>http://localhost:4000/blog/2017/02/Split-du-fichier-rsfa</link>
-        <guid isPermaLink="true">http://localhost:4000/blog/2017/02/Split-du-fichier-rsfa</guid>
+        <link>http://localhost:4000/blog/2017/02/Split_du_fichier_rsfa</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/2017/02/Split_du_fichier_rsfa</guid>
         
         
       </item>
@@ -189,8 +189,8 @@
 &lt;/div&gt;
 </description>
         <pubDate>Sun, 26 Feb 2017 13:31:55 +0100</pubDate>
-        <link>http://localhost:4000/blog/2017/02/Premier-post</link>
-        <guid isPermaLink="true">http://localhost:4000/blog/2017/02/Premier-post</guid>
+        <link>http://localhost:4000/blog/2017/02/Premier_post</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/2017/02/Premier_post</guid>
         
         
       </item>

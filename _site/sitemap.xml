@@ -3,7 +3,7 @@
   
     
     <url>
-      <loc>http://localhost:4000/blog/2017/02/do.call-pmeasyr</loc>
+      <loc>http://localhost:4000/blog/2017/02/do_call_pmeasyr</loc>
       
         <lastmod>2017-02-28T13:40:55+01:00</lastmod>
       
@@ -18,7 +18,7 @@
   
     
     <url>
-      <loc>http://localhost:4000/blog/2017/02/Split-du-fichier-rsfa</loc>
+      <loc>http://localhost:4000/blog/2017/02/Split_du_fichier_rsfa</loc>
       
         <lastmod>2017-02-27T13:40:55+01:00</lastmod>
       
@@ -33,7 +33,7 @@
   
     
     <url>
-      <loc>http://localhost:4000/blog/2017/02/Premier-post</loc>
+      <loc>http://localhost:4000/blog/2017/02/Premier_post</loc>
       
         <lastmod>2017-02-26T13:31:55+01:00</lastmod>
       
@@ -51,7 +51,7 @@
     <url>
       <loc>http://localhost:4000/about/</loc>
       
-        <lastmod>2017-02-28T17:36:09+01:00</lastmod>
+        <lastmod>2017-02-28T17:49:59+01:00</lastmod>
       
       
         <changefreq>monthly</changefreq>
@@ -66,7 +66,7 @@
     <url>
       <loc>http://localhost:4000/blog/</loc>
       
-        <lastmod>2017-02-28T17:36:09+01:00</lastmod>
+        <lastmod>2017-02-28T17:49:59+01:00</lastmod>
       
       
         <changefreq>monthly</changefreq>
@@ -81,7 +81,7 @@
     <url>
       <loc>http://localhost:4000/miscellany/ce-site/</loc>
       
-        <lastmod>2017-02-28T17:36:09+01:00</lastmod>
+        <lastmod>2017-02-28T17:49:59+01:00</lastmod>
       
       
         <changefreq>monthly</changefreq>
@@ -96,7 +96,7 @@
     <url>
       <loc>http://localhost:4000/feed.xml</loc>
       
-        <lastmod>2017-02-28T17:36:09+01:00</lastmod>
+        <lastmod>2017-02-28T17:49:59+01:00</lastmod>
       
       
         <changefreq>monthly</changefreq>
@@ -111,7 +111,7 @@
     <url>
       <loc>http://localhost:4000/</loc>
       
-        <lastmod>2017-02-28T17:36:09+01:00</lastmod>
+        <lastmod>2017-02-28T17:49:59+01:00</lastmod>
       
       
         <changefreq>monthly</changefreq>
@@ -126,7 +126,7 @@
     <url>
       <loc>http://localhost:4000/css/main.css</loc>
       
-        <lastmod>2017-02-28T17:36:09+01:00</lastmod>
+        <lastmod>2017-02-28T17:49:59+01:00</lastmod>
       
       
         <changefreq>monthly</changefreq>
@@ -141,7 +141,7 @@
     <url>
       <loc>http://localhost:4000/miscellany/manuel_pdf/</loc>
       
-        <lastmod>2017-02-28T17:36:09+01:00</lastmod>
+        <lastmod>2017-02-28T17:49:59+01:00</lastmod>
       
       
         <changefreq>monthly</changefreq>
@@ -156,7 +156,7 @@
     <url>
       <loc>http://localhost:4000/miscellany/</loc>
       
-        <lastmod>2017-02-28T17:36:09+01:00</lastmod>
+        <lastmod>2017-02-28T17:49:59+01:00</lastmod>
       
       
         <changefreq>monthly</changefreq>
