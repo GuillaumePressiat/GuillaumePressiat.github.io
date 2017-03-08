@@ -8,7 +8,7 @@ tags: pmeasyr magrittr
 
 Ce post correspond au contenu de la [nouvelle vignette du package](http://www.github.com/IM-APHP/pmeasyr/tree/master/vignettes/vignette2.Rmd).
 
-La syntaxe initiée dans le [post précédent]({% post_url 2017-02-28-do_call_pmeasyr %}) permet de ne préciser qu'une fois les paramètres (finess, annee, mois, path). Le package intègre désormais syntaxe, c'est ce qui est présenté ici. 
+La syntaxe initiée dans le [post précédent]({% post_url 2017-02-28-do_call_pmeasyr %}) permet de ne préciser qu'une fois les paramètres (finess, annee, mois, path). Le package intègre désormais cette syntaxe[^1], c'est ce qui est présenté ici. 
 
 
 {% highlight r %}
@@ -124,7 +124,7 @@ p %>%  adelete()
 
 Avec le noyau de paramètres `p` défini tout en haut de cette page, on a les éléments nécessaires pour reconstruire le nom du fichier&thinsp;: `750100042.2015.12.out.rds` : 
 {% highlight r %}
-# Coller des chaines de caracteres faon pipe
+# Coller des chaines de caracteres façon pipe
 `%+%` <- function(x,y){paste0(x,y)}
 
 # Le fichier se nomme : 750100042.2015.12.out.rds
@@ -138,3 +138,7 @@ View(mydata$leg_mco)
 {% endhighlight %}
 
 Les données sont de nouveau dans l'environnement R.
+
+----
+[^1]: La syntaxe standard `f(finess, annee, mois, path)` est toujours valide
+

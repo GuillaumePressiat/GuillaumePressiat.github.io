@@ -6,15 +6,15 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 08 Mar 2017 02:07:19 +0100</pubDate>
-    <lastBuildDate>Wed, 08 Mar 2017 02:07:19 +0100</lastBuildDate>
+    <pubDate>Wed, 08 Mar 2017 02:13:17 +0100</pubDate>
+    <lastBuildDate>Wed, 08 Mar 2017 02:13:17 +0100</lastBuildDate>
     <generator>Jekyll v3.4.0</generator>
     
       <item>
         <title>Flux d'import avec pmeasyr et %&gt;%</title>
         <description>&lt;p&gt;Ce post correspond au contenu de la &lt;a href=&quot;http://www.github.com/IM-APHP/pmeasyr/tree/master/vignettes/vignette2.Rmd&quot;&gt;nouvelle vignette du package&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;La syntaxe initiée dans le &lt;a href=&quot;/blog/2017/02/do_call_pmeasyr&quot;&gt;post précédent&lt;/a&gt; permet de ne préciser qu’une fois les paramètres (finess, annee, mois, path). Le package intègre désormais syntaxe, c’est ce qui est présenté ici.&lt;/p&gt;
+&lt;p&gt;La syntaxe initiée dans le &lt;a href=&quot;/blog/2017/02/do_call_pmeasyr&quot;&gt;post précédent&lt;/a&gt; permet de ne préciser qu’une fois les paramètres (finess, annee, mois, path). Le package intègre désormais cette syntaxe&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;, c’est ce qui est présenté ici.&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pmeasyr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dplyr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
@@ -110,7 +110,7 @@
 
 &lt;p&gt;Avec le noyau de paramètres &lt;code class=&quot;highlighter-rouge&quot;&gt;p&lt;/code&gt; défini tout en haut de cette page, on a les éléments nécessaires pour reconstruire le nom du fichier : &lt;code class=&quot;highlighter-rouge&quot;&gt;750100042.2015.12.out.rds&lt;/code&gt; :&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# Coller des chaines de caracteres faon pipe
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# Coller des chaines de caracteres façon pipe
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;`%+%`&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;paste0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 
 &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Le fichier se nomme : 750100042.2015.12.out.rds
@@ -123,6 +123,16 @@
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;View&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mydata&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;leg_mco&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Les données sont de nouveau dans l’environnement R.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
+      &lt;p&gt;La syntaxe standard &lt;code class=&quot;highlighter-rouge&quot;&gt;f(finess, annee, mois, path)&lt;/code&gt; est toujours valide&amp;nbsp;&lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
 </description>
         <pubDate>Tue, 07 Mar 2017 08:10:55 +0100</pubDate>
         <link>http://localhost:4000/blog/2017/03/Flux_d_import_avec_pmeasyr</link>
