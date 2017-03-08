@@ -3,6 +3,7 @@ layout: post
 title:  "Alléger les scripts utilisant pmeasyr avec do.call"
 date:   2017-02-28 13:40:55 +0100
 author: Guillaume Pressiat
+tags: pmeasyr
 ---
 
 

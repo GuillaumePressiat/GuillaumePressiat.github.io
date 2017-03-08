@@ -3,6 +3,7 @@ layout: post
 title:  "Sujet introductif"
 date:   2017-02-26 13:31:55 +0100
 author: Guillaume Pressiat
+tags: pmeasyr
 ---
 
 Bienvenue, ce blog rassemble les informations autour du package R *pmeasyr*. 

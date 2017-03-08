@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 01 Mar 2017 06:11:04 +0100</pubDate>
-    <lastBuildDate>Wed, 01 Mar 2017 06:11:04 +0100</lastBuildDate>
+    <pubDate>Wed, 08 Mar 2017 01:25:26 +0100</pubDate>
+    <lastBuildDate>Wed, 08 Mar 2017 01:25:26 +0100</lastBuildDate>
     <generator>Jekyll v3.4.0</generator>
     
       <item>
@@ -100,6 +100,8 @@
         <link>http://localhost:4000/blog/2017/02/do_call_pmeasyr</link>
         <guid isPermaLink="true">http://localhost:4000/blog/2017/02/do_call_pmeasyr</guid>
         
+        <category>pmeasyr</category>
+        
         
       </item>
     
@@ -119,6 +121,8 @@
         <pubDate>Mon, 27 Feb 2017 13:40:55 +0100</pubDate>
         <link>http://localhost:4000/blog/2017/02/Split_du_fichier_rsfa</link>
         <guid isPermaLink="true">http://localhost:4000/blog/2017/02/Split_du_fichier_rsfa</guid>
+        
+        <category>rafael</category>
         
         
       </item>
@@ -191,6 +195,8 @@
         <pubDate>Sun, 26 Feb 2017 13:31:55 +0100</pubDate>
         <link>http://localhost:4000/blog/2017/02/Premier_post</link>
         <guid isPermaLink="true">http://localhost:4000/blog/2017/02/Premier_post</guid>
+        
+        <category>pmeasyr</category>
         
         
       </item>
