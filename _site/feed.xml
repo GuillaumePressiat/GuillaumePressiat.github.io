@@ -6,15 +6,15 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 08 Mar 2017 01:26:35 +0100</pubDate>
-    <lastBuildDate>Wed, 08 Mar 2017 01:26:35 +0100</lastBuildDate>
+    <pubDate>Wed, 08 Mar 2017 02:07:19 +0100</pubDate>
+    <lastBuildDate>Wed, 08 Mar 2017 02:07:19 +0100</lastBuildDate>
     <generator>Jekyll v3.4.0</generator>
     
       <item>
         <title>Flux d'import avec pmeasyr et %&gt;%</title>
         <description>&lt;p&gt;Ce post correspond au contenu de la &lt;a href=&quot;http://www.github.com/IM-APHP/pmeasyr/tree/master/vignettes/vignette2.Rmd&quot;&gt;nouvelle vignette du package&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;La syntaxe initiée dans le &lt;a href=&quot;/blog/2017/02/do_call_pmeasyr&quot;&gt;post précédent&lt;/a&gt; permet de ne préciser qu’une fois les paramètres (finess, annee, mois, path). Le package intègre désormais en charge cette syntaxe, c’est ce qui est présenté ici.&lt;/p&gt;
+&lt;p&gt;La syntaxe initiée dans le &lt;a href=&quot;/blog/2017/02/do_call_pmeasyr&quot;&gt;post précédent&lt;/a&gt; permet de ne préciser qu’une fois les paramètres (finess, annee, mois, path). Le package intègre désormais syntaxe, c’est ce qui est présenté ici.&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pmeasyr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dplyr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
@@ -127,6 +127,10 @@
         <pubDate>Tue, 07 Mar 2017 08:10:55 +0100</pubDate>
         <link>http://localhost:4000/blog/2017/03/Flux_d_import_avec_pmeasyr</link>
         <guid isPermaLink="true">http://localhost:4000/blog/2017/03/Flux_d_import_avec_pmeasyr</guid>
+        
+        <category>pmeasyr</category>
+        
+        <category>magrittr</category>
         
         
       </item>
@@ -243,7 +247,7 @@
         <link>http://localhost:4000/blog/2017/02/Split_du_fichier_rsfa</link>
         <guid isPermaLink="true">http://localhost:4000/blog/2017/02/Split_du_fichier_rsfa</guid>
         
-        <category>rafael</category>
+        <category>python</category>
         
         
       </item>

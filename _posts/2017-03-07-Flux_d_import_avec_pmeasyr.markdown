@@ -3,11 +3,12 @@ layout: post
 title:  "Flux d'import avec pmeasyr et %>%"
 date:   2017-03-07 08:10:55 +0100
 author: Guillaume Pressiat
+tags: pmeasyr magrittr
 ---
 
 Ce post correspond au contenu de la [nouvelle vignette du package](http://www.github.com/IM-APHP/pmeasyr/tree/master/vignettes/vignette2.Rmd).
 
-La syntaxe initiée dans le [post précédent]({% post_url 2017-02-28-do_call_pmeasyr %}) permet de ne préciser qu'une fois les paramètres (finess, annee, mois, path). Le package intègre désormais en charge cette syntaxe, c'est ce qui est présenté ici. 
+La syntaxe initiée dans le [post précédent]({% post_url 2017-02-28-do_call_pmeasyr %}) permet de ne préciser qu'une fois les paramètres (finess, annee, mois, path). Le package intègre désormais syntaxe, c'est ce qui est présenté ici. 
 
 
 {% highlight r %}
