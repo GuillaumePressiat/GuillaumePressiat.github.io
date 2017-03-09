@@ -34,24 +34,14 @@ En partant de ces paramètres à gauche et en écrivant les appels de fonctions 
 
 ## 2 - Dézipper
 
-On crée une fonction qui permet d'ajouter de nouveaux paramètres à l'objet `p`, par exemple :
-
-{% highlight r %}
-# Ajouter des paramètres au noyau de parametres façon pipe
-`%P%` <- function(p, x){c(p,x)}
-p %P% c(type = "out")
-# équivaut à : 
-c(p, type = "out")
-{% endhighlight %}
-
 Par défaut la fonction `adezip()` dézippe la totalité des fichiers de l'archive PMSI, on pourra également effacer tous les fichiers avec `adelete()`.
 
 {% highlight r %}
 # Tout dézipper
 # out
-p %P% c(type = "out") %>% adezip()
+p %>% adezip(type = "out")
 # in
-p %P% c(type = "in" ) %>% adezip()
+p %>% adezip(type = "in")
 {% endhighlight %}
 
 
@@ -74,42 +64,105 @@ p %>% ipo()      -> po_out
 p %>% ileg_mco() -> leg
 p %>% itra()     -> tra
 
+# rsa type 6 : 
+p %>% irsa(typi = 6) -> rsa
+# rsa d'une autre année :
+p %>% irsa(annee = 2016) -> rsa
+# rsa d'une autre année, lire les dix premiers rsa :
+p %>% irsa(annee = 2016, n_max = 10) -> rsa
+
 # in
-p %>% irum()                            -> rum
-p %P% c(typano  = "in") %>% iano_mco()  -> ano_in
-p %P% c(typmed  = "in") %>% imed_mco()  -> med_in
-p %P% c(typdmi  = "in") %>% idmi_mco()  -> dmi_in
-p %P% c(typdiap = "in") %>% idiap()     -> diap_in
-p %P% c(typpo   = "in") %>% ipo()       -> po_in
+p %>% irum()                    -> rum
+p %>% iano_mco(typano  = "in")  -> ano_in
+p %>% imed_mco(typmed  = "in")  -> med_in
+p %>% idmi_mco(typdmi  = "in")  -> dmi_in
+p %>% idiap(typdiap = "in")     -> diap_in
+p %>% ipo(typpo   = "in")       -> po_in
 {% endhighlight %}
 
-### Appel de fonctions (implicite)
+### Importer plusieurs années avec une boucle
+
+On dézippe et on importe les rsa de 2011 à 2015.
+Les rsa seront dans l'environnement R avec comme nom : 
+  
+```
+rsa_2011  rsa_2012  rsa_2013  rsa_2014  rsa_2015
+```
+
+{% highlight r %}
+p <- noyau_pmeasyr(
+  finess = '750100042',
+  mois   = 12,
+  path = "~/Documents/data/mco",
+  progress = F
+)
+
+for (i in 2011:2015){
+  p %>% adezip(annee = i, type = "out", liste = "rsa")
+  p %>% irsa(annee = i) -> temp
+  assign(paste("rsa", i, sep = "_"), temp)
+}
+{% endhighlight %}
+
+On peut aussi envisager un import mois par mois si besoin, ou boucler sur une liste de finess (entités géographiques).
+
+### Appel de fonctions
 
 Pour l'exemple, on utilise ci-dessous `sapply()` à la liste des fonctions MCO *out*, en appelant toutes les fonctions, on crée ainsi un objet contenant toutes les tables du MCO *out*. 
 
 {% highlight r %}
-# En plus dense : 
+p <- noyau_pmeasyr(
+        finess   = '750100042',
+        annee    = 2015,
+        mois     = 12,
+        path     = '~/Documents/data/mco',
+        progress = F)
+
 # On liste les fonctions MCO du package :
 fout <- c('irsa', 'iano_mco', 'iium', 'idiap', 'imed_mco', 'idmi_mco', 'ipo', 'ileg_mco', 'itra')
 
-sapply(fout, function(x)get(x)(p)) -> liste_tables_mco_out
+sapply(fout, function(f)get(f)(p)) -> liste_tables_mco_out
+# Les tables ont le noms des fonctions : 
 names(liste_tables_mco_out)
+{% endhighlight %}
+
+```
+irsa iano_mco iium idiap imed_mco idmi_mco ipo ileg_mco itra
+```
+
+{% highlight r %}
 # enlever les i des noms des tables
 names(liste_tables_mco_out) <- substr(names(liste_tables_mco_out),2, nchar(names(liste_tables_mco_out)))
 {% endhighlight %}
+
+```
+rsa ano_mco ium diap med_mco dmi_mco po leg_mco tra
+```
 
 ## 4 - Sauvegarde (~ library Rds)
 
 On sauvegarde cet objet R, contenant toutes les tables du *out* MCO dans un fichier *.rds* nommé `750100042.2015.12.out.rds`.
 
 {% highlight r %}
-# Coller des chaines de caracteres faon pipe
+# Coller des chaines de caracteres façon pipe
 `%+%` <- function(x,y){paste0(x,y)}
 
-dir.create('~/Documents/data/mco/tables')
-nom <- p$finess %+% '.' %+% p$annee %+% '.' %+% p$mois %+% '.' %+% 'out' %+% '.' %+% 'rds'
-saveRDS(liste_tables_mco_out, '~/Documents/data/mco/tables/' %+% nom)
+dir.create(p$path %+% '/tables')
 {% endhighlight %}
+
+Le répertoire suivant est créé : 
+```
+'~/Documents/data/mco/tables/'
+```
+
+{% highlight r %}
+nom <- p$finess %+% '.' %+% p$annee %+% '.' %+% p$mois %+% '.' %+% 'out' %+% '.' %+% 'rds'
+saveRDS(liste_tables_mco_out, p$path %+% '/tables/' %+% nom)
+{% endhighlight %}
+Le fichier rds se nomme : 
+```
+750100042.2015.12.out.rds
+```
 
 ## 5 - Effacer
 
