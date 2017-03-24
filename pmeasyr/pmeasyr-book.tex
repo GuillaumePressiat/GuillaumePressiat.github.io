@@ -125,7 +125,7 @@ Publique - Hôpitaux de Paris}
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-02-27}
+  \date{2017-03-24}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -720,6 +720,8 @@ Nom & Fonction\tabularnewline
 & \textasciitilde{} HAD - Import des Med\tabularnewline
 \href{https://github.com/IM-APHP/pmeasyr/tree/master/Rd_md/irapss.Rmd}{irapss}
 & \textasciitilde{} HAD - Import des RAPSS\tabularnewline
+\href{https://github.com/IM-APHP/pmeasyr/tree/master/Rd_md/ileg_had.Rmd}{ileg\_had}
+& \textasciitilde{} HAD - Import des erreurs LEG\tabularnewline
 \bottomrule
 \end{longtable}
 
@@ -747,6 +749,12 @@ Nom & Fonction\tabularnewline
 & \textasciitilde{} SSR - Import des RHA\tabularnewline
 \href{https://github.com/IM-APHP/pmeasyr/tree/master/Rd_md/issrha.Rmd}{issrha}
 & \textasciitilde{} SSR - Import des SSRHA\tabularnewline
+\href{https://github.com/IM-APHP/pmeasyr/tree/master/Rd_md/imed_ssr.Rmd}{imed\_ssr}
+& \textasciitilde{} SSR - Import des MED\tabularnewline
+\href{https://github.com/IM-APHP/pmeasyr/tree/master/Rd_md/iium_ssr.Rmd}{iium\_ssr}
+& \textasciitilde{} SSR - Import des UM\tabularnewline
+\href{https://github.com/IM-APHP/pmeasyr/tree/master/Rd_md/ileg_ssr.Rmd}{ileg\_ssr}
+& \textasciitilde{} SSR - Import des erreurs LEG\tabularnewline
 \bottomrule
 \end{longtable}
 
@@ -829,6 +837,16 @@ Nom & Fonction\tabularnewline
 \begin{Highlighting}[]
 \CommentTok{# Charger les formats de toutes les tables prises en charge par le package}
 \NormalTok{pmeasyr::formats}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Labels}\label{labels}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Obtenir le libelle d'une variable du PMSI}
+\KeywordTok{labeleasier}\NormalTok{(rsa15$rsa$SEXE, }\DataTypeTok{Sexe =} \NormalTok{T)}
+\KeywordTok{labeleasier}\NormalTok{(rsa15$rsa$ECHPMSI, }\DataTypeTok{Mode_entree =} \NormalTok{T)}
 \end{Highlighting}
 \end{Shaded}
 
