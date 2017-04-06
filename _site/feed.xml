@@ -6,9 +6,43 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 09 Mar 2017 04:32:32 +0100</pubDate>
-    <lastBuildDate>Thu, 09 Mar 2017 04:32:32 +0100</lastBuildDate>
+    <pubDate>Thu, 06 Apr 2017 16:34:43 +0200</pubDate>
+    <lastBuildDate>Thu, 06 Apr 2017 16:34:43 +0200</lastBuildDate>
     <generator>Jekyll v3.4.0</generator>
+    
+      <item>
+        <title>Transcodeur : manipuler des listes de codes</title>
+        <description>&lt;h1 id=&quot;transposer-une-liste-de-codes-cim-10-ou-ccam&quot;&gt;Transposer une liste de codes CIM-10 ou CCAM&lt;/h1&gt;
+
+&lt;p&gt;Une étape centrale des études PMSI est la manipulation de listes des codes diagnostics et des codes actes.&lt;/p&gt;
+
+&lt;p&gt;Nous sommes souvent amenés à :&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;rajouter des quotes ou des guillemets autour de codes&lt;/li&gt;
+  &lt;li&gt;convertir une liste en ligne en une liste en colonne&lt;/li&gt;
+  &lt;li&gt;convertir une liste en colonne en une liste en ligne&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Cette page contient une application embarquée évitant d’avoir à réaliser soi-même ces manipulations.&lt;/p&gt;
+
+&lt;div id=&quot;Transcodeur&quot;&gt;
+          &lt;iframe id=&quot;example1&quot; src=&quot;https://guillaumepressiat.shinyapps.io/transcodeur/&quot; style=&quot;border: none; width: 100%; height: 850px&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;a target=&quot;_blank&quot; href=&quot;https://guillaumepressiat.shinyapps.io/transcodeur/&quot;&gt;Lien vers l’application en pleine page&lt;/a&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 05 Apr 2017 16:50:50 +0200</pubDate>
+        <link>http://localhost:4000/blog/2017/04/shiny_transcodeur</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/2017/04/shiny_transcodeur</guid>
+        
+        <category>shiny</category>
+        
+        <category>cim&amp;nbsp;&amp;&amp;nbsp;ccam</category>
+        
+        
+      </item>
     
       <item>
         <title>Flux d'import avec pmeasyr et %&gt;%</title>

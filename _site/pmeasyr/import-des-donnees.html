@@ -25,7 +25,7 @@
 <meta name="author" content="Guillaume Pressiat || SIMAP / DOMU / Assistance Publique - Hôpitaux de Paris">
 
 
-<meta name="date" content="2017-02-27">
+<meta name="date" content="2017-03-24">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -130,6 +130,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.4" data-path="import-des-donnees.html"><a href="import-des-donnees.html#psy"><i class="fa fa-check"></i><b>4.4</b> PSY</a></li>
 <li class="chapter" data-level="4.5" data-path="import-des-donnees.html"><a href="import-des-donnees.html#rsf"><i class="fa fa-check"></i><b>4.5</b> RSF</a></li>
 <li class="chapter" data-level="4.6" data-path="import-des-donnees.html"><a href="import-des-donnees.html#dictionnaire-de-variables"><i class="fa fa-check"></i><b>4.6</b> Dictionnaire de variables</a></li>
+<li class="chapter" data-level="4.7" data-path="import-des-donnees.html"><a href="import-des-donnees.html#labels"><i class="fa fa-check"></i><b>4.7</b> Labels</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="requetes-sur-des-pathologies-actes.html"><a href="requetes-sur-des-pathologies-actes.html"><i class="fa fa-check"></i><b>5</b> Requêtes sur des pathologies / actes</a><ul>
 <li class="chapter" data-level="5.1" data-path="requetes-sur-des-pathologies-actes.html"><a href="requetes-sur-des-pathologies-actes.html#transposition-des-codes-diagnostics"><i class="fa fa-check"></i><b>5.1</b> Transposition des codes diagnostics</a></li>
@@ -441,6 +442,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <td align="left"><a href="https://github.com/IM-APHP/pmeasyr/tree/master/Rd_md/irapss.Rmd">irapss</a></td>
 <td align="left">~ HAD - Import des RAPSS</td>
 </tr>
+<tr class="even">
+<td align="left"><a href="https://github.com/IM-APHP/pmeasyr/tree/master/Rd_md/ileg_had.Rmd">ileg_had</a></td>
+<td align="left">~ HAD - Import des erreurs LEG</td>
+</tr>
 </tbody>
 </table>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pmeasyr)
@@ -471,6 +476,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <tr class="odd">
 <td align="left"><a href="https://github.com/IM-APHP/pmeasyr/tree/master/Rd_md/issrha.Rmd">issrha</a></td>
 <td align="left">~ SSR - Import des SSRHA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="https://github.com/IM-APHP/pmeasyr/tree/master/Rd_md/imed_ssr.Rmd">imed_ssr</a></td>
+<td align="left">~ SSR - Import des MED</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="https://github.com/IM-APHP/pmeasyr/tree/master/Rd_md/iium_ssr.Rmd">iium_ssr</a></td>
+<td align="left">~ SSR - Import des UM</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="https://github.com/IM-APHP/pmeasyr/tree/master/Rd_md/ileg_ssr.Rmd">ileg_ssr</a></td>
+<td align="left">~ SSR - Import des erreurs LEG</td>
 </tr>
 </tbody>
 </table>
@@ -548,6 +565,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="kw">dico</span>(rsa15$rsa)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Charger les formats de toutes les tables prises en charge par le package</span>
 pmeasyr::formats</code></pre></div>
+</div>
+<div id="labels" class="section level2">
+<h2><span class="header-section-number">4.7</span> Labels</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Obtenir le libelle d&#39;une variable du PMSI</span>
+<span class="kw">labeleasier</span>(rsa15$rsa$SEXE, <span class="dt">Sexe =</span> T)
+<span class="kw">labeleasier</span>(rsa15$rsa$ECHPMSI, <span class="dt">Mode_entree =</span> T)</code></pre></div>
 
 </div>
 </div>
