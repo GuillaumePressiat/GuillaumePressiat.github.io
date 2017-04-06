@@ -26,5 +26,7 @@ Cette page contient une application embarquée évitant d'avoir à réaliser soi
           <iframe id="example1" src="https://guillaumepressiat.shinyapps.io/transcodeur/" style="border: none; width: 100%; height: 850px" frameborder="0"></iframe>
 </div>
 
+L'application se déconnecte automatiquement après 2 minutes et 30 secondes.
+
 <a target="_blank" href="https://guillaumepressiat.shinyapps.io/transcodeur/">Lien vers l'application en pleine page</a>
 
