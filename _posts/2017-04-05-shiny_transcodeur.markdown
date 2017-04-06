@@ -19,14 +19,16 @@ Nous sommes souvent amenés à :
 - convertir une liste en colonne en une liste en ligne
 
 
-Cette page contient une application embarquée évitant d'avoir à réaliser soi-même ces manipulations. 
+Cette page présente une application évitant d'avoir à réaliser soi-même ces manipulations. 
 
 
-<div id="Transcodeur">
+<!--<div id="Transcodeur">
           <iframe id="example1" src="https://guillaumepressiat.shinyapps.io/transcodeur/" style="border: none; width: 100%; height: 850px" frameborder="0"></iframe>
-</div>
+</div>-->
+
+![Transcodeur](/images/transcodeur.png)
+
+
+<a target="_blank" href="https://guillaumepressiat.shinyapps.io/transcodeur/">Lien vers l'application</a>
 
 L'application se déconnecte automatiquement après 2 minutes et 30 secondes.
-
-<a target="_blank" href="https://guillaumepressiat.shinyapps.io/transcodeur/">Lien vers l'application en pleine page</a>
-
