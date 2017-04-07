@@ -26,8 +26,10 @@ Cette page présente une application évitant d'avoir à réaliser soi-même ces
           <iframe id="example1" src="https://guillaumepressiat.shinyapps.io/transcodeur/" style="border: none; width: 100%; height: 850px" frameborder="0"></iframe>
 </div>-->
 
-![Transcodeur](/images/transcodeur.png)
-
+<a target="_blank" href="https://guillaumepressiat.shinyapps.io/transcodeur/">
+<!--![Transcodeur](/images/transcodeur.png)-->
+<img border="0" alt="transcodeur_capture" src="/images/transcodeur.png">
+</a>
 
 <a target="_blank" href="https://guillaumepressiat.shinyapps.io/transcodeur/">Lien vers l'application</a>
 
