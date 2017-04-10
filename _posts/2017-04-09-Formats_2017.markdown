@@ -63,7 +63,7 @@ La fonction [labeleasier](https://github.com/IM-APHP/pmeasyr/blob/master/Rd_md/l
 '6', '7', '8', '9' -> "Mutation", "Transfert", "Domicile", "Décès"
 ```
 
-Ce dictionnaire de libellés est amené à être complété.
+Ce dictionnaire de libellés sera complété au fil du temps et des usages.
 
 
 <br>
@@ -76,12 +76,6 @@ Cette nouveauté facilite, allège le code à écrire pour importer les fichiers
 
 
 {% highlight r %}
-# Dézipper
-# out
-p %>% adezip(type = "out")
-{% endhighlight %}
-
-{% highlight r %}
 
 # Définir un noyau de paramètres :
 p <- noyau_pmeasyr(
@@ -91,6 +85,12 @@ p <- noyau_pmeasyr(
         path     = '~/Documents/data/mco',
         progress = F)
 
+{% endhighlight %}
+
+{% highlight r %}
+# Dézipper
+# out
+p %>% adezip(type = "out")
 {% endhighlight %}
 
 {% highlight r %}
