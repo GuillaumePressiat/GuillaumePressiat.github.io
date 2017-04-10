@@ -6,9 +6,103 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 07 Apr 2017 10:09:12 +0200</pubDate>
-    <lastBuildDate>Fri, 07 Apr 2017 10:09:12 +0200</lastBuildDate>
+    <pubDate>Mon, 10 Apr 2017 16:25:35 +0200</pubDate>
+    <lastBuildDate>Mon, 10 Apr 2017 16:25:35 +0200</lastBuildDate>
     <generator>Jekyll v3.4.0</generator>
+    
+      <item>
+        <title>Formats PMSI 2017 et nouveautés : mise à jour du package pmeasyr</title>
+        <description>&lt;h1 id=&quot;mise-à-jour-de-la-tables-des-formats&quot;&gt;Mise à jour de la tables des formats&lt;/h1&gt;
+
+&lt;p&gt;Le package &lt;em&gt;pmeasyr&lt;/em&gt; permet de lire les fichiers PMSI générés par les outils de l’ATIH pour les données MCO, SSR, HAD, PSY et pour les RSF.&lt;/p&gt;
+
+&lt;p&gt;Les formats 2017 pour ces champs PMSI sont désormais pris en charge par le package.&lt;/p&gt;
+
+&lt;p&gt;Pour en profiter et pouvoir lire les fichiers 2017, il faut relancer l’installation du package :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;n&quot;&gt;devtools&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;install_github&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'IM-APHP/pmeasyr'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Suite à cette installation, il est préférable de relancer RStudio ou relancer R (ctrl+shift+F10) pour bien charger le package mis à jour.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;nouvelles-fonctionnalités&quot;&gt;Nouvelles fonctionnalités&lt;/h1&gt;
+
+&lt;h3 id=&quot;liste-des-erreurs-de-générations-sur-trois-champs&quot;&gt;Liste des erreurs de générations sur trois champs&lt;/h3&gt;
+
+&lt;p&gt;Les fichiers &lt;em&gt;.leg&lt;/em&gt; sont pris en charge en &lt;a href=&quot;https://github.com/IM-APHP/pmeasyr/blob/master/Rd_md/ileg_mco.Rmd&quot;&gt;MCO&lt;/a&gt;, &lt;a href=&quot;https://github.com/IM-APHP/pmeasyr/blob/master/Rd_md/ileg_ssr.Rmd&quot;&gt;SSR&lt;/a&gt; et &lt;a href=&quot;https://github.com/IM-APHP/pmeasyr/blob/master/Rd_md/ileg_had.Rmd&quot;&gt;HAD&lt;/a&gt;. Ces fichiers contiennent les erreurs de groupage et permettent de rattacher les erreurs indiquées sur &lt;a href=&quot;https://epmsi.atih.sante.fr/&quot;&gt;e-PMSI&lt;/a&gt; aux séjours (avec le fichier &lt;em&gt;tra&lt;/em&gt;).&lt;/p&gt;
+
+&lt;h3 id=&quot;les-rafael-maj&quot;&gt;Les rafael-maj&lt;/h3&gt;
+
+&lt;p&gt;Les fichiers &lt;em&gt;rsfa&lt;/em&gt; et &lt;em&gt;ano-ace&lt;/em&gt; sont lus par le package, les fichiers de reprise de l’année précédente &lt;em&gt;rsfa-maj&lt;/em&gt; et &lt;em&gt;ano-ace-maj&lt;/em&gt; le sont désormais aussi, cf &lt;a href=&quot;https://github.com/IM-APHP/pmeasyr/blob/master/Rd_md/irafael.Rmd&quot;&gt;irafael&lt;/a&gt;, &lt;a href=&quot;https://github.com/IM-APHP/pmeasyr/blob/master/Rd_md/iano_rafael.Rmd&quot;&gt;iano_rafael&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;tdiag-en-ssr&quot;&gt;tdiag en SSR&lt;/h3&gt;
+
+&lt;p&gt;La fonction &lt;a href=&quot;https://github.com/IM-APHP/pmeasyr/blob/master/Rd_md/tdiag.Rmd&quot;&gt;tdiag&lt;/a&gt; qui permet de rassembler tous les diagnostics des &lt;em&gt;rum&lt;/em&gt; et des &lt;em&gt;rsa&lt;/em&gt; en une seule table prend maintenant en charge les &lt;em&gt;rha&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;médicaments-en-ssr&quot;&gt;Médicaments en SSR&lt;/h3&gt;
+
+&lt;p&gt;La fonction &lt;a href=&quot;https://github.com/IM-APHP/pmeasyr/blob/master/Rd_md/imed_ssr.Rmd&quot;&gt;imed_ssr&lt;/a&gt; pour lire les médicaments en sortie de genrha.&lt;/p&gt;
+
+&lt;h3 id=&quot;un-dictionnaire-de-libellés-pour-le-pmsi&quot;&gt;Un dictionnaire de libellés pour le PMSI&lt;/h3&gt;
+
+&lt;p&gt;La fonction &lt;a href=&quot;https://github.com/IM-APHP/pmeasyr/blob/master/Rd_md/labeleasier.Rmd&quot;&gt;labeleasier&lt;/a&gt; pour attribuer aux variables usuelles du PMSI le libellé qui correspond (Mode entrée, Mode sortie, Provenance, Destination, Sexe), par exemple :&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# Sexe : 
+
+'1', '2' -&amp;gt; &quot;Homme&quot;, &quot;Femme&quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# Mode sortie : 
+
+'6', '7', '8', '9' -&amp;gt; &quot;Mutation&quot;, &quot;Transfert&quot;, &quot;Domicile&quot;, &quot;Décès&quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Ce dictionnaire de libellés est amené à être complété.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;des-programmes-dimports-autour-dun-noyau-de-paramètres&quot;&gt;Des programmes d’imports autour d’un noyau de paramètres&lt;/h1&gt;
+
+&lt;p&gt;Cette nouveauté facilite, allège le code à écrire pour importer les fichiers, cf &lt;a href=&quot;https://guillaumepressiat.github.io/blog/2017/03/Flux_d_import_avec_pmeasyr&quot;&gt;post précédent&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h4 id=&quot;un-exemple-rapide-en-mco-&quot;&gt;Un exemple rapide en MCO :&lt;/h4&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# Dézipper
+# out
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;adezip&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;out&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# Définir un noyau de paramètres :
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;noyau_pmeasyr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;finess&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;   &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'750100042'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;annee&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2016&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mois&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;     &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;     &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'~/Documents/data/mco'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;progress&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;F&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# Cela allège la syntaxe pour la suite (les appels de fonctions)
+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;irsa&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;     &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rsa&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iano_mco&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ano_out&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;itra&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;     &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tra&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# Changer un paramètre dans l'appel de la fonction : 
+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;irsa&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;annee&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2017&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;     &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rsa&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Changer plusieurs paramètres : 
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iano_mco&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;annee&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2017&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mois&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ano_out&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+</description>
+        <pubDate>Sun, 09 Apr 2017 16:50:50 +0200</pubDate>
+        <link>http://localhost:4000/blog/2017/04/Formats_2017</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/2017/04/Formats_2017</guid>
+        
+        <category>pmeasyr</category>
+        
+        
+      </item>
     
       <item>
         <title>Transcodeur : manipuler des listes de codes</title>

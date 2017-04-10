@@ -1,0 +1,116 @@
+---
+layout: post
+title:  "Formats PMSI 2017 et nouveautés : mise à jour du package pmeasyr"
+date:   2017-04-09 15:50:50 +0100
+author: Guillaume Pressiat
+tags: pmeasyr
+---
+
+
+# Mise à jour de la tables des formats
+
+Le package *pmeasyr* permet de lire les fichiers PMSI générés par les outils de l'ATIH pour les données MCO, SSR, HAD, PSY et pour les RSF.
+
+Les formats 2017 pour ces champs PMSI sont désormais pris en charge par le package.
+
+Pour en profiter et pouvoir lire les fichiers 2017, il faut relancer l'installation du package : 
+
+
+{% highlight r %}
+
+devtools::install_github('IM-APHP/pmeasyr')
+
+{% endhighlight %}
+
+Suite à cette installation, il est préférable de relancer RStudio ou relancer R (ctrl+shift+F10) pour bien charger le package mis à jour.
+
+  
+
+<br>
+
+# Nouvelles fonctionnalités
+
+### Liste des erreurs de générations sur trois champs
+
+Les fichiers *.leg* sont pris en charge en [MCO](https://github.com/IM-APHP/pmeasyr/blob/master/Rd_md/ileg_mco.Rmd), [SSR](https://github.com/IM-APHP/pmeasyr/blob/master/Rd_md/ileg_ssr.Rmd) et [HAD](https://github.com/IM-APHP/pmeasyr/blob/master/Rd_md/ileg_had.Rmd). Ces fichiers contiennent les erreurs de groupage et permettent de rattacher les erreurs indiquées sur [e-PMSI](https://epmsi.atih.sante.fr/) aux séjours (avec le fichier *tra*).
+
+
+### Les rafael-maj
+
+Les fichiers *rsfa* et *ano-ace* sont lus par le package, les fichiers de reprise de l'année précédente *rsfa-maj* et *ano-ace-maj* le sont désormais aussi, cf [irafael](https://github.com/IM-APHP/pmeasyr/blob/master/Rd_md/irafael.Rmd), [iano_rafael](https://github.com/IM-APHP/pmeasyr/blob/master/Rd_md/iano_rafael.Rmd).
+
+
+### tdiag en SSR
+
+La fonction [tdiag](https://github.com/IM-APHP/pmeasyr/blob/master/Rd_md/tdiag.Rmd) qui permet de rassembler tous les diagnostics des *rum* et des *rsa* en une seule table prend maintenant en charge les *rha*.
+
+### Médicaments en SSR
+
+La fonction [imed_ssr](https://github.com/IM-APHP/pmeasyr/blob/master/Rd_md/imed_ssr.Rmd) pour lire les médicaments en sortie de genrha.
+
+### Un dictionnaire de libellés pour le PMSI
+
+La fonction [labeleasier](https://github.com/IM-APHP/pmeasyr/blob/master/Rd_md/labeleasier.Rmd) pour attribuer aux variables usuelles du PMSI le libellé qui correspond (Mode entrée, Mode sortie, Provenance, Destination, Sexe), par exemple : 
+
+```
+# Sexe : 
+
+'1', '2' -> "Homme", "Femme"
+```
+```
+# Mode sortie : 
+
+'6', '7', '8', '9' -> "Mutation", "Transfert", "Domicile", "Décès"
+```
+
+Ce dictionnaire de libellés est amené à être complété.
+
+
+<br>
+
+# Des programmes d'imports autour d'un noyau de paramètres
+
+Cette nouveauté facilite, allège le code à écrire pour importer les fichiers, cf [post précédent](https://guillaumepressiat.github.io/blog/2017/03/Flux_d_import_avec_pmeasyr).
+
+#### Un exemple rapide en MCO : 
+
+
+{% highlight r %}
+# Dézipper
+# out
+p %>% adezip(type = "out")
+{% endhighlight %}
+
+{% highlight r %}
+
+# Définir un noyau de paramètres :
+p <- noyau_pmeasyr(
+        finess   = '750100042',
+        annee    = 2016,
+        mois     = 12,
+        path     = '~/Documents/data/mco',
+        progress = F)
+
+{% endhighlight %}
+
+{% highlight r %}
+
+# Cela allège la syntaxe pour la suite (les appels de fonctions)
+
+p %>% irsa()     -> rsa
+p %>% iano_mco() -> ano_out
+p %>% itra()     -> tra
+
+{% endhighlight %}
+
+{% highlight r %}
+
+# Changer un paramètre dans l'appel de la fonction : 
+
+p %>% irsa(annee = 2017)     -> rsa
+
+# Changer plusieurs paramètres : 
+p %>% iano_mco(annee = 2017, mois = 3) -> ano_out
+
+{% endhighlight %}
+
