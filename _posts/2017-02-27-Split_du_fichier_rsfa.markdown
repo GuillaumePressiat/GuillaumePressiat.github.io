@@ -4,6 +4,7 @@ title:  "Split du fichier rsfa (rafael) avec python et import dans R"
 date:   2017-02-27 13:40:55 +0100
 author: Guillaume Pressiat
 tags: python
+categories: Programmation data&nbsp;management
 ---
 
 

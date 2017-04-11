@@ -4,6 +4,7 @@ title:  "Transcodeur : manipuler des listes de codes"
 date:   2017-04-05 15:50:50 +0100
 author: Guillaume Pressiat
 tags: shiny cim&nbsp;&&nbsp;ccam
+categories: Application
 ---
 
 

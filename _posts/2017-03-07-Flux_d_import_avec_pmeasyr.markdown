@@ -4,6 +4,7 @@ title:  "Flux d'import avec pmeasyr et %>%"
 date:   2017-03-07 08:10:55 +0100
 author: Guillaume Pressiat
 tags: pmeasyr magrittr
+categories: Programmation
 ---
 
 Ce post correspond au contenu de la [nouvelle vignette du package](http://www.github.com/IM-APHP/pmeasyr/tree/master/vignettes/vignette2.Rmd).

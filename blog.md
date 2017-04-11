@@ -52,3 +52,33 @@ Se trouvent ici les différents posts de ce blog.
 </ul>
 
 
+
+{% assign rawcategories = "" %}
+{% for post in site.posts %}
+  {% assign ccategories = post.categories | join:'|' | append:'|' %}
+  {% assign rawcategories = rawcategories | append:ccategories %}
+{% endfor %}
+{% assign rawcategories = rawcategories | split:'|' | sort %}
+
+
+{% assign categories = "" %}
+{% for categorie in rawcategories %}
+  {% if categorie != "" %}
+    {% if categories == "" %}
+      {% assign categories = categorie | split:'|' %}
+    {% endif %}
+    {% unless categories contains categorie %}
+      {% assign categories = categories | join:'|' | append:'|' | append:categorie | split:'|' %}
+    {% endunless %}
+  {% endif %}
+{% endfor %}
+
+#### **Par catégorie**
+
+<ul class="categories">
+{% for categorie in categories %}
+	<a class = "categorie" href="/blog/categories/#{{ categorie }}"> {{ categorie }} </a>
+{% endfor %}
+</ul>
+
+

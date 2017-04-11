@@ -4,6 +4,7 @@ title:  "Formats PMSI 2017 et nouveautés : mise à jour du package pmeasyr"
 date:   2017-04-09 15:50:50 +0100
 author: Guillaume Pressiat
 tags: pmeasyr
+categories: Mise&nbsp;à&nbsp;jour
 ---
 
 
