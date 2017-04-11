@@ -111,12 +111,12 @@
 }
 
 .categorie:hover {
-  background-color: #4c488e;
+  background-color: rgb(0,119,54); 
   color: white;
 }
 
 .categorie:hover::after {
-   border-left-color: #4c488e; 
+   border-left-color: rgb(0,119,54); 
 }
 
 // Our variables

@@ -4,22 +4,6 @@ title: Blog
 permalink: /blog/
 ---
 
-Se trouvent ici les différents posts de ce blog.
-
-<ul class="listing">
-{% for post in site.posts %}
-  {% capture y %}{{post.date | date:"%Y"}}{% endcapture %}
-  {% if year != y %}
-    {% assign year = y %}
-    <li class="listing-seperator">{{ y }}</li>
-  {% endif %}
-  <li class="listing-item">
-    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%d-%m-%Y" }}</time>
-    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-  </li>
-{% endfor %}
-</ul>
-
 
 {% assign rawtags = "" %}
 {% for post in site.posts %}
@@ -40,16 +24,6 @@ Se trouvent ici les différents posts de ce blog.
 		{% endunless %}
 	{% endif %}
 {% endfor %}
-
-<br>
-
-#### **Par mot-clé**
-
-<ul class="tags">
-{% for tag in tags %}
-	<a class = "tag" href="/blog/tag/#{{ tag }}"> {{ tag }} </a>
-{% endfor %}
-</ul>
 
 
 
@@ -72,6 +46,38 @@ Se trouvent ici les différents posts de ce blog.
     {% endunless %}
   {% endif %}
 {% endfor %}
+
+Se trouvent ici les différents posts de ce blog.
+
+
+<ul class="listing">
+{% for post in site.posts %}
+  {% capture y %}{{post.date | date:"%Y"}}{% endcapture %}
+  {% if year != y %}
+    {% assign year = y %}
+    <li class="listing-seperator">{{ y }}</li>
+  {% endif %}
+  <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%d-%m-%Y" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+	<!--{% for categorie in post.categories %}<a class = "categorie" href="/blog/categories/#{{ categorie }}">{{ categorie }}</a>{% endfor %}-->
+	</li>
+{% endfor %}
+</ul>
+
+
+<br>
+
+#### **Par mot-clé**
+
+<ul class="tags">
+{% for tag in tags %}
+	<a class = "tag" href="/blog/tags/#{{ tag }}"> {{ tag }} </a>
+{% endfor %}
+</ul>
+
+
+<br>
 
 #### **Par catégorie**
 
