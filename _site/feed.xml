@@ -6,9 +6,33 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 11 Apr 2017 15:06:38 +0200</pubDate>
-    <lastBuildDate>Tue, 11 Apr 2017 15:06:38 +0200</lastBuildDate>
+    <pubDate>Sun, 18 Jun 2017 15:50:32 +0200</pubDate>
+    <lastBuildDate>Sun, 18 Jun 2017 15:50:32 +0200</lastBuildDate>
     <generator>Jekyll v3.4.0</generator>
+    
+      <item>
+        <title>Aide en ligne avec pkgdown</title>
+        <description>&lt;p&gt;La documentation des fonctions du package ainsi que les vignettes sont désormais accessibles au lien suivant :&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://im-aphp.github.io/pmeasyr/&quot;&gt;https://im-aphp.github.io/pmeasyr/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;L’aide pour toutes les fonctions est dans le menu &lt;strong&gt;Reference&lt;/strong&gt;, les vignettes dans le menu &lt;strong&gt;Article&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Ces pages html statiques correspondent au contenu des dossiers &lt;code class=&quot;highlighter-rouge&quot;&gt;man&lt;/code&gt; et &lt;code class=&quot;highlighter-rouge&quot;&gt;vignettes&lt;/code&gt; du package et ont été produites avec le package &lt;a href=&quot;https://github.com/hadley/pkgdown&quot;&gt;pkgdown&lt;/a&gt;.&lt;/p&gt;
+
+</description>
+        <pubDate>Sat, 17 Jun 2017 16:34:50 +0200</pubDate>
+        <link>http://localhost:4000/blog/2017/06/aide-en-ligne</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/2017/06/aide-en-ligne</guid>
+        
+        <category>pmeasyr,</category>
+        
+        <category>pkgdown</category>
+        
+        
+        <category>Mise&amp;nbsp;à&amp;nbsp;jour</category>
+        
+      </item>
     
       <item>
         <title>Formats PMSI 2017 et nouveautés : mise à jour du package pmeasyr</title>

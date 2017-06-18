@@ -10,7 +10,7 @@
 - title: "Divers"
   href: "/miscellany/"
   subcategories:
-    - subtitle: "Manuel pdf pmeasyr"
-      subhref: "/miscellany/manuel_pdf/"
+    - subtitle: "Aides en ligne"
+      subhref: "/miscellany/aides_pmeasyr/"
     - subtitle: "à propos de ce site"
       subhref: "/miscellany/ce-site/"
