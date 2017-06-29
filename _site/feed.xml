@@ -6,9 +6,61 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 27 Jun 2017 10:47:30 +0200</pubDate>
-    <lastBuildDate>Tue, 27 Jun 2017 10:47:30 +0200</lastBuildDate>
+    <pubDate>Thu, 29 Jun 2017 12:34:09 +0200</pubDate>
+    <lastBuildDate>Thu, 29 Jun 2017 12:34:09 +0200</lastBuildDate>
     <generator>Jekyll v3.4.0</generator>
+    
+      <item>
+        <title>Vidéo de présentation du package</title>
+        <description>&lt;style media=&quot;screen&quot; type=&quot;text/css&quot;&gt;
+.container {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+}
+.video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+&lt;/style&gt;
+
+&lt;h1 id=&quot;vidéo-youtube-de-présentation&quot;&gt;Vidéo youtube de présentation&lt;/h1&gt;
+
+&lt;!--style=&quot;border: none; width: 800; height: 600&quot; --&gt;
+&lt;div class=&quot;container&quot;&gt;
+&lt;div id=&quot;video_youtube&quot; align=&quot;center&quot;&gt;
+          &lt;iframe id=&quot;pmeasyr-intro&quot; src=&quot;https://www.youtube.com/embed/dRiQOZpIsmk?vq=hd720&quot; class=&quot;video&quot; allowfullscreen=&quot;&quot; frameborder=&quot;0&quot;&gt; &lt;/iframe&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;Éléments-abordés-&quot;&gt;Éléments abordés :&lt;/h2&gt;
+
+&lt;h3 id=&quot;pmeasyr&quot;&gt;pmeasyr&lt;/h3&gt;
+
+&lt;h3 id=&quot;transcodeur-application-shiny-pour-restructurer-des-listes-de-codes&quot;&gt;Transcodeur (application shiny pour restructurer des listes de codes)&lt;/h3&gt;
+
+&lt;p&gt;Voir la vidéo directement sur &lt;a href=&quot;https://www.youtube.com/watch?v=dRiQOZpIsmk&amp;amp;vq=hd720&quot;&gt;youtube&lt;/a&gt;.&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 29 Jun 2017 11:00:50 +0200</pubDate>
+        <link>http://localhost:4000/blog/2017/06/video-intro</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/2017/06/video-intro</guid>
+        
+        <category>pmeasyr</category>
+        
+        <category>vidéo</category>
+        
+        
+        <category>Présentation</category>
+        
+      </item>
     
       <item>
         <title>Aide en ligne avec pkgdown</title>
