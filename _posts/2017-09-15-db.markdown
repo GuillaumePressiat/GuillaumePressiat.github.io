@@ -37,7 +37,7 @@ Voici le code pour effacer toutes les tables de la base :
 
 ## Noyau de paramètres
 
-Pour tester que tout fonctionne on ajoute le paramètre `n_max = 10 000` pour n'importer que les 10 000 premières lignes.
+Pour tester que tout fonctionne on ajoute le paramètre `n_max = 10000` pour n'importer que les 10 000 premières lignes.
 
 ```r
 an = 16
@@ -192,5 +192,5 @@ dbDisconnect(con, shutdown=TRUE)
 
 ## fonctionne aussi pour d'autres db
 
-S'appuyant sur dbplyr et DBI, ce code fonctionne également pour d'autres bases de données PostGreSQL, MariaDB, SQLite... Il suffit pour cela de changer au départ l'objet connection par une connection à la base souhaitée : voir package dbplyr.
+S'appuyant sur dbplyr et DBI, ce code fonctionne également pour d'autres bases de données PostgreSQL, MariaDB, SQLite... Il suffit pour cela de changer au départ l'objet connection par une connection à la base souhaitée : voir package dbplyr.
 
