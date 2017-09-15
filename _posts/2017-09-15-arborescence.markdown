@@ -48,7 +48,7 @@ dir.create('~/Documents/data/mco', recursive = T)
 
 ## Déposer les archives et commencer un programme
 
-Peu importe si vos collègues sont sur windows ou unix, vous pourrez alors partager vos scripts, si vos archives sont placés comme indiqué [ici](https://guillaumepressiat.github.io/pmeasyr/archives.html#arborescence-des-archives). 
+Peu importe si vos collègues sont sur windows ou unix, vous pourrez alors partager vos scripts, si vos archives sont placées comme indiqué [ici](https://guillaumepressiat.github.io/pmeasyr/archives.html#arborescence-des-archives). 
 
 Début du programme : 
 
@@ -66,7 +66,7 @@ noyau_pmeasyr(
 ## Un répertoire pour une db
 
 
-Ce choix d'arborescence des archives sera utilisé pour le prochain post qui concernera l'intégration des données pmsi avec pmeasyr dans une base de données (avec DBI, dbplyr et monetdblite).
+Ce choix d'arborescence des archives sera utilisé pour le prochain post qui concerne l'intégration des données pmsi avec pmeasyr dans une base de données (avec DBI, dbplyr et monetdblite).
 
 ```r
 dir.create('~/Documents/data/__db')
