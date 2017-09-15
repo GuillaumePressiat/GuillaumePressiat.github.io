@@ -189,6 +189,39 @@ purrr::quietly(rsf_out)(12, p) -> statuts ; gc(); #ok
 dbDisconnect(con, shutdown=TRUE)
 ```
 
+## Lister les tables de la base de données
+
+```r
+listable <- function(con){
+dbListTables(con) -> liste
+ 
+ suppressWarnings(matrix(c(sort(liste), rep('',16 - length(liste) %% 16)),
+                         nrow = 16)) %>% as_tibble() %>%
+   knitr::kable(col.names = paste0('16 tables, n°',
+                                   1:(floor((length(liste)/ 16) )+1)))
+}
+```
+
+```
+|16 tables, n°1   |16 tables, n°2   |16 tables, n°3   |16 tables, n°4    |16 tables, n°5    |16 tables, n°6    |
+|:----------------|:----------------|:----------------|:-----------------|:-----------------|:-----------------|
+|mco_11_rsa_actes |mco_13_rsa_actes |mco_15_rsa_actes |mco_17_rsa_actes  |rsf_13_rafael_a   |rsf_15_rafael_a   |
+|mco_11_rsa_ano   |mco_13_rsa_ano   |mco_15_rsa_ano   |mco_17_rsa_ano    |rsf_13_rafael_ano |rsf_15_rafael_ano |
+|mco_11_rsa_diags |mco_13_rsa_diags |mco_15_rsa_diags |mco_17_rsa_diags  |rsf_13_rafael_b   |rsf_15_rafael_b   |
+|mco_11_rsa_rsa   |mco_13_rsa_rsa   |mco_15_rsa_rsa   |mco_17_rsa_rsa    |rsf_13_rafael_c   |rsf_15_rafael_c   |
+|mco_11_rsa_um    |mco_13_rsa_um    |mco_15_rsa_um    |mco_17_rsa_um     |rsf_13_rafael_h   |rsf_15_rafael_h   |
+|mco_11_rum_actes |mco_13_rum_actes |mco_15_rum_actes |mco_17_rum_actes  |rsf_13_rafael_l   |rsf_15_rafael_l   |
+|mco_11_rum_diags |mco_13_rum_diags |mco_15_rum_diags |mco_17_rum_diags  |rsf_13_rafael_m   |rsf_15_rafael_m   |
+|mco_11_rum_rum   |mco_13_rum_rum   |mco_15_rum_rum   |mco_17_rum_rum    |rsf_13_rafael_p   |rsf_15_rafael_p   |
+|mco_12_rsa_actes |mco_14_rsa_actes |mco_16_rsa_actes |rsf_12_rafael_a   |rsf_14_rafael_a   |rsf_16_rafael_a   |
+|mco_12_rsa_ano   |mco_14_rsa_ano   |mco_16_rsa_ano   |rsf_12_rafael_ano |rsf_14_rafael_ano |rsf_16_rafael_ano |
+|mco_12_rsa_diags |mco_14_rsa_diags |mco_16_rsa_diags |rsf_12_rafael_b   |rsf_14_rafael_b   |rsf_16_rafael_b   |
+|mco_12_rsa_rsa   |mco_14_rsa_rsa   |mco_16_rsa_rsa   |rsf_12_rafael_c   |rsf_14_rafael_c   |rsf_16_rafael_c   |
+|mco_12_rsa_um    |mco_14_rsa_um    |mco_16_rsa_um    |rsf_12_rafael_h   |rsf_14_rafael_h   |rsf_16_rafael_h   |
+|mco_12_rum_actes |mco_14_rum_actes |mco_16_rum_actes |rsf_12_rafael_l   |rsf_14_rafael_l   |rsf_16_rafael_l   |
+|mco_12_rum_diags |mco_14_rum_diags |mco_16_rum_diags |rsf_12_rafael_m   |rsf_14_rafael_m   |rsf_16_rafael_m   |
+|mco_12_rum_rum   |mco_14_rum_rum   |mco_16_rum_rum   |rsf_12_rafael_p   |rsf_14_rafael_p   |rsf_16_rafael_p   |
+```
 
 ## fonctionne aussi pour d'autres db
 

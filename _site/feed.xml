@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 15 Sep 2017 11:53:37 +0200</pubDate>
-    <lastBuildDate>Fri, 15 Sep 2017 11:53:37 +0200</lastBuildDate>
+    <pubDate>Fri, 15 Sep 2017 12:30:30 +0200</pubDate>
+    <lastBuildDate>Fri, 15 Sep 2017 12:30:30 +0200</lastBuildDate>
     <generator>Jekyll v3.4.0</generator>
     
       <item>
@@ -41,7 +41,7 @@
 
 &lt;h2 id=&quot;noyau-de-paramètres&quot;&gt;Noyau de paramètres&lt;/h2&gt;
 
-&lt;p&gt;Pour tester que tout fonctionne on ajoute le paramètre &lt;code class=&quot;highlighter-rouge&quot;&gt;n_max = 10 000&lt;/code&gt; pour n’importer que les 10 000 premières lignes.&lt;/p&gt;
+&lt;p&gt;Pour tester que tout fonctionne on ajoute le paramètre &lt;code class=&quot;highlighter-rouge&quot;&gt;n_max = 10000&lt;/code&gt; pour n’importer que les 10 000 premières lignes.&lt;/p&gt;
 
 &lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;an&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -191,9 +191,43 @@
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
+&lt;h2 id=&quot;lister-les-tables-de-la-base-de-données&quot;&gt;Lister les tables de la base de données&lt;/h2&gt;
+
+&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;listable&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;con&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dbListTables&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;con&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;liste&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+ 
+ &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;suppressWarnings&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;liste&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;rep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;liste&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                         &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nrow&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;as_tibble&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+   &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;knitr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;kable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;col.names&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;paste0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'16 tables, n°'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+                                   &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;floor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;liste&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;+1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;|16 tables, n°1   |16 tables, n°2   |16 tables, n°3   |16 tables, n°4    |16 tables, n°5    |16 tables, n°6    |
+|:----------------|:----------------|:----------------|:-----------------|:-----------------|:-----------------|
+|mco_11_rsa_actes |mco_13_rsa_actes |mco_15_rsa_actes |mco_17_rsa_actes  |rsf_13_rafael_a   |rsf_15_rafael_a   |
+|mco_11_rsa_ano   |mco_13_rsa_ano   |mco_15_rsa_ano   |mco_17_rsa_ano    |rsf_13_rafael_ano |rsf_15_rafael_ano |
+|mco_11_rsa_diags |mco_13_rsa_diags |mco_15_rsa_diags |mco_17_rsa_diags  |rsf_13_rafael_b   |rsf_15_rafael_b   |
+|mco_11_rsa_rsa   |mco_13_rsa_rsa   |mco_15_rsa_rsa   |mco_17_rsa_rsa    |rsf_13_rafael_c   |rsf_15_rafael_c   |
+|mco_11_rsa_um    |mco_13_rsa_um    |mco_15_rsa_um    |mco_17_rsa_um     |rsf_13_rafael_h   |rsf_15_rafael_h   |
+|mco_11_rum_actes |mco_13_rum_actes |mco_15_rum_actes |mco_17_rum_actes  |rsf_13_rafael_l   |rsf_15_rafael_l   |
+|mco_11_rum_diags |mco_13_rum_diags |mco_15_rum_diags |mco_17_rum_diags  |rsf_13_rafael_m   |rsf_15_rafael_m   |
+|mco_11_rum_rum   |mco_13_rum_rum   |mco_15_rum_rum   |mco_17_rum_rum    |rsf_13_rafael_p   |rsf_15_rafael_p   |
+|mco_12_rsa_actes |mco_14_rsa_actes |mco_16_rsa_actes |rsf_12_rafael_a   |rsf_14_rafael_a   |rsf_16_rafael_a   |
+|mco_12_rsa_ano   |mco_14_rsa_ano   |mco_16_rsa_ano   |rsf_12_rafael_ano |rsf_14_rafael_ano |rsf_16_rafael_ano |
+|mco_12_rsa_diags |mco_14_rsa_diags |mco_16_rsa_diags |rsf_12_rafael_b   |rsf_14_rafael_b   |rsf_16_rafael_b   |
+|mco_12_rsa_rsa   |mco_14_rsa_rsa   |mco_16_rsa_rsa   |rsf_12_rafael_c   |rsf_14_rafael_c   |rsf_16_rafael_c   |
+|mco_12_rsa_um    |mco_14_rsa_um    |mco_16_rsa_um    |rsf_12_rafael_h   |rsf_14_rafael_h   |rsf_16_rafael_h   |
+|mco_12_rum_actes |mco_14_rum_actes |mco_16_rum_actes |rsf_12_rafael_l   |rsf_14_rafael_l   |rsf_16_rafael_l   |
+|mco_12_rum_diags |mco_14_rum_diags |mco_16_rum_diags |rsf_12_rafael_m   |rsf_14_rafael_m   |rsf_16_rafael_m   |
+|mco_12_rum_rum   |mco_14_rum_rum   |mco_16_rum_rum   |rsf_12_rafael_p   |rsf_14_rafael_p   |rsf_16_rafael_p   |
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
 &lt;h2 id=&quot;fonctionne-aussi-pour-dautres-db&quot;&gt;fonctionne aussi pour d’autres db&lt;/h2&gt;
 
-&lt;p&gt;S’appuyant sur dbplyr et DBI, ce code fonctionne également pour d’autres bases de données PostGreSQL, MariaDB, SQLite… Il suffit pour cela de changer au départ l’objet connection par une connection à la base souhaitée : voir package dbplyr.&lt;/p&gt;
+&lt;p&gt;S’appuyant sur dbplyr et DBI, ce code fonctionne également pour d’autres bases de données PostgreSQL, MariaDB, SQLite… Il suffit pour cela de changer au départ l’objet connection par une connection à la base souhaitée : voir package dbplyr.&lt;/p&gt;
 
 </description>
         <pubDate>Fri, 15 Sep 2017 10:34:50 +0200</pubDate>
@@ -213,7 +247,7 @@
     
       <item>
         <title>Arborescence des archives homogène ~/Documents/data</title>
-        <description>&lt;p&gt;&lt;strong&gt;&lt;em&gt;L’idée de ce post est de proposer une arborescence d’archives pmsi commune aux différents utilisateurs de pmeasyr, qu’ils soient sous windows, mac ou linux. Une localisation des données (fichiers du pmsi) commune facilite grandement le partage de programmes : c’est un peu l’équivalent d’une arborescence commune en ce qui concerne les projets RStudio (les fichiers in/out étant souvent volumineux, il est préférable de ne pas les dupliquer).&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+        <description>&lt;p&gt;&lt;strong&gt;&lt;em&gt;L’idée de ce post est de proposer une arborescence d’archives pmsi commune aux différents utilisateurs de pmeasyr, qu’ils soient sous windows, mac ou linux. Une localisation des données (fichiers du pmsi) commune facilite grandement le partage de programmes : c’est un peu l’équivalent d’une arborescence commune en ce qui concerne les projets RStudio (mais les fichiers in/out étant souvent volumineux, il est préférable de ne pas les dupliquer dans chaque projet).&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;Autre avantage de cette approche, les données pmsi, assez sensibles de par leur contenu sont protégées par votre mot de passe dans votre session utilisateur.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
@@ -251,7 +285,7 @@
 
 &lt;h2 id=&quot;déposer-les-archives-et-commencer-un-programme&quot;&gt;Déposer les archives et commencer un programme&lt;/h2&gt;
 
-&lt;p&gt;Peu importe si vos collègues sont sur windows ou unix, vous pourrez alors partager vos scripts, si vos archives sont placés comme indiqué &lt;a href=&quot;https://guillaumepressiat.github.io/pmeasyr/archives.html#arborescence-des-archives&quot;&gt;ici&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Peu importe si vos collègues sont sur windows ou unix, vous pourrez alors partager vos scripts, si vos archives sont placées comme indiqué &lt;a href=&quot;https://guillaumepressiat.github.io/pmeasyr/archives.html#arborescence-des-archives&quot;&gt;ici&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Début du programme :&lt;/p&gt;
 
@@ -268,7 +302,7 @@
 
 &lt;h2 id=&quot;un-répertoire-pour-une-db&quot;&gt;Un répertoire pour une db&lt;/h2&gt;
 
-&lt;p&gt;Ce choix d’arborescence des archives sera utilisé pour le prochain post qui concernera l’intégration des données pmsi avec pmeasyr dans une base de données (avec DBI, dbplyr et monetdblite).&lt;/p&gt;
+&lt;p&gt;Ce choix d’arborescence des archives sera utilisé pour le prochain post qui concerne l’intégration des données pmsi avec pmeasyr dans une base de données (avec DBI, dbplyr et monetdblite).&lt;/p&gt;
 
 &lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;dir.create&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'~/Documents/data/__db'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
