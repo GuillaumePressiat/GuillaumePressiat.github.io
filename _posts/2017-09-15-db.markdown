@@ -1,197 +1,109 @@
 ---
 layout: post
-title:  "monetdb : Intégrer les données avec pmeasyr dans une db"
+title:  "Administrer les tables dans une base de données avec pmeasyr et DBI"
 date:   2017-09-15 09:34:50 +0100
 author: Guillaume Pressiat
-tags: pmeasyr monetdb
+tags: pmeasyr monetdb DBI dplyr
 categories: data&nbsp;management Programmation 
 ---
 
 
-***Ce post présente comment intégrer les données mco et rsf dans une base de données monetdb.***
+***Ce post présente comment intégrer les données mco et rsf dans une base de données monetdb. Ces fonctionnalités sont désormais disponibles dans le package***
 
-Après avoir créé le répertoire `'~/Documents/data/monetdb'`, voir le [post précédent](https://guillaumepressiat.github.io/blog/2017/09/arborescence).
+Après avoir créé le répertoire `'~/Documents/data/monetdb'` (voir le [post précédent](https://guillaumepressiat.github.io/blog/2017/09/arborescence)) :
 
 ## Se connecter à la base dans le répertoire monetdb
 
-```r
-# paste0 façon %>%
-`%+%` <- function(x,y){paste0(x,y)}
-
-
-library(MonetDBLite) # devtools::install_github("hannesmuehleisen/MonetDBLite")
+{% highlight r %}
+library(MonetDBLite)
 library(DBI)
 
 library(dbplyr)
 library(dplyr, warn.conflicts = F)
+
 dbdir <- "~/Documents/data/monetdb"
 con <- dbConnect(MonetDBLite::MonetDBLite(), dbdir)
-```
+{% endhighlight %}
 
 Voici le code pour effacer toutes les tables de la base : 
 
-```r
-# Clean-up
-# lapply(dbListTables(con), function(x){dbRemoveTable(con, x)})
-```
+{% highlight r %}
+#Clean-up
+#lapply(dbListTables(con), function(x){dbRemoveTable(con, x)})
+{% endhighlight %}
 
 ## Noyau de paramètres
 
 Pour tester que tout fonctionne on ajoute le paramètre `n_max = 10000` pour n'importer que les 10 000 premières lignes.
 
-```r
+{% highlight r %}
 an = 16
 remove = T
 library(pmeasyr)
 p <- noyau_pmeasyr(
-  finess = '750100042',
-  mois   = 12,
+  finess   = '750100042',
+  mois     = 12,
   progress = F,
-  lib = F ,
-  n_max  = 1e5
+  lib      = F ,
+  n_max    = 1e5
 )
-```
+{% endhighlight %}
 
 
 ## Intégrer les tables mco out dans la base : 
 
-### fonction par année
+La fonction `db_mco_out` permet d'intégrer les données niveau séjour du out (rsa, actes, diagnostics, table anohosp). Les tra sont ajoutés à ces tables.
 
-```r
-mco_out <- function(an, p, remove = T){
-  
-  if (remove == T){
-    dbListTables(con) -> u
-    u[grepl('_rsa_',u) & grepl(an,u)] -> lr
-    lapply(lr, function(x){dbRemoveTable(con, x)})
-  }
-  
-  p <- utils::modifyList(p, list(annee = 2000 + an, path = '~/Documents/data/' %+% 'mco'))
-  
-  irsa(p,  typi = 6) %>% tdiag() -> rsa
-  iano_mco(p) -> rsa_ano
-  itra(p) -> tra
-  
-  inner_tra(rsa$rsa, tra) %>% 
-    mutate(ghm = paste0(RSACMD, RSATYPE, RSANUM, RSACOMPX),
-           diags = paste0(dpdrum,  das, collapse  = ', '),
-           anseqta = if_else(MOISSOR < "03", "20" %+% as.character(an-1), "20" %+% as.character(an))) -> rsa$rsa
-  
-  inner_tra(rsa$actes, tra) -> rsa$actes
-  inner_tra(rsa$diags, tra) -> rsa$diags
-  inner_tra(rsa$rsa_um, tra) -> rsa$rsa_um
-  inner_tra(rsa_ano, tra) -> rsa_ano
-  
-  dbWriteTable(con, "mco_" %+% an %+% "_rsa_rsa", as.data.frame(rsa$rsa))
-  dbWriteTable(con, "mco_" %+% an %+% "_rsa_actes", as.data.frame(rsa$actes))
-  dbWriteTable(con, "mco_" %+% an %+% "_rsa_diags", as.data.frame(rsa$diags))
-  dbWriteTable(con, "mco_" %+% an %+% "_rsa_um", as.data.frame(rsa$rsa_um))
-  dbWriteTable(con, "mco_" %+% an %+% "_rsa_ano", as.data.frame(rsa_ano))
-  
-}
+On met dans l'objet `statuts` tout ce que retourne la fonction `db_mco_out`, et on l'analyse ensuite. Entre chaque import dans la base de données, on lance un garbage collection (ramasse-miettes) pour bien mettre à zéro la mémoire vive.
 
-```
+*On utilise la fonction `purrr::quielty` pour cela, pour garder les messages, output, warning résultant de l'exécution. 
+L'idée est d'exécuter la fonction année par année et de vérifier l'objet `statuts` est ok.*
 
-### éxécution
-
-On met dans l'objet `statuts` tout ce que retourne la fonction `mco_out`, et on l'analyse ensuite. Entre chaque import dans la base de données on lance un garbage collection pour bien mettre à zéro la mémoire vive.
-
-```r
-purrr::quietly(mco_out)(16, p) -> statuts ; gc(); #ok
-purrr::quietly(mco_out)(15, p) -> statuts ; gc(); #ok
-purrr::quietly(mco_out)(14, p) -> statuts ; gc(); #ok
-purrr::quietly(mco_out)(13, p) -> statuts ; gc(); #ok
-purrr::quietly(mco_out)(12, p) -> statuts ; gc(); #ok
-purrr::quietly(mco_out)(11, p) -> statuts ; gc(); #ok
-```
+{% highlight r %}
+purrr::quietly(db_mco_out)(16, p) -> statuts ; gc(); #ok
+purrr::quietly(db_mco_out)(15, p) -> statuts ; gc();
+purrr::quietly(db_mco_out)(14, p) -> statuts ; gc();
+purrr::quietly(db_mco_out)(13, p) -> statuts ; gc();
+purrr::quietly(db_mco_out)(12, p) -> statuts ; gc();
+purrr::quietly(db_mco_out)(11, p) -> statuts ; gc();
+{% endhighlight %}
 
 ## Intégrer les tables mco in dans la base :
 
-### fonction par année
+La fonction `db_mco_in` permet d'intégrer les données niveau rum du in (rum, actes, diagnostics, dad).
+ 
 
-```r
-mco_in <- function(an, p, remove = T){
-  
-  if (remove == T){
-    dbListTables(con) -> u
-    u[grepl('_rum_',u) & grepl(an,u)] -> lr
-    lapply(lr, function(x){dbRemoveTable(con, x)})
-  }
-  
-  p <- utils::modifyList(p, list(annee = 2000 + an, path = '~/Documents/data/' %+% 'mco'))
-  
-  irum(p,  typi = 4) %>% tdiag() -> rum
-  rum$rum %>% mutate(DUREESEJPART = as.integer(difftime(D8SOUE, D8EEUE, units= c("days")))) -> rum$rum
-  
-  dbWriteTable(con, "mco_" %+% an %+% "_rum_rum", rum$rum)
-  dbWriteTable(con, "mco_" %+% an %+% "_rum_diags", as.data.frame(rum$diags))
-  dbWriteTable(con, "mco_" %+% an %+% "_rum_actes", as.data.frame(rum$actes))
-
-}
-```
-
-### éxécution
-
-```r
-purrr::quietly(mco_in)(16, p) -> statuts ; gc(); #ok
-purrr::quietly(mco_in)(15, p) -> statuts ; gc(); #ok
-purrr::quietly(mco_in)(14, p) -> statuts ; gc(); #ok
-purrr::quietly(mco_in)(13, p) -> statuts ; gc(); #ok
-purrr::quietly(mco_in)(12, p) -> statuts ; gc(); #ok
-purrr::quietly(mco_in)(11, p) -> statuts ; gc(); #ok
-```
+{% highlight r %}
+purrr::quietly(db_mco_in)(16, p) -> statuts ; gc();
+purrr::quietly(db_mco_in)(15, p) -> statuts ; gc();
+purrr::quietly(db_mco_in)(14, p) -> statuts ; gc();
+purrr::quietly(db_mco_in)(13, p) -> statuts ; gc();
+purrr::quietly(db_mco_in)(12, p) -> statuts ; gc();
+purrr::quietly(db_mco_in)(11, p) -> statuts ; gc();
+{% endhighlight %}
 
 
 ## Intégrer les bases rsf out par année
 
-### fonction
-
-```r
-rsf_out <- function(an, p, remove = T){
-  
-  if (remove == T){
-    dbListTables(con) -> u
-    u[grepl('_rafael_',u) & grepl(an,u)] -> lr
-    lapply(lr, function(x){dbRemoveTable(con, x)})
-  }
-  
-  p <- utils::modifyList(p, list(annee = 2000 + an, path = '~/Documents/data/' %+% 'rsf'))
-  
-  irafael(p)  -> rsf
-  iano_rafael(p) -> rsf_ano
-  
-  dbWriteTable(con, "rsf_" %+% an %+% "_rafael_a", as.data.frame(rsf$A))
-  dbWriteTable(con, "rsf_" %+% an %+% "_rafael_b", as.data.frame(rsf$B))
-  dbWriteTable(con, "rsf_" %+% an %+% "_rafael_c", as.data.frame(rsf$C))
-  dbWriteTable(con, "rsf_" %+% an %+% "_rafael_h", as.data.frame(rsf$H))
-  dbWriteTable(con, "rsf_" %+% an %+% "_rafael_l", as.data.frame(rsf$L))
-  dbWriteTable(con, "rsf_" %+% an %+% "_rafael_m", as.data.frame(rsf$M))
-  dbWriteTable(con, "rsf_" %+% an %+% "_rafael_p", as.data.frame(rsf$P))
-  
-  dbWriteTable(con, "rsf_" %+% an %+% "_rafael_ano", as.data.frame(rsf_ano))
-  
-}
-```
-
-### éxécution
-
-```r
-purrr::quietly(rsf_out)(16, p) -> statuts ; gc(); #ok
-purrr::quietly(rsf_out)(15, p) -> statuts ; gc(); #ok
-purrr::quietly(rsf_out)(14, p) -> statuts ; gc(); #ok
-purrr::quietly(rsf_out)(13, p) -> statuts ; gc(); #ok
-purrr::quietly(rsf_out)(12, p) -> statuts ; gc(); #ok
-```
+La fonction `db_rsf_out` permet d'intégrer les données des rafael (une table par lettre A, B, C, ... et les données anohosp).
+ 
+{% highlight r %}
+purrr::quietly(db_rsf_out)(16, p) -> statuts ; gc();
+purrr::quietly(db_rsf_out)(15, p) -> statuts ; gc();
+purrr::quietly(db_rsf_out)(14, p) -> statuts ; gc();
+purrr::quietly(db_rsf_out)(13, p) -> statuts ; gc();
+purrr::quietly(db_rsf_out)(12, p) -> statuts ; gc();
+{% endhighlight %}
 
 ## se déconnecter
 
-```r
+{% highlight r %}
 dbDisconnect(con, shutdown=TRUE)
-```
+{% endhighlight %}
 
 ## Lister les tables de la base de données
 
-```r
+{% highlight r %}
 listable <- function(con){
 dbListTables(con) -> liste
  
@@ -200,9 +112,10 @@ dbListTables(con) -> liste
    knitr::kable(col.names = paste0('16 tables, n°',
                                    1:(floor((length(liste)/ 16) )+1)))
 }
-```
+listable(con)
+{% endhighlight %}
 
-```
+{% highlight text %}
 |16 tables, n°1   |16 tables, n°2   |16 tables, n°3   |16 tables, n°4    |16 tables, n°5    |16 tables, n°6    |
 |:----------------|:----------------|:----------------|:-----------------|:-----------------|:-----------------|
 |mco_11_rsa_actes |mco_13_rsa_actes |mco_15_rsa_actes |mco_17_rsa_actes  |rsf_13_rafael_a   |rsf_15_rafael_a   |
@@ -221,9 +134,19 @@ dbListTables(con) -> liste
 |mco_12_rum_actes |mco_14_rum_actes |mco_16_rum_actes |rsf_12_rafael_l   |rsf_14_rafael_l   |rsf_16_rafael_l   |
 |mco_12_rum_diags |mco_14_rum_diags |mco_16_rum_diags |rsf_12_rafael_m   |rsf_14_rafael_m   |rsf_16_rafael_m   |
 |mco_12_rum_rum   |mco_14_rum_rum   |mco_16_rum_rum   |rsf_12_rafael_p   |rsf_14_rafael_p   |rsf_16_rafael_p   |
-```
+{% endhighlight %}
 
 ## fonctionne aussi pour d'autres db
 
 S'appuyant sur dbplyr et DBI, ce code fonctionne également pour d'autres bases de données PostgreSQL, MariaDB, SQLite... Il suffit pour cela de changer au départ l'objet connection par une connection à la base souhaitée : voir package dbplyr.
+
+## Intégration au package pmeasyr
+
+Le package *pmeasyr* intègre ces nouvelles fonctionnalités, voir : 
+
+- [Fonctions "vers la base de données"](https://im-aphp.github.io/pmeasyr/reference/index.html#section-vers-la-base-de-donn-es)
+- [Vignette](https://im-aphp.github.io/pmeasyr/articles/vignette3.html)
+- [News](https://github.com/IM-APHP/pmeasyr/blob/master/NEWS.md)
+
+
 
