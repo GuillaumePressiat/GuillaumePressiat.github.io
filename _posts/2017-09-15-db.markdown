@@ -60,12 +60,12 @@ On met dans l'objet `statuts` tout ce que retourne la fonction `db_mco_out`, et 
 L'idée est d'exécuter la fonction année par année et de vérifier l'objet `statuts` est ok.*
 
 {% highlight r %}
-purrr::quietly(db_mco_out)(16, p) -> statuts ; gc(); #ok
-purrr::quietly(db_mco_out)(15, p) -> statuts ; gc();
-purrr::quietly(db_mco_out)(14, p) -> statuts ; gc();
-purrr::quietly(db_mco_out)(13, p) -> statuts ; gc();
-purrr::quietly(db_mco_out)(12, p) -> statuts ; gc();
-purrr::quietly(db_mco_out)(11, p) -> statuts ; gc();
+purrr::quietly(db_mco_out)(con, 16, p) -> statuts ; gc(); #ok
+purrr::quietly(db_mco_out)(con, 15, p) -> statuts ; gc();
+purrr::quietly(db_mco_out)(con, 14, p) -> statuts ; gc();
+purrr::quietly(db_mco_out)(con, 13, p) -> statuts ; gc();
+purrr::quietly(db_mco_out)(con, 12, p) -> statuts ; gc();
+purrr::quietly(db_mco_out)(con, 11, p) -> statuts ; gc();
 {% endhighlight %}
 
 ## Intégrer les tables mco in dans la base :
@@ -74,12 +74,12 @@ La fonction `db_mco_in` permet d'intégrer les données niveau rum du in (rum, a
  
 
 {% highlight r %}
-purrr::quietly(db_mco_in)(16, p) -> statuts ; gc();
-purrr::quietly(db_mco_in)(15, p) -> statuts ; gc();
-purrr::quietly(db_mco_in)(14, p) -> statuts ; gc();
-purrr::quietly(db_mco_in)(13, p) -> statuts ; gc();
-purrr::quietly(db_mco_in)(12, p) -> statuts ; gc();
-purrr::quietly(db_mco_in)(11, p) -> statuts ; gc();
+purrr::quietly(db_mco_in)(con, 16, p) -> statuts ; gc();
+purrr::quietly(db_mco_in)(con, 15, p) -> statuts ; gc();
+purrr::quietly(db_mco_in)(con, 14, p) -> statuts ; gc();
+purrr::quietly(db_mco_in)(con, 13, p) -> statuts ; gc();
+purrr::quietly(db_mco_in)(con, 12, p) -> statuts ; gc();
+purrr::quietly(db_mco_in)(con, 11, p) -> statuts ; gc();
 {% endhighlight %}
 
 
@@ -88,11 +88,11 @@ purrr::quietly(db_mco_in)(11, p) -> statuts ; gc();
 La fonction `db_rsf_out` permet d'intégrer les données des rafael (une table par lettre A, B, C, ... et les données anohosp).
  
 {% highlight r %}
-purrr::quietly(db_rsf_out)(16, p) -> statuts ; gc();
-purrr::quietly(db_rsf_out)(15, p) -> statuts ; gc();
-purrr::quietly(db_rsf_out)(14, p) -> statuts ; gc();
-purrr::quietly(db_rsf_out)(13, p) -> statuts ; gc();
-purrr::quietly(db_rsf_out)(12, p) -> statuts ; gc();
+purrr::quietly(db_rsf_out)(con, 16, p) -> statuts ; gc();
+purrr::quietly(db_rsf_out)(con, 15, p) -> statuts ; gc();
+purrr::quietly(db_rsf_out)(con, 14, p) -> statuts ; gc();
+purrr::quietly(db_rsf_out)(con, 13, p) -> statuts ; gc();
+purrr::quietly(db_rsf_out)(con, 12, p) -> statuts ; gc();
 {% endhighlight %}
 
 ## se déconnecter
