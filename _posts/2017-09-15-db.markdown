@@ -83,11 +83,6 @@ La fonction `db_rsf_out` permet d'intégrer les données des rafael (une table p
 purrr::quietly(db_rsf_out)(con, 16, p) -> statuts ; gc();
 {% endhighlight %}
 
-## se déconnecter
-
-{% highlight r %}
-dbDisconnect(con, shutdown=TRUE)
-{% endhighlight %}
 
 ## Lister les tables de la base de données
 
