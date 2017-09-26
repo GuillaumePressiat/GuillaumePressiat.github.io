@@ -20,9 +20,9 @@ Une possibilité est de mettre les données dans `'~/Documents/data'`.
 
 Exemple : 
 
-```r
+{% highlight r %}
 dir.create('~/Documents/data/mco')
-```
+{% endhighlight %}
 
 Dossier dans lequel placer les archives in/out du mco.
 
@@ -34,17 +34,17 @@ Chaque utilisateur dispose de son répertoire, exemple `'C:/Users/gui/'`. Et sou
 Mais dans R, le symbole `'~'` utilisé sur windows dans un chemin d'accès aux fichiers renvoie au répertoire Documents de l'utilisateur : `C:/Users/gui/Documents/`.
 
 
-```r
+{% highlight r %}
 path.expand('~')
-```
+{% endhighlight %}
 
 renvoie `'C:/Users/gui/Documents/'`.
 
 Par conséquent sur Windows le répertoire à créer pour localiser les fichiers d'archives pmsi sera : `'C:/Users/gui/Documents/Documents/data'` :
 
-```r
+{% highlight r %}
 dir.create('~/Documents/data/mco', recursive = T)
-```
+{% endhighlight %}
 
 ## Déposer les archives et commencer un programme
 
@@ -52,7 +52,7 @@ Peu importe si vos collègues sont sur windows ou unix, vous pourrez alors parta
 
 Début du programme : 
 
-```r
+{% highlight r %}
 library(pmeasyr)
 # noyau_skeleton()
 noyau_pmeasyr(
@@ -61,16 +61,16 @@ noyau_pmeasyr(
   mois   = ..,
   path   = '~/Documents/data/mco'
 ) -> p
-```
+{% endhighlight %}
 
 ## Un répertoire pour une db
 
 
 Ce choix d'arborescence des archives sera utilisé pour le prochain post qui concerne l'intégration des données pmsi avec pmeasyr dans une base de données (avec DBI, dbplyr et monetdblite).
 
-```r
+{% highlight r %}
 dir.create('~/Documents/data/__db')
-```
+{% endhighlight %}
 
 
 
