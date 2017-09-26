@@ -29,7 +29,7 @@ Voici le code pour effacer toutes les tables de la base :
 
 {% highlight r %}
 #Clean-up
-#lapply(dbListTables(con$con), function(x){dbRemoveTable(con, x)})
+#lapply(dbListTables(con$con), function(x){dbRemoveTable(con$con, x)})
 {% endhighlight %}
 
 ## Noyau de paramètres
