@@ -22,14 +22,14 @@ library(dbplyr)
 library(dplyr, warn.conflicts = F)
 
 dbdir <- "~/Documents/data/monetdb"
-con <- dbConnect(MonetDBLite::MonetDBLite(), dbdir)
+con <- src_monetdblite(dbdir)
 {% endhighlight %}
 
 Voici le code pour effacer toutes les tables de la base : 
 
 {% highlight r %}
 #Clean-up
-#lapply(dbListTables(con), function(x){dbRemoveTable(con, x)})
+#lapply(dbListTables(con$con), function(x){dbRemoveTable(con, x)})
 {% endhighlight %}
 
 ## Noyau de paramètres
@@ -62,10 +62,7 @@ L'idée est d'exécuter la fonction année par année et de vérifier l'objet `s
 {% highlight r %}
 purrr::quietly(db_mco_out)(con, 16, p) -> statuts ; gc(); #ok
 purrr::quietly(db_mco_out)(con, 15, p) -> statuts ; gc();
-purrr::quietly(db_mco_out)(con, 14, p) -> statuts ; gc();
-purrr::quietly(db_mco_out)(con, 13, p) -> statuts ; gc();
-purrr::quietly(db_mco_out)(con, 12, p) -> statuts ; gc();
-purrr::quietly(db_mco_out)(con, 11, p) -> statuts ; gc();
+# ...
 {% endhighlight %}
 
 ## Intégrer les tables mco in dans la base :
@@ -75,11 +72,6 @@ La fonction `db_mco_in` permet d'intégrer les données niveau rum du in (rum, a
 
 {% highlight r %}
 purrr::quietly(db_mco_in)(con, 16, p) -> statuts ; gc();
-purrr::quietly(db_mco_in)(con, 15, p) -> statuts ; gc();
-purrr::quietly(db_mco_in)(con, 14, p) -> statuts ; gc();
-purrr::quietly(db_mco_in)(con, 13, p) -> statuts ; gc();
-purrr::quietly(db_mco_in)(con, 12, p) -> statuts ; gc();
-purrr::quietly(db_mco_in)(con, 11, p) -> statuts ; gc();
 {% endhighlight %}
 
 
@@ -89,10 +81,6 @@ La fonction `db_rsf_out` permet d'intégrer les données des rafael (une table p
  
 {% highlight r %}
 purrr::quietly(db_rsf_out)(con, 16, p) -> statuts ; gc();
-purrr::quietly(db_rsf_out)(con, 15, p) -> statuts ; gc();
-purrr::quietly(db_rsf_out)(con, 14, p) -> statuts ; gc();
-purrr::quietly(db_rsf_out)(con, 13, p) -> statuts ; gc();
-purrr::quietly(db_rsf_out)(con, 12, p) -> statuts ; gc();
 {% endhighlight %}
 
 ## se déconnecter
@@ -149,4 +137,5 @@ Le package *pmeasyr* intègre ces nouvelles fonctionnalités, voir :
 - [News](https://github.com/IM-APHP/pmeasyr/blob/master/NEWS.md)
 
 
+Les fonctions du package permettent également d'ajouter des index aux tables pour optimiser les requêtes dans la base.
 
