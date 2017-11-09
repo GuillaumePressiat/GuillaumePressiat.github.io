@@ -37,16 +37,16 @@ Voici le code pour effacer toutes les tables de la base :
 Pour tester que tout fonctionne on ajoute le paramètre `n_max = 10000` pour n'importer que les 10 000 premières lignes.
 
 {% highlight r %}
-an = 16
-remove = T
 library(pmeasyr)
 p <- noyau_pmeasyr(
-  finess   = '750100042',
+  finess   = '750712184',
+  annee = 2016,
   mois     = 12,
-  progress = F,
-  lib      = F ,
-  n_max    = 1e5
-)
+  path     = '~/Documents/data/mco',
+  progress = F, 
+  tolower_names = T, # choix de noms de colonnes minuscules : T / F
+  n_max = 1e4, # on limite la lecture a un petit nombre de lignes pour tester d'abord
+  lib = F)
 {% endhighlight %}
 
 
@@ -60,9 +60,8 @@ On met dans l'objet `statuts` tout ce que retourne la fonction `db_mco_out`, et 
 L'idée est d'exécuter la fonction année par année et de vérifier l'objet `statuts` est ok.*
 
 {% highlight r %}
-purrr::quietly(db_mco_out)(con, 16, p) -> statuts ; gc(); #ok
-purrr::quietly(db_mco_out)(con, 15, p) -> statuts ; gc();
-# ...
+purrr::quietly(db_mco_out)(con,  p, annee = 2016) -> statuts ; gc(); #ok
+purrr::quietly(db_mco_out)(con,  p, annee = 2015) -> statuts ; gc();
 {% endhighlight %}
 
 ## Intégrer les tables mco in dans la base :
@@ -71,7 +70,7 @@ La fonction `db_mco_in` permet d'intégrer les données niveau rum du in (rum, a
  
 
 {% highlight r %}
-purrr::quietly(db_mco_in)(con, 16, p) -> statuts ; gc();
+purrr::quietly(db_mco_in)(con,  p, annee = 2016) -> statuts ; gc();
 {% endhighlight %}
 
 
@@ -80,7 +79,7 @@ purrr::quietly(db_mco_in)(con, 16, p) -> statuts ; gc();
 La fonction `db_rsf_out` permet d'intégrer les données des rafael (une table par lettre A, B, C, ... et les données anohosp).
  
 {% highlight r %}
-purrr::quietly(db_rsf_out)(con, 16, p) -> statuts ; gc();
+purrr::quietly(db_rsf_out)(con,  p, annee = 2016) -> statuts ; gc();
 {% endhighlight %}
 
 
