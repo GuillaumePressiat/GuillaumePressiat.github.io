@@ -264,10 +264,13 @@ p &lt;-<span class="st"> </span><span class="kw">noyau_pmeasyr</span>(
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ok</code></pre></div>
 <p>Nous avons présenté la ligne pour importer les données MCO out 2016, mais il est possible de la faire pour le MCO in (<code>db_mco_in</code>), le SSR out (<code>db_ssr_out</code>), l’HAD (<code>db_had_out</code>), la Psy (<code>db_psy_out</code>) et les rsf (<code>db_rsf_out</code>).</p>
 <p>Une fonction pour importer une autre table est également disponible (<code>db_generique</code>).</p>
+<p>Après plusieurs imports dans la base de données, se déconnecter :</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw">dbDisconnect</span>(con<span class="op">$</span>con)</code></pre></div>
 </div>
 </div>
 <div id="acceder-aux-donnees-dans-la-base" class="section level2">
 <h2><span class="header-section-number">13.3</span> Accéder aux données dans la base</h2>
+<p>Se reconnecter à la base en redéfinissant l’objet <code>con</code>.</p>
 <p>Poursuivons l’exemple sur le mco out 2016.</p>
 <div id="lister-les-tables-dans-la-base" class="section level3">
 <h3><span class="header-section-number">13.3.1</span> Lister les tables dans la base</h3>

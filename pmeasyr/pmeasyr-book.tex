@@ -961,14 +961,14 @@ la liste
 
 \CommentTok{# En passant par les zones stream}
 \NormalTok{string_diags =}\StringTok{ }
-\StringTok{  'F803|G400|G401|G402|G403|G404|G405|G406|G407|G408|G409|G410|G411|G412|418|G419|R568'}
+\StringTok{  'F803|G400|G401|G402|G403|G404|G405|G406|G407|G408|G409|G410|G411|G412|G418|G419|R568'}
 
 \CommentTok{# quelle que soit la position du diagnostic}
-\NormalTok{rsa15}\OperatorTok{$}\NormalTok{rsa }\OperatorTok{%>%}\StringTok{ }\KeywordTok{fiter}\NormalTok{(}\KeywordTok{grepl}\NormalTok{(string_diags, dpdrum)}\OperatorTok{|}\KeywordTok{grepl}\NormalTok{(string_diags, das))}
+\NormalTok{rsa15}\OperatorTok{$}\NormalTok{rsa }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(}\KeywordTok{grepl}\NormalTok{(string_diags, dpdrum)}\OperatorTok{|}\KeywordTok{grepl}\NormalTok{(string_diags, das))}
 \CommentTok{# position en das}
-\NormalTok{rsa15}\OperatorTok{$}\NormalTok{rsa }\OperatorTok{%>%}\StringTok{ }\KeywordTok{fiter}\NormalTok{(}\KeywordTok{grepl}\NormalTok{(string_diags, das))}
+\NormalTok{rsa15}\OperatorTok{$}\NormalTok{rsa }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(}\KeywordTok{grepl}\NormalTok{(string_diags, das))}
 \CommentTok{# position en dpdr}
-\NormalTok{rsa15}\OperatorTok{$}\NormalTok{rsa }\OperatorTok{%>%}\StringTok{ }\KeywordTok{fiter}\NormalTok{(}\KeywordTok{grepl}\NormalTok{(string_diags, dpdrum))}
+\NormalTok{rsa15}\OperatorTok{$}\NormalTok{rsa }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(}\KeywordTok{grepl}\NormalTok{(string_diags, dpdrum))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1447,10 +1447,10 @@ Par homogénéité avec le format jusqu'alors, la valeur par défaut de ce
 paramètre reste \texttt{FALSE}, les noms de variables restent donc en
 majuscule sans modifier ce paramètre.
 
-**N.B. : Pour utiliser les fonctions \texttt{requete},
+\textbf{N.B. : Pour utiliser les fonctions \texttt{requete},
 \texttt{requete\_db}, \texttt{lancer\_requete} et
 \texttt{lancer\_requete\_db}, il est nécessaire d'avoir choisi un import
-avec noms de variables en minuscule : \texttt{tolower\_names\ =\ TRUE}.
+avec noms de variables en minuscule : \texttt{tolower\_names\ =\ TRUE}.}
 
 \chapter{\texorpdfstring{Vers la base de données avec
 \texttt{pmeasyr}}{Vers la base de données avec pmeasyr}}\label{vers-la-base-de-donnees-avec-pmeasyr}
@@ -1539,8 +1539,18 @@ Psy (\texttt{db\_psy\_out}) et les rsf (\texttt{db\_rsf\_out}).
 Une fonction pour importer une autre table est également disponible
 (\texttt{db\_generique}).
 
+Après plusieurs imports dans la base de données, se déconnecter :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{DBI}\OperatorTok{::}\KeywordTok{dbDisconnect}\NormalTok{(con}\OperatorTok{$}\NormalTok{con)}
+\end{Highlighting}
+\end{Shaded}
+
 \section{Accéder aux données dans la
 base}\label{acceder-aux-donnees-dans-la-base}
+
+Se reconnecter à la base en redéfinissant l'objet \texttt{con}.
 
 Poursuivons l'exemple sur le mco out 2016.
 

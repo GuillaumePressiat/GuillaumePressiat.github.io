@@ -302,14 +302,14 @@ rsa15<span class="op">$</span>diags <span class="op">%&gt;%</span><span class="s
 
 <span class="co"># En passant par les zones stream</span>
 string_diags =<span class="st"> </span>
-<span class="st">  &#39;F803|G400|G401|G402|G403|G404|G405|G406|G407|G408|G409|G410|G411|G412|418|G419|R568&#39;</span>
+<span class="st">  &#39;F803|G400|G401|G402|G403|G404|G405|G406|G407|G408|G409|G410|G411|G412|G418|G419|R568&#39;</span>
 
 <span class="co"># quelle que soit la position du diagnostic</span>
-rsa15<span class="op">$</span>rsa <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">fiter</span>(<span class="kw">grepl</span>(string_diags, dpdrum)<span class="op">|</span><span class="kw">grepl</span>(string_diags, das))
+rsa15<span class="op">$</span>rsa <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(<span class="kw">grepl</span>(string_diags, dpdrum)<span class="op">|</span><span class="kw">grepl</span>(string_diags, das))
 <span class="co"># position en das</span>
-rsa15<span class="op">$</span>rsa <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">fiter</span>(<span class="kw">grepl</span>(string_diags, das))
+rsa15<span class="op">$</span>rsa <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(<span class="kw">grepl</span>(string_diags, das))
 <span class="co"># position en dpdr</span>
-rsa15<span class="op">$</span>rsa <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">fiter</span>(<span class="kw">grepl</span>(string_diags, dpdrum))</code></pre></div>
+rsa15<span class="op">$</span>rsa <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(<span class="kw">grepl</span>(string_diags, dpdrum))</code></pre></div>
 </div>
 <div id="recherche-de-codes-actes" class="section level2">
 <h2><span class="header-section-number">5.3</span> Recherche de codes actes</h2>
