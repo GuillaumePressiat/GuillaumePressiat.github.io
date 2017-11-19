@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="contexte.html">
+<link rel="prev" href="restructurer-des-listes-de-codes-enrobeur.html">
+<link rel="next" href="vers-la-base-de-donnees-avec-pmeasyr.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -220,24 +220,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Traitement des données PMSI avec R</h1>
-<h4 class="author"><em>Guillaume Pressiat || SIMAP / DOMU / Assistance Publique - Hôpitaux de Paris</em></h4>
-<h4 class="date"><em>2017-11-19</em></h4>
-</div>
-<div id="introduction" class="section level1">
-<h1><span class="header-section-number">1</span> Introduction</h1>
-<p>Ce livret numérique présente des exemples de traitements de données PMSI avec R. L’objectif est de concentrer ici :</p>
-<ul>
-<li><p>une documentation permettant de débuter avec l’import de données via le package <a href="https://github.com/IM-APHP/pmeasyr"><em>pmeasyr</em></a></p></li>
-<li>des exemples d’analyses PMSI :
-<ul>
-<li>requêtes sur les diagnostics et les actes</li>
-<li>analyse des files actives pour une pathologie</li>
-<li>statistiques élementaires sur des variables du PMSI</li>
-<li>analyse du case-mix et de la dms par ghm</li>
-</ul></li>
-</ul>
+<div id="noms-de-colonnes-en-minuscules" class="section level1">
+<h1><span class="header-section-number">12</span> Noms de colonnes en minuscules</h1>
+<p>Dans chaque fonction, un nouveau paramètre est disponible : <code>tolower_names</code>. Il permet à l’utlisateur de choisir entre minuscules et majuscules pour les noms des variables dans les tables.</p>
+<p>Par homogénéité avec le format jusqu’alors, la valeur par défaut de ce paramètre reste <code>FALSE</code>, les noms de variables restent donc en majuscule sans modifier ce paramètre.</p>
+<p>**N.B. : Pour utiliser les fonctions <code>requete</code>, <code>requete_db</code>, <code>lancer_requete</code> et <code>lancer_requete_db</code>, il est nécessaire d’avoir choisi un import avec noms de variables en minuscule : <code>tolower_names = TRUE</code>.</p>
 
 </div>
             </section>
@@ -245,8 +232,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-
-<a href="contexte.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="restructurer-des-listes-de-codes-enrobeur.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="vers-la-base-de-donnees-avec-pmeasyr.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

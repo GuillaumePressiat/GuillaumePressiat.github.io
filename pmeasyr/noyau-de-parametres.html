@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="contexte.html">
+<link rel="prev" href="help.html">
+<link rel="next" href="restructurer-des-listes-de-codes-enrobeur.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -220,33 +220,94 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Traitement des données PMSI avec R</h1>
-<h4 class="author"><em>Guillaume Pressiat || SIMAP / DOMU / Assistance Publique - Hôpitaux de Paris</em></h4>
-<h4 class="date"><em>2017-11-19</em></h4>
-</div>
-<div id="introduction" class="section level1">
-<h1><span class="header-section-number">1</span> Introduction</h1>
-<p>Ce livret numérique présente des exemples de traitements de données PMSI avec R. L’objectif est de concentrer ici :</p>
+<div id="noyau-de-parametres" class="section level1">
+<h1><span class="header-section-number">10</span> Noyau de paramètres</h1>
+<div id="quatre-parametres" class="section level2">
+<h2><span class="header-section-number">10.1</span> Quatre paramètres</h2>
+<p>Les fonctions de dézippage et d’import de pmeasyr ont en commun quatre paramètres :</p>
 <ul>
-<li><p>une documentation permettant de débuter avec l’import de données via le package <a href="https://github.com/IM-APHP/pmeasyr"><em>pmeasyr</em></a></p></li>
-<li>des exemples d’analyses PMSI :
-<ul>
-<li>requêtes sur les diagnostics et les actes</li>
-<li>analyse des files actives pour une pathologie</li>
-<li>statistiques élementaires sur des variables du PMSI</li>
-<li>analyse du case-mix et de la dms par ghm</li>
-</ul></li>
+<li>le finess du fichier</li>
+<li>l’année pmsi</li>
+<li>le mois pmsi</li>
+<li>le path, repértoire où se trouve le fichier</li>
 </ul>
+<p>Ces paramètres sont toujours nécessaires : définir un noyau de paramètres permet de ne les préciser une seule fois, allège le code pour plus de lisibilité.</p>
+<p><strong>Exemple de redondance des paramètres :</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Exemple</span>
+<span class="kw">library</span>(pmeasyr)
 
+<span class="co"># Dézipper</span>
+<span class="kw">adezip</span>(<span class="dt">finess =</span> <span class="st">&#39;750712184&#39;</span>, 
+       <span class="dt">annee  =</span> <span class="dv">2015</span>, 
+       <span class="dt">mois   =</span> <span class="dv">12</span>, 
+       <span class="dt">path   =</span> <span class="st">&#39;~/Documents/data/mco/&#39;</span>,
+       <span class="dt">type   =</span> <span class="st">&quot;out&quot;</span>, 
+       <span class="dt">liste  =</span> <span class="kw">c</span>(<span class="st">&quot;rsa&quot;</span>, <span class="st">&quot;ano&quot;</span>, <span class="st">&quot;tra&quot;</span>))
+
+<span class="co"># Table ano</span>
+<span class="kw">iano_mco</span>(<span class="dt">finess =</span> <span class="st">&#39;750712184&#39;</span>, 
+         <span class="dt">annee  =</span> <span class="dv">2015</span>, 
+         <span class="dt">mois   =</span> <span class="dv">12</span>, 
+         <span class="dt">path   =</span> <span class="st">&#39;~/Documents/data/mco/&#39;</span>) -&gt;<span class="st"> </span>ano
+
+<span class="co"># Tables rsa</span>
+<span class="kw">irsa</span>(<span class="dt">finess =</span> <span class="st">&#39;750712184&#39;</span>, 
+     <span class="dt">annee  =</span> <span class="dv">2015</span>, 
+     <span class="dt">mois   =</span> <span class="dv">12</span>, 
+     <span class="dt">path   =</span> <span class="st">&#39;~/Documents/data/mco/&#39;</span>, 
+     <span class="dt">typi   =</span> <span class="dv">4</span>) -&gt;<span class="st"> </span>rsa
+
+<span class="co"># Table tra</span>
+<span class="kw">itra</span>(<span class="dt">finess =</span> <span class="st">&#39;750712184&#39;</span>, 
+     <span class="dt">annee  =</span> <span class="dv">2015</span>, 
+     <span class="dt">mois   =</span> <span class="dv">12</span>, 
+     <span class="dt">path   =</span> <span class="st">&#39;~/Documents/data/mco/&#39;</span>) -&gt;<span class="st"> </span>tra</code></pre></div>
+</div>
+<div id="solution-avec-noyau_pmeasyr" class="section level2">
+<h2><span class="header-section-number">10.2</span> Solution avec <code>noyau_pmeasyr()</code></h2>
+<div id="definir-le-noyau-de-parametres" class="section level3">
+<h3><span class="header-section-number">10.2.1</span> Définir le noyau de paramètres</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pmeasyr)
+p &lt;-<span class="st"> </span><span class="kw">noyau_pmeasyr</span>(<span class="dt">finess =</span> <span class="st">&#39;750712184&#39;</span>, 
+                   <span class="dt">annee =</span> <span class="dv">2015</span>, 
+                   <span class="dt">mois =</span> <span class="dv">12</span>, 
+                   <span class="dt">path   =</span> <span class="st">&#39;~/Documents/data/mco/&#39;</span>)</code></pre></div>
+</div>
+<div id="utiliser-le-noyau-de-parametres" class="section level3">
+<h3><span class="header-section-number">10.2.2</span> Utiliser le noyau de paramètres</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Tout dézipper</span>
+<span class="co"># out</span>
+p <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">adezip</span>(<span class="dt">type =</span> <span class="st">&quot;out&quot;</span>)
+<span class="co"># in</span>
+p <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">adezip</span>(<span class="dt">type =</span> <span class="st">&quot;in&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">irsa</span>()     -&gt;<span class="st"> </span>rsa
+p <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">iano_mco</span>() -&gt;<span class="st"> </span>ano_out
+p <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">itra</span>()     -&gt;<span class="st"> </span>tra</code></pre></div>
+<p>La syntaxe est beaucoup plus lisible désormais.</p>
+</div>
+</div>
+<div id="noyau_skeleton" class="section level2">
+<h2><span class="header-section-number">10.3</span> <code>noyau_skeleton()</code></h2>
+<p>La fonction <code>noyau_skeleton()</code> permet d’obtenir dans la console R le squelette pour définir les quatre paramètres d’un noyau <code>pmeasyr</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pmeasyr)
+<span class="kw">noyau_skeleton</span>()</code></pre></div>
+<pre><code>## 
+## noyau_pmeasyr(
+##   finess = &#39;.........&#39;,
+##   annee  = ....,
+##   mois   = ..,
+##   path   = &#39;&#39;
+## ) -&gt; p</code></pre>
+
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="contexte.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="help.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="restructurer-des-listes-de-codes-enrobeur.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="contexte.html">
+<link rel="prev" href="noyau-de-parametres.html">
+<link rel="next" href="noms-de-colonnes-en-minuscules.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -220,33 +220,66 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Traitement des données PMSI avec R</h1>
-<h4 class="author"><em>Guillaume Pressiat || SIMAP / DOMU / Assistance Publique - Hôpitaux de Paris</em></h4>
-<h4 class="date"><em>2017-11-19</em></h4>
-</div>
-<div id="introduction" class="section level1">
-<h1><span class="header-section-number">1</span> Introduction</h1>
-<p>Ce livret numérique présente des exemples de traitements de données PMSI avec R. L’objectif est de concentrer ici :</p>
-<ul>
-<li><p>une documentation permettant de débuter avec l’import de données via le package <a href="https://github.com/IM-APHP/pmeasyr"><em>pmeasyr</em></a></p></li>
-<li>des exemples d’analyses PMSI :
-<ul>
-<li>requêtes sur les diagnostics et les actes</li>
-<li>analyse des files actives pour une pathologie</li>
-<li>statistiques élementaires sur des variables du PMSI</li>
-<li>analyse du case-mix et de la dms par ghm</li>
-</ul></li>
-</ul>
+<div id="restructurer-des-listes-de-codes-enrobeur" class="section level1">
+<h1><span class="header-section-number">11</span> Restructurer des listes de codes : enrobeur</h1>
+<p>La fonction <code>enrobeur()</code> permet de structurer une liste de diagnostics, de ghm ou de codes CCAM sous différents formats, selon le type de requêtes que l’on souhaite effectuer ensuite.</p>
+<div id="pour-du-sql-like-..-left-right" class="section level3">
+<h3><span class="header-section-number">11.0.1</span> Pour du SQL %like% %..% (left &amp; right)</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(magrittr)
+li &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;QEFA003&#39;</span>, <span class="st">&#39;QEFA005&#39;</span>, <span class="st">&#39;QEFA010&#39;</span>, <span class="st">&#39;QEFA013&#39;</span>, <span class="st">&#39;QEFA015&#39;</span>, <span class="st">&#39;QEFA019&#39;</span>, <span class="st">&#39;QEFA020&#39;</span>)
 
+<span class="kw">enrobeur</span>(li, <span class="dt">robe=</span><span class="st">&quot;</span><span class="ch">\&#39;</span><span class="st">%&quot;</span>, <span class="dt">interstice=</span><span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">symetrique =</span> T) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">cat</span>()</code></pre></div>
+<pre><code>## &#39;%QEFA003%&#39;
+## &#39;%QEFA005%&#39;
+## &#39;%QEFA010%&#39;
+## &#39;%QEFA013%&#39;
+## &#39;%QEFA015%&#39;
+## &#39;%QEFA019%&#39;
+## &#39;%QEFA020%&#39;</code></pre>
+</div>
+<div id="sql-like-.." class="section level3">
+<h3><span class="header-section-number">11.0.2</span> SQL %like% ..%</h3>
+<table>
+<tbody>
+<tr class="odd">
+<td>à venir</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="sql-like-..-1" class="section level3">
+<h3><span class="header-section-number">11.0.3</span> SQL %like% %..</h3>
+<table>
+<tbody>
+<tr class="odd">
+<td>à venir</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="pour-du-grepl" class="section level3">
+<h3><span class="header-section-number">11.0.4</span> Pour du grepl</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">li &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;QEFA003&#39;</span>, <span class="st">&#39;QEFA005&#39;</span>, <span class="st">&#39;QEFA010&#39;</span>, <span class="st">&#39;QEFA013&#39;</span>, <span class="st">&#39;QEFA015&#39;</span>, <span class="st">&#39;QEFA019&#39;</span>, <span class="st">&#39;QEFA020&#39;</span>)
+
+<span class="kw">enrobeur</span>(li, <span class="dt">robe=</span><span class="st">&quot;&quot;</span>, <span class="dt">interstice=</span><span class="st">&quot;|&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">cat</span>()</code></pre></div>
+<pre><code>## QEFA003|QEFA005|QEFA010|QEFA013|QEFA015|QEFA019|QEFA020</code></pre>
+</div>
+<div id="pour-du-listing" class="section level3">
+<h3><span class="header-section-number">11.0.5</span> Pour du listing</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">li &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;QEFA003&#39;</span>, <span class="st">&#39;QEFA005&#39;</span>, <span class="st">&#39;QEFA010&#39;</span>, <span class="st">&#39;QEFA013&#39;</span>, <span class="st">&#39;QEFA015&#39;</span>, <span class="st">&#39;QEFA019&#39;</span>, <span class="st">&#39;QEFA020&#39;</span>)
+
+<span class="kw">enrobeur</span>(li, <span class="dt">robe=</span><span class="st">&quot;</span><span class="ch">\&#39;</span><span class="st">&quot;</span>, <span class="dt">interstice=</span><span class="st">&quot;, &quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">cat</span>()</code></pre></div>
+<pre><code>## &#39;QEFA003&#39;, &#39;QEFA005&#39;, &#39;QEFA010&#39;, &#39;QEFA013&#39;, &#39;QEFA015&#39;, &#39;QEFA019&#39;, &#39;QEFA020&#39;</code></pre>
+
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="contexte.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="noyau-de-parametres.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="noms-de-colonnes-en-minuscules.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

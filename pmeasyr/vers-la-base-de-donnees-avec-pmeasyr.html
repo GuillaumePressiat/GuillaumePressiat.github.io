@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="contexte.html">
+<link rel="prev" href="noms-de-colonnes-en-minuscules.html">
+<link rel="next" href="requetr-rediger-executer-des-requetes-pmsi-beta.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -220,33 +220,78 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Traitement des données PMSI avec R</h1>
-<h4 class="author"><em>Guillaume Pressiat || SIMAP / DOMU / Assistance Publique - Hôpitaux de Paris</em></h4>
-<h4 class="date"><em>2017-11-19</em></h4>
+<div id="vers-la-base-de-donnees-avec-pmeasyr" class="section level1">
+<h1><span class="header-section-number">13</span> Vers la base de données avec <code>pmeasyr</code></h1>
+<p>Constatant que chaque étude avec <code>pmeasyr</code> commence par un import de données, nous proposons une nouvelle approche : intégrer une fois pour toutes les données M12 dans une base de données managée et accessible avec <code>pmeasyr</code>. Les données en cours d’année pouvant également y être intégrées.</p>
+<p>Nous décrivons ici l’import de données MCO 2016 dans une base de données tel qu’il est possible de le réaliser à l’aide de <code>pmeasyr</code>.</p>
+<div id="connexion-a-une-base-de-donnees" class="section level2">
+<h2><span class="header-section-number">13.1</span> Connexion à une base de données</h2>
+<div id="monetdb" class="section level3">
+<h3><span class="header-section-number">13.1.1</span> monetdb</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dbdir &lt;-<span class="st"> &quot;~/Documents/data/monetdb&quot;</span>
+con &lt;-<span class="st"> </span>MonetDBLite<span class="op">::</span><span class="kw">src_monetdblite</span>(dbdir)</code></pre></div>
 </div>
-<div id="introduction" class="section level1">
-<h1><span class="header-section-number">1</span> Introduction</h1>
-<p>Ce livret numérique présente des exemples de traitements de données PMSI avec R. L’objectif est de concentrer ici :</p>
-<ul>
-<li><p>une documentation permettant de débuter avec l’import de données via le package <a href="https://github.com/IM-APHP/pmeasyr"><em>pmeasyr</em></a></p></li>
-<li>des exemples d’analyses PMSI :
-<ul>
-<li>requêtes sur les diagnostics et les actes</li>
-<li>analyse des files actives pour une pathologie</li>
-<li>statistiques élementaires sur des variables du PMSI</li>
-<li>analyse du case-mix et de la dms par ghm</li>
-</ul></li>
-</ul>
+<div id="sqlite" class="section level3">
+<h3><span class="header-section-number">13.1.2</span> SQLite</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dbdir &lt;-<span class="st"> &quot;~/Documents/data/sqlite/pmsi.sqlite&quot;</span>
+con &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">src_sqlite</span>(dbdir)</code></pre></div>
+</div>
+<div id="postgres" class="section level3">
+<h3><span class="header-section-number">13.1.3</span> PostGres</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">con &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">src_postgres</span>(<span class="dt">user =</span> <span class="st">&quot;gui&quot;</span>, <span class="dt">password =</span> <span class="st">&quot;gui&quot;</span>, <span class="dt">dbname =</span> <span class="st">&quot;aphp&quot;</span>,
+                    <span class="dt">host =</span> <span class="st">&quot;localhost&quot;</span>, <span class="dt">port =</span> <span class="dv">5432</span>)</code></pre></div>
+</div>
+</div>
+<div id="integration-en-base" class="section level2">
+<h2><span class="header-section-number">13.2</span> Intégration en base</h2>
+<div id="definition-des-parametres" class="section level3">
+<h3><span class="header-section-number">13.2.1</span> Définition des paramètres</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># noyau_skeleton()</span>
+p &lt;-<span class="st"> </span><span class="kw">noyau_pmeasyr</span>(
+  <span class="dt">finess   =</span> <span class="st">&#39;750712184&#39;</span>,
+  <span class="dt">mois     =</span> <span class="dv">12</span>,
+  <span class="dt">path     =</span> <span class="st">&#39;~/Documents/data/mco&#39;</span>,
+  <span class="dt">progress =</span> F, 
+  <span class="dt">tolower_names =</span> T, <span class="co"># choix de noms de colonnes minuscules : T / F</span>
+  <span class="dt">n_max =</span> <span class="fl">1e4</span>, <span class="co"># on limite la lecture a un petit nombre de lignes pour tester d&#39;abord </span>
+  <span class="co"># on importera tout dans un second temps</span>
+  <span class="dt">lib =</span> F) <span class="co"># pas de libellés de colonnes (inutile ici)</span></code></pre></div>
+</div>
+<div id="exemple-dimport" class="section level3">
+<h3><span class="header-section-number">13.2.2</span> Exemple d’import</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">purrr<span class="op">::</span><span class="kw">quietly</span>(db_mco_out)(con,  p, <span class="dt">annee =</span> <span class="dv">2016</span>) -&gt;<span class="st"> </span>ok </code></pre></div>
+<p><code>ok</code> contient toutes les sorties de l’éxécution de la fonction : vérifier qu’il n’y a pas d’erreur ou d’avertissement anormal avant de poursuivre. Ok ? Voyons ce que contient <code>ok</code> :</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ok</code></pre></div>
+<p>Nous avons présenté la ligne pour importer les données MCO out 2016, mais il est possible de la faire pour le MCO in (<code>db_mco_in</code>), le SSR out (<code>db_ssr_out</code>), l’HAD (<code>db_had_out</code>), la Psy (<code>db_psy_out</code>) et les rsf (<code>db_rsf_out</code>).</p>
+<p>Une fonction pour importer une autre table est également disponible (<code>db_generique</code>).</p>
+</div>
+</div>
+<div id="acceder-aux-donnees-dans-la-base" class="section level2">
+<h2><span class="header-section-number">13.3</span> Accéder aux données dans la base</h2>
+<p>Poursuivons l’exemple sur le mco out 2016.</p>
+<div id="lister-les-tables-dans-la-base" class="section level3">
+<h3><span class="header-section-number">13.3.1</span> Lister les tables dans la base</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">db_liste_tables</span>(con)</code></pre></div>
+</div>
+<div id="acceder-aux-tables-mco-out" class="section level3">
+<h3><span class="header-section-number">13.3.2</span> Accéder aux tables mco out</h3>
+<p>Les lignes suivantes permettent de se connecter aux tables dans la base. Pour la suite il pourra être intéressant de lire <a href="http://db.rstudio.com/dplyr/">l’aide du package dplyr</a>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tbl_mco</span>(con, <span class="dv">16</span>, <span class="st">&#39;rsa_rsa&#39;</span>) <span class="co"># Table rsa</span>
+<span class="kw">tbl_mco</span>(con, <span class="dv">16</span>, <span class="st">&#39;rsa_actes&#39;</span>) <span class="co"># Table actes des rsa</span>
+<span class="kw">tbl_mco</span>(con, <span class="dv">16</span>, <span class="st">&#39;rsa_diags&#39;</span>) <span class="co"># Table diags des rsa (après `tdiag`)</span>
+<span class="kw">tbl_mco</span>(con, <span class="dv">16</span>, <span class="st">&#39;rsa_um&#39;</span>) <span class="co"># Table um des rsa </span></code></pre></div>
+<p>D’autres fonctions <code>tbl_ssr</code>, <code>tbl_had</code>, <code>tbl_had</code>, <code>tbl_psy</code>, <code>tbl_rsf</code> facilitent la connexion à ces “remote table”.</p>
 
+</div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="contexte.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="noms-de-colonnes-en-minuscules.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="requetr-rediger-executer-des-requetes-pmsi-beta.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
