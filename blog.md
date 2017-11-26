@@ -55,7 +55,9 @@ Se trouvent ici les différents posts de ce blog.
   {% capture y %}{{post.date | date:"%Y"}}{% endcapture %}
   {% if year != y %}
     {% assign year = y %}
+    
     <li class="listing-seperator">{{ y }}</li>
+    <hr width="25%"><br>
   {% endif %}
   <li class="listing-item">
     

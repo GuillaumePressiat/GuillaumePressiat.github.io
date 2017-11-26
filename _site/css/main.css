@@ -360,6 +360,17 @@ ul, ol, dl, figure,
 .highlight {
   margin-bottom: 15px; }
 
+extrasmall {
+  fontsize: 0.6em; }
+
+hr {
+  display: block;
+  color: #66669950;
+  font-family: arial;
+  text-align: center;
+  font-size: 60px;
+  line-height: 1; }
+
 /**
  * Images
  */
@@ -689,12 +700,12 @@ ul.listing li.listing-item time {
   font-weight: 500;
   text-transform: uppercase;
   padding-right: 10px;
-  font-size: 1.1em; }
+  font-size: 1.0em; }
 
 ul.listing li.listing-item a {
   color: #522d80;
   font-weight: 400;
-  font-size: 1.3em;
+  font-size: 1.1em;
   font-family: 'Titillium Web', sans-serif; }
 
 /**
