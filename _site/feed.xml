@@ -6,13 +6,13 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 26 Nov 2017 23:07:27 +0100</pubDate>
-    <lastBuildDate>Sun, 26 Nov 2017 23:07:27 +0100</lastBuildDate>
+    <pubDate>Mon, 27 Nov 2017 00:34:31 +0100</pubDate>
+    <lastBuildDate>Mon, 27 Nov 2017 00:34:31 +0100</lastBuildDate>
     <generator>Jekyll v3.4.0</generator>
     
       <item>
         <title>Administrer les tables dans une base de données avec pmeasyr et DBI</title>
-        <description>&lt;p&gt;&lt;strong&gt;&lt;em&gt;Intégrer les données pmsi dans une base monetdb.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+        <description>&lt;p&gt;&lt;em&gt;Intégrer les données pmsi dans une base monetdb.&lt;/em&gt;&lt;/p&gt;
 
 &lt;!--more--&gt;
 
@@ -144,7 +144,7 @@ L’idée est d’exécuter la fonction année par année et de vérifier l’ob
     
       <item>
         <title>Arborescence des archives homogène ~/Documents/data</title>
-        <description>&lt;p&gt;&lt;strong&gt;&lt;em&gt;“Une arborescence de travail commune pour envisager des programmes communs.”&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+        <description>&lt;p&gt;&lt;em&gt;“Une arborescence de travail commune pour envisager des programmes communs.”&lt;/em&gt;&lt;/p&gt;
 
 &lt;!--more--&gt;
 
@@ -241,7 +241,7 @@ L’idée est d’exécuter la fonction année par année et de vérifier l’ob
 
 &lt;/style&gt;
 
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Une vidéo youtube permet de découvrir la documentation, l’utilisation du package et de Transcodeur.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Une vidéo youtube permet de découvrir la documentation, l’utilisation du package et de Transcodeur.&lt;/em&gt;&lt;/p&gt;
 
 &lt;!--more--&gt;
 &lt;!--style=&quot;border: none; width: 800; height: 600&quot; --&gt;
@@ -277,7 +277,7 @@ L’idée est d’exécuter la fonction année par année et de vérifier l’ob
     
       <item>
         <title>Aide en ligne avec pkgdown</title>
-        <description>&lt;p&gt;&lt;strong&gt;&lt;em&gt;Une page d’aide en ligne réalisée avec &lt;code class=&quot;highlighter-rouge&quot;&gt;pkgdown&lt;/code&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+        <description>&lt;p&gt;&lt;em&gt;Une page d’aide en ligne réalisée avec &lt;code class=&quot;highlighter-rouge&quot;&gt;pkgdown&lt;/code&gt;&lt;/em&gt;&lt;/p&gt;
 
 &lt;!--more--&gt;
 
@@ -303,7 +303,7 @@ L’idée est d’exécuter la fonction année par année et de vérifier l’ob
     
       <item>
         <title>Formats PMSI 2017 et nouveautés : mise à jour du package pmeasyr</title>
-        <description>&lt;p&gt;&lt;strong&gt;&lt;em&gt;Mise à jour des formats pour 2017 et nouvelles fonctionalités.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+        <description>&lt;p&gt;&lt;em&gt;Mise à jour des formats pour 2017 et nouvelles fonctionalités.&lt;/em&gt;&lt;/p&gt;
 
 &lt;!--more--&gt;
 
@@ -403,7 +403,7 @@ L’idée est d’exécuter la fonction année par année et de vérifier l’ob
     
       <item>
         <title>Transcodeur : manipuler des listes de codes</title>
-        <description>&lt;p&gt;&lt;strong&gt;&lt;em&gt;Une application Shiny pour ne plus s’embêter à manipuler des listes de codes (Cim, CCAM, GHM, …) à la main.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+        <description>&lt;p&gt;&lt;em&gt;Une application Shiny pour ne plus s’embêter à manipuler des listes de codes (Cim, CCAM, GHM, …) à la main.&lt;/em&gt;&lt;/p&gt;
 
 &lt;!--more--&gt;
 
@@ -449,7 +449,7 @@ L’idée est d’exécuter la fonction année par année et de vérifier l’ob
     
       <item>
         <title>Flux d'import avec pmeasyr et %&gt;%</title>
-        <description>&lt;p&gt;&lt;strong&gt;&lt;em&gt;Rédiger ses imports autour d’un noyau de paramètres avec &lt;code class=&quot;highlighter-rouge&quot;&gt;noyau_pmeasyr&lt;/code&gt;.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+        <description>&lt;p&gt;&lt;em&gt;Rédiger ses imports autour d’un noyau de paramètres avec &lt;code class=&quot;highlighter-rouge&quot;&gt;noyau_pmeasyr&lt;/code&gt;.&lt;/em&gt;&lt;/p&gt;
 
 &lt;!--more--&gt;
 
@@ -640,7 +640,7 @@ Les rsa seront dans l’environnement R avec comme nom :&lt;/p&gt;
     
       <item>
         <title>Alléger les scripts utilisant pmeasyr avec do.call</title>
-        <description>&lt;p&gt;&lt;strong&gt;&lt;em&gt;Une nouvelle manière de rédiger les scripts d’imports.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+        <description>&lt;p&gt;&lt;em&gt;Une nouvelle manière de rédiger les scripts d’imports.&lt;/em&gt;&lt;/p&gt;
 
 &lt;!--more--&gt;
 
@@ -741,7 +741,7 @@ Les rsa seront dans l’environnement R avec comme nom :&lt;/p&gt;
     
       <item>
         <title>Split du fichier rsfa (rafael) avec python et import dans R</title>
-        <description>&lt;p&gt;&lt;strong&gt;&lt;em&gt;Quelques astuces pour traiter les volumineux fichiers rsfa.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+        <description>&lt;p&gt;&lt;em&gt;Quelques astuces pour traiter les volumineux fichiers rsfa.&lt;/em&gt;&lt;/p&gt;
 
 &lt;!--more--&gt;
 
@@ -771,7 +771,7 @@ Les rsa seront dans l’environnement R avec comme nom :&lt;/p&gt;
     
       <item>
         <title>Sujet introductif</title>
-        <description>&lt;p&gt;&lt;strong&gt;&lt;em&gt;Bienvenue, ce blog rassemble les informations autour du package R &lt;code class=&quot;highlighter-rouge&quot;&gt;pmeasyr&lt;/code&gt;.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+        <description>&lt;p&gt;&lt;em&gt;Bienvenue, ce blog rassemble les informations autour du package R &lt;code class=&quot;highlighter-rouge&quot;&gt;pmeasyr&lt;/code&gt;.&lt;/em&gt;&lt;/p&gt;
 
 &lt;!--more--&gt;
 
@@ -782,9 +782,6 @@ Les rsa seront dans l’environnement R avec comme nom :&lt;/p&gt;
   &lt;li&gt;Le &lt;a href=&quot;/assets/files/pmeasyr.pdf&quot;&gt;manuel pdf&lt;/a&gt; avec l’aide pour toutes les fonctions du package&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;pmeasyr&lt;/code&gt; permet d’importer les données du PMSI dans R, il est alors possible de les analyser (en utilisant &lt;code class=&quot;highlighter-rouge&quot;&gt;dplyr&lt;/code&gt; par exemple).&lt;/p&gt;

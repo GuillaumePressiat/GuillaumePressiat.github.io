@@ -9,7 +9,7 @@ excerpt_separator: <!--more-->
 ---
 
 
-***Rédiger ses imports autour d'un noyau de paramètres avec `noyau_pmeasyr`.***
+*Rédiger ses imports autour d'un noyau de paramètres avec `noyau_pmeasyr`.*
 
 <!--more-->
 

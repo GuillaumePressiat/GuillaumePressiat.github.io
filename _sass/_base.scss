@@ -25,7 +25,6 @@ body {
 
 
 
-
 /**
  * Set `margin-bottom` to maintain vertical rhythm
  */
@@ -36,9 +35,7 @@ ul, ol, dl, figure,
     margin-bottom: $spacing-unit / 2;
 }
 
-extrasmall {
-    fontsize: 0.6em;
-}
+
 hr {
     display: block;
     color: #66669950;
@@ -48,6 +45,14 @@ hr {
     line-height: 1;
 }
 
+hr.side {
+    width: 75%; 
+    border: solid #ddd; 
+    border-width: 1px 0 0; 
+    clear: both; 
+    margin: 22px 0 21px; 
+    height: 0; 
+}
 
 /**
  * Images
@@ -105,7 +110,7 @@ a {
     text-decoration: none;
 
    &:visited {
-    /*    color: darken($brand-color, 15%); */
+        color: darken($brand-color, 15%); 
     } 
 
     &:hover {

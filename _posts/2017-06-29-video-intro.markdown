@@ -26,7 +26,7 @@ excerpt_separator: <!--more-->
 </style>
 
 
-***Une vidéo youtube permet de découvrir la documentation, l'utilisation du package et de Transcodeur.***
+*Une vidéo youtube permet de découvrir la documentation, l'utilisation du package et de Transcodeur.*
 
 <!--more-->
 <!--style="border: none; width: 800; height: 600" -->

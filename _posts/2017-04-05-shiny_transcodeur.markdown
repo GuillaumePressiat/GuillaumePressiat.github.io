@@ -8,7 +8,7 @@ categories: Application
 excerpt_separator: <!--more-->
 ---
 
-***Une application Shiny pour ne plus s'embêter à manipuler des listes de codes (Cim, CCAM, GHM, ...) à la main.***
+*Une application Shiny pour ne plus s'embêter à manipuler des listes de codes (Cim, CCAM, GHM, ...) à la main.*
 
 
 <!--more-->

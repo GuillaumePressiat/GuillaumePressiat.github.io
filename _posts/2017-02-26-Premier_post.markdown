@@ -8,7 +8,7 @@ categories: Présentation
 excerpt_separator: <!--more-->
 ---
 
-***Bienvenue, ce blog rassemble les informations autour du package R `pmeasyr`.***
+*Bienvenue, ce blog rassemble les informations autour du package R `pmeasyr`.*
 
 <!--more-->
 
@@ -19,10 +19,6 @@ excerpt_separator: <!--more-->
 
 
 <br>
-
-----------
-<br>
-
 
 `pmeasyr` permet d'importer les données du PMSI dans R, il est alors possible de les analyser (en utilisant `dplyr` par exemple).
 

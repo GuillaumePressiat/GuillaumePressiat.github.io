@@ -9,7 +9,7 @@ excerpt_separator: <!--more-->
 ---
 
 
-***Intégrer les données pmsi dans une base monetdb.***
+*Intégrer les données pmsi dans une base monetdb.*
 
 <!--more-->
 

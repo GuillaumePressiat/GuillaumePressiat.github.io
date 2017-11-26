@@ -56,6 +56,7 @@ Se trouvent ici les différents posts de ce blog.
   {% if year != y %}
     {% assign year = y %}
     
+
     <li class="listing-seperator">{{ y }}</li>
     <hr width="25%"><br>
   {% endif %}
@@ -63,12 +64,14 @@ Se trouvent ici les différents posts de ce blog.
     
     <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a><br>
     <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%d-%m-%Y" }}</time>
-    <small>{{ post.excerpt }}</small>
-     <hr width="75%"> 
+    <small >{{ post.excerpt }}</small>
+    <!--  <hr  width="25%">  -->
+    <hr  class = "side" > 
 	<!--{% for categorie in post.categories %}<a class = "categorie" href="/blog/categories/#{{ categorie }}">{{ categorie }}</a>{% endfor %}-->
 	</li>
 {% endfor %}
 </ul>
+
 
 
 <br>
@@ -88,8 +91,9 @@ Se trouvent ici les différents posts de ce blog.
 
 <ul class="categories">
 {% for categorie in categories %}
+
 	<a class = "categorie" href="/blog/categories/#{{ categorie }}"> {{ categorie }} </a>
+
 {% endfor %}
 </ul>
-
 

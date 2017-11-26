@@ -8,7 +8,7 @@ categories: Programmation data&nbsp;management
 excerpt_separator: <!--more-->
 ---
 
-***Quelques astuces pour traiter les volumineux fichiers rsfa.***
+*Quelques astuces pour traiter les volumineux fichiers rsfa.*
 
 <!--more-->
 

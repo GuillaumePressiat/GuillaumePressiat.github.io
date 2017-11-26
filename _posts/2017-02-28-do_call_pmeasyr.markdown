@@ -9,7 +9,7 @@ excerpt_separator: <!--more-->
 ---
 
 
-***Une nouvelle manière de rédiger les scripts d'imports.***
+*Une nouvelle manière de rédiger les scripts d'imports.*
 
 <!--more-->
 

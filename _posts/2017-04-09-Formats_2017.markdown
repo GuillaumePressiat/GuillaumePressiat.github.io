@@ -9,7 +9,7 @@ excerpt_separator: <!--more-->
 ---
 
 
-***Mise à jour des formats pour 2017 et nouvelles fonctionalités.*** 
+*Mise à jour des formats pour 2017 et nouvelles fonctionalités.*
 
 <!--more-->
 

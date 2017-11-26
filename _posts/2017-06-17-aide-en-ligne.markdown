@@ -9,7 +9,7 @@ excerpt_separator: <!--more-->
 ---
 
 
-***Une page d'aide en ligne réalisée avec `pkgdown`***
+*Une page d'aide en ligne réalisée avec `pkgdown`*
  
 <!--more-->
 

@@ -8,7 +8,7 @@ categories: data&nbsp;management
 excerpt_separator: <!--more-->
 ---
 
-***"Une arborescence de travail commune pour envisager des programmes communs."***
+*"Une arborescence de travail commune pour envisager des programmes communs."*
 
 <!--more-->
 

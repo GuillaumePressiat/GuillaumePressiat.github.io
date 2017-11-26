@@ -230,9 +230,14 @@ html {
 }
 
 ul.listing {
+    width: "75%";
 	list-style-type: none;
 	margin-left: 0px;
 
+}
+
+ul.tags {
+    width: "75%";
 }
 
 ul.listing li.listing-seperator {
@@ -243,7 +248,6 @@ ul.listing li.listing-seperator {
 }
 
 ul.listing li.listing-item time {
-
 	color: #333;
 	font-weight: 500;
 	text-transform: uppercase;
