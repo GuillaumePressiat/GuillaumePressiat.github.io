@@ -6,13 +6,17 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 09 Nov 2017 12:54:30 +0100</pubDate>
-    <lastBuildDate>Thu, 09 Nov 2017 12:54:30 +0100</lastBuildDate>
+    <pubDate>Sun, 26 Nov 2017 18:03:28 +0100</pubDate>
+    <lastBuildDate>Sun, 26 Nov 2017 18:03:28 +0100</lastBuildDate>
     <generator>Jekyll v3.4.0</generator>
     
       <item>
         <title>Administrer les tables dans une base de données avec pmeasyr et DBI</title>
-        <description>&lt;p&gt;&lt;strong&gt;&lt;em&gt;Ce post présente comment intégrer les données mco et rsf dans une base de données monetdb. Ces fonctionnalités sont désormais disponibles dans le package&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+        <description>&lt;p&gt;&lt;strong&gt;&lt;em&gt;Intégrer les données pmsi dans une base monetdb.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Ce post présente comment intégrer les données mco et rsf dans une base de données monetdb. Ces fonctionnalités sont désormais disponibles dans le package&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;Après avoir créé le répertoire &lt;code class=&quot;highlighter-rouge&quot;&gt;'~/Documents/data/monetdb'&lt;/code&gt; (voir le &lt;a href=&quot;https://guillaumepressiat.github.io/blog/2017/09/arborescence&quot;&gt;post précédent&lt;/a&gt;) :&lt;/p&gt;
 
@@ -140,7 +144,11 @@ L’idée est d’exécuter la fonction année par année et de vérifier l’ob
     
       <item>
         <title>Arborescence des archives homogène ~/Documents/data</title>
-        <description>&lt;p&gt;&lt;strong&gt;&lt;em&gt;L’idée de ce post est de proposer une arborescence d’archives pmsi commune aux différents utilisateurs de pmeasyr, qu’ils soient sous windows, mac ou linux. Une localisation des données (fichiers du pmsi) commune facilite grandement le partage de programmes : c’est un peu l’équivalent d’une arborescence commune en ce qui concerne les projets RStudio (mais les fichiers in/out étant souvent volumineux, il est préférable de ne pas les dupliquer dans chaque projet).&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+        <description>&lt;p&gt;&lt;strong&gt;&lt;em&gt;“Une arborescence de travail commune pour envisager des programmes communs.”&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;L’idée de ce post est de proposer une arborescence d’archives pmsi commune aux différents utilisateurs de pmeasyr, qu’ils soient sous windows, mac ou linux. Une localisation des données (fichiers du pmsi) commune facilite grandement le partage de programmes : c’est un peu l’équivalent d’une arborescence commune en ce qui concerne les projets RStudio (mais les fichiers in/out étant souvent volumineux, il est préférable de ne pas les dupliquer dans chaque projet).&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;Autre avantage de cette approche, les données pmsi, assez sensibles de par leur contenu sont protégées par votre mot de passe dans votre session utilisateur.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
@@ -233,8 +241,9 @@ L’idée est d’exécuter la fonction année par année et de vérifier l’ob
 
 &lt;/style&gt;
 
-&lt;h1 id=&quot;vidéo-youtube-de-présentation&quot;&gt;Vidéo youtube de présentation&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Une vidéo youtube permet de découvrir la documentation, l’utilisation du package et de Transcodeur.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
+&lt;!--more--&gt;
 &lt;!--style=&quot;border: none; width: 800; height: 600&quot; --&gt;
 &lt;div class=&quot;container&quot;&gt;
 &lt;div id=&quot;video_youtube&quot; align=&quot;center&quot;&gt;
@@ -244,7 +253,7 @@ L’idée est d’exécuter la fonction année par année et de vérifier l’ob
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;Éléments-abordés-&quot;&gt;Éléments abordés :&lt;/h2&gt;
+&lt;h2 id=&quot;éléments-abordés-&quot;&gt;Éléments abordés :&lt;/h2&gt;
 
 &lt;h3 id=&quot;pmeasyr&quot;&gt;pmeasyr&lt;/h3&gt;
 
@@ -268,7 +277,9 @@ L’idée est d’exécuter la fonction année par année et de vérifier l’ob
     
       <item>
         <title>Aide en ligne avec pkgdown</title>
-        <description>&lt;p&gt;La documentation des fonctions du package ainsi que les vignettes sont désormais accessibles au lien suivant :&lt;/p&gt;
+        <description>&lt;p&gt;&lt;strong&gt;&lt;em&gt;Une page d’aide en ligne réalisée avec &lt;code class=&quot;highlighter-rouge&quot;&gt;pkgdown&lt;/code&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;!--more--&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://im-aphp.github.io/pmeasyr/&quot;&gt;https://im-aphp.github.io/pmeasyr/&lt;/a&gt;&lt;/p&gt;
 
@@ -292,7 +303,11 @@ L’idée est d’exécuter la fonction année par année et de vérifier l’ob
     
       <item>
         <title>Formats PMSI 2017 et nouveautés : mise à jour du package pmeasyr</title>
-        <description>&lt;h1 id=&quot;mise-à-jour-de-la-tables-des-formats&quot;&gt;Mise à jour de la tables des formats&lt;/h1&gt;
+        <description>&lt;p&gt;&lt;strong&gt;&lt;em&gt;Mise à jour des formats pour 2017 et nouvelles fonctionalités.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h1 id=&quot;mise-à-jour-de-la-tables-des-formats&quot;&gt;Mise à jour de la tables des formats&lt;/h1&gt;
 
 &lt;p&gt;Le package &lt;em&gt;pmeasyr&lt;/em&gt; permet de lire les fichiers PMSI générés par les outils de l’ATIH pour les données MCO, SSR, HAD, PSY et pour les RSF.&lt;/p&gt;
 
@@ -388,7 +403,11 @@ L’idée est d’exécuter la fonction année par année et de vérifier l’ob
     
       <item>
         <title>Transcodeur : manipuler des listes de codes</title>
-        <description>&lt;h1 id=&quot;transposer-une-liste-de-codes-cim-10-ou-ccam&quot;&gt;Transposer une liste de codes CIM-10 ou CCAM&lt;/h1&gt;
+        <description>&lt;p&gt;&lt;strong&gt;&lt;em&gt;Une application Shiny pour ne plus s’embêter à manipuler des listes de codes (Cim, CCAM, GHM, …) à la main.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h1 id=&quot;transposer-une-liste-de-codes-cim-10-ou-ccam&quot;&gt;Transposer une liste de codes CIM-10 ou CCAM&lt;/h1&gt;
 
 &lt;p&gt;Une étape centrale des études PMSI est la manipulation de listes des codes diagnostics et des codes actes.&lt;/p&gt;
 
@@ -430,7 +449,11 @@ L’idée est d’exécuter la fonction année par année et de vérifier l’ob
     
       <item>
         <title>Flux d'import avec pmeasyr et %&gt;%</title>
-        <description>&lt;p&gt;Ce post correspond au contenu de la &lt;a href=&quot;http://www.github.com/IM-APHP/pmeasyr/tree/master/vignettes/vignette2.Rmd&quot;&gt;nouvelle vignette du package&lt;/a&gt;.&lt;/p&gt;
+        <description>&lt;p&gt;&lt;strong&gt;&lt;em&gt;Rédiger ses imports autour d’un noyau de paramètres avec &lt;code class=&quot;highlighter-rouge&quot;&gt;noyau_pmeasyr&lt;/code&gt;.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;Ce post correspond au contenu de la &lt;a href=&quot;http://www.github.com/IM-APHP/pmeasyr/tree/master/vignettes/vignette2.Rmd&quot;&gt;nouvelle vignette du package&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;La syntaxe initiée dans le &lt;a href=&quot;/blog/2017/02/do_call_pmeasyr&quot;&gt;post précédent&lt;/a&gt; permet de ne préciser qu’une fois les paramètres (finess, annee, mois, path). Le package intègre désormais cette syntaxe&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;, c’est ce qui est présenté ici.&lt;/p&gt;
 
@@ -617,7 +640,11 @@ Les rsa seront dans l’environnement R avec comme nom :&lt;/p&gt;
     
       <item>
         <title>Alléger les scripts utilisant pmeasyr avec do.call</title>
-        <description>&lt;h3 id=&quot;quatre-paramètres&quot;&gt;Quatre paramètres&lt;/h3&gt;
+        <description>&lt;p&gt;&lt;strong&gt;&lt;em&gt;Une nouvelle manière de rédiger les scripts d’imports.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h3 id=&quot;quatre-paramètres&quot;&gt;Quatre paramètres&lt;/h3&gt;
 
 &lt;p&gt;Les fonctions de dézippage et d’import de &lt;em&gt;pmeasyr&lt;/em&gt; ont en commun quatre paramètres :&lt;/p&gt;
 
@@ -714,7 +741,11 @@ Les rsa seront dans l’environnement R avec comme nom :&lt;/p&gt;
     
       <item>
         <title>Split du fichier rsfa (rafael) avec python et import dans R</title>
-        <description>&lt;p&gt;Le fichier &lt;code class=&quot;highlighter-rouge&quot;&gt;rsfa&lt;/code&gt; peut être volumineux car il contient tous les types de rafael (débuts de factures, actes externes, ATU, consultations, …). Or il est rare d’avoir à utiliser tous les types de rafael en même temps dans un seul projet.&lt;/p&gt;
+        <description>&lt;p&gt;&lt;strong&gt;&lt;em&gt;Quelques astuces pour traiter les volumineux fichiers rsfa.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;Le fichier &lt;code class=&quot;highlighter-rouge&quot;&gt;rsfa&lt;/code&gt; peut être volumineux car il contient tous les types de rafael (débuts de factures, actes externes, ATU, consultations, …). Or il est rare d’avoir à utiliser tous les types de rafael en même temps dans un seul projet.&lt;/p&gt;
 
 &lt;p&gt;Plutôt que de tout importer dans R et donc charger trop de données (c.-à.-d. remplir la mémoire vive inutilement), on peut :&lt;/p&gt;
 
@@ -740,7 +771,9 @@ Les rsa seront dans l’environnement R avec comme nom :&lt;/p&gt;
     
       <item>
         <title>Sujet introductif</title>
-        <description>&lt;p&gt;Bienvenue, ce blog rassemble les informations autour du package R &lt;em&gt;pmeasyr&lt;/em&gt;.&lt;/p&gt;
+        <description>&lt;p&gt;&lt;strong&gt;&lt;em&gt;Bienvenue, ce blog rassemble les informations autour du package R &lt;code class=&quot;highlighter-rouge&quot;&gt;pmeasyr&lt;/code&gt;.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;!--more--&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Le package est hébergé sur le &lt;a href=&quot;https://github.com/IM-APHP/pmeasyr&quot;&gt;Github de l’Information Médicale AP-HP&lt;/a&gt;&lt;/li&gt;

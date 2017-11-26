@@ -5,9 +5,17 @@ date:   2017-03-07 08:10:55 +0100
 author: Guillaume Pressiat
 tags: pmeasyr magrittr
 categories: Programmation
+excerpt_separator: <!--more-->
 ---
 
+
+***Rédiger ses imports autour d'un noyau de paramètres avec `noyau_pmeasyr`.***
+
+<!--more-->
+
 Ce post correspond au contenu de la [nouvelle vignette du package](http://www.github.com/IM-APHP/pmeasyr/tree/master/vignettes/vignette2.Rmd).
+
+
 
 La syntaxe initiée dans le [post précédent]({% post_url 2017-02-28-do_call_pmeasyr %}) permet de ne préciser qu'une fois les paramètres (finess, annee, mois, path). Le package intègre désormais cette syntaxe[^1], c'est ce qui est présenté ici. 
 

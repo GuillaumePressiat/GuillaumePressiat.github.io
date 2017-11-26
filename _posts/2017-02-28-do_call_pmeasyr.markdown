@@ -5,8 +5,13 @@ date:   2017-02-28 13:40:55 +0100
 author: Guillaume Pressiat
 tags: pmeasyr
 categories: Programmation
+excerpt_separator: <!--more-->
 ---
 
+
+***Une nouvelle manière de rédiger les scripts d'imports.***
+
+<!--more-->
 
 ### Quatre paramètres
 
@@ -16,6 +21,7 @@ Les fonctions de dézippage et d'import de *pmeasyr* ont en commun quatre param�
 - l'année pmsi
 - le mois pmsi
 - le path, repértoire où se trouve le fichier
+
 
 
 Appeler ces fonctions amène à répéter souvent ces quatre paramètres, exemple : 

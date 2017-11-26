@@ -5,8 +5,13 @@ date:   2017-09-15 09:34:50 +0100
 author: Guillaume Pressiat
 tags: pmeasyr monetdb DBI dplyr
 categories: data&nbsp;management Programmation 
+excerpt_separator: <!--more-->
 ---
 
+
+***Intégrer les données pmsi dans une base monetdb.***
+
+<!--more-->
 
 ***Ce post présente comment intégrer les données mco et rsf dans une base de données monetdb. Ces fonctionnalités sont désormais disponibles dans le package***
 

@@ -5,14 +5,18 @@ date:   2017-02-26 13:31:55 +0100
 author: Guillaume Pressiat
 tags: pmeasyr
 categories: Présentation
+excerpt_separator: <!--more-->
 ---
 
-Bienvenue, ce blog rassemble les informations autour du package R *pmeasyr*. 
+***Bienvenue, ce blog rassemble les informations autour du package R `pmeasyr`.***
+
+<!--more-->
 
 - Le package est hébergé sur le [Github de l'Information Médicale AP-HP](https://github.com/IM-APHP/pmeasyr)
 - Un [livret numérique](/pmeasyr) présente le package et son utilisation
 - Ce livret est aussi disponible au [format pdf](/pmeasyr/pmeasyr-book.pdf)
 - Le [manuel pdf]({% link /assets/files/pmeasyr.pdf %}) avec l'aide pour toutes les fonctions du package
+
 
 <br>
 

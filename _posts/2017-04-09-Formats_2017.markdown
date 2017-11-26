@@ -5,8 +5,13 @@ date:   2017-04-09 15:50:50 +0100
 author: Guillaume Pressiat
 tags: pmeasyr
 categories: Mise&nbsp;à&nbsp;jour
+excerpt_separator: <!--more-->
 ---
 
+
+***Mise à jour des formats pour 2017 et nouvelles fonctionalités.*** 
+
+<!--more-->
 
 # Mise à jour de la tables des formats
 
@@ -22,6 +27,7 @@ Pour en profiter et pouvoir lire les fichiers 2017, il faut relancer l'installat
 devtools::install_github('IM-APHP/pmeasyr')
 
 {% endhighlight %}
+
 
 Suite à cette installation, il est préférable de relancer RStudio ou relancer R (ctrl+shift+F10) pour bien charger le package mis à jour.
 

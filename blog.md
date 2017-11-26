@@ -58,8 +58,10 @@ Se trouvent ici les différents posts de ce blog.
     <li class="listing-seperator">{{ y }}</li>
   {% endif %}
   <li class="listing-item">
+    
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a><br>
     <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%d-%m-%Y" }}</time>
-    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    <small>{{ post.excerpt }}</small>
 	<!--{% for categorie in post.categories %}<a class = "categorie" href="/blog/categories/#{{ categorie }}">{{ categorie }}</a>{% endfor %}-->
 	</li>
 {% endfor %}

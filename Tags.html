@@ -37,8 +37,8 @@ permalink: /blog/tags/
 	 {% for post in site.posts %}
 		 {% if post.tags contains tag %}
 	      <li class="listing-item">
-    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%d-%m-%Y" }}</time>
-    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+   <!-- <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%d-%m-%Y" }}</time>-->
+    <small><a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></small>
 
 <!-- 		 <h4>
 		 <a href="{{ post.url }}">

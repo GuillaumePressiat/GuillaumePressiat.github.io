@@ -5,12 +5,18 @@ date:   2017-09-15 08:34:50 +0100
 author: Guillaume Pressiat
 tags: pmeasyr
 categories: data&nbsp;management
+excerpt_separator: <!--more-->
 ---
+
+***"Une arborescence de travail commune pour envisager des programmes communs."***
+
+<!--more-->
 
 
 ***L'idée de ce post est de proposer une arborescence d'archives pmsi commune aux différents utilisateurs de pmeasyr, qu'ils soient sous windows, mac ou linux. Une localisation des données (fichiers du pmsi) commune facilite grandement le partage de programmes : c'est un peu l'équivalent d'une arborescence commune en ce qui concerne les projets RStudio (mais les fichiers in/out étant souvent volumineux, il est préférable de ne pas les dupliquer dans chaque projet).***
 
 ***Autre avantage de cette approche, les données pmsi, assez sensibles de par leur contenu sont protégées par votre mot de passe dans votre session utilisateur.***
+
 
 ## Sous Unix
 

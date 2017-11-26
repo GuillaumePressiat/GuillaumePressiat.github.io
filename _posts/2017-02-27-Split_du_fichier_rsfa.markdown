@@ -5,10 +5,15 @@ date:   2017-02-27 13:40:55 +0100
 author: Guillaume Pressiat
 tags: python
 categories: Programmation data&nbsp;management
+excerpt_separator: <!--more-->
 ---
 
+***Quelques astuces pour traiter les volumineux fichiers rsfa.***
+
+<!--more-->
 
 Le fichier `rsfa` peut être volumineux car il contient tous les types de rafael (débuts de factures, actes externes, ATU, consultations, ...). Or il est rare d'avoir à utiliser tous les types de rafael en même temps dans un seul projet.
+
 
 Plutôt que de tout importer dans R et donc charger trop de données (c.-à.-d. remplir la mémoire vive inutilement), on peut :
 

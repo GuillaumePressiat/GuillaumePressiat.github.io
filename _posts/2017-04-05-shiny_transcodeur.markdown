@@ -5,8 +5,13 @@ date:   2017-04-05 15:50:50 +0100
 author: Guillaume Pressiat
 tags: shiny cim&nbsp;&&nbsp;ccam
 categories: Application
+excerpt_separator: <!--more-->
 ---
 
+***Une application Shiny pour ne plus s'embêter à manipuler des listes de codes (Cim, CCAM, GHM, ...) à la main.***
+
+
+<!--more-->
 
 # Transposer une liste de codes CIM-10 ou CCAM
 
@@ -18,6 +23,7 @@ Nous sommes souvent amenés à :
 - rajouter des quotes ou des guillemets autour de codes
 - convertir une liste en ligne en une liste en colonne
 - convertir une liste en colonne en une liste en ligne
+
 
 
 Cette page présente une application évitant d'avoir à réaliser soi-même ces manipulations. 
