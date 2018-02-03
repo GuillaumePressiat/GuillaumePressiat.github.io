@@ -25,7 +25,7 @@
 <meta name="author" content="Guillaume Pressiat || SIMAP / DOMU / Assistance Publique - Hôpitaux de Paris">
 
 
-<meta name="date" content="2017-11-19">
+<meta name="date" content="2018-02-03">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -100,7 +100,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <nav role="navigation">
 
 <ul class="summary">
-<li><b><span style="background-color: grey; opacity:1;"><a href="https://guillaumepressiat.github.io">Retour au blog pmeasyr</a></b></span></li>
+<li><b><span style="background-color: white; opacity:0.7;"><a href="https://guillaumepressiat.github.io"><< Retour au blog pmeasyr</a></b></span></li>
 <li><a href="./">Traitement des données PMSI avec R</a></li>
 
 <li class="divider"></li>
@@ -204,7 +204,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Publié avec bookdown</a></li>
-<li><b><span style="background-color: grey; opacity:1;"><a href="https://guillaumepressiat.github.io">Retour au blog pmeasyr</a></b></span></li>
+<li><b><span style="background-color: white; opacity:0.7;"><a href="https://guillaumepressiat.github.io"><< Retour au blog pmeasyr</a></b></span></li>
+
 </ul>
 
       </nav>
@@ -289,13 +290,14 @@ gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": false,
-"facebook": true,
-"twitter": true,
+"facebook": false,
+"twitter": false,
 "google": false,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": {},
+"linkedin": false
 },
 "fontsettings": {
 "theme": "white",
@@ -308,7 +310,8 @@ gitbook.start({
 },
 "download": ["pmeasyr-book.pdf", "pmeasyr-book.epub"],
 "toc": {
-"collapse": "subsection"
+"collapse": "subsection",
+"scroll_highlight": true
 }
 });
 });
