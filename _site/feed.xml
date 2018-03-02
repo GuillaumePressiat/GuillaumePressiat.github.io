@@ -6,9 +6,58 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 27 Nov 2017 00:34:31 +0100</pubDate>
-    <lastBuildDate>Mon, 27 Nov 2017 00:34:31 +0100</lastBuildDate>
+    <pubDate>Fri, 02 Mar 2018 16:29:52 +0100</pubDate>
+    <lastBuildDate>Fri, 02 Mar 2018 16:29:52 +0100</lastBuildDate>
     <generator>Jekyll v3.4.0</generator>
+    
+      <item>
+        <title>Fonctions de requêtage dans pmeasyr</title>
+        <description>&lt;p&gt;&lt;em&gt;Rédiger, structurer simplement des requêtes PMSI, pouvoir les réutiliser et les partager.&lt;/em&gt;&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;De nouvelles fonctions permettent de rédiger et d’exécuter des requêtes sur les tables générées dans R avec pmeasyr, soit en mémoire, soit dans une base de données.&lt;/p&gt;
+
+&lt;p&gt;Ces fonctions sont présentées &lt;a href=&quot;https://guillaumepressiat.github.io/pmeasyr/requetr-rediger-executer-des-requetes-pmsi-beta.html&quot;&gt;ici&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;La structuration commune des données induite par le partage du package peut permettre de partager également les méthodes appliquées sur ces données et entre autres, les requêtes.&lt;/p&gt;
+
+</description>
+        <pubDate>Fri, 02 Mar 2018 14:05:50 +0100</pubDate>
+        <link>http://localhost:4000/blog/2018/03/requetr</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/2018/03/requetr</guid>
+        
+        <category>pmeasyr</category>
+        
+        <category>cim&amp;nbsp;&amp;&amp;nbsp;ccam</category>
+        
+        
+        <category>Programmation</category>
+        
+      </item>
+    
+      <item>
+        <title>Mars en attendant... 2018, M01 &amp; M02</title>
+        <description>&lt;p&gt;&lt;em&gt;Utiliser pmeasyr sur les données M01 et M02 2018, en attendant M03.&lt;/em&gt;&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;Le package permet d’intégrer les données 2018 M01 et M02, il faut pour cela le mettre à jour :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;n&quot;&gt;devtools&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;install_github&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'IM-APHP/pmeasyr'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;En attendant la prochaine mise à jour liée à la remontée M03 où il faudra de nouveau faire la mise à jour.&lt;/p&gt;
+</description>
+        <pubDate>Fri, 02 Mar 2018 14:05:50 +0100</pubDate>
+        <link>http://localhost:4000/blog/2018/03/mars_18</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/2018/03/mars_18</guid>
+        
+        <category>pmeasyr</category>
+        
+        
+        <category>Mise&amp;nbsp;à&amp;nbsp;jour</category>
+        
+      </item>
     
       <item>
         <title>Administrer les tables dans une base de données avec pmeasyr et DBI</title>
@@ -253,7 +302,7 @@ L’idée est d’exécuter la fonction année par année et de vérifier l’ob
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;éléments-abordés-&quot;&gt;Éléments abordés :&lt;/h2&gt;
+&lt;h2 id=&quot;Éléments-abordés-&quot;&gt;Éléments abordés :&lt;/h2&gt;
 
 &lt;h3 id=&quot;pmeasyr&quot;&gt;pmeasyr&lt;/h3&gt;
 
@@ -736,111 +785,6 @@ Les rsa seront dans l’environnement R avec comme nom :&lt;/p&gt;
         
         
         <category>Programmation</category>
-        
-      </item>
-    
-      <item>
-        <title>Split du fichier rsfa (rafael) avec python et import dans R</title>
-        <description>&lt;p&gt;&lt;em&gt;Quelques astuces pour traiter les volumineux fichiers rsfa.&lt;/em&gt;&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-&lt;p&gt;Le fichier &lt;code class=&quot;highlighter-rouge&quot;&gt;rsfa&lt;/code&gt; peut être volumineux car il contient tous les types de rafael (débuts de factures, actes externes, ATU, consultations, …). Or il est rare d’avoir à utiliser tous les types de rafael en même temps dans un seul projet.&lt;/p&gt;
-
-&lt;p&gt;Plutôt que de tout importer dans R et donc charger trop de données (c.-à.-d. remplir la mémoire vive inutilement), on peut :&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;spécifier à &lt;em&gt;pmeasyr&lt;/em&gt; que l’on ne souhaite pas garder tous les types de rsfa en mémoire dans R&lt;/li&gt;
-  &lt;li&gt;diviser le fichier d’origine &lt;code class=&quot;highlighter-rouge&quot;&gt;rsfa&lt;/code&gt; en plusieurs fichiers selon leur type avec python&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;a href=&quot;/assets/files/split_rsfa.nb.html&quot;&gt;Un notebook en ligne&lt;/a&gt; présente ces deux solutions.&lt;/p&gt;
-</description>
-        <pubDate>Mon, 27 Feb 2017 13:40:55 +0100</pubDate>
-        <link>http://localhost:4000/blog/2017/02/Split_du_fichier_rsfa</link>
-        <guid isPermaLink="true">http://localhost:4000/blog/2017/02/Split_du_fichier_rsfa</guid>
-        
-        <category>python</category>
-        
-        
-        <category>Programmation</category>
-        
-        <category>data&amp;nbsp;management</category>
-        
-      </item>
-    
-      <item>
-        <title>Sujet introductif</title>
-        <description>&lt;p&gt;&lt;em&gt;Bienvenue, ce blog rassemble les informations autour du package R &lt;code class=&quot;highlighter-rouge&quot;&gt;pmeasyr&lt;/code&gt;.&lt;/em&gt;&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Le package est hébergé sur le &lt;a href=&quot;https://github.com/IM-APHP/pmeasyr&quot;&gt;Github de l’Information Médicale AP-HP&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Un &lt;a href=&quot;/pmeasyr&quot;&gt;livret numérique&lt;/a&gt; présente le package et son utilisation&lt;/li&gt;
-  &lt;li&gt;Ce livret est aussi disponible au &lt;a href=&quot;/pmeasyr/pmeasyr-book.pdf&quot;&gt;format pdf&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Le &lt;a href=&quot;/assets/files/pmeasyr.pdf&quot;&gt;manuel pdf&lt;/a&gt; avec l’aide pour toutes les fonctions du package&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;pmeasyr&lt;/code&gt; permet d’importer les données du PMSI dans R, il est alors possible de les analyser (en utilisant &lt;code class=&quot;highlighter-rouge&quot;&gt;dplyr&lt;/code&gt; par exemple).&lt;/p&gt;
-
-&lt;h2 id=&quot;un-exemple-de-traitement-en-mco&quot;&gt;Un exemple de traitement en MCO&lt;/h2&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pmeasyr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Import des rsa, des passages um, des diagnostics associés et des actes
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tables_rsa&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;irsa&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;finess&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'750712184'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Finess de l'établissement
-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;                   &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;annee&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2016&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Année pmsi
-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;                   &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mois&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;   &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Mois pmsi
-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;                   &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;   &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'~/Documents/data/mco'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Localisation du fichier .rsa
-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;                   &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;typi&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;   &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Type d'import, plusieurs possibles
-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-
-&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Filtrer sur les séjours (table rsa) avec : 
-# - un GHM chirurgical et
-# - un diagnostic principal &quot;fracture du fémur&quot; (S720).
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dplyr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tables_rsa&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rsa&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RSATYPE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'C'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DP&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'S720'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-
-&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Filtrer sur les actes (table actes) avec un acte regroupé acte de chirurgie (activité ccam 1)
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dplyr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tables_rsa&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;actes&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ACT&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'1'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-
-&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Séjours passés en Soins intensifs hémato (table unité médicale, type d'autorisation 16)
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dplyr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tables_rsa&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rsa_um&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;grepl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'16'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TYPAUT1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Pour plus d’exemples sur le MCO et sur les autres champs&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; SSR, HAD, PSY et RSF, consulter le &lt;a href=&quot;/pmeasyr/&quot;&gt;livret en ligne&lt;/a&gt;.
-&lt;br /&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;div class=&quot;footnotes&quot;&gt;
-  &lt;ol&gt;
-    &lt;li id=&quot;fn:1&quot;&gt;
-      &lt;p&gt;Champs PMSI :&lt;/p&gt;
-      &lt;ul&gt;
-        &lt;li&gt;MCO : Médecine Chirurgie Obstétrique&lt;/li&gt;
-        &lt;li&gt;SSR : Soins de Suite et de Réadaptation&lt;/li&gt;
-        &lt;li&gt;HAD : Hospitalisation À Domicile&lt;/li&gt;
-        &lt;li&gt;PSY : Psychiatrie&lt;/li&gt;
-        &lt;li&gt;RSF : Résumés Standardisés de Financement (Rafael)&lt;/li&gt;
-      &lt;/ul&gt;
-      &lt;p&gt;&lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/div&gt;
-</description>
-        <pubDate>Sun, 26 Feb 2017 13:31:55 +0100</pubDate>
-        <link>http://localhost:4000/blog/2017/02/Premier_post</link>
-        <guid isPermaLink="true">http://localhost:4000/blog/2017/02/Premier_post</guid>
-        
-        <category>pmeasyr</category>
-        
-        
-        <category>Présentation</category>
         
       </item>
     

@@ -1,0 +1,21 @@
+---
+layout: post
+title:  "Fonctions de requêtage dans pmeasyr"
+date:   2018-03-02 14:05:50 +0100
+author: Guillaume Pressiat
+tags: pmeasyr cim&nbsp;&&nbsp;ccam
+categories: Programmation
+excerpt_separator: <!--more-->
+---
+
+
+*Rédiger, structurer simplement des requêtes PMSI, pouvoir les réutiliser et les partager.*
+
+<!--more-->
+
+De nouvelles fonctions permettent de rédiger et d'exécuter des requêtes sur les tables générées dans R avec pmeasyr, soit en mémoire, soit dans une base de données.
+
+Ces fonctions sont présentées [ici](https://guillaumepressiat.github.io/pmeasyr/requetr-rediger-executer-des-requetes-pmsi-beta.html).
+
+La structuration commune des données induite par le partage du package peut permettre de partager également les méthodes appliquées sur ces données et entre autres, les requêtes.
+
