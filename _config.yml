@@ -19,6 +19,9 @@ exclude:
   - Gemfile
   - Gemfile.lock
 
+plugins:
+  - jekyll-feed
+
 # SEO stuff
 # google_author: ""
 # google_site_verification: ""
