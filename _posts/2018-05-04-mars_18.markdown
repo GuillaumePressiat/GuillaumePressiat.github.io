@@ -5,11 +5,10 @@ date:   2018-05-04 14:05:50 +0100
 author: Guillaume Pressiat
 tags: pmeasyr Cartographie finess
 categories: Mise&nbsp;à&nbsp;jour
-excerpt_separator: <!--more-->
 ---
 
 
-*Utiliser pmeasyr sur les données M03 à M12 2018, en attendant 2019.*
+*Utiliser pmeasyr sur les données M03 à M12 2018, en attendant 2019. Présentation d'un code pour faire une mappemonde interactive avec R.*
 
 <!--more-->
 

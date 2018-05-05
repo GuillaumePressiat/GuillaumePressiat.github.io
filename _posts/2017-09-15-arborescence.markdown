@@ -5,7 +5,6 @@ date:   2017-09-15 08:34:50 +0100
 author: Guillaume Pressiat
 tags: pmeasyr
 categories: data&nbsp;management
-excerpt_separator: <!--more-->
 ---
 
 *"Une arborescence de travail commune pour envisager des programmes communs."*

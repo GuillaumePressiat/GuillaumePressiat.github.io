@@ -4,7 +4,7 @@ email: guillaume.pressiat@aphp.fr
 description: > # this means to ignore newlines until "baseurl:"
   pmeasyr : import de données PMSI avec R
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: "" # the base hostname & protocol for your site
+url: "https://guillaumepressiat.github.io/" # the base hostname & protocol for your site
 github_username:  GuillaumePressiat
 
 # Build settings
@@ -19,7 +19,7 @@ exclude:
   - Gemfile
   - Gemfile.lock
 
-plugins:
+gems:
   - jekyll-feed
 
 # SEO stuff

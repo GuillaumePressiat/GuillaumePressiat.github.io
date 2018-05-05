@@ -5,7 +5,6 @@ date:   2018-03-02 14:05:50 +0100
 author: Guillaume Pressiat
 tags: pmeasyr
 categories: Mise&nbsp;à&nbsp;jour
-excerpt_separator: <!--more-->
 ---
 
 
