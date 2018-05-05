@@ -1,24 +1,116 @@
 ---
 layout: post
-title:  "Mars en attendant... 2018, M01 & M02"
-date:   2018-03-02 14:05:50 +0100
+title:  "Formats 2018 : ok ; et digression cartographique"
+date:   2018-05-04 14:05:50 +0100
 author: Guillaume Pressiat
-tags: pmeasyr
+tags: pmeasyr Cartographie finess
 categories: Mise&nbsp;à&nbsp;jour
 excerpt_separator: <!--more-->
 ---
 
 
-*Utiliser pmeasyr sur les données M01 et M02 2018, en attendant M03.*
+*Utiliser pmeasyr sur les données M03 à M12 2018, en attendant 2019.*
 
 <!--more-->
 
 
-Le package permet d'intégrer les données 2018 M01 et M02, il faut pour cela le mettre à jour :
+# Package prêt pour 2018 M03 - 2018 M12
+
+Ça y est, le package permet d'intégrer les données 2018 M03, il faut pour cela le mettre à jour :
 
 
 {% highlight r %}
 devtools::install_github('IM-APHP/pmeasyr')
 {% endhighlight %}
 
-En attendant la prochaine mise à jour liée à la remontée M03 où il faudra de nouveau faire la mise à jour.
+
+<br>
+
+# Digression cartographique
+
+### Carte choroplèthe à partir de codes COG Insee
+
+Entre autres nouveautés, l'apparition d'une variable dans les fichiers Anohosp, `PAYSPAT`, utilisant les [COG Insee](https://www.insee.fr/fr/information/2028273).
+
+J'en profite pour inclure ici un code pour faire une `mappemonde`[^1] en utilisant : 
+
+- la correspondance des codes pays INSEE vers les codes pays ISO
+- le package leaflet
+- des données simulées à partir d'une loi uniforme (mais le code est imaginé pour fonctionner avec les codes contenus dans les fichiers ano 2018)
+
+
+<iframe src = '{% link /assets/files/worldmap.html %}' width = "100%" height = "400px"></iframe>
+
+<br>
+
+{% highlight r %}
+library(dplyr, warn.conflicts = FALSE)
+
+# Télécharger les COG pays INSEE
+httr::GET('https://www.insee.fr/fr/statistiques/fichier/2666684/pays2017-txt.zip',
+          httr::write_disk(path = '~/Documents/data/insee/pays2017.txt.zip', overwrite = T))
+# Les importer
+iso <- readr::read_tsv('~/Documents/data/insee/pays2017.txt.zip', locale = readr::locale(encoding = "latin1")) %>%
+  filter(ACTUAL == 1) %>%
+  dplyr::mutate(COG = ifelse(LIBCOG == 'FRANCE', "99100", COG)) %>%
+  dplyr::mutate(PAYSPAT = substr(COG,3,5),
+                n = round(runif(nrow(.), 1, 1e3), 0))
+
+
+# Jointure
+library(sp)
+library(sf)
+library(leaflet)
+library(maps)
+library(rworldmap)
+am_map <- joinCountryData2Map(iso, joinCode = "ISO2", nameJoinColumn = "CODEISO2")
+qpal <- colorQuantile(rev(viridis::viridis(5)),
+am_map$n, n=5)
+
+crs.molvidde <- leafletCRS(
+  crsClass="L.Proj.CRS", code='ESRI:53009',
+  proj4def= '+proj=moll +lon_0=0 +x_0=0 +y_0=0 +a=6371000 +b=6371000 +units=m +no_defs',
+  resolutions = c(65536, 32768, 16384, 8192, 4096, 2048))
+
+l <- leaflet(
+am_map,
+options = leafletOptions(
+maxZoom = 5,  attributionControl = FALSE, crs= crs.molvidde)) %>% #
+addGraticule(style= list(color= '#999', weight= 0.5, opacity= 1)) %>%
+addGraticule(sphere = TRUE,
+            style= list(color= '#777', weight= 1, opacity= 0.25)) %>%
+ addPolygons(
+   label=~stringr::str_c(LIBCOG, ' - ', n),
+   labelOptions= labelOptions(direction = 'auto'),
+   weight=1, color='#ffffff', opacity=1,
+   fillColor = ~ qpal(n), fillOpacity = 1,
+   highlightOptions = highlightOptions(
+     color= ~ qpal(n), weight = 2,
+     bringToFront = TRUE, sendToBack = TRUE)) %>%
+ addLegend(
+   "topright", pal = qpal, values = ~ n, labels = ~n,
+   title = htmltools::HTML("Quntiles bidons"),
+   opacity = 1 )
+
+l
+
+{% endhighlight %}
+
+
+
+### Signalement : projet finess_etalab
+
+Le projet [finess_etalab](https://www.data.gouv.fr/fr/reuses/imports-et-cartographies-fichiers-finess-etalab-avec-r/) permet de simplifier l'intégration des données finess de data.gouv.fr avec R. 
+Une présentation de ce projet est faite [ici](https://guillaumepressiat.github.io/finess_etalab/rmd/import_etalab.html).
+
+Ce projet est open source et sa "mise en package" est en cours de réalisation par Joris Muller, [ici](https://github.com/jomuller/finess_etalab) ! 
+
+<br>
+
+--- 
+
+[^1]: Deux posts intéressants pour produire ce type de carte avec R :
+	* Un exemple intéressant sur les constructeurs automobiles où l'on trouve comment joindre des données à un shapefile avec des codes pays ISO : [https://rpubs.com/timwinke/worldmap](https://rpubs.com/timwinke/worldmap)
+	* J'utilise ici en grande partie le code leaflet proposé ici : [https://bhaskarvk.github.io/user2017.geodataviz/notebooks/03-Interactive-Maps.nb.html#polygons](https://bhaskarvk.github.io/user2017.geodataviz/notebooks/03-Interactive-Maps.nb.html#polygons)
+
+
