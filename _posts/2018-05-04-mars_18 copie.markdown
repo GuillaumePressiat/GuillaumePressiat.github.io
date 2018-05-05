@@ -88,7 +88,7 @@ addGraticule(sphere = TRUE,
      bringToFront = TRUE, sendToBack = TRUE)) %>%
  addLegend(
    "topright", pal = qpal, values = ~ n, labels = ~n,
-   title = htmltools::HTML("Quntiles bidons"),
+   title = htmltools::HTML("Quintiles bidons"),
    opacity = 1 )
 
 l
