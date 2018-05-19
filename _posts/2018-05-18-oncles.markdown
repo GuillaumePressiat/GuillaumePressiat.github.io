@@ -31,8 +31,8 @@ Une dernière application concerne les [GHM](https://guillaumepressiat.shinyapps
 
 ## Remarque et nota bene
 
-Bien sûr, ces listes étant récupérées dans le manuel des GHM publié en mars, et la fonction groupage évolue parfois en cours d'année, on peut imaginer que certaines de ces listes ne sont pas tout à fait à jour.
+Bien sûr, ces listes étant récupérées dans le manuel des GHM publié en mars, et la fonction groupage évoluant parfois en cours d'année, on peut imaginer que certaines de ces listes ne sont pas tout à fait à jour.
 
 
-**N.B. : Ces applications sont hébergées gratuitement sur `shinyapps.io`, la rapidité, ainsi que le nombre de connexions possibles, sont limités. L'interface peut être un peu lente. L'idée de ce post finalement est plutôt de présenter ce qu'il est possible de concevoir comme interface de mise à disposition de ces contenus. Seuls les listes des pdf est disponible ici, les applications ne contiennent pas d'informations type FG (CMA, actes opératoires, etc.).**
+**N.B. : Ces applications sont hébergées gratuitement sur `shinyapps.io`, la rapidité, ainsi que le nombre de connexions possibles, sont limités. L'interface peut être un peu lente. L'idée de ce post finalement est plutôt de présenter ce qu'il est possible de concevoir comme interface de mise à disposition de ces contenus. Seuls les listes des pdf sont disponibles ici, les applications ne contiennent pas d'informations type FG (CMA, actes opératoires, etc.).**
 
