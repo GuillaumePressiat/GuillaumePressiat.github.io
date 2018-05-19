@@ -1,0 +1,38 @@
+---
+layout: post
+title:  "Applications : listes des manuels de GHM"
+date:   2018-05-18 14:05:50 +0100
+author: Guillaume Pressiat
+tags: cim&nbsp;&&nbsp;ccam
+categories: Présentation Application
+---
+
+Lors d'un précédent post, je présentais une application Shiny, Transcodeur, en ligne et ouverte à tous pour faciliter la manipulation de codes CIM-10 et CCAM.
+
+Aujourd'hui, je présente d'autres applications dont l'objectif est la mise à disposition des listes de diagnostics et codes CCAM des manuels de GHM sous un format agréable, ces listes qui orientent vers des racines de GHM.
+
+<!--more-->
+
+Les listes sont récupérées en utilisant les programmes disponibles [ici](https://github.com/GuillaumePressiat/scrapatih/).
+
+
+## CIM-10
+
+<a target="_blank" href="https://guillaumepressiat.shinyapps.io/oncle_cim/"><img border="0" alt="oncle_cim" src="/images/oncle_cim.png"></a>
+
+## CCAM
+
+<a target="_blank" href="https://guillaumepressiat.shinyapps.io/oncle_ccam/"><img border="0" alt="transcodeur_capture" src="/images/oncle_ccam.png"></a>
+
+
+## GHM
+
+Une dernière application concerne les [GHM](https://guillaumepressiat.shinyapps.io/oncle_ghm/).
+
+## Remarque et nota bene
+
+Bien sûr, ces listes étant récupérées dans le manuel des GHM publié en mars, et la fonction groupage évolue parfois en cours d'année, on peut imaginer que certaines de ces listes ne sont pas tout à fait à jour.
+
+
+**N.B. : Ces applications sont hébergées gratuitement sur `shinyapps.io`, la rapidité, ainsi que le nombre de connexions possibles, sont limités. L'interface peut être un peu lente. L'idée de ce post finalement est plutôt de présenter ce qu'il est possible de concevoir comme interface de mise à disposition de ces contenus. Seuls les listes des pdf est disponible ici, les applications ne contiennent pas d'informations type FG (CMA, actes opératoires, etc.).**
+
