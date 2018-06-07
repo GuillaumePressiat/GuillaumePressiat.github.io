@@ -1,0 +1,11 @@
+---
+layout: post
+title:  "Lister les travaux connexes avec R et les visualiser"
+date:   2018-06-07 08:05:50 +0100
+author: Guillaume Pressiat
+tags: pmeasyr cim&nbsp;&&nbsp;ccam
+categories: Présentation
+---
+
+Ce post pour annoncer une visualisation des travaux connexes/annexes à pmeasyr accessibles [ici](https://guillaumepressiat.github.io/miscellany/connexes/).
+
