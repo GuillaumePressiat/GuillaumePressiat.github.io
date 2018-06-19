@@ -1282,4 +1282,12 @@ Quelles évolutions pour les coefficients géographiques, depuis 2007 ?
 </tbody>
 </table>
 
+<br>
+
+### Le saviez-vous ?
+
+Les numéros finess des établissements d'Outre-Mer commencent par 97, et le quatrième caractère permet de reconstruire le département : 1 Guadeloupe, 2 Martinique, 3 Guyane et 4 Réunion, cf [^1].
+
+--- 
+[^1]: [http://finess.sante.gouv.fr/fininter/jsp/definitions.do?codeDefinition=3](http://finess.sante.gouv.fr/fininter/jsp/definitions.do?codeDefinition=3).
 
