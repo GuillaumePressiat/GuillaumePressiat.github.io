@@ -1,0 +1,62 @@
+\documentclass[dvipsnames]{article}
+%\usepackage[a4paper]{geometry}
+\usepackage[centering]{geometry}
+%\usepackage[hidelinks]{hyperref}
+\usepackage[hyphens,spaces,obeyspaces]{url}
+\usepackage[colorlinks,allcolors=blue]{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usetikzlibrary{mindmap}
+
+\pagestyle{empty}
+% Information boxes
+\usetikzlibrary{mindmap,trees}
+\tikzset{concept/.append style={fill={none}}}
+\begin{document}
+%https://www.sharelatex.com/blog/2013/09/04/tikz-series-pt5.html
+
+\begin{center}
+\begin{tikzpicture}[
+  mindmap,
+  every node/.style={concept, execute at begin node=\hskip0pt},
+  root concept/.append style={color = white, fill = white
+  },
+  text=black, grow cyclic,
+  level 1/.append style={level distance=6cm,sibling angle=120},
+  level 2/.append style={level distance=3cm,sibling angle=45}
+]
+
+
+
+\node{Données PMSI avec R}
+	%[clockwise from=0]
+    child [concept color=red!60!black] { node  {\href{https://guillaumepressiat.github.io/}{pmeasyr}}
+		child { node {\href{https://guillaumepressiat.github.io/pmeasyr/import-des-donnees.html\#mco}{MCO}}}
+        child { node {\href{https://guillaumepressiat.github.io/pmeasyr/import-des-donnees.html\#ssr}{SSR}}}
+        child { node {\href{https://guillaumepressiat.github.io/pmeasyr/import-des-donnees.html\#had}{HAD}}}
+        child { node {\href{https://guillaumepressiat.github.io/pmeasyr/import-des-donnees.html\#psy}{Psy}}}
+        child { node {\href{https://guillaumepressiat.github.io/pmeasyr/import-des-donnees.html\#rsf}{RSF}}}
+        child { node {\href{https://guillaumepressiat.github.io/pmeasyr/requetr-rediger-executer-des-requetes-pmsi-beta.html}{requetr}}}
+        child { node {\href{https://guillaumepressiat.github.io/pmeasyr/vers-la-base-de-donnees-avec-pmeasyr.html}{Base de données}}}
+        child { node {\href{https://im-aphp.github.io/pmeasyr/articles/vignette4.html}{vvr}}}
+    }
+    child [concept color=blue!60!black] { node {\href{https://guillaumepressiat.github.io/nomensland/index.html}{nomensland}}
+        child { node {CCAM}}
+        child { node {CIM-10}}
+        child { node {GHM, racines de GHM et regroupement}}
+        child { node {GHS et suppléments}}
+        child { node {CSARR}}
+        child { node {LPP}}
+        %child { node {Orphanet}}
+        child { node {Listes de requêtes}}
+    }
+    child [concept color=Green!50!black] { node {\href{https://guillaumepressiat.github.io/blog/2018/05/oncles}{Shiny apps}}
+        child { node {\href{https://guillaumepressiat.shinyapps.io/oncle_cim/}{Oncle CIM}}}
+        child { node {\href{https://guillaumepressiat.shinyapps.io/oncle_ccam/}{Oncle CCAM}}}
+        child { node {\href{https://guillaumepressiat.shinyapps.io/oncle_ghm/}{GHM}}}
+        child { node {\href{https://guillaumepressiat.shinyapps.io/transcodeur/}{Transcodeur}}}
+    };
+
+\end{tikzpicture}
+\end{center}
+\end{document}
