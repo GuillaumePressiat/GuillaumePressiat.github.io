@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="requetes-sur-des-pathologies-actes.html">
-<link rel="next" href="fichier-tra.html">
+<link rel="prev" href="requetr-rediger-executer-des-requetes-pmsi.html">
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -238,51 +238,135 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="etude-des-files-actives" class="section level1">
-<h1><span class="header-section-number">6</span> Étude des files actives</h1>
-<div id="import-des-donnees-anohosp" class="section level2">
-<h2><span class="header-section-number">6.1</span> Import des données Anohosp</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Import des données anohosp du out</span>
-<span class="kw">iano_mco</span>(<span class="dt">finess =</span> <span class="dv">750100042</span>, 
-         <span class="dt">annee =</span> <span class="dv">2015</span>,
-         <span class="dt">mois =</span> <span class="dv">12</span>,
-         <span class="dt">path =</span> <span class="st">&#39;~/Documents/data/mco&#39;</span>) -&gt;<span class="st"> </span>ano
-
-<span class="co"># Filtrer sur les patients chainables avec la variable cok</span>
-<span class="kw">library</span>(dplyr)
-ano %&gt;%<span class="st"> </span><span class="kw">filter</span>(cok) -&gt;<span class="st"> </span>ano
-
-<span class="co"># File active globale établissement</span>
-<span class="kw">distinct</span>(ano, NOANON) %&gt;%<span class="st"> </span><span class="kw">nrow</span>()</code></pre></div>
+<div id="vvr-valoriser-les-rsa" class="section level1">
+<h1><span class="header-section-number">15</span> vvr : Valoriser les rsa</h1>
+<p><em>Valorisation, cf <a href="https://fr.wikipedia.org/wiki/Valorisation">wikipédia</a></em></p>
+<ul>
+<li><em>processus de détermination de la valeur d’un objet, d’un actif, d’une entité. L’objectif est d’établir un prix.</em></li>
+<li><em>processus visant à améliorer la valeur de cet objet, actif, entité</em></li>
+</ul>
+<p>Cette partie de <code>pmeasyr</code> permet de constituer des tables contenant les informations de valorisation de chaque rsa, en accord avec la valorisation epmsi, donc avec la valorisation VisualValoSej (VVS, d’où le choix du nom vvr).</p>
+<p>Trois étapes sont distinguées pour reproduire la valorisation d’un rsa :</p>
+<ul>
+<li>disposer des référentiels de tarifs</li>
+<li>une étape autour du séjour : la valorisation GHS + suppléments, etc</li>
+<li>une étape autour de la facture : le caractère facturable ou non du séjour est déterminé.</li>
+</ul>
+<p>Pour ces deux dernières étapes, la logique retenue a été la suivante : deux fonctions permettent de constituer une table séjour (rsa) et une table facture (ano) contenant les variables utiles.</p>
+<div id="acceder-aux-tarifs-depuis-r" class="section level2">
+<h2><span class="header-section-number">15.1</span> Accéder aux tarifs depuis R</h2>
+<p>Le package intitulé <a href="https://guillaumepressiat.github.io/nomensland/index.html">nomensland</a> contient un ensemble de référentiels utiles dans le PMSI, parmi lesquels les tarifs GHS et suppléments du MCO pour les établissements publics.</p>
+<p>Il est nécessaire d’installer ce package ou de disposer de tables dont la structure et les noms de colonnes sont identiques à celles de ce package pour pouvoir continuer.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tarifs      &lt;-<span class="st"> </span>nomensland::<span class="kw">get_table</span>(<span class="st">&#39;tarifs_mco_ghs&#39;</span>) %&gt;%<span class="st"> </span><span class="kw">distinct</span>(ghs, anseqta, <span class="dt">.keep_all =</span> <span class="ot">TRUE</span>)
+supplements &lt;-<span class="st"> </span>nomensland::<span class="kw">get_table</span>(<span class="st">&#39;tarifs_mco_supplements&#39;</span>) %&gt;%<span class="st"> </span><span class="kw">mutate_if</span>(is.numeric, tidyr::replace_na, <span class="dv">0</span>)</code></pre></div>
 </div>
-<div id="file-active-dune-pathologie" class="section level2">
-<h2><span class="header-section-number">6.2</span> File active d’une pathologie</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Codes diagnostics obésité </span>
-string_diags =<span class="st"> &#39;E66&#39;</span>
+<div id="etape-sejour" class="section level2">
+<h2><span class="header-section-number">15.2</span> Étape séjour</h2>
+<p>Il y a plusieurs possibilités pour cette étape : valoriser uniquement les GHS + bornes extrêmes, ou bien valoriser l’intégralité des rubriques de valorisation.</p>
+<p>Mais il faut d’abord préparer la table rsa spécifique à la valorisation.</p>
+<div id="preparation-des-rsa" class="section level3">
+<h3><span class="header-section-number">15.2.1</span> Préparation des rsa</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># avec un noyau pmeasyr (importer les données)</span>
+annee &lt;-<span class="st"> </span><span class="dv">18</span>
+p &lt;-<span class="st"> </span><span class="kw">noyau_pmeasyr</span>(
+  <span class="dt">finess   =</span> <span class="st">&#39;750712184&#39;</span>,
+  <span class="dt">annee    =</span> <span class="dv">2000</span> +<span class="st"> </span>annee,
+  <span class="dt">mois     =</span> <span class="dv">6</span>,
+  <span class="dt">path     =</span> <span class="st">&#39;~/Documents/data/mco&#39;</span>,
+  <span class="dt">progress =</span> <span class="ot">FALSE</span>,
+  <span class="dt">n_max    =</span> <span class="ot">Inf</span>,
+  <span class="dt">lib      =</span> <span class="ot">FALSE</span>,
+  <span class="dt">tolower_names =</span> <span class="ot">TRUE</span>)
 
-<span class="kw">library</span>(dplyr)
-<span class="co"># position en dpdr</span>
-rsa15$rsa %&gt;%<span class="st"> </span><span class="kw">filter</span>(<span class="kw">grepl</span>(string_diags, dpdrum)) -&gt;<span class="st"> </span>ob
+vrsa &lt;-<span class="st"> </span><span class="kw">vvr_rsa</span>(p)
 
-<span class="co"># File active obésité globale établissement</span>
-<span class="kw">inner_join</span>(ano, ob, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&#39;CLE_RSA&#39;</span>)) -&gt;<span class="st"> </span>patients_ob
-<span class="kw">distinct</span>(patients_ob, NOANON) %&gt;%<span class="st"> </span><span class="kw">nrow</span>()</code></pre></div>
+<span class="co"># depuis une base de données (collecter les données)</span>
+dbdir &lt;-<span class="st"> &quot;~/Documents/data/monetdb&quot;</span>
+con &lt;-<span class="st"> </span><span class="kw">src_monetdblite</span>(dbdir)
+
+vrsa &lt;-<span class="st"> </span><span class="kw">vvr_rsa</span>(con, annee)</code></pre></div>
 </div>
-<div id="file-active-dune-chirurgie" class="section level2">
-<h2><span class="header-section-number">6.3</span> File active d’une chirurgie</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Codes actes chirurgie bariatrique</span>
-liste_actes =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;HFCA001&#39;</span>, <span class="st">&#39;HFCC003&#39;</span>, <span class="st">&#39;HFFC004&#39;</span>, <span class="st">&#39;HFFA001&#39;</span>, <span class="st">&#39;HFMA009&#39;</span>,
-                <span class="st">&#39;HFMC007&#39;</span>, <span class="st">&#39;HFKA001&#39;</span>, <span class="st">&#39;HFKC001&#39;</span>, <span class="st">&#39;HFKA002&#39;</span>, <span class="st">&#39;HFMA011&#39;</span>,
-                <span class="st">&#39;HFMC008&#39;</span>, <span class="st">&#39;HFMA010&#39;</span>, <span class="st">&#39;HFMC006&#39;</span>, <span class="st">&#39;HFLE002&#39;</span>, <span class="st">&#39;HFGC900&#39;</span>,
-                <span class="st">&#39;HFLC900&#39;</span>, <span class="st">&#39;HFFA011&#39;</span>, <span class="st">&#39;HFFC018&#39;</span>, <span class="st">&#39;HGCA009&#39;</span>, <span class="st">&#39;HGCC027&#39;</span>)
+<div id="calculer-la-valorisation-ghs-borne-extreme-haut-extreme-bas" class="section level3">
+<h3><span class="header-section-number">15.2.2</span> Calculer la valorisation GHS borne extrême haut + extrême bas</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Recette GHS de base et suppléments EXB, EXH</span>
+rsa_v &lt;-<span class="st"> </span><span class="kw">vvr_ghs_supp</span>(<span class="dt">rsa =</span> vrsa, <span class="dt">tarifs =</span> tarifs)</code></pre></div>
+</div>
+<div id="calculer-la-valorisation-ghs-borne-extreme-haut-extreme-bas-et-supplements" class="section level3">
+<h3><span class="header-section-number">15.2.3</span> Calculer la valorisation GHS borne extrême haut + extrême bas et suppléments</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Recette GHS de base, EXB, EXH, et suppléments</span>
+rsa_v &lt;-<span class="st"> </span><span class="kw">vvr_ghs_supp</span>(vrsa, tarifs, supplements, vano, <span class="kw">ipo</span>(p), <span class="kw">idiap</span>(p), <span class="dt">pie =</span> <span class="kw">ipie</span>(p), <span class="dt">bee =</span> <span class="ot">FALSE</span>)</code></pre></div>
+</div>
+</div>
+<div id="etape-facture" class="section level2">
+<h2><span class="header-section-number">15.3</span> Étape facture</h2>
+<div id="preparation-des-ano" class="section level3">
+<h3><span class="header-section-number">15.3.1</span> Préparation des ano</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Not run: 
+<span class="co"># avec un noyau pmeasyr (importer les données)</span>
+p &lt;-<span class="st"> </span><span class="kw">noyau_pmeasyr</span>(
+  <span class="dt">finess   =</span> <span class="st">&#39;750712184&#39;</span>,
+  <span class="dt">annee    =</span> <span class="dv">2000</span> +<span class="st"> </span><span class="dv">18</span>,
+  <span class="dt">mois     =</span> <span class="dv">4</span>,
+  <span class="dt">path     =</span> <span class="st">&#39;~/Documents/data/mco&#39;</span>,
+  <span class="dt">progress =</span> <span class="ot">FALSE</span>,
+  <span class="dt">n_max    =</span> <span class="ot">Inf</span>,
+  <span class="dt">lib      =</span> <span class="ot">FALSE</span>,
+  <span class="dt">tolower_names =</span> <span class="ot">TRUE</span>)
 
-<span class="kw">library</span>(dplyr)
-<span class="co"># acte codé activité 1 (chirurgical)</span>
-rsa15$actes %&gt;%<span class="st"> </span><span class="kw">filter</span>(CDCCAM %in%<span class="st"> </span>liste_actes, ACT ==<span class="st"> &#39;1&#39;</span>) -&gt;<span class="st"> </span>cob
+vano &lt;-<span class="st"> </span><span class="kw">vvr_ano_mco</span>(p)
 
-<span class="co"># File active chirurgie bariatrique globale établissement</span>
-<span class="kw">inner_join</span>(ano, cob, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&#39;CLE_RSA&#39;</span>)) -&gt;<span class="st"> </span>patients_cob
-<span class="kw">distinct</span>(patients_cob, NOANON) %&gt;%<span class="st"> </span><span class="kw">nrow</span>()</code></pre></div>
+<span class="co"># depuis une base de données (collecter les données)</span>
+dbdir &lt;-<span class="st"> &quot;~/Documents/data/monetdb&quot;</span>
+con &lt;-<span class="st"> </span><span class="kw">src_monetdblite</span>(dbdir)
+
+vano &lt;-<span class="st"> </span><span class="kw">vvr_ano_mco</span>(con, <span class="dv">18</span>)</code></pre></div>
+</div>
+<div id="attribuer-le-caractere-facturable-du-sejour-tel-que-sur-epmsi-tableau-sv" class="section level3">
+<h3><span class="header-section-number">15.3.2</span> Attribuer le caractère facturable du séjour tel que sur epmsi (tableau sv)</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Not run: 
+<span class="co"># Tenir compte des porg</span>
+ano_sv &lt;-<span class="st"> </span><span class="kw">vvr_mco_sv</span>(vrsa, vano, <span class="dt">porg =</span> <span class="kw">ipo</span>(p))
+
+<span class="co"># ne pas tenir compte des porg</span>
+ano_sv &lt;-<span class="st"> </span><span class="kw">vvr_mco_sv</span>(vrsa, vano)
+
+## End(Not run)</code></pre></div>
+</div>
+</div>
+<div id="conjuguer-la-valorisation-des-sejours-a-leur-caractere-facturable" class="section level2">
+<h2><span class="header-section-number">15.4</span> Conjuguer la valorisation des séjours à leur caractère facturable</h2>
+<p>Une fois que les éléments sont prêts, on peut les rassembler :</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">valo_rsa &lt;-<span class="st"> </span><span class="kw">vvr_mco</span>(rsa_v, ano_sv)</code></pre></div>
+<p>Ou tout calculer en un seul appel à ces différentes fonctions :</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">resu &lt;-<span class="st"> </span><span class="kw">vvr_mco</span>(
+<span class="kw">vvr_ghs_supp</span>(<span class="dt">rsa =</span> vrsa, 
+             <span class="dt">tarifs =</span> tarifs_ghs, 
+             <span class="dt">supplements =</span>  tarifs_supp, 
+             <span class="dt">ano =</span> vano, 
+             <span class="dt">porg =</span> <span class="kw">ipo</span>(p), 
+             <span class="dt">diap =</span> <span class="kw">idiap</span>(p), 
+             <span class="dt">pie =</span> <span class="kw">ipie</span>(p), 
+             <span class="dt">full =</span> <span class="ot">FALSE</span>,
+             <span class="dt">cgeo =</span> <span class="fl">1.07</span>, 
+             <span class="dt">prudent =</span> <span class="ot">NULL</span>,
+             <span class="dt">bee =</span> <span class="ot">FALSE</span>),
+<span class="kw">vvr_mco_sv</span>(vrsa, vano, <span class="kw">ipo</span>(p))
+)</code></pre></div>
+</div>
+<div id="concordance-avec-epmsi" class="section level2">
+<h2><span class="header-section-number">15.5</span> Concordance avec epmsi</h2>
+<p>Deux fonctions permettent de produire des tableaux importants sur epmsi : cela permet de s’assurer que le résultat est ok.</p>
+<ul>
+<li>Tableau [1.V.1.SV]: Séjours valorisés</li>
+<li>Tableau [1.V.1.RAV]: Récapitulation activité - valorisation &amp; Tableau [1.V.1.RAE]: Récapitulation activité - effectifs</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">epmsi_mco_sv</span>(valo_rsa, <span class="dt">knit =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">epmsi_mco_rav</span>(valo, <span class="dt">knit =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p>Ce dernier tableau contient à la fois le RAE et le RAV.</p>
+</div>
+<div id="vignette-presentant-ces-fonctions" class="section level2">
+<h2><span class="header-section-number">15.6</span> Vignette présentant ces fonctions</h2>
+<p>Un concentré de l’utilisation de ces fonctions, ainsi qu’un dictionnaire des variables présentes dans les tables produites sont disponibles dans l’<a href="https://im-aphp.github.io/pmeasyr/articles/vignette4.html">une des vignettes</a> du package.</p>
 
 </div>
 </div>
@@ -291,8 +375,8 @@ rsa15$actes %&gt;%<span class="st"> </span><span class="kw">filter</span>(CDCCAM
           </div>
         </div>
       </div>
-<a href="requetes-sur-des-pathologies-actes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="fichier-tra.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="requetr-rediger-executer-des-requetes-pmsi.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

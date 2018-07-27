@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Traitement des données PMSI avec R</title>
   <meta name="description" content="Ce livre numérique présente des exemples de traitements de données PMSI avec R">
-  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="Traitement des données PMSI avec R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Guillaume Pressiat || SIMAP / DOMU / Assistance Publique - Hôpitaux de Paris">
 
 
-<meta name="date" content="2017-11-19">
+<meta name="date" content="2018-07-27">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -33,7 +33,7 @@
   
   
 <link rel="prev" href="vers-la-base-de-donnees-avec-pmeasyr.html">
-
+<link rel="next" href="vvr-valoriser-les-rsa.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -100,6 +100,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <nav role="navigation">
 
 <ul class="summary">
+<li><b><span style="background-color: white; opacity:0.7;"><a href="https://guillaumepressiat.github.io"><< Retour au blog pmeasyr</a></b></span></li>
 <li><a href="./">Traitement des données PMSI avec R</a></li>
 
 <li class="divider"></li>
@@ -201,8 +202,25 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="14.5.2" data-path="requetr-rediger-executer-des-requetes-pmsi.html"><a href="requetr-rediger-executer-des-requetes-pmsi.html#lancement"><i class="fa fa-check"></i><b>14.5.2</b> Lancement</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="15" data-path="vvr-valoriser-les-rsa.html"><a href="vvr-valoriser-les-rsa.html"><i class="fa fa-check"></i><b>15</b> vvr : Valoriser les rsa</a><ul>
+<li class="chapter" data-level="15.1" data-path="vvr-valoriser-les-rsa.html"><a href="vvr-valoriser-les-rsa.html#acceder-aux-tarifs-depuis-r"><i class="fa fa-check"></i><b>15.1</b> Accéder aux tarifs depuis R</a></li>
+<li class="chapter" data-level="15.2" data-path="vvr-valoriser-les-rsa.html"><a href="vvr-valoriser-les-rsa.html#etape-sejour"><i class="fa fa-check"></i><b>15.2</b> Étape séjour</a><ul>
+<li class="chapter" data-level="15.2.1" data-path="vvr-valoriser-les-rsa.html"><a href="vvr-valoriser-les-rsa.html#preparation-des-rsa"><i class="fa fa-check"></i><b>15.2.1</b> Préparation des rsa</a></li>
+<li class="chapter" data-level="15.2.2" data-path="vvr-valoriser-les-rsa.html"><a href="vvr-valoriser-les-rsa.html#calculer-la-valorisation-ghs-borne-extreme-haut-extreme-bas"><i class="fa fa-check"></i><b>15.2.2</b> Calculer la valorisation GHS borne extrême haut + extrême bas</a></li>
+<li class="chapter" data-level="15.2.3" data-path="vvr-valoriser-les-rsa.html"><a href="vvr-valoriser-les-rsa.html#calculer-la-valorisation-ghs-borne-extreme-haut-extreme-bas-et-supplements"><i class="fa fa-check"></i><b>15.2.3</b> Calculer la valorisation GHS borne extrême haut + extrême bas et suppléments</a></li>
+</ul></li>
+<li class="chapter" data-level="15.3" data-path="vvr-valoriser-les-rsa.html"><a href="vvr-valoriser-les-rsa.html#etape-facture"><i class="fa fa-check"></i><b>15.3</b> Étape facture</a><ul>
+<li class="chapter" data-level="15.3.1" data-path="vvr-valoriser-les-rsa.html"><a href="vvr-valoriser-les-rsa.html#preparation-des-ano"><i class="fa fa-check"></i><b>15.3.1</b> Préparation des ano</a></li>
+<li class="chapter" data-level="15.3.2" data-path="vvr-valoriser-les-rsa.html"><a href="vvr-valoriser-les-rsa.html#attribuer-le-caractere-facturable-du-sejour-tel-que-sur-epmsi-tableau-sv"><i class="fa fa-check"></i><b>15.3.2</b> Attribuer le caractère facturable du séjour tel que sur epmsi (tableau sv)</a></li>
+</ul></li>
+<li class="chapter" data-level="15.4" data-path="vvr-valoriser-les-rsa.html"><a href="vvr-valoriser-les-rsa.html#conjuguer-la-valorisation-des-sejours-a-leur-caractere-facturable"><i class="fa fa-check"></i><b>15.4</b> Conjuguer la valorisation des séjours à leur caractère facturable</a></li>
+<li class="chapter" data-level="15.5" data-path="vvr-valoriser-les-rsa.html"><a href="vvr-valoriser-les-rsa.html#concordance-avec-epmsi"><i class="fa fa-check"></i><b>15.5</b> Concordance avec epmsi</a></li>
+<li class="chapter" data-level="15.6" data-path="vvr-valoriser-les-rsa.html"><a href="vvr-valoriser-les-rsa.html#vignette-presentant-ces-fonctions"><i class="fa fa-check"></i><b>15.6</b> Vignette présentant ces fonctions</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Publié avec bookdown</a></li>
+<li><b><span style="background-color: white; opacity:0.7;"><a href="https://guillaumepressiat.github.io"><< Retour au blog pmeasyr</a></b></span></li>
+
 </ul>
 
       </nav>
@@ -255,7 +273,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">exemple_requete &lt;-<span class="st"> </span><span class="kw">list</span>(
   <span class="dt">actes =</span> <span class="kw">c</span>(<span class="st">&#39;QEFA003&#39;</span>,<span class="st">&#39;QEFA005&#39;</span>,<span class="st">&#39;QEFA010&#39;</span>,<span class="st">&#39;QEFA013&#39;</span>,<span class="st">&#39;QEFA015&#39;</span>,<span class="st">&#39;QEFA019&#39;</span>,<span class="st">&#39;QEFA020&#39;</span>)
 )</code></pre></div>
-<p>La commande suivante renvoie les clés rsa correspondants à cette requête :</p>
+<p>La commande suivante renvoie un <code>tibble</code> (tableau) contenant les clés rsa correspondants à cette requête :</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">requete</span>(rsa, exemple_requete)</code></pre></div>
 <p>Il est possible de retourner d’autres variables que la clé rsa uniquement, en les spécifiant :</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">requete</span>(rsa, exemple_requete, <span class="dt">vars =</span> <span class="kw">c</span>(<span class="st">&#39;nas&#39;</span>, <span class="st">&#39;agean&#39;</span>, <span class="st">&#39;actes&#39;</span>, <span class="st">&#39;diags&#39;</span>, <span class="st">&#39;ghm&#39;</span>))</code></pre></div>
@@ -270,8 +288,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <table>
 <thead>
 <tr class="header">
-<th align="left">elem</th>
-<th align="left">commentaire</th>
+<th align="left">Élément</th>
+<th align="left">Commentaire</th>
 </tr>
 </thead>
 <tbody>
@@ -301,11 +319,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </tr>
 <tr class="odd">
 <td align="left">ghm</td>
-<td align="left">Liste de ghm ou début de ghm : exemple : 15C, 08C24, 08C241</td>
+<td align="left">Liste de ghm ou racine de ghm : exemple : 08C24, 08C241</td>
 </tr>
 <tr class="even">
 <td align="left">diags_exclus</td>
-<td align="left">Diagnostics à exlcure en toutes positions</td>
+<td align="left">Diagnostics à exclure en toutes positions</td>
 </tr>
 <tr class="odd">
 <td align="left">poidsmin</td>
@@ -321,7 +339,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </tr>
 <tr class="even">
 <td align="left">autres</td>
-<td align="left">Autres éléments de requête, exemple ‘agegest &lt; 37’</td>
+<td align="left">Autres éléments de requête au niveau rsa partie fixe, exemple ‘agegest &lt; 37’</td>
 </tr>
 <tr class="odd">
 <td align="left">diags</td>
@@ -358,6 +376,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <span class="co"># Pour des rsa dans une base de données</span>
 <span class="kw">lancer_requete_db</span>(con, <span class="dv">16</span>, deux_requetes, <span class="dt">vars =</span> <span class="kw">c</span>(<span class="st">&#39;nas&#39;</span>, <span class="st">&#39;duree&#39;</span>, <span class="st">&#39;ghm&#39;</span>))</code></pre></div>
+<p>La commande suivante renvoie un <code>tibble</code> (tableau) contenant les clés rsa correspondants à ces requêtes avec deux variables identifiant le nom et la thématique de la requête correspondante.</p>
 
 </div>
 </div>
@@ -367,8 +386,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="vers-la-base-de-donnees-avec-pmeasyr.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="vers-la-base-de-donnees-avec-pmeasyr.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="vvr-valoriser-les-rsa.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -383,13 +402,14 @@ gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": false,
-"facebook": true,
-"twitter": true,
+"facebook": false,
+"twitter": false,
 "google": false,
+"linkedin": false,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": {}
 },
 "fontsettings": {
 "theme": "white",
@@ -402,7 +422,8 @@ gitbook.start({
 },
 "download": ["pmeasyr-book.pdf", "pmeasyr-book.epub"],
 "toc": {
-"collapse": "subsection"
+"collapse": "subsection",
+"scroll_highlight": true
 }
 });
 });
