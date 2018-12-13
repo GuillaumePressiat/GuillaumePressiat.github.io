@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "stringfix : new package for string manipulation in a %>% way"
+title:  "stringfix : new R package for string manipulation in a %>% way"
 date:   2018-12-08 08:05:50 +0100
 author: Guillaume Pressiat
 tags: R
@@ -24,10 +24,10 @@ In Python, the operator `+` is used to paste two character strings together. For
 ```
 
 
-While a ggplot function has already the same name, it is used to override data in a `ggplot` call and not for pasting character strings, see [here](https://ggplot2.tidyverse.org/reference/gg-add.html). When loading tidyverse, the same ggplot function is called, preventing us from using paste0’s %+%. Otherwise, you can find a hint of character string pasting in the [Advanced R](http://adv-r.had.co.nz/Functions.html#special-calls) book.
+While a ggplot function has already the same name, it is used to override data in a `ggplot` call and not for pasting character strings, see [here](https://ggplot2.tidyverse.org/reference/gg-add.html). When loading tidyverse, the same ggplot function is called, preventing us from using `paste0’`s `%+%`. Otherwise, you can find a hint of character string pasting in the [Advanced R](http://adv-r.had.co.nz/Functions.html#special-calls) book.
 
 
-In order to create a toolbox around `paste0`'s `%+%`, I started collecting some other infix functions for character strings manipulation. The main question was: which functions with a right to left call that I use really often could be reordedered in a  %>% code. Here is the little family I have since build on : paste, grepl, substring, count, padding. The goal of this package is to use stringr or base functions in backend as a start for an alternative character string manipulation in R.
+In order to create a toolbox around `paste0`'s `%+%`, I started collecting some other infix functions for character strings manipulation. The main question was: which functions with a right to left call that I use really often could be reordered in a  `%>%` code. Here is the little family I have since build on : paste, grepl, substring, count, padding. The goal of this package is to use stringr or base functions in backend as a start for an alternative character string manipulation in R.
 
 This package is still at its early begining (kind of a draft for me!)  but I thought some other people would enjoy it and may even wish to contribute.
 
