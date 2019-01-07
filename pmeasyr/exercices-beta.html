@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>8 Statistiques du PMSI | Traitement des données PMSI avec R</title>
+  <title>16 Exercices (béta) | Traitement des données PMSI avec R</title>
   <meta name="description" content="Ce livre numérique présente des exemples de traitements de données PMSI avec R">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="8 Statistiques du PMSI | Traitement des données PMSI avec R" />
+  <meta property="og:title" content="16 Exercices (béta) | Traitement des données PMSI avec R" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="8 Statistiques du PMSI | Traitement des données PMSI avec R" />
+  <meta name="twitter:title" content="16 Exercices (béta) | Traitement des données PMSI avec R" />
   
   <meta name="twitter:description" content="Ce livre numérique présente des exemples de traitements de données PMSI avec R" />
   
@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="fichier-tra.html">
-<link rel="next" href="help.html">
+<link rel="prev" href="vvr-valoriser-les-rsa.html">
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -266,59 +266,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="statistiques-du-pmsi" class="section level1">
-<h1><span class="header-section-number">8</span> Statistiques du PMSI</h1>
-<div id="age-et-duree-de-sejour" class="section level2">
-<h2><span class="header-section-number">8.1</span> Âge et durée de séjour</h2>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
-
-<span class="co"># Age moyen et DMS sur les plus de 0 jour</span>
-rsa15<span class="op">$</span>rsa <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">age_moyen =</span> <span class="kw">mean</span>(AGEAN, <span class="dt">na.rm =</span> T),
-            <span class="dt">dms =</span> <span class="kw">mean</span>(DUREE[DUREE <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>]),
-            <span class="dt">effectif =</span> <span class="kw">n</span>(),
-            <span class="dt">effectif_sup0 =</span> <span class="kw">sum</span>(DUREE <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>))
-
-<span class="co"># Age moyen en prenant en compte les séjours des bébés </span>
-<span class="co"># (variable age en jour) </span>
-rsa15<span class="op">$</span>rsa <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Age =</span> <span class="kw">if_else</span>(<span class="kw">is.na</span>(AGEAN), <span class="kw">as.integer</span>(AGEJR) <span class="op">/</span><span class="st"> </span><span class="fl">365.25</span>, <span class="kw">as.numeric</span>(AGEAN))) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">age_moyen =</span> <span class="kw">mean</span>(Age),
-            <span class="dt">effectif =</span> <span class="kw">n</span>())</code></pre>
+<div id="exercices-beta" class="section level1">
+<h1><span class="header-section-number">16</span> Exercices (béta)</h1>
+<p>Cette partie contient quelques exercices pour se familiariser à l’utilisation de <code>dplyr</code> avec les données du PMSI importées avec <code>pmeasyr</code>. Les données sont fictives et très simples, il s’agit simplement d’exercices autour de R.</p>
+<div class="DCexercise">
+<h4 id="filtrer-des-rsa-en-fonction-d-actes"><span class="header-section-number">16</span> 1. Filtrer des rsa en fonction d’ actes</h4>
+<p>Imaginez que vous disposez de <tt>rsa</tt> importés avec <tt>pmeasyr</tt>.</p>
+<p><strong>Instructions:</strong></p>
+<ul>
+<li><p>charger le package dplyr</p></li>
+<li><p>Afficher la table actes des rsa$actes</p></li>
+<li><p>Filtrer cette table pour ne retenir que les lignes contenant l’acte NFKA015.</p></li>
+</ul>
+<iframe src="DCL/ex_1.html" frameborder="0" scrolling="no" style="width:100%;height:340px">
+</iframe>
 </div>
-<div id="nombre-de-sejours-par-categorie-majeure-de-diagnostics" class="section level2">
-<h2><span class="header-section-number">8.2</span> Nombre de séjours par catégorie majeure de diagnostics</h2>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Nombre de séjours par catégorie majeure de diagnostics</span>
-rsa15<span class="op">$</span>rsa <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(RSACMD)</code></pre>
+<div class="DCexercise">
+<h4 id="filtrer-sur-les-actes-les-diagnostics-et-croiser-les-deux-informations"><span class="header-section-number">16</span> 2. Filtrer sur les actes, les diagnostics et croiser les deux informations</h4>
+<p><strong>Instructions:</strong></p>
+<ul>
+<li><p>charger le package dplyr</p></li>
+<li><p>Afficher la table actes des rsa$actes</p></li>
+<li><p>Créer une table <tt>a</tt> en filtrer les actes des rsa pour ne retenir que les lignes contenant l’acte NFKA015.</p></li>
+<li><p>Créer une table <tt>b</tt> en filtrant les diagnostics des rsa pour ne retenir que les lignes contenant le code E66.</p></li>
+<li><p>Croiser ces deux tables</p></li>
+</ul>
+<iframe src="DCL/ex_2.html" frameborder="0" scrolling="no" style="width:100%;height:340px">
+</iframe>
 </div>
-<div id="case-mix-mco-dms-par-ghm-ghs" class="section level2">
-<h2><span class="header-section-number">8.3</span> Case-mix MCO, DMS par GHM / GHS</h2>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Construire la variable GHM</span>
-rsa15<span class="op">$</span>rsa <span class="op">%&gt;%</span><span class="st"> </span>tidyr<span class="op">::</span><span class="kw">unite</span>(GHM, 
-                           RSACMD, RSATYPE, RSANUM, RSACOMPX,
-                           <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>) -&gt;<span class="st"> </span>rsa15<span class="op">$</span>rsa
 
-<span class="co"># Case-mix par GHM</span>
-rsa15<span class="op">$</span>rsa <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(GHM)
-
-<span class="co"># Case-mix par GHM / GHS</span>
-rsa15<span class="op">$</span>rsa <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(GHM, NOGHS)
-
-<span class="co"># DMS par GHM / GHS</span>
-rsa15<span class="op">$</span>rsa <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(GHM, NOGHS) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">dms =</span> <span class="kw">mean</span>(DUREE[DUREE <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>]),
-            <span class="dt">effectif =</span> <span class="kw">n</span>(),
-            <span class="dt">effectif_sup0 =</span> <span class="kw">sum</span>(DUREE <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>))</code></pre>
-
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="fichier-tra.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="help.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="vvr-valoriser-les-rsa.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

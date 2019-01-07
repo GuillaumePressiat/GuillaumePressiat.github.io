@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Traitement des données PMSI avec R</title>
+  <title>13 Vers la base de données avec pmeasyr | Traitement des données PMSI avec R</title>
   <meta name="description" content="Ce livre numérique présente des exemples de traitements de données PMSI avec R">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Traitement des données PMSI avec R" />
+  <meta property="og:title" content="13 Vers la base de données avec pmeasyr | Traitement des données PMSI avec R" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Traitement des données PMSI avec R" />
+  <meta name="twitter:title" content="13 Vers la base de données avec pmeasyr | Traitement des données PMSI avec R" />
   
   <meta name="twitter:description" content="Ce livre numérique présente des exemples de traitements de données PMSI avec R" />
   
@@ -25,7 +25,7 @@
 <meta name="author" content="Guillaume Pressiat || SIMAP / DOMU / Assistance Publique - Hôpitaux de Paris">
 
 
-<meta name="date" content="2018-07-27">
+<meta name="date" content="2019-01-08">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -36,6 +36,7 @@
 <link rel="next" href="requetr-rediger-executer-des-requetes-pmsi.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -50,41 +51,67 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -217,6 +244,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="15.5" data-path="vvr-valoriser-les-rsa.html"><a href="vvr-valoriser-les-rsa.html#concordance-avec-epmsi"><i class="fa fa-check"></i><b>15.5</b> Concordance avec epmsi</a></li>
 <li class="chapter" data-level="15.6" data-path="vvr-valoriser-les-rsa.html"><a href="vvr-valoriser-les-rsa.html#vignette-presentant-ces-fonctions"><i class="fa fa-check"></i><b>15.6</b> Vignette présentant ces fonctions</a></li>
 </ul></li>
+<li class="chapter" data-level="16" data-path="exercices-beta.html"><a href="exercices-beta.html"><i class="fa fa-check"></i><b>16</b> Exercices (béta)</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Publié avec bookdown</a></li>
 <li><b><span style="background-color: white; opacity:0.7;"><a href="https://guillaumepressiat.github.io"><< Retour au blog pmeasyr</a></b></span></li>
@@ -246,25 +274,25 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">13.1</span> Connexion à une base de données</h2>
 <div id="monetdb" class="section level3">
 <h3><span class="header-section-number">13.1.1</span> monetdb</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dbdir &lt;-<span class="st"> &quot;~/Documents/data/monetdb&quot;</span>
-con &lt;-<span class="st"> </span>MonetDBLite::<span class="kw">src_monetdblite</span>(dbdir)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">dbdir &lt;-<span class="st"> &quot;~/Documents/data/monetdb&quot;</span>
+con &lt;-<span class="st"> </span>MonetDBLite<span class="op">::</span><span class="kw">src_monetdblite</span>(dbdir)</code></pre>
 </div>
 <div id="sqlite" class="section level3">
 <h3><span class="header-section-number">13.1.2</span> SQLite</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dbdir &lt;-<span class="st"> &quot;~/Documents/data/sqlite/pmsi.sqlite&quot;</span>
-con &lt;-<span class="st"> </span>dplyr::<span class="kw">src_sqlite</span>(dbdir)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">dbdir &lt;-<span class="st"> &quot;~/Documents/data/sqlite/pmsi.sqlite&quot;</span>
+con &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">src_sqlite</span>(dbdir)</code></pre>
 </div>
 <div id="postgres" class="section level3">
 <h3><span class="header-section-number">13.1.3</span> PostGres</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">con &lt;-<span class="st"> </span>dplyr::<span class="kw">src_postgres</span>(<span class="dt">user =</span> <span class="st">&quot;gui&quot;</span>, <span class="dt">password =</span> <span class="st">&quot;gui&quot;</span>, <span class="dt">dbname =</span> <span class="st">&quot;aphp&quot;</span>,
-                    <span class="dt">host =</span> <span class="st">&quot;localhost&quot;</span>, <span class="dt">port =</span> <span class="dv">5432</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">con &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">src_postgres</span>(<span class="dt">user =</span> <span class="st">&quot;gui&quot;</span>, <span class="dt">password =</span> <span class="st">&quot;gui&quot;</span>, <span class="dt">dbname =</span> <span class="st">&quot;aphp&quot;</span>,
+                    <span class="dt">host =</span> <span class="st">&quot;localhost&quot;</span>, <span class="dt">port =</span> <span class="dv">5432</span>)</code></pre>
 </div>
 </div>
 <div id="integration-en-base" class="section level2">
 <h2><span class="header-section-number">13.2</span> Intégration en base</h2>
 <div id="definition-des-parametres" class="section level3">
 <h3><span class="header-section-number">13.2.1</span> Définition des paramètres</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># noyau_skeleton()</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># noyau_skeleton()</span>
 p &lt;-<span class="st"> </span><span class="kw">noyau_pmeasyr</span>(
   <span class="dt">finess   =</span> <span class="st">&#39;750712184&#39;</span>,
   <span class="dt">mois     =</span> <span class="dv">12</span>,
@@ -273,17 +301,17 @@ p &lt;-<span class="st"> </span><span class="kw">noyau_pmeasyr</span>(
   <span class="dt">tolower_names =</span> T, <span class="co"># choix de noms de colonnes minuscules : T / F</span>
   <span class="dt">n_max =</span> <span class="fl">1e4</span>, <span class="co"># on limite la lecture a un petit nombre de lignes pour tester d&#39;abord </span>
   <span class="co"># on importera tout dans un second temps</span>
-  <span class="dt">lib =</span> F) <span class="co"># pas de libellés de colonnes (inutile ici)</span></code></pre></div>
+  <span class="dt">lib =</span> F) <span class="co"># pas de libellés de colonnes (inutile ici)</span></code></pre>
 </div>
 <div id="exemple-dimport" class="section level3">
 <h3><span class="header-section-number">13.2.2</span> Exemple d’import</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">purrr::<span class="kw">quietly</span>(db_mco_out)(con,  p, <span class="dt">annee =</span> <span class="dv">2016</span>) -&gt;<span class="st"> </span>ok </code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">purrr<span class="op">::</span><span class="kw">quietly</span>(db_mco_out)(con,  p, <span class="dt">annee =</span> <span class="dv">2016</span>) -&gt;<span class="st"> </span>ok </code></pre>
 <p><code>ok</code> contient toutes les sorties de l’éxécution de la fonction : vérifier qu’il n’y a pas d’erreur ou d’avertissement anormal avant de poursuivre. Ok ? Voyons ce que contient <code>ok</code> :</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ok</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">ok</code></pre>
 <p>Nous avons présenté la ligne pour importer les données MCO out 2016, mais il est possible de la faire pour le MCO in (<code>db_mco_in</code>), le SSR out (<code>db_ssr_out</code>), l’HAD (<code>db_had_out</code>), la Psy (<code>db_psy_out</code>) et les rsf (<code>db_rsf_out</code>).</p>
 <p>Une fonction pour importer une autre table est également disponible (<code>db_generique</code>).</p>
 <p>Après plusieurs imports dans la base de données, se déconnecter :</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DBI::<span class="kw">dbDisconnect</span>(con$con)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">DBI<span class="op">::</span><span class="kw">dbDisconnect</span>(con<span class="op">$</span>con)</code></pre>
 </div>
 </div>
 <div id="acceder-aux-donnees-dans-la-base" class="section level2">
@@ -292,15 +320,15 @@ p &lt;-<span class="st"> </span><span class="kw">noyau_pmeasyr</span>(
 <p>Poursuivons l’exemple sur le mco out 2016.</p>
 <div id="lister-les-tables-dans-la-base" class="section level3">
 <h3><span class="header-section-number">13.3.1</span> Lister les tables dans la base</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">db_liste_tables</span>(con)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">db_liste_tables</span>(con)</code></pre>
 </div>
 <div id="acceder-aux-tables-mco-out" class="section level3">
 <h3><span class="header-section-number">13.3.2</span> Accéder aux tables mco out</h3>
 <p>Les lignes suivantes permettent de se connecter aux tables dans la base. Pour la suite il pourra être intéressant de lire <a href="http://db.rstudio.com/dplyr/">l’aide du package dplyr</a>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tbl_mco</span>(con, <span class="dv">16</span>, <span class="st">&#39;rsa_rsa&#39;</span>) <span class="co"># Table rsa</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tbl_mco</span>(con, <span class="dv">16</span>, <span class="st">&#39;rsa_rsa&#39;</span>) <span class="co"># Table rsa</span>
 <span class="kw">tbl_mco</span>(con, <span class="dv">16</span>, <span class="st">&#39;rsa_actes&#39;</span>) <span class="co"># Table actes des rsa</span>
 <span class="kw">tbl_mco</span>(con, <span class="dv">16</span>, <span class="st">&#39;rsa_diags&#39;</span>) <span class="co"># Table diags des rsa (après `tdiag`)</span>
-<span class="kw">tbl_mco</span>(con, <span class="dv">16</span>, <span class="st">&#39;rsa_um&#39;</span>) <span class="co"># Table um des rsa </span></code></pre></div>
+<span class="kw">tbl_mco</span>(con, <span class="dv">16</span>, <span class="st">&#39;rsa_um&#39;</span>) <span class="co"># Table um des rsa </span></code></pre>
 <p>D’autres fonctions <code>tbl_ssr</code>, <code>tbl_had</code>, <code>tbl_had</code>, <code>tbl_psy</code>, <code>tbl_rsf</code> facilitent la connexion à ces “remote table”.</p>
 
 </div>
@@ -332,9 +360,10 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
-"all": {}
+"all": {},
+"instapper": false
 },
 "fontsettings": {
 "theme": "white",
@@ -342,6 +371,10 @@ gitbook.start({
 "size": 2
 },
 "edit": {
+"link": null,
+"text": null
+},
+"history": {
 "link": null,
 "text": null
 },
