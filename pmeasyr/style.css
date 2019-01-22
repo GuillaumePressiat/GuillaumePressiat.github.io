@@ -62,7 +62,7 @@ a:visited{
     font-weight:700;
 }
 
-p{
+p, ul{
     /*background:#edf0f2;
     color:#333333;*/
     font-family: Segoe UI,Helvetica, Arial,sans-serif;
