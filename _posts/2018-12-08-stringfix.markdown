@@ -1,13 +1,15 @@
 ---
 layout: post
 title:  "stringfix : new R package for string manipulation in a %>% way"
-date:   2018-12-08 08:05:50 +0100
+date:   2019-01-24
 author: Guillaume Pressiat
 tags: R
 ---
 
 
 I usually write around here in french and mainly report on French Hospitals data managment and the statistical tasks they imply. As today’s post is about a new package I have created, I’ll be writing in english. The package is called [`stringfix`](https://guillaumepressiat.github.io/stringfix/index.html) because it uses infix operators to manipulate character strings.
+
+*This post is an actualisation on December 2018 post.*
 
 <!--more-->
 
@@ -142,7 +144,7 @@ iris %>% toupper_names %>% head
 Finally, I also wanted to outline that the function from the [rmngb](https://github.com/pierucci/rmngb) package : `%out%` : negation of `%in%` can be very useful to avoid  typing `! x %in% y` (you can just type `x %out% y` instead). This is why I have included it in this package !
 
 
-More information here : [https://github.com/GuillaumePressiat/stringfix](https://github.com/GuillaumePressiat/stringfix)
+More functions and information here : [https://github.com/GuillaumePressiat/stringfix](https://github.com/GuillaumePressiat/stringfix)
 
 ---
 
