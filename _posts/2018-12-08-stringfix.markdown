@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "stringfix : new R package for string manipulation in a %>% way"
-date:   2019-01-24
+date:   2019-01-24 02:05:50 +0100
 author: Guillaume Pressiat
 tags: R
 ---
@@ -9,9 +9,9 @@ tags: R
 
 I usually write around here in french and mainly report on French Hospitals data managment and the statistical tasks they imply. As today’s post is about a new package I have created, I’ll be writing in english. The package is called [`stringfix`](https://guillaumepressiat.github.io/stringfix/index.html) because it uses infix operators to manipulate character strings.
 
-*This post is an actualisation on December 2018 post.*
-
 <!--more-->
+
+*This post is an actualisation on December 2018 post.*
 
 # Introduction
 
