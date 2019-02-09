@@ -68,7 +68,7 @@ sejours_qefa <- requete_db(con, 18, exemple_requete)
 
 ## Tarifs et suppléments
 library(nomensland)
-tarifs      <- get_table('tarifs_mco_ghs') %>% 
+tarifs_ghs  <- get_table('tarifs_mco_ghs') %>% 
   distinct(ghs, anseqta, .keep_all = TRUE)
 supplements <- get_table('tarifs_mco_supplements') %>% 
   mutate_if(is.numeric, tidyr::replace_na, 0)
