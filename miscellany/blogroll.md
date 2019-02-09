@@ -10,3 +10,4 @@ permalink: /miscellany/blogroll/
 - [R-bloggers](https://www.r-bloggers.com/)
 - [Le DIM](http://www.departement-information-medicale.com/)
 - [Opikanoba](https://www.opikanoba.org/)
+- [Byrne's Euclid](https://www.c82.net/euclid/)
