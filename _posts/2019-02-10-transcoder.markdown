@@ -46,7 +46,7 @@ For instance, here is a screenshot of the app that put a column in grepl pipe fo
 <center>
 <figure>
   <a href="/images/transcoder_2.png"><img src="/images/transcoder_2.png" alt = "" width= "80%" /></a>
-  <figcaption>Format a comma list to pipe | format</figcaption>
+  <figcaption>Format a column to pipe | format</figcaption>
 </figure>  
 </center>
 
