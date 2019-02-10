@@ -41,7 +41,7 @@ devtools::install_github('GuillaumePressiat/stringfix')
 
 You can also view and explore this little app running on shinyapps.io [here](https://guillaumepressiat.shinyapps.io/transcodeur/).
 
-For instance, here is a screeshot that put a column in grepl pipe format:
+For instance, here is a screenshot of the app that put a column in grepl pipe format:
 
 <center>
 <figure>
