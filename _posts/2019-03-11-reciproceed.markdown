@@ -37,7 +37,7 @@ To do this, an idea is: using a YAML file and [bookdown](https://bookdown.org) t
 
 As an example, I collected some soup recipes and fake procedures, see the source [YAML file](https://github.com/GuillaumePressiat/reciproceed/blob/master/index_procedures.yaml).
 
-Soup recipes are used as fake data (meaning that they are structured and have chronogical steps like procedures) but they are not fake soups. By the way they came from [bbcfoods](https://www.bbcgoodfood.com/recipes).
+Soup recipes are used as fake data (meaning that they are structured and have chronological steps like procedures) but they are not fake soups. By the way they came from [bbcfoods](https://www.bbcgoodfood.com/recipes).
 
 And the result book is here:
 
