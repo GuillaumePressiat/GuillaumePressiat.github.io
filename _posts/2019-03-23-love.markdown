@@ -108,4 +108,6 @@ Love is needing to be loved
 
 We could also read title of this article as "strength of an R function exposed with a Lennon song"...
 
+If you like it, you can view this code as a [gist here](https://gist.github.com/GuillaumePressiat/f2d4ac48b12920ef501a00abf5a2fb99).
+
 
