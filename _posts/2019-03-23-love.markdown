@@ -27,7 +27,7 @@ love_verse <- function(w1, w2, w3){
 {% endhighlight %}
 
 
-As a return, parameters sometimes gives echoes of poetry.
+As a return, parameters sometimes give echoes of poetry.
 
 
 {% highlight r %}
