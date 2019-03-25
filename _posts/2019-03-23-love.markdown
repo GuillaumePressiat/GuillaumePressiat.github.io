@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Strength of a Lennon song exposed with R function glue::glue
-date:   2019-03-23 13:05:50 +0100
+date:   2019-03-25 14:05:50 +0100
 author: Guillaume Pressiat
 tags: R
 ---
@@ -15,6 +15,9 @@ tags: R
 </center>
 
 <!--more-->
+
+*This post is an actualisation with addendum below*.
+
 
 {% highlight r %}
 love_verse <- function(w1, w2, w3){
@@ -109,5 +112,42 @@ Love is needing to be loved
 We could also read title of this article as "strength of an R function exposed with a Lennon song"...
 
 If you like it, you can view this code as a [gist here](https://gist.github.com/GuillaumePressiat/f2d4ac48b12920ef501a00abf5a2fb99).
+
+
+## Addendum
+
+In a more tidyverse way, you could also do this last piping block step using `glue_data` approach, what I have not thinked about. 
+I haven't been able to think theses words will fit in a tibble, which is why I have used `do.call` which sounds a little like `old.school`!
+
+With a little help from [Jim Hester](https://gist.github.com/GuillaumePressiat/f2d4ac48b12920ef501a00abf5a2fb99#gistcomment-2870511), it's getting better:
+
+{% highlight r %}
+
+library(magrittr)
+
+tibble::tribble(
+  ~a, ~b, ~c,
+  "real", "feeling", "wanting",
+  "touch", "reaching", "asking",
+  "free", "living", "needing"
+  ) %>%
+  glue::glue_data(
+  "Love is {a}, {a} is love
+   Love is {b}, {b} love
+   Love is {c} to be loved",
+  ) %>%
+  glue::glue_collapse("\n\n")
+#> Love is real, real is love
+#> Love is feeling, feeling love
+#> Love is wanting to be loved
+#> 
+#> Love is touch, touch is love
+#> Love is reaching, reaching love
+#> Love is asking to be loved
+#> 
+#> Love is free, free is love
+#> Love is living, living love
+#> Love is needing to be loved
+{% endhighlight %}
 
 
