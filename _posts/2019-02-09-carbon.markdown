@@ -1,0 +1,59 @@
+---
+layout: post
+title: "pmeasyr en images"
+date: 2019-02-09 08:05:50 +0100
+author: Guillaume Pressiat
+tags: pmeasyr carbon
+categories: Présentation
+excerpt_separator: <!--more-->
+---
+
+
+Créer des images pour présenter du code à l'aide de carbon.
+
+<center>
+<figure>
+  <img src="/images/carbon/carbon(0).png" alt = "" width= "60%" />
+  <figcaption>Étape 0 : définir un noyau de paramètres</figcaption>
+</figure>  
+</center>
+
+
+<!--more-->
+
+Voir ici: [https://carbon.now.sh/](https://carbon.now.sh/)
+
+Le code de ces exemples est disponible [ici](/images/carbon/exemples_carbon.R).
+
+<center>
+
+<figure>
+  <a href="/images/carbon/carbon(1).png"><img src="/images/carbon/carbon(1).png" alt = "" width= "60%"/></a>
+  <figcaption>Étape 1 : dézipper et importer les données</figcaption>
+</figure>  
+
+<figure>
+  <a href="/images/carbon/carbon(2).png"><img src="/images/carbon/carbon(2).png" alt = "" width= "60%"/></a>
+  <figcaption>Étape 2 : calcul de case-mix et dms</figcaption>
+</figure>  
+
+<figure>
+  <a href="/images/carbon/carbon(3).png"><img src="/images/carbon/carbon(3).png" alt = "" width= "70%"/></a>
+  <figcaption>Étape 3 : des exemples de requêtes</figcaption>
+</figure>  
+
+<figure>
+  <a href="/images/carbon/carbon(4).png"><img src="/images/carbon/carbon(4).png" alt = "" width= "60%"/></a>
+  <figcaption>Étape 4 : des données, intégrées dans une base de données</figcaption>
+</figure>  
+
+<figure>
+  <a href="/images/carbon/carbon(5).png"><img src="/images/carbon/carbon(5).png" alt = "" width= "63%"/></a>
+  <figcaption>Étape 5 : requêter des données, intégrées dans une base de données</figcaption>
+</figure>
+
+<figure>
+  <a href="/images/carbon/carbon(6).png"><img src="/images/carbon/carbon(6).png" alt = "" width= "70%"/></a>
+  <figcaption>Étape 6 : Valoriser des rsa et retrouver les montants epmsi</figcaption>
+</figure>  
+</center>
