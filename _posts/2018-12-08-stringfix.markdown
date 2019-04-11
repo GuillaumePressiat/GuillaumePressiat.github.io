@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "stringfix : new R package for string manipulation in a %>% way"
-date:   2018-12-08 08:05:50 +0100
+date:   2019-01-24 08:05:50 +0100
 author: Guillaume Pressiat
 tags: R
 ---
