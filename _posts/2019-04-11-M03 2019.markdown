@@ -1,0 +1,80 @@
+---
+layout: post
+title: "Prêt pour M03 2019 - un point sur les nouveautés de pmeasyr"
+date: 2019-04-14 00:31:55 +0100
+author: Guillaume Pressiat
+tags: pmeasyr
+categories: Mise&nbsp;à&nbsp;jour
+excerpt_separator: <!--more-->
+---
+
+*Suite à la mise à jour des formats pour M03 2019, je présente les nouveautés ajoutées dans pmeasyr.*
+
+<!--more-->
+
+
+# Nouveautés dans les formats PMSI 2019
+
+Parmi les nouveautés je ne détaillerai que la principale, l'ajout pour tous les champs de la variable n° d'identifiant permanent du patient, in et out avec le n° d'identifiant permanent du patient anonymisé dans les données anohosp.
+
+Pour intégrer les données 2019 à partir de M03, il faut réinstalller le package.
+
+{% highlight r %}
+
+devtools::install_github('IM-APHP/pmeasyr')
+
+{% endhighlight %}
+
+
+# Nouveautés dans pmeasyr
+
+En plus des formats 2019 disponibles, voici une liste des nouveautés ajoutées et consolidées dans l'année passée :
+
+### Valorisation des séjours MCO
+
+[https://im-aphp.github.io/pmeasyr/articles/vignette4.html](https://im-aphp.github.io/pmeasyr/articles/vignette4.html)
+
+Un ensemble de fonctions permet de reconstruire pour les établissements ex-DGF la valorisation BR epmsi et ainsi avoir :
+
+- une table avec les valorisations GHS et suppléments pour chaque séjour
+- une table avec les caractères facturables / non facturables exprimés selon les modalités des tableaux epmsi
+- la conjonction de ces deux points peut permettre de rendre compte de problèmes et d'évolutions de groupage et de facturation au cours du temps, préalablement à la validation sur epmsi (ex: quels séjours deviennent non valorisés, quels séjours changent de GHS, si l'on compare les données de plusieurs remontées successives, lamda ou courant)
+- afin de s'assurer de la concordance entre ces valorisations recalculées dans R et celle d'epmsi, deux fonctions permettent de reproduire les tableaux SV et RAV d'epmsi ; et avec un peu d'effort, on peut reconstituer également les tableaux EMM.
+
+### Valorisation des sous-séquences d'HAD
+
+[https://im-aphp.github.io/pmeasyr/reference/vvr_had_ght.html](https://im-aphp.github.io/pmeasyr/reference/vvr_had_ght.html)
+
+Depuis quelques jours, j'ai ajouté la possibilité pour les établissements ex-DGF réalisant de l'activité d'HAD de valoriser l'activité de leurs sous-séquences en accord avec les montants epmsi.
+
+# Nouveauté en dehors de pmeasyr
+
+[pmsEye](https://guillaumepressiat.github.io/pmsEye/) est un package pour importer les sorties des logiciels VisualValo*.
+
+[https://guillaumepressiat.github.io/pmsEye/](https://guillaumepressiat.github.io/pmsEye/)
+
+# Utilisation du package pmeasyr
+
+
+Un utilisateur habitué de pmeasyr m'a indiqué avoir fait une mission pour une entreprise, il s'agissait d'intégrer des données PMSI *in/out* avec pmeasyr dans leur outil de requêtage de "profil patient". Cette entreprise démarchant ensuite les hôpitaux pour proposer leur produit. 
+
+Plusieurs sentiments-réflexes se sont déclenchés chez moi en apprenant cette nouvelle :
+
+- la satisfaction : le package est une solution reconnue et une entreprise s'appuie dessus, même si ce n'est pas l'écosystème auquel j'avais pensé, on peut voir cela positivement
+- l'étonnement : sachant que je ne tire pas de profit financier du partage de ce package, il peut sembler étonnant que l'on m'informe naturellement de cette mission effectuée en utilisant pmeasyr, sans que j'en trouve trace par ailleurs
+- le besoin de trouver une explication à mon incompréhension : partager un outil, un ensemble de programmes, ce n'est pas partager des valeurs, ni une vision des choses. Je reformule : c'est partager des choses avec des personnes qui ne partagent pas forcément la même vision des choses. 
+- le besoin de réexprimer "ma vision des choses" qui j'en suis sûr n'engage pas que moi, ce que je fais ici
+
+
+	- le package a été diffusé au départ avec l'idée de répondre aux besoins de personnels hospitaliers d'information médicale ; avec comme origine le contexte suivant : "un hôpital A a pu développer un outil qu'un hôpital B n'a pas pu développer mais qui lui serait utile, ou pour lequel un hôpital C a motivation à participer"
+	- ouvrir et rendre reproductible facilement un ensemble de méthodes courantes du PMSI : rendre ouvertes, gratuites et compréhensibles des méthodes qui peuvent être au choix fermées, payantes et/ou opaques
+	- travailler en partenariat avec des personnes dont les intérêts sont proches
+	- travailler avec des outils qui rendent les tâches plus agréables, voire amusantes pour certains d'entre nous
+
+
+Ce package reste ouvert, même pour des réutilisations commerciales, alors comme une solution sympathique, minimale, je vois : je vous remercie de citer le package si vous l'utilisez. J'apprécierai également que vous me contactiez pour m'informer de comment vous utilisez le package ou pour me remonter vos remarques, adresse mail visible [ici](https://github.com/IM-APHP/pmeasyr/blob/master/DESCRIPTION). 
+
+{% highlight r %}
+citation("pmeasyr")
+{% endhighlight %}
+
