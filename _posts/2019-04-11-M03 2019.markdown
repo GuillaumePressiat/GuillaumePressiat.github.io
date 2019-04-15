@@ -39,7 +39,9 @@ Un ensemble de fonctions permet de reconstruire pour les établissements ex-DGF 
 - une table avec les valorisations GHS et suppléments pour chaque séjour
 - une table avec les caractères facturables / non facturables exprimés selon les modalités des tableaux epmsi
 - la conjonction de ces deux points peut permettre de rendre compte de problèmes et d'évolutions de groupage et de facturation au cours du temps, préalablement à la validation sur epmsi (ex: quels séjours deviennent non valorisés, quels séjours changent de GHS, si l'on compare les données de plusieurs remontées successives, lamda ou courant)
-- afin de s'assurer de la concordance entre ces valorisations recalculées dans R et celle d'epmsi, deux fonctions permettent de reproduire les tableaux SV et RAV d'epmsi ; et avec un peu d'effort, on peut reconstituer également les tableaux EMM.
+
+
+Afin de s'assurer de la concordance entre ces valorisations recalculées dans R et celle d'epmsi, deux fonctions permettent de reproduire les tableaux SV et RAV d'epmsi ; et avec un peu d'effort, on peut reconstituer également les tableaux EMM.
 
 ### Valorisation des sous-séquences d'HAD
 
