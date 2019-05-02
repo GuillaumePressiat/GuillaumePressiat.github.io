@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  Under Pi: gganimate test around quadrature of the circle
-date:   2019-05-02 14:05:50 +0100
+title: "Under Pi : gganimate test around quadrature of the circle"
+date: 2019-05-02 14:05:50 +0100
 author: Guillaume Pressiat
 tags: R
 ---
