@@ -73,3 +73,12 @@ p <- ggplot() +
 p
 {% endhighlight %}
 
+
+More information and some links of inspirations are here in the code:
+
+https://github.com/Guillaumepressiat/under_pi
+
+And I have made a really long gif here:
+
+https://raw.githubusercontent.com/GuillaumePressiat/under_pi/master/under_pi_patient_geek.gif
+
