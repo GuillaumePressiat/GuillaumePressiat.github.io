@@ -21,6 +21,7 @@ exclude:
 
 gems:
   - jekyll-feed
+  - jekyll-seo-tag
 
 # SEO stuff
 # google_author: ""
