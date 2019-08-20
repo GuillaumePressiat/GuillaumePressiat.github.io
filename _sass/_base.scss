@@ -9,10 +9,19 @@ dl, dd, ol, ul, figure {
 }
 
 
+footer {
+      background-image: linear-gradient(
+      to bottom, 
+      rgba(40, 69, 119, 0.4),
+       white/*,
+      rgba(40, 69, 119, 0.3)*/);
+}
+
 
 /**
  * Basic styling
  */
+
 body {
     font-family: $base-font-family;
     font-size: $base-font-size;
