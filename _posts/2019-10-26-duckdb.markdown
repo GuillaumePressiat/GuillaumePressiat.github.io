@@ -394,9 +394,13 @@ In any case thanks to DuckDB developers and welcome to the new duck.
 
 See here [https://github.com/cwida/duckdb](https://github.com/cwida/duckdb). 
 
+
 DuckDB developers point's of view on data management and explanations about "duck" can be found [here](https://db.in.tum.de/teaching/ss19/moderndbs/duckdb-tum.pdf?lang=de). 
 
+
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Male_mallard_standing.jpg/220px-Male_mallard_standing.jpg" />
+
+[Here](https://zurich-r-user-group.github.io/slides/20190618_duckdb.pdf) we can read more informations on ALTREP, MonetDBLite and DuckDB, and reasons why MonetDB was finally abandoned.
 
 <hr>
 <br>
