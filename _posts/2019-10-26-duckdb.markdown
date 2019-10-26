@@ -314,7 +314,7 @@ dbGetQuery(con_duck, 'SELECT "Species", MIN("Sepal.Width") FROM iris GROUP BY "S
 3 versicolor              2.0
 ```
 
-Like for all data sources with DBI, if the query is more complex, we can write it comfortably in a external file and launch it like this for example:
+Like for all data sources with DBI, if the query is more complex, we can write it comfortably in an external file and launch it like this for example:
 
 {% highlight r %}
 dbGetQuery(con_duck, readr::read_file('~/Documents/scripts/script.sql'))
