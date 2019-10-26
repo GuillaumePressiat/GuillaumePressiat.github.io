@@ -48,13 +48,13 @@ Stocking data in a database is another one.
 
 **All that we can say is that "we're walking on works in progress". Like number of eggshells, more works in progress here probably means more breaking changes.**
 
-Works in progress for packages, also for (embedded) databases !
+Works in progress for packages, also for (embedded) databases!
 
 # From Monet to Duck
 
 MonetDBLite philosophy is to be like a "very very fast SQLite". But it's time for change (or it seems to be).  
-Then we can thanks MonetDBLite developers as it was a nice adventure to play/work with MonetDB speed !  
-As a question, is there another person, some volunteers, possibilities to maintain MonetDBLite (somewhere a nice tool) ?  
+Then we can thanks MonetDBLite developers as it was a nice adventure to play/work with MonetDB speed!  
+As a question, is there another person, some volunteers, possibilities to maintain MonetDBLite (somewhere a nice tool)?  
 There are not so many informations for the moment about what happened and that's why I write this post. 
 
 [Here](https://github.com/MonetDB/MonetDBLite-R/issues/38#issuecomment-490589276), I read that they are now working on a new solution, under MIT License, named [DuckDB](https://www.duckdb.org/), see [here](https://hannes.muehleisen.org/SIGMOD2019-demo-duckdb.pdf) for more details.
@@ -101,17 +101,12 @@ tbl(con, 'iris')
 ### Put some rows and columns in db
 
 {% highlight r %}
-library(nycflights13)
-dim(nycflights13::flights)
-object.size(nycflights13::flights) %>% format(units = "Mb")
-{% endhighlight %}
-
-```
 > dim(nycflights13::flights)
 [1] 336776     19
 > object.size(nycflights13::flights) %>% format(units = "Mb")
 [1] "38.8 Mb"
-```
+{% endhighlight %}
+
 
 Sampling it to get more rows, then duplicating columns, two time.
 
@@ -121,18 +116,14 @@ df_test <- nycflights13::flights %>%
   sample_n(2e6, replace = TRUE) %>% 
   bind_cols(., rename_all(., function(x){paste0(x, '_bind_cols')})) %>% 
   bind_cols(., rename_all(., function(x){paste0(x, '_bind_cols_bis')}))
-
-dim(df_test)
-object.size(df_test) %>% format(units = "Mb")
 {% endhighlight %}
 
-
-```
+{% highlight r %}
 > dim(df_test)
 [1] 2000000      76
 > object.size(df_test) %>% format(units = "Mb")
 [1] "916.4 Mb"
-```
+{% endhighlight %}
 
 Write in db
 
@@ -144,11 +135,12 @@ tictoc::toc()
 
 It take some times compared to MonetDBLite (no benchmark here, I just run this several times and it was consistent).
 
-```
+{% highlight r %}
 # DuckDB      : 23.251 sec elapsed
 # SQLite      : 20.23 sec elapsed
 # MonetDBLite : 8.4 sec elapsed
-```
+{% endhighlight %}
+
 
 
 The three are pretty fast.  
@@ -159,7 +151,7 @@ Most importantly if queries are fast, and they are, most of the time we're allwr
 ### Glimpse
 
 
-```
+{% highlight r %}
 > tbl(con_duck, 'df_test') %>% glimpse()
 Observations: ??
 Variables: 76
@@ -198,7 +190,8 @@ $ distance_bind_cols_bind_cols_bis       <dbl> 1065, 199, 740, 200, 950, 1626, 2
 $ hour_bind_cols_bind_cols_bis           <dbl> 16, 21, 19, 21, 15, 19, 10, 7, 10, 17, 16, 17, 8, 14, 8, 19, 15, 16, 20…
 $ minute_bind_cols_bind_cols_bis         <dbl> 12, 27, 20, 59, 0, 0, 30, 0, 45, 20, 29, 28, 35, 50, 25, 0, 35, 55, 0, …
 $ time_hour_bind_cols_bind_cols_bis      <dttm> 2013-11-29 21:00:00, 2013-10-08 01:00:00, 2013-03-02 00:00:00, 2013-05…
-```
+{% endhighlight %}
+
 
 ### Count
 
@@ -221,7 +214,7 @@ tbl(con_duck, 'df_test') %>% select(time_hour)
 {% endhighlight %}
 
 
-```
+{% highlight r %}
 # Source:   lazy query [?? x 1]
 # Database: duckdb_connection
    time_hour                 
@@ -237,14 +230,15 @@ tbl(con_duck, 'df_test') %>% select(time_hour)
  9 2013-09-15 14:00:00.000000
 10 2013-04-25 21:00:00.000000
 # … with more rows
-```
+{% endhighlight %}
+
 
 {% highlight r %}
 tbl(con_sqlite, 'df_test') %>% select(time_hour)
 {% endhighlight %}
 
 
-```
+{% highlight r %}
 # Source:   lazy query [?? x 1]
 # Database: sqlite 3.22.0 [/Users/guillaumepressiat/Documents/data/sqlite.sqlite]
     time_hour
@@ -260,7 +254,7 @@ tbl(con_sqlite, 'df_test') %>% select(time_hour)
  9 1379253600
 10 1366923600
 # … with more rows
-```
+{% endhighlight %}
 
 # Some querying
 
@@ -277,14 +271,15 @@ It already works nicely with dplyr.
 +   collect()
 {% endhighlight %}
 
-```
+{% highlight r %}
 # A tibble: 3 x 2
   Species    `min(Sepal.Width)`
   <chr>                   <dbl>
 1 virginica                 2.2
 2 setosa                    2.3
 3 versicolor                2  
-```
+{% endhighlight %}
+
 
 {% highlight r %}
 > tbl(con_duck, 'iris') %>% 
@@ -292,12 +287,13 @@ It already works nicely with dplyr.
 +     summarise(min(Sepal.Width)) %>% show_query()
 {% endhighlight %}
 
-```
+{% highlight sql %}
 <SQL>
 SELECT "Species", MIN("Sepal.Width") AS "min(Sepal.Width)"
 FROM "iris"
 GROUP BY "Species"
-```
+{% endhighlight %}
+
 
 ### sql
 
@@ -307,12 +303,13 @@ Run query as a string
 dbGetQuery(con_duck, 'SELECT "Species", MIN("Sepal.Width") FROM iris GROUP BY "Species"')
 {% endhighlight %}
 
-```
+{% highlight r %}
      Species min(Sepal.Width)
 1  virginica              2.2
 2     setosa              2.3
 3 versicolor              2.0
-```
+{% endhighlight %}
+
 
 Like for all data sources with DBI, if the query is more complex, we can write it comfortably in an external file and launch it like this for example:
 
