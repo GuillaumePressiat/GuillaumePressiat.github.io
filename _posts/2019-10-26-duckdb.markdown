@@ -400,7 +400,7 @@ DuckDB developers point's of view on data management and explanations about "duc
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Male_mallard_standing.jpg/220px-Male_mallard_standing.jpg" />
 
-[Here](https://zurich-r-user-group.github.io/slides/20190618_duckdb.pdf) we can read more informations on ALTREP, MonetDBLite and DuckDB, and reasons why MonetDB was finally abandoned.
+[Here](https://zurich-r-user-group.github.io/slides/20190618_duckdb.pdf) we can read more informations on ALTREP, MonetDBLite and DuckDB, and reasons why MonetDB was finally abandoned ("RIP MonetDBLite").
 
 <hr>
 <br>
