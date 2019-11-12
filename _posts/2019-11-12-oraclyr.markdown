@@ -9,7 +9,7 @@ tags: R
 
 
 
-<img src = "https://upload.wikimedia.org/wikipedia/en/4/40/O_logo.png">
+<!-- <img src = "https://upload.wikimedia.org/wikipedia/en/4/40/O_logo.png"> -->
 
 RStudio makes Oracle accessibility from R easier via odbc and connections Pane[^1].   
 Personally, I find it's not so easy.  
