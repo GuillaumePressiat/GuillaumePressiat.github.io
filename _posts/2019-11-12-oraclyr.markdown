@@ -157,8 +157,8 @@ my_oracle <- dbConnect(odbc::odbc(),
 {% endhighlight %}
 
 <hr>
-[^1]: RStudio documentation for Oracle connections[https://db.rstudio.com/databases/oracle/](https://db.rstudio.com/databases/oracle/)
+[^1]: RStudio documentation for Oracle connections: [https://db.rstudio.com/databases/oracle/](https://db.rstudio.com/databases/oracle/)
 [^2]: see here for a readme in a repo on github: [https://github.com/GuillaumePressiat/oracle_odbc_connection_template_for_R](https://github.com/GuillaumePressiat/oracle_odbc_connection_template_for_R)
-[^3]: how to make a connection string for oracle that includes hostname, instance name, user id, password using system.data.oracleclient?, [stackoverflow](https://stackoverflow.com/a/46203817/10527496)
+[^3]: how to make a connection string for oracle that includes hostname, instance name, user id, password using system.data.oracleclient? [stackoverflow](https://stackoverflow.com/a/46203817/10527496)
 [^4]: for Oracle catalogs, see here: [https://docs.oracle.com/pls/db92/db92.catalog_views?remark=homepage](https://docs.oracle.com/pls/db92/db92.catalog_views?remark=homepage)
-[^5]: see here for ROracle difficulties [https://technology.amis.nl/2017/08/23/r-and-the-oracle-database-using-dplyr-dbplyr-with-roracle-on-windows-10/](https://technology.amis.nl/2017/08/23/r-and-the-oracle-database-using-dplyr-dbplyr-with-roracle-on-windows-10/)
+[^5]: see here for ROracle difficulties: [https://technology.amis.nl/2017/08/23/r-and-the-oracle-database-using-dplyr-dbplyr-with-roracle-on-windows-10/](https://technology.amis.nl/2017/08/23/r-and-the-oracle-database-using-dplyr-dbplyr-with-roracle-on-windows-10/)
