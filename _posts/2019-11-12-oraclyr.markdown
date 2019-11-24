@@ -4,6 +4,7 @@ title: "dplyr and Oracle database with odbc on windows"
 date: 2019-11-12 13:05:50 +0100
 author: Guillaume Pressiat
 tags: R
+comments: true
 ---
 
 

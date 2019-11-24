@@ -29,3 +29,7 @@ layout: default
     <li><a href="/blog/tags/#{{ tag }}" class="tag">{{ tag }}</a></li>
   {% endfor %}
 </ul>
+
+{% if page.comments %}
+{% include disqus.html %}
+{% endif %}
