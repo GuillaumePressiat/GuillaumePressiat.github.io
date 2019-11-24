@@ -4,6 +4,7 @@ title:  "reciproceed : recipe, proceed, reciprocally"
 date:   2019-03-11 02:05:50 +0100
 author: Guillaume Pressiat
 tags: R
+comments: true
 ---
 
 

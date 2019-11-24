@@ -4,6 +4,7 @@ title: "A duck. Giving a look at DuckDB since MonetDBLite was removed from CRAN"
 date: 2019-10-26 13:05:50 +0100
 author: Guillaume Pressiat
 tags: R
+comments: true
 ---
 
 

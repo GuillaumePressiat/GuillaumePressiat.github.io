@@ -4,6 +4,7 @@ title:  "stringfix : adding transcoder shiny app"
 date:   2019-02-10 02:05:50 +0100
 author: Guillaume Pressiat
 tags: R
+comments: true
 ---
 
 

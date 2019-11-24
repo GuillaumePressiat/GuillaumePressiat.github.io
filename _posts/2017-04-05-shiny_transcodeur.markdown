@@ -6,6 +6,7 @@ author: Guillaume Pressiat
 tags: shiny cim&nbsp;&&nbsp;ccam
 categories: Application
 excerpt_separator: <!--more-->
+comments: true
 ---
 
 *Une application Shiny pour ne plus s'embêter à manipuler des listes de codes (Cim, CCAM, GHM, ...) à la main.*

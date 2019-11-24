@@ -5,6 +5,7 @@ date:   2018-05-18 14:05:50 +0100
 author: Guillaume Pressiat
 tags: cim&nbsp;&&nbsp;ccam
 categories: Présentation Application
+comments: true
 ---
 
 Lors d'un précédent post, je présentais une application Shiny, Transcodeur, en ligne et ouverte à tous pour faciliter la manipulation de codes CIM-10 et CCAM.

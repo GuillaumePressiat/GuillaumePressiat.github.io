@@ -4,6 +4,7 @@ title:  Strength of a Lennon song exposed with R function glue::glue
 date:   2019-03-25 14:05:50 +0100
 author: Guillaume Pressiat
 tags: R
+comments: true
 ---
 
 

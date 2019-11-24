@@ -4,6 +4,7 @@ title:  "stringfix : new R package for string manipulation in a %>% way"
 date:   2019-01-24 02:05:50 +0100
 author: Guillaume Pressiat
 tags: R
+comments: true
 ---
 
 

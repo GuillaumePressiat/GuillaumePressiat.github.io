@@ -6,6 +6,7 @@ author: Guillaume Pressiat
 tags: pmeasyr
 categories: Mise&nbsp;à&nbsp;jour
 excerpt_separator: <!--more-->
+comments: true
 ---
 
 *Suite à la mise à jour des formats pour M03 2019, je présente les nouveautés ajoutées dans pmeasyr.*
