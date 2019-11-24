@@ -8,29 +8,35 @@
 \usepackage{tikz}
 \usetikzlibrary{mindmap}
 
+\renewcommand{\familydefault}{\sfdefault}
+%\usepackage{avant}
+
 \pagestyle{empty}
 % Information boxes
 \usetikzlibrary{mindmap,trees}
-\tikzset{concept/.append style={fill={none}}}
+%\tikzset{concept/.append style={fill={none}}}
 \begin{document}
 %https://www.sharelatex.com/blog/2013/09/04/tikz-series-pt5.html
+\definecolor{green}{RGB}{92,159,97}
+\definecolor{black}{RGB}{0,69,119}
+\definecolor{blue}{RGB}{0, 0, 153}
+\definecolor{white}{RGB}{242, 242, 242}
 
 \begin{center}
 \begin{tikzpicture}[
   mindmap,
   every node/.style={concept, execute at begin node=\hskip0pt},
-  root concept/.append style={color = white, fill = white
+  root concept/.append style={color = green, fill = black
   },
-  text=black, grow cyclic,
+  text=white, grow cyclic,
   level 1/.append style={level distance=6cm,sibling angle=120},
   level 2/.append style={level distance=3cm,sibling angle=45}
 ]
 
 
-
 \node{Données PMSI avec R}
 	%[clockwise from=0]
-    child [concept color=red!60!black] { node  {\href{https://guillaumepressiat.github.io/}{pmeasyr}}
+    child [concept color=green] { node  {\href{https://guillaumepressiat.github.io/}{pmeasyr}}
 		child { node {\href{https://guillaumepressiat.github.io/pmeasyr/import-des-donnees.html\#mco}{MCO}}}
         child { node {\href{https://guillaumepressiat.github.io/pmeasyr/import-des-donnees.html\#ssr}{SSR}}}
         child { node {\href{https://guillaumepressiat.github.io/pmeasyr/import-des-donnees.html\#had}{HAD}}}
@@ -40,17 +46,18 @@
         child { node {\href{https://guillaumepressiat.github.io/pmeasyr/vers-la-base-de-donnees-avec-pmeasyr.html}{Base de données}}}
         child { node {\href{https://im-aphp.github.io/pmeasyr/articles/vignette4.html}{vvr}}}
     }
-    child [concept color=blue!60!black] { node {\href{https://guillaumepressiat.github.io/nomensland/index.html}{nomensland}}
-        child { node {CCAM}}
+    child [concept color=green] { node {\href{https://guillaumepressiat.github.io/nomensland/index.html}{nomensland}}
+        child { node {CCAM CSARR}}
         child { node {CIM-10}}
-        child { node {GHM, racines de GHM et regroupement}}
-        child { node {GHS et suppléments}}
-        child { node {CSARR}}
-        child { node {LPP}}
-        %child { node {Orphanet}}
+        child { node {GHM}}
+        child { node {GHS suppléments}}
+        child { node {Finess - UM}}
+        child { node {MO ATU DMI LPP}}
+        child { node {Orpha}}
         child { node {Listes de requêtes}}
     }
-    child [concept color=Green!50!black] { node {\href{https://guillaumepressiat.github.io/blog/2018/05/oncles}{Shiny apps}}
+    child [concept color=green] { node {\href{https://guillaumepressiat.github.io/blog/2018/05/oncles}{Shiny apps}}
+        child { node {\href{https://guillaumepressiat.shinyapps.io/nomensweb/}{nomensweb}}}
         child { node {\href{https://guillaumepressiat.shinyapps.io/oncle_cim/}{Oncle CIM}}}
         child { node {\href{https://guillaumepressiat.shinyapps.io/oncle_ccam/}{Oncle CCAM}}}
         child { node {\href{https://guillaumepressiat.shinyapps.io/oncle_ghm/}{GHM}}}
