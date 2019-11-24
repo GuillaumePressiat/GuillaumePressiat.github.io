@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2018.4.3)  24 NOV 2019 14:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2018.4.3)  24 NOV 2019 15:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -950,7 +950,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 69.
 Here is how much of TeX's memory you used:
  16515 strings out of 492995
  321292 string characters out of 6132705
- 422846 words of memory out of 5000000
+ 422837 words of memory out of 5000000
  19817 multiletter control sequences out of 15000+600000
  4858 words of font info for 18 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -958,7 +958,7 @@ Here is how much of TeX's memory you used:
 </usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb
 ></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb><
 /usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb>
-Output written on mind_map.pdf (1 page, 41752 bytes).
+Output written on mind_map.pdf (1 page, 41730 bytes).
 PDF statistics:
  48 PDF objects out of 1000 (max. 8388607)
  40 compressed objects within 1 object stream
