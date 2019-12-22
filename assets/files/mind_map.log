@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2018.4.3)  24 NOV 2019 15:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2018.4.3)  22 DEC 2019 18:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -920,37 +920,37 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-Overfull \hbox (0.79646pt too wide) in paragraph at lines 65--65
+Overfull \hbox (0.79646pt too wide) in paragraph at lines 66--66
  \OT1/cmss/m/n/8 suppl^^Sements 
  []
 
 
-Overfull \hbox (0.77426pt too wide) in paragraph at lines 65--65
+Overfull \hbox (0.77426pt too wide) in paragraph at lines 66--66
  [][][][]\OT1/cmss/m/n/8 Transcodeur[][] 
  []
 
 
-Overfull \hbox (40.54375pt too wide) in paragraph at lines 67--68
+Overfull \hbox (40.54375pt too wide) in paragraph at lines 68--69
  [] 
  []
 
 [1
 
 {/usr/local/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 69.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 69.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 70.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 70.
 
 (./mind_map.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 69.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 69.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 70.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 70.
 Package rerunfilecheck Info: File `mind_map.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 69.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 70.
  ) 
 Here is how much of TeX's memory you used:
  16515 strings out of 492995
  321292 string characters out of 6132705
- 422837 words of memory out of 5000000
+ 422857 words of memory out of 5000000
  19817 multiletter control sequences out of 15000+600000
  4858 words of font info for 18 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -958,7 +958,7 @@ Here is how much of TeX's memory you used:
 </usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb
 ></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb><
 /usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb>
-Output written on mind_map.pdf (1 page, 41730 bytes).
+Output written on mind_map.pdf (1 page, 41747 bytes).
 PDF statistics:
  48 PDF objects out of 1000 (max. 8388607)
  40 compressed objects within 1 object stream
