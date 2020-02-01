@@ -1,6 +1,6 @@
 # Site settings
 title: pmeasyr
-email: guillaume.pressiat@aphp.fr
+email: guillaume.pressiat@chu-brest.fr
 description: > # this means to ignore newlines until "baseurl:"
   pmeasyr : import de données PMSI avec R
 baseurl: "" # the subpath of your site, e.g. /blog/
