@@ -9,7 +9,7 @@ permalink: /miscellany/aides_pmeasyr/
 
 Des pages html statiques générées avec [pkgdown](https://github.com/hadley/pkgdown) permettent d'avoir l'aide du package en ligne : 
 
-[https://guillaumepressiat.github.io/pmeasyr/](https://im-aphp.github.io/pmeasyr/)
+[https://guillaumepressiat.github.io/pmeasyr/](https://guillaumepressiat.github.io/pmeasyr/)
 
 
 # Manuel pdf
