@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Eyes on first wave with french open data"
+title: "Eyes on first wave with french open data -- COVID-19"
 date: 2020-05-22 05:05:50 +0100
 author: Guillaume Pressiat
 tags: R shiny
@@ -18,7 +18,7 @@ comments: true
 
 **[Covidfrance app](https://guillaumepressiat.shinyapps.io/covidfrance/)** was first developped beginning of April for family, friends (and myself) to automatically know every day how many cases there are in each department where they live, daily along this crisis.
 
-This app download daily csv file from french site data.gouv.fr via its api and build the map for last day.
+This app download daily csv file from french site data.gouv.fr via its api and build the map updated with last day data.
 
 - [Scientific colour maps](http://www.fabiocrameri.ch/resources/ScientificColourMaps_FabioCrameri.png) palettes are used with scico package
 - Population's ratio statistics are enabled with a switch to have both absolute and relative measures of epidemy.
