@@ -1,0 +1,88 @@
+---
+layout: post
+title: "Partage et formation à R, au tidyverse : for free - 2"
+date: 2020-05-20 09:35:50 +0100
+author: Guillaume Pressiat
+tags: pmeasyr learnr
+comments: true
+---
+
+
+
+
+<!-- <img src = "https://upload.wikimedia.org/wikipedia/en/4/40/O_logo.png">
+ -->
+**Des ressources pour découvrir R et s'entraîner**  
+
+
+<!--more-->
+
+
+<br>
+
+Suite du précédent post sur une communauté R et les formations R payantes, voir ici pour [info](/blog/2020/05/learnr). 
+
+
+# Tutoriels
+
+Ci-dessous, j'oriente ici vers quelques liens, nouveaux fruits des projets qui ont rendu et rendent possible le package pmeasyr. 
+
+
+# learnr
+
+À l'origine desquels, on trouve, entre autres, si ce n'est R lui-même, les travaux menés par RStudio.
+
+RStudio a travaillé à l'intégration d'une fonctionnalité "tutoriels".
+
+- learnr est un package qui permet de créer des tutoriels, des questionnaires, qui répondent d'une manière assez unique à la question : comment apprendre ? 
+- des exemples de tutoriels interactifs sont disponibles en ligne
+- la [prochaine version](https://blog.rstudio.com/2020/02/25/rstudio-1-3-integrated-tutorials/) de RStudio prévoit l'intégration de tels tutoriels, ce qui va encore ajouter une dimension pertinente à ce logiciel
+- ces tutoriels seront à l'avenir intégrable dans chaque package, et permettront de se former au fil de leur utilisation
+
+[https://rstudio.github.io/learnr/](https://rstudio.github.io/learnr/)
+
+## Installer R, RStudio, et démarrer
+
+C'est l'étape avec laquelle l'ensemble R + RStudio, tout devient possible !
+
+[https://learnr-examples.shinyapps.io/ex-setup-r/](https://learnr-examples.shinyapps.io/ex-setup-r/)
+
+## Découvrir les principes de la manipulation de données avec R / dplyr
+
+C'est l'étape où l'on prend conscience que R peut rendre les choses faciles, en peu de verbes : 
+
+
+filter, mutate, arrange, summarise, group_by
+
+Ces tutoriels sont interactifs.
+
+### Les bases : [https://learnr-examples.shinyapps.io/ex-data-basics/](https://learnr-examples.shinyapps.io/ex-data-basics/)
+
+### Synthétiser les données : [https://learnr-examples.shinyapps.io/ex-data-summarise/](https://learnr-examples.shinyapps.io/ex-data-summarise/)
+
+### Filtrer les données : [https://learnr-examples.shinyapps.io/ex-data-filter/](https://learnr-examples.shinyapps.io/ex-data-filter/)
+
+### Ajouter des colonnes : [https://learnr-examples.shinyapps.io/ex-data-mutate/](https://learnr-examples.shinyapps.io/ex-data-mutate/)
+
+Ce ne sont que des exemples qui invitent à produire des tutoriels plus détaillés.
+
+## R4ds
+
+On en apprend plus en se référant au livre [R for data science](https://r4ds.had.co.nz/)
+
+<!-- ![r4ds](https://d33wubrfki0l68.cloudfront.net/b88ef926a004b0fce72b2526b0b5c4413666a4cb/24a30/cover.png = 150*150) -->
+<img src="https://d33wubrfki0l68.cloudfront.net/b88ef926a004b0fce72b2526b0b5c4413666a4cb/24a30/cover.png" height="150" />
+
+
+# analyse-R
+
+Vous trouverez ici une documentation en français qui regroupe l'essentiel pour démarrer et consolider sa connaissance de R :
+
+[https://larmarange.github.io/analyse-R/](https://larmarange.github.io/analyse-R/)
+
+# Documents pmeasyr
+
+[https://guillaumepressiat.github.io/pmeasyr-book/](https://guillaumepressiat.github.io/pmeasyr-book/)
+
+La suite sera certainement l'intégration de tutoriels de type learnr dans pmeasyr et nomensland.
+

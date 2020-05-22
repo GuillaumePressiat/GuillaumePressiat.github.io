@@ -1,0 +1,35 @@
+---
+layout: post
+title: "Dimonade"
+date: 2020-02-15 09:15:50 +0100
+author: Guillaume Pressiat
+tags: pmeasyr cim&nbsp;&&nbsp;ccam
+categories: Application
+comments: true
+---
+
+
+
+
+<img src = "/images/dimonade.png">
+
+Accéder aux nomenclatures et classifications du PMSI sans sourciller
+
+
+<!--more-->
+
+<br>
+
+
+### Application dimonade
+
+Dans le PMSI, il y a des nomenclatures et classifications, **[dimonade](https://guillaumepressiat.shinyapps.io/dimonade/)** regroupe certaines d'entre elles (CCAM, CIM, GHM, GHS).
+
+L'objectif : essayer de ne pas se sentir dominé par la finesse des classifications, trouver facilement le niveau d'agrégat adéquat pour répondre à la question posée. 
+Prendre la classification par les cornes, en quelque sorte.
+
+Et ne pas accumuler les manipulations de nomenclatures dans des tableurs...
+
+<a target="_blank" href="https://guillaumepressiat.shinyapps.io/dimonade/">
+<img border="0" alt="dimonade" src="/images/dimonade.png">
+</a>

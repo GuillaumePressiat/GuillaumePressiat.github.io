@@ -1,0 +1,70 @@
+---
+layout: post
+title: "Partage et formation à R, au tidyverse : for free - 1"
+date: 2020-05-20 09:30:50 +0100
+author: Guillaume Pressiat
+tags: pmeasyr learnr
+comments: true
+---
+
+
+
+
+<!-- <img src = "https://upload.wikimedia.org/wikipedia/en/4/40/O_logo.png">
+ -->
+**Un propos sur la communauté R & PMSI**
+
+*Propos rédigés avant la crise COVID-19, publication volontairement à retardement*
+
+<!--more-->
+
+<br>
+
+# Sur une communauté R & PMSI
+
+R semble désormais être un outil reconnu pour le PMSI, un [blog](https://www.lespmsi.com/6-raisons-dutiliser-r-en-analyse-pmsi/)
+en fait même la promotion, et propose une formation payante.  
+Il est bon de souligner qu'il existe, déjà, des ressources intéressantes en ligne.
+
+Si certains profitent des projets open source comme d'une poule aux oeufs d'oR pour proposer des prestations 
+payantes (formations, mais surtout logiciels), c'est là au moins une publicité, il faut le reconnaître, pour R. 
+
+Il fera tout de même du bien de faire publicité aux travaux qui restent ouverts à tous, [c'est l'objet du post suivant](/blog/2020/05/learnr-2#tutoriels). 
+
+### About a blog...
+
+C'est étonnant de vanter la "gratuité" d'un outil pour en construire un autre avec, payant. 
+C'est qu'il n'y a pas de frontière entre ce "gratuit" et le payant. En réalité, R est un logiciel libre (mais on doit dire gratuit, *lapsus*, quand ce logiciel permet le fin du fin : faire l'inverse).
+
+Pour R et le PMSI, c'est toujours un plaisir de concourir au profit des autres[^1]. Que les personnes qui veulent profiter du "gratuit" le fassent au moins avec décence. S'il y a des mots qu'on utilise, 
+comme je l'ai fait [ici](https://guillaumepressiat.github.io/pmeasyr/#le-pourquoi-du-package), pour faire la promotion de R, les lire de la bouche d'un autre a déclenché chez moi un réflexe. 
+Je ne signifie pas que des idées appartiennent à quelqu'un, bien au contraire. Ces idées étaient le fruit d'un groupe d'utilisateurs R. 
+Il y une nette différence entre payer chacun pour un outil et mettre en commmun pmeasyr.
+Il n'y a pas de règles, c'est ainsi. Je ne parlerais pas des idées ou des développements faits en R dans l'outil en question : comme il n'est pas open-source, je ne peux rien en dire.
+
+Bref, si on se contente d'être *soft*, cela peut être vu comme un relais dans la promotion de R pour le PMSI. 
+
+
+J'aime penser, comme cela avait été initié à l'AP-HP, qu'une communauté hospitalière d'utilisateurs de R pour le PMSI (et plus largement données de santé) peut s'organiser pour partager les méthodes, 
+sans faire une fois de plus appel à 
+un intervenant "extérieur". Celui qu'on attendrait toujours, comme un messie, au regard tellement neuf.   
+
+Que la balle retourne à l'envoyeur n'est pas tellement mon objectif, travailler en commun s'avérant plutôt être un sport collectif. 
+
+M'enfin, que les gens apprennent comme ils préfèrent tant qu'ils le font avec envie ! 
+
+
+La suite : publicité aux travaux qui restent ouverts à tous, [c'est l'objet du post suivant](/blog/2020/05/learnr-2#tutoriels). 
+
+### Chat pmeasyr
+
+Pour ceux qui seraient intéréssés par le partage, j’ai initié un chat en ligne pour partager les problèmes, échanger les idées, s’entraider et répondre aux questions autour de R et du PMSI. Vous pouvez me contacter par mail pour y être intégrés. L’adresse pour cela se trouve [ici](https://github.com/GuillaumePressiat/pmeasyr/blob/master/DESCRIPTION#L22).
+
+Cela peut aussi simplement permettre de faire un retour sur vos utilisations de pmeasyr.
+
+<img src = "/images/zulip.png">
+
+
+----
+<!-- [^1]: Chacun sa croûte, chacun son chemin... -->
+[^1]: sans même avoir été mis au courant, encore mieux.
