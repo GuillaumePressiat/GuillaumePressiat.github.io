@@ -30,7 +30,7 @@ This app download daily csv file from french site data.gouv.fr via its api and b
 Data availables are:
 
 - *Hospitalisés*: people in hospital on day i
-- *En réanimation*: people in care unit on day i
+- *En réanimation*: people in intensive care unit on day i
 - *Retours à domicile (cumulés)*: cumul of returned at home until the day i
 - *Décès (cumulés)*: cumul of deceases <u>at hospital</u> until the day i
 
