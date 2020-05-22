@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Eyes on first wave with french open data"
-date: 2020-05-21 13:05:50 +0100
+date: 2020-05-22 05:05:50 +0100
 author: Guillaume Pressiat
 tags: R shiny
 categories: Application
