@@ -1,0 +1,29 @@
+---
+layout: post
+title: "Creative commons in the meantime"
+date: 2020-08-16 06:05:50 +0100
+author: Guillaume Pressiat
+tags: R shiny
+categories: Application
+comments: true
+---
+
+
+
+Just a little post about sharing code and skills with the unknown.
+
+
+
+<!--more-->
+<img src = "/images/covid/covid-usa.png" alt = "Covid-usa shiny app" width = "70%">
+
+
+After posting about [covidfrance app](https://guillaumepressiat.github.io/blog/2020/05/covidview), I 
+[exchanged](https://gist.github.com/GuillaumePressiat/0e3658624e42f763e3e6a67df92bc6c5#gistcomment-3363830) with github users wanting to reproduce the app for their country..
+
+I just want to say here that it was really a pleasure to exchange with people around the world like this. 
+It was nice to share skills and to learn new things with problematics on new data.
+
+No matter the manner (yes GitHub is Microsoft), peoples want to share and learn things. For what it's worth it works. 
+After all I've learned from r-bloggers and GitHub, it just seems natural to "return something".
+
