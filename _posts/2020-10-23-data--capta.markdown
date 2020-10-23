@@ -180,9 +180,9 @@ Ce qui n'apparaitra pas dans ces replis, c'est la connaissance de terroir du pay
 On développe dans le paragraphe suivant une réflexion sur l'aval : les modalités d’analyses de ces obtenues. 
 
 
-### Perspectives de la donnée 
+## Perspectives de la donnée 
 
-#### La donnée et le kaléidoscope, l'endroit de nos subjectivités
+### La donnée et le kaléidoscope, l'endroit de nos subjectivités
 
 
 L'analyse de données a ceci de proche de l'analyse mathématique qu'elle joue avec les échelles. Il y a l'infiniment petit d'une mesure, d'une information, d'un "cas particulier" -le grain de la donnée, et l'infiniment grand de l'ensemble. L'infini exprime ici de manière exagérée la combinaison des intervalles finis qui supportent la donnée dans des dimensions et disciplines nombreuses. Le terme d'"infini" accroche l'esprit car on sent que l'on pourrait s'y perdre[^6]. 
