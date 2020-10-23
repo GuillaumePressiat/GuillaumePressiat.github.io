@@ -10,7 +10,7 @@ comments: true
 
 
 
-> La tentation de l’idéalisme vient peut-être du mot même de données qui décrit aussi mal que possible ce sur quoi s’appliquent les capacités cognitives ordinaires des érudits, des savants et des intellectuels. Il faudrait remplacer ce terme par celui, beaucoup plus réaliste, d’obtenues et parler par conséquent de bases d’obtenues, de sublata plutôt que de data.[^1]
+> La tentation de l’idéalisme vient peut-être du mot même de données qui décrit aussi mal que possible ce sur quoi s’appliquent les capacités cognitives ordinaires des érudits, des savants et des intellectuels. Il faudrait remplacer ce terme par celui, beaucoup plus réaliste, d’obtenues et parler par conséquent de bases d’obtenues, de sublata plutôt que de data.[^1]
 
 <!--more-->
 
@@ -79,7 +79,7 @@ Mais revenons sur le concept de donnée. Je reprends ici des éléments d'un art
 
 Suite au développement des expérimentations scientifiques et de l'instrumentation allant avec, le terme donnée apparait au XVIIème siècle.
 
-> ***Données***, *adj. pris subst. terme de Mathématique, qui signifie certaines choses ou quantités, qu’on suppose être données ou connues, & dont on se sert pour en trouver d’autres qui sont inconnues, & que l’on cherche. Un problème ou une question renferme en général deux sortes de grandeurs, les données & les cherchées, data & quæsita.*[^2]
+> **Données**, adj. pris subst. terme de Mathématique, qui signifie certaines choses ou quantités, qu’on suppose être données ou connues, & dont on se sert pour en trouver d’autres qui sont inconnues, & que l’on cherche. Un problème ou une question renferme en général deux sortes de grandeurs, les données & les cherchées, data & quæsita.[^2]
 
 Jusque-là, on est en plein dans notre contexte, le souhait d'avoir l'éventail du connu pour trouver, dans les replis, ce qui est pour l'instant inconnu, ce qui reste à chercher et à comprendre dans les données.
 
@@ -104,11 +104,11 @@ Actuellement, nous vivons dans un monde où le terme *big data* est souvent util
 
 Bruno Latour retourne brillamment ce qu'est une donnée. C'est très intéressant.
 
-> La tentation de l’idéalisme vient peut-être du mot même de données qui décrit aussi mal que possible ce sur quoi s’appliquent les capacités cognitives ordinaires des érudits, des savants et des intellectuels. Il faudrait remplacer ce terme par celui, beaucoup plus réaliste, d’obtenues et parler par conséquent de bases d’obtenues, de sublata plutôt que de data.[^1]
+> La tentation de l’idéalisme vient peut-être du mot même de données qui décrit aussi mal que possible ce sur quoi s’appliquent les capacités cognitives ordinaires des érudits, des savants et des intellectuels. Il faudrait remplacer ce terme par celui, beaucoup plus réaliste, d’obtenues et parler par conséquent de bases d’obtenues, de sublata plutôt que de data.[^1]
 
 Ce qui est derrière cette notion d'obtenues se voit compléter dans le terme "capta", Johanna Drucker :
 
-> Croire que les données sont intrinsèquement quantitatives — évidentes, neutres sur le plan des valeurs et indépendantes de l’observateur — exclut la possibilité de les concevoir comme qualitatives, co-dépendamment constituées — en d’autres termes, de reconnaître que data sont des captas […] Je suggère que nous repensions fondamentalement les données comme des captas en termes d’ambiguïté plutôt que de certitude, et que nous trouvions des moyens d’exprimer graphiquement la complexité de l’interprétation.[^5],  [trad. libre][^4]
+> Croire que les données sont intrinsèquement quantitatives — évidentes, neutres sur le plan des valeurs et indépendantes de l’observateur — exclut la possibilité de les concevoir comme qualitatives, co-dépendamment constituées — en d’autres termes, de reconnaître que data sont des captas […] Je suggère que nous repensions fondamentalement les données comme des captas en termes d’ambiguïté plutôt que de certitude, et que nous trouvions des moyens d’exprimer graphiquement la complexité de l’interprétation.[^5],  [trad. libre][^4]
 
 
 <br>
