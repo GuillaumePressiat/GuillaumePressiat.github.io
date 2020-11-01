@@ -52,23 +52,22 @@ blockquote {
 
 ## Introduction 
   
-L'usage courant du terme de donnée nous amène à l'interroger comme concept (et percept par là-même). C'est un préliminaire pour pouvoir interroger tant bien les données elles-mêmes que les différents processus et acteurs amenant à les obtenir. Si un objectif est défini, celui de trouver dans toutes les informations de santé disponibles des réponses à des questions, ainsi que soulever de nouvelles questions, le moyen d'atteindre cet objectif reste à concevoir : comment respecter la donnée, et, avec elle, respecter les différents acteurs qui s'y investissent ? 
+L'usage courant du terme de donnée nous amène à l'interroger comme concept (et percept par là-même). C'est un préliminaire pour pouvoir interroger tant bien les données elles-mêmes que les différents processus et acteurs amenant à les obtenir. Si un objectif est défini, celui de trouver dans toutes les informations de santé disponibles des réponses à des questions, ainsi que de soulever de nouvelles questions, le moyen d'atteindre cet objectif reste à concevoir : comment respecter la donnée, et, avec elle, respecter les différents acteurs qui s'y investissent ? 
 
 *Est-on bien sûr que l'analyse des données tient compte de la complexité des processus et du crédit des acteurs qui les réalisent ?*
-
 
 ## Contexte
 
 En période de crise sanitaire, les hôpitaux ont été en première ligne pour affronter le virus. En parallèle, les pouvoirs publics ont invité les hôpitaux à produire une donnée au fil de l'eau (transmissions hebdomadaires) pour alimenter le nouveau HealthDataHub (HDH). 
+ 
+Les louanges sur la capacité du pays -et des territoires- à trouver des solutions sans l'aide de l'État ont fleuri lors de cette crise, mais le décret précisant que les données devraient remonter des hôpitaux vers le HDH est passé par un canal on ne peut plus central. Et comme souvent, l'information ensuite enchevêtrée dans les strates administratives ne circule pas : elle sédimente. Il aura donc fallu la chercher partout. Subtile l'efficacité et la clarté en période de crise. (On n'oubliera pas qu'en parallèle les hôpitaux répondaient déjà au relevé pluri-quotidien des patients COVID hospitalisés / en réanimation / décédés ou sortis, à destination des ARS - Santé Publique France - etc.). 
 
-Les louanges sur la capacité du pays -et des territoires, à trouver des solutions sans l'aide de l'État, trop centralisé, ont fleuri lors de cette crise, mais le décret précisant que les données devraient remonter des hôpitaux vers le HDH est passé par un canal on ne peut plus central, loin de la réalité des hôpitaux, il aura fallu chercher l'information partout (dans ce décret, notices techniques, échanges de mails en panique). Pareil pour tout le monde, dans tous les hôpitaux. Subtile, l'efficacité et la clarté, en période de crise. 
+Mais, c'est bien normal de vouloir le plus de données possible en période de crise pour avoir toutes les chances de mieux comprendre ce virus. Cela dit les producteurs de données ne sont pas du tout associés ni considérés en ce qui concerne les nouvelles modalités d'analyse de ces données. Pour adopter une formulation organiciste, on déconnecte la tête du corps, et ce n'est pas une bonne chose pour la suite. Il faudrait relier les hôpitaux au HealthDataHub, comme son nom l'indique d'ailleurs, et pas uniquement les données des hôpitaux. *À l'échelle des grands hôpitaux, c'est ce qui est réalisé avec les entrepôts de données de santé : l'organisation à cette échelle peut permettre de créer le lien entre les métiers de la donnée et les métiers du soin.* 
 
-Loin des données, et des problématiques de ceux qui les produisent, en tout cas. (On n'oubliera pas qu'en parallèle les hôpitaux répondaient déjà au relevé pluri-quotidien des patients COVID hospitalisés / en réanimation / décédés ou sortis, à destination des ARS - Santé Publique France - etc.). Mais, c'est bien normal de vouloir le plus de données possible en période de crise pour avoir toutes les chances de mieux comprendre ce virus. 
+Plus pragmatiquement, la demande de remontées hebdomadaires donne l'impression que la donnée coule de l'hôpital comme d'une source. En pleine crise sanitaire comme en temps normal, ce n'est pas le cas. Cette impression ne s'atténue guère quand le ministre de la santé évoque la perte de temps pour un médecin de saisir ces informations (l'avenir du codage[^7]), alors qu'en même temps, il est demandé aux hôpitaux de fournir ces informations à un rythme accéléré ! Mais qui sont ces médecins qui codent ?  
 
-Cela dit, les producteurs de données ne sont pas du tout associés ni considérés en ce qui concerne les nouvelles modalités de leur analyse. Pour adopter une formulation organiciste, on déconnecte la tête du corps, et ce n'est pas une bonne chose pour la suite. Il faudrait relier les hôpitaux au HealthDataHub, comme son nom l'indique d'ailleurs, et pas uniquement les données des hôpitaux. *À l'échelle des grands hôpitaux, c'est ce qui est réalisé avec les entrepôts de données de santé locaux.* Plus pragmatiquement, la demande de remontées hebdomadaires donne l'impression que la donnée coule de l'hôpital comme d'une source. En pleine crise sanitaire comme en temps normal, ce n'est pas le cas. Cette impression ne s'atténue guère quand le ministre de la santé évoque la perte de temps pour un médecin de saisir ces informations (l'avenir du codage[^7]), alors qu'en même temps, il est demandé aux hôpitaux de fournir ces informations à un rythme accéléré ! Mais qui sont ces médecins qui codent ?  
 
-Autre point délicat : le format des données hospitalières (PMSI, voir plus bas), quasiment stable depuis une dizaine d'années est bousculé pour répondre à cette demande du HDH. Il l'est également pour mise en demeure des formats par la CNIL, erreur de calendrier. En pleine crise, donc, on déstabilise les systèmes d'informations hospitaliers s'appuyant sur ces données. 
-
+Autre point délicat : le format des données hospitalières (PMSI, voir plus bas), quasiment stable depuis une dizaine d'années est bousculé pour répondre à cette demande du HDH. Il l'est également pour tenir compte des exigences de la CNIL (niveau d'anonymisation des informations patients[^9]), erreur / hasard de calendrier. En pleine crise, donc, on déstabilise les systèmes d'informations hospitaliers s'appuyant sur ces données. 
 
 ## Données ou obtenues ?
 
@@ -89,15 +88,6 @@ Jusque-là, on est en plein dans notre contexte, le souhait d'avoir l'éventail 
 Actuellement, nous vivons dans un monde où le terme *big data* est souvent utilisé, mais là encore, sans forcément bien connaître ni pouvoir comprendre quelles sont les données qui sont derrières. 
 
 
-<!-- Elles : -->
-
-<!-- - sont de toutes sortes (structurées, non structurées ; documents, images, mesures, chiffres, codes, classes, etc.) -->
-<!-- - proviennent de toutes parts (logiciels, navigation web, déplacements, consommation, entreprises, hôpitaux, etc.) -->
-<!-- - sont produites selon des processus et par des acteurs très divers (flux automatisés, production par clics, actions d'un humanoïde) -->
-<!-- - nécessitent beaucoup d'énergie -->
-<!-- - procurent du pouvoir à celui qui a la main dessus -->
-
-
 ### Obtenues
 
 > Dans les années 1990, les sociologues des sciences ont critiqué l’usage du mot « donnée » pour désigner des objets en réalité construits, arrachés au terrain au prix d’un temps et d’efforts parfois considérables. Le mot « obtenue » est notamment suggéré par Bruno Latour comme une alternative souhaitable.[^4]
@@ -106,7 +96,7 @@ Bruno Latour retourne brillamment ce qu'est une donnée. C'est très intéressan
 
 > La tentation de l’idéalisme vient peut-être du mot même de données qui décrit aussi mal que possible ce sur quoi s’appliquent les capacités cognitives ordinaires des érudits, des savants et des intellectuels. Il faudrait remplacer ce terme par celui, beaucoup plus réaliste, d’obtenues et parler par conséquent de bases d’obtenues, de sublata plutôt que de data.[^1]
 
-Ce qui est derrière cette notion d'obtenues se voit compléter dans le terme "capta", Johanna Drucker :
+Ce qui est derrière cette notion d'obtenues se voit complété dans le terme "capta", Johanna Drucker :
 
 > Croire que les données sont intrinsèquement quantitatives — évidentes, neutres sur le plan des valeurs et indépendantes de l’observateur — exclut la possibilité de les concevoir comme qualitatives, co-dépendamment constituées — en d’autres termes, de reconnaître que data sont des captas […] Je suggère que nous repensions fondamentalement les données comme des captas en termes d’ambiguïté plutôt que de certitude, et que nous trouvions des moyens d’exprimer graphiquement la complexité de l’interprétation.[^5],  [trad. libre][^4]
 
@@ -149,7 +139,7 @@ Nous nous concentrerons ici sur la fabrication des diagnostics décrivant les pa
 
 #### Du compte rendu d'hospitalisation au diagnostic
 
-Ces diagnostics appartiennent de manière normative à une classification internationale des maladies (CIM-10) basée sur des codes alpha-numériques : pour faire très simple, 'E66' signifie par exemple "Obésité". C'est un code parmi d'autres qui décrit le motif de prise en charge du patient, ses pathologies associées. Ce diagnostic précis, est codé avec 6 caractères au maximun, au sein d'un système robuste, le programme de médicalisation des systèmes d'information (PMSI) ; il alimente régulièrement les bases de données nationales de santé.
+Ces diagnostics appartiennent de manière normative à une classification internationale des maladies (CIM-10) basée sur des codes alpha-numériques : pour faire très simple, 'E66' signifie par exemple "Obésité". C'est un code parmi d'autres qui décrit le motif de prise en charge du patient, ses pathologies associées. Ce diagnostic précis, est codé avec 6 caractères au maximum, au sein d'un système robuste, le programme de médicalisation des systèmes d'information (PMSI) ; il alimente régulièrement les bases de données nationales de santé.
 
 - Ces codes peuvent être "codés" par le médecin ayant pris en charge le patient, en parallèle de la rédaction d'un compte rendu d'hospitalisation ou d'une lettre de sortie, envoyée au médecin traitant.
 - Ils peuvent aussi être "codés" par des experts du codage, au sein d'un département spécifique dans l'hôpital : le DIM. Les médecins d'information médicale (MIM) associés à de plus nombreux techniciens (TIM) "convertissent" ce qui a été inscrit dans le compte rendu d'hospitalisation par le médecin ayant pris en charge le patient.
@@ -180,15 +170,15 @@ Ce qui n'apparaitra pas dans ces replis, c'est la connaissance de terroir du pay
 On développe dans le paragraphe suivant une réflexion sur l'aval : les modalités d’analyses de ces obtenues. 
 
 
-### Perspectives de la donnée 
+## Perspectives de la donnée 
 
-#### La donnée et le kaléidoscope, l'endroit de nos subjectivités
+### La donnée et le kaléidoscope, l'endroit de nos subjectivités
 
 
 L'analyse de données a ceci de proche de l'analyse mathématique qu'elle joue avec les échelles. Il y a l'infiniment petit d'une mesure, d'une information, d'un "cas particulier" -le grain de la donnée, et l'infiniment grand de l'ensemble. L'infini exprime ici de manière exagérée la combinaison des intervalles finis qui supportent la donnée dans des dimensions et disciplines nombreuses. Le terme d'"infini" accroche l'esprit car on sent que l'on pourrait s'y perdre[^6]. 
 
 
-Imbriqués dans différentes échelles successives, les processus de production de la donnée se devinent. Si l'on joue comme on le fait en tournant un kaléidoscope, *un voyage imagé dans les données*, il y aura autant de temps d'arrêts, où le niveau de détail apparait plus net, que de dimensions subjectives et d'expertises requises pour analyser les données. À chaque temps d'arrêt du kaléidoscope, un acteur de la donnée retrouve l'objet de son travail, la netteté dans laquelle il reconnaît une réalité, une familiarité. Il voit net sur sa discipline, mais peut-être un peu flou ailleurs. C'est une expertise qui prend le pouvoir. Ou, pour remplacer l'expertise par un terme moins exclusif, la maîtrise. L'aphorisme nous aide : sans elle, la puissance n'est rien. Ou on accélère et tout va plus vite, ce qui est perçu n'est que flou. Ou on élabore en prenant le temps pour éviter ce flou, la maîtrise serait de savoir ce que l'on veut trouver avant de commencer à chercher. 
+Imbriqués dans différentes échelles successives, les processus de production de la donnée se devinent. Si l'on joue comme on le fait en tournant un kaléidoscope, *un voyage imagé dans les données*, il y aura autant de temps d'arrêts, où le niveau de détail apparait plus net, que de dimensions subjectives et d'expertises requises pour analyser les données. À chaque temps d'arrêt du kaléidoscope, un acteur de la donnée retrouve l'objet de son travail, la netteté dans laquelle il reconnaît une réalité, une familiarité. Il voit net sur sa discipline, mais peut-être un peu flou ailleurs. C'est une expertise qui prend le pouvoir. Ou, pour remplacer l'expertise par un terme moins exclusif, la maîtrise. La formule nous aide : sans elle, la puissance n'est rien. Ou on accélère et tout va plus vite, ce qui est perçu n'est que flou. Ou on élabore en prenant le temps pour éviter ce flou, la maîtrise serait de savoir ce que l'on veut trouver avant de commencer à chercher. 
 
 
 Cette métaphore du kaléidoscope fonctionne aussi pour le partage démocratique. Savant ou non, le constat, c'est que chacun est ancré dans sa subjectivité : il n'y a pas plus de partage de pouvoir qu'il n'existe d'objectivité si pour chacun l'échelle du zoom est figée. Comme dirait l'autre : "il ne faut pas voir les choses par le petit bout de la lorgnette".
@@ -231,5 +221,6 @@ Perspective avec contre-jour : si cette donnée n'est pas un don du ciel, n'atte
 [^6]: C'est désormais un océan de données dans lequel nous vivons, un véritable enjeu qu'il ne s'agit pas d'aborder ici : on ne fait que pressentir les conséquences de notre dépendance à la donnée. Y a t-il un sens à tout cela, quelles seront les conséquences politiques, énergétiques et sociales d'une fuite en avant dans l'âpre monde du tout-donnée (smart-cities, etc.) ?
 [^7]: [https://www.hospimedia.fr/actualite/articles/20200615-gestion-les-medecins-dim-rappellent-l-utilite-du](https://www.hospimedia.fr/actualite/articles/20200615-gestion-les-medecins-dim-rappellent-l-utilite-du)
 [^8]: *Cette logique structurant l'information hospitalière représente un investissement humain et logiciel pour les hôpitaux réellement conséquent, elle s'inscrit dans le PMSI et a depuis 2008 pour principale finalité le financement des hôpitaux par la tarification à l'activité  -et non pas la recherche, ni l'épidémiologie, ni la lutte contre le COVID - les hôpitaux cherchant à équilibrer leurs finances dans ce système (garder le navire à flot).*
+[^9]: [https://www.atih.sante.fr/mesures-de-securite-de-pseudonymisation-des-logiciels-pmsi](https://www.atih.sante.fr/mesures-de-securite-de-pseudonymisation-des-logiciels-pmsi)
 
 
