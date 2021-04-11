@@ -15,7 +15,7 @@ I was interested to take RSelenium for a spin.
 
 <!--more-->
 
-Few years ago, Selenium and R wasn't particularly friends (Python+Selenium were more used for instance) but 
+Few years ago, Selenium and R weren't particularly friends (Python+Selenium were more used for instance) but 
 it seems to have changed.
 Package author and [rOpenSci](https://docs.ropensci.org/RSelenium/index.html) works and documentation did it.
 
@@ -24,7 +24,7 @@ I share here some recipes in this context: when you want to scrape a paginated t
 not purely HTML but a result of embedded javascript execution in browser.
 
 A thing that wans’t particularly easy in Selenium at the beginning was how to extract sub-elements like html table code and not “source page as a whole”. 
-I have used `innerHTML` attributes for this.
+I have used `innerHTML` attribute for this.
 
 This example explains how emulate clicks can be done to navigate from elements to others in the HTML page, and a more focus point on moving from page to page in a paginated table.
 
