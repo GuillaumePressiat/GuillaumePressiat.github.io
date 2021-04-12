@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Using RSelenium to scrape a paginated HTML table"
-date: 2021-04-11 05:05:50 +0100
+date: 2021-04-12 09:05:50 +0100
 author: Guillaume Pressiat
 tags: R RSelenium rvest
 categories: scraping
@@ -32,7 +32,7 @@ This example explains how emulate clicks can be done to navigate from elements t
 
 <br>
 
-Here is a [youtube video]([https://www.youtube-nocookie.com/embed/udJAi5dx2UQ?cc_load_policy=1&cc_lang_pref=en]) with subtitles I have made to illustrate it (no voice).
+Here is a [youtube video](https://www.youtube.com/watch?v=udJAi5dx2UQ&cc_load_policy=1&cc_lang_pref=en) with subtitles I have made to illustrate it (no voice).
 
 <iframe src="https://www.youtube-nocookie.com/embed/udJAi5dx2UQ?cc_load_policy=1&cc_lang_pref=en&hq=720" width='100%' height='600px'></iframe>
 
