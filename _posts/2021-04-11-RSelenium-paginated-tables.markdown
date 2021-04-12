@@ -8,7 +8,21 @@ categories: scraping
 comments: true
 ---
 
+<style>
 
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+}
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+</style>
 
 Trying to answer this question on [stackoverflow](https://stackoverflow.com/questions/67021563/scrape-understat-data-into-r) about understat.com scraping
 I was interested to take RSelenium for a spin. 
@@ -34,8 +48,9 @@ This example explains how emulate clicks can be done to navigate from elements t
 
 Here is a [youtube video](https://www.youtube.com/watch?v=udJAi5dx2UQ&cc_load_policy=1&cc_lang_pref=en) with subtitles I have made to illustrate it (no voice).
 
-<iframe src="https://www.youtube-nocookie.com/embed/udJAi5dx2UQ?cc_load_policy=1&cc_lang_pref=en&hq=720" width='100%' height='600px'></iframe>
-
+<center>
+<iframe src="https://www.youtube-nocookie.com/embed/udJAi5dx2UQ?cc_load_policy=1&cc_lang_pref=en&hq=720" width="560" height="315" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</center>
 
 <br>
 
