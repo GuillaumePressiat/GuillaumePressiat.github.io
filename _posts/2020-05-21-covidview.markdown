@@ -20,7 +20,7 @@ comments: true
 
 This app download daily csv file from french site data.gouv.fr via its api and build the map updated with last day data.
 
-- [Scientific colour maps](http://www.fabiocrameri.ch/resources/ScientificColourMaps_FabioCrameri.png) palettes are used with scico package
+- [Scientific colour maps](https://www.fabiocrameri.ch/colourmaps/) palettes are used with scico package
 - Population's ratio statistics are enabled with a switch to have both absolute and relative measures of epidemy.
 - Overlay of json layers is used with full opacity to render time progression visible 
 - departments shapes are simplified and smoothed with [smoothr](https://cran.r-project.org/web/packages/smoothr/vignettes/smoothr.html#smoothing-methods) (Chaikin method) and rmapshaper, really nice packages
