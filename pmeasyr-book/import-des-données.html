@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>7 Fichier TRA | Traitement des données PMSI avec R</title>
+  <title>4 Import des données | Traitement des données PMSI avec R</title>
   <meta name="description" content="Ce livre numérique présente des exemples de traitements de données PMSI avec R" />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="7 Fichier TRA | Traitement des données PMSI avec R" />
+  <meta property="og:title" content="4 Import des données | Traitement des données PMSI avec R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="7 Fichier TRA | Traitement des données PMSI avec R" />
+  <meta name="twitter:title" content="4 Import des données | Traitement des données PMSI avec R" />
   
   <meta name="twitter:description" content="Ce livre numérique présente des exemples de traitements de données PMSI avec R" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="étude-des-files-actives.html"/>
-<link rel="next" href="statistiques-du-pmsi.html"/>
+<link rel="prev" href="archives.html"/>
+<link rel="next" href="requêtes-sur-des-pathologies-actes.html"/>
 <script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -293,16 +293,123 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="fichier-tra" class="section level1" number="7">
-<h1><span class="header-section-number">7</span> Fichier TRA</h1>
-<p>Le fichier TRA est un fichier du <em>out</em> qui permet de relier les données anonymes du <em>out</em> aux données du <em>in</em>, il comprend un lien entre :</p>
-<ul>
-<li>MCO : clé rsa, numéro de rss, numéro de sejour (nas), date d’entrée et date de sortie du séjour</li>
-<li>SSR : numéro séquentiel du séjour + noseqrhs et numéro de séjour + numéro de semaine</li>
-<li>PSY RPSA : ipp, date d’entrée et de fin du sejour, numéro séquentiel du séjour, numéro de séquence et numéro de séjour, dates de début et fin de sequence</li>
-<li>PSY R3A : ipp, date de l’acte, numéro d’ordre, forme activité, um, nature et lieu de l’acte</li>
-<li>HAD : numéro séquentiel de séjour, numéro de séquence, sous-sequence et numéro de séjour, dates de début et fin des séquences et sous-séquences, dates d’entrée et de sortie du séjour, modes d’entrée sortie provenance destination</li>
-</ul>
+<div id="import-des-données" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Import des données</h1>
+<div id="mco" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> MCO</h2>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Nom</th>
+<th align="left">Fonction</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><a href="https://guillaumepressiat.github.io/pmeasyr/reference/irsa.html">irsa</a></td>
+<td align="left">~ MCO - Import des RSA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="https://guillaumepressiat.github.io/pmeasyr/reference/irum.html">irum</a></td>
+<td align="left">~ MCO - Import des RUM</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="https://guillaumepressiat.github.io/pmeasyr/reference/idiap.html">idiap</a></td>
+<td align="left">~ MCO - Import des DIAP</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="https://guillaumepressiat.github.io/pmeasyr/reference/idmi_mco.html">idmi_mco</a></td>
+<td align="left">~ MCO - Import des DMI</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="https://guillaumepressiat.github.io/pmeasyr/reference/iium.html">iium</a></td>
+<td align="left">~ MCO - Import des donnees UM</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="https://guillaumepressiat.github.io/pmeasyr/reference/ileg_mco.html">ileg_mco</a></td>
+<td align="left">~ MCO - Import des erreurs Leg</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="https://guillaumepressiat.github.io/pmeasyr/reference/imed_mco.html">imed_mco</a></td>
+<td align="left">~ MCO - Import des Med</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="https://guillaumepressiat.github.io/pmeasyr/reference/ipo.html">ipo</a></td>
+<td align="left">~ MCO - Import des PO</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="https://guillaumepressiat.github.io/pmeasyr/reference/iano_mco.html">iano_mco</a></td>
+<td align="left">~ MCO - Import des Anohosp</td>
+</tr>
+</tbody>
+</table>
+<p>Les données in / out sont prises en charge.</p>
+<div id="rsa" class="section level3" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> RSA</h3>
+<p>Selon la nature des analyses à produire, plusieurs types d’imports sont possibles :</p>
+<table>
+<colgroup>
+<col width="5%" />
+<col width="94%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="right">Type</th>
+<th align="left">Import</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">Light : Partie fixe</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">Light+ : Partie fixe + stream en ligne (+) actes et das</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="left">Light++ : Partie fixe + stream en ligne (++) actes, das, typaut um et dpdr des um</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="left">Standard : Partie fixe + creation des tables actes, das et rsa_um</td>
+</tr>
+<tr class="odd">
+<td align="right">5</td>
+<td align="left">Standard+ : Partie fixe + creation des tables actes, das et rsa_um + stream (+)</td>
+</tr>
+<tr class="even">
+<td align="right">6</td>
+<td align="left">Standard++ : Partie fixe + creation des tables actes, das et rsa_um + stream (++)</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="import-des-données.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pmeasyr)</span>
+<span id="cb8-2"><a href="import-des-données.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Import des rsa 2015 type 6</span></span>
+<span id="cb8-3"><a href="import-des-données.html#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">irsa</span>(<span class="at">finess =</span> <span class="dv">750100042</span>, </span>
+<span id="cb8-4"><a href="import-des-données.html#cb8-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">annee =</span> <span class="dv">2015</span>, </span>
+<span id="cb8-5"><a href="import-des-données.html#cb8-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">mois =</span> <span class="dv">12</span>, </span>
+<span id="cb8-6"><a href="import-des-données.html#cb8-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">path =</span> <span class="st">&#39;~/Documents/data/mco&#39;</span>, </span>
+<span id="cb8-7"><a href="import-des-données.html#cb8-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">typi =</span> <span class="dv">6</span>) <span class="ot">-&gt;</span> rsa15</span>
+<span id="cb8-8"><a href="import-des-données.html#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(rsa15<span class="sc">$</span>rsa)</span>
+<span id="cb8-9"><a href="import-des-données.html#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(rsa15<span class="sc">$</span>rsa_um)</span>
+<span id="cb8-10"><a href="import-des-données.html#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(rsa15<span class="sc">$</span>actes)</span>
+<span id="cb8-11"><a href="import-des-données.html#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(rsa15<span class="sc">$</span>das)</span></code></pre></div>
+<p>Les tables sont par défaut avec des libellés :</p>
+<div class="figure">
+<img src="images/rsa1.png" alt="" />
+<p class="caption">Capture d’une portion de la table <code>rsa15$rsa</code></p>
+</div>
+</div>
+<div id="rum" class="section level3" number="4.1.2">
+<h3><span class="header-section-number">4.1.2</span> RUM</h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="import-des-données.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import des rum 2015</span></span>
+<span id="cb9-2"><a href="import-des-données.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">irum</span>(<span class="at">finess =</span> <span class="dv">750100042</span>, </span>
+<span id="cb9-3"><a href="import-des-données.html#cb9-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">annee =</span> <span class="dv">2015</span>, </span>
+<span id="cb9-4"><a href="import-des-données.html#cb9-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">mois =</span> <span class="dv">12</span>, </span>
+<span id="cb9-5"><a href="import-des-données.html#cb9-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">path =</span> <span class="st">&#39;~/Documents/data/mco&#39;</span>)</span></code></pre></div>
+<p>Selon la nature des analyses à produire, plusieurs types d’imports sont possibles :</p>
 <table>
 <thead>
 <tr class="header">
@@ -312,78 +419,278 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </thead>
 <tbody>
 <tr class="odd">
-<td align="right"><a href="https://im-aphp.github.io/pmeasyr/reference/itra.html">itra</a></td>
-<td align="left">~ TRA - Import du TRA</td>
+<td align="right">1</td>
+<td align="left">XLight : Partie fixe</td>
 </tr>
 <tr class="even">
-<td align="right"><a href="https://im-aphp.github.io/pmeasyr/reference/inner_tra.html">inner_tra</a></td>
-<td align="left">~ TRA - Ajout du TRA aux données Out</td>
+<td align="right">2</td>
+<td align="left">Light : Partie fixe + stream en ligne des actes, das et dad</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="left">Standard : Partie fixe + table actes, das, dad</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="left">Standard+ : Partie fixe + stream + table actes, das, dad</td>
 </tr>
 </tbody>
 </table>
-<div id="ajout-du-tra-en-mco" class="section level2" number="7.1">
-<h2><span class="header-section-number">7.1</span> Ajout du TRA en MCO</h2>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="fichier-tra.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># lecture du fichier tra et jointure aux rsa</span></span>
-<span id="cb23-2"><a href="fichier-tra.html#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">itra</span>(<span class="dv">750100042</span>, <span class="dv">2015</span>, <span class="dv">12</span>, <span class="st">&#39;~/Documents/data/mco&#39;</span>) <span class="ot">-&gt;</span> tra</span>
-<span id="cb23-3"><a href="fichier-tra.html#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-4"><a href="fichier-tra.html#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajout du tra aux rsa :</span></span>
-<span id="cb23-5"><a href="fichier-tra.html#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(rsa15<span class="sc">$</span>rsa, tra) <span class="ot">-&gt;</span> rsa15<span class="sc">$</span>rsa</span>
-<span id="cb23-6"><a href="fichier-tra.html#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajout du tra à la partie um des rsa :</span></span>
-<span id="cb23-7"><a href="fichier-tra.html#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(rsa15<span class="sc">$</span>rsa_um, tra) <span class="ot">-&gt;</span> rsa15<span class="sc">$</span>rsa_um</span>
-<span id="cb23-8"><a href="fichier-tra.html#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajout du tra à la partie actes des rsa :</span></span>
-<span id="cb23-9"><a href="fichier-tra.html#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(rsa15<span class="sc">$</span>actes, tra) <span class="ot">-&gt;</span> rsa15<span class="sc">$</span>actes</span>
-<span id="cb23-10"><a href="fichier-tra.html#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajout du tra à la partie das des rsa :</span></span>
-<span id="cb23-11"><a href="fichier-tra.html#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(rsa15<span class="sc">$</span>das, tra) <span class="ot">-&gt;</span> rsa15<span class="sc">$</span>das</span></code></pre></div>
 </div>
-<div id="ajout-du-tra-en-had" class="section level2" number="7.2">
-<h2><span class="header-section-number">7.2</span> Ajout du TRA en HAD</h2>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="fichier-tra.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import du TRA HAD</span></span>
-<span id="cb24-2"><a href="fichier-tra.html#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">itra</span>(<span class="at">finess =</span> <span class="dv">750712184</span>,</span>
-<span id="cb24-3"><a href="fichier-tra.html#cb24-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">annee =</span> <span class="dv">2015</span>,</span>
-<span id="cb24-4"><a href="fichier-tra.html#cb24-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">mois =</span> <span class="dv">12</span>,</span>
-<span id="cb24-5"><a href="fichier-tra.html#cb24-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">path =</span> <span class="st">&#39;~/Documents/data/had&#39;</span>, </span>
-<span id="cb24-6"><a href="fichier-tra.html#cb24-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">champ =</span> <span class="st">&quot;had&quot;</span>) <span class="ot">-&gt;</span> tra</span>
-<span id="cb24-7"><a href="fichier-tra.html#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-8"><a href="fichier-tra.html#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajout du tra</span></span>
-<span id="cb24-9"><a href="fichier-tra.html#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(data_had<span class="sc">$</span>rapss, tra, <span class="at">champ =</span> <span class="st">&quot;had&quot;</span>) <span class="ot">-&gt;</span> data_had<span class="sc">$</span>rapss</span>
-<span id="cb24-10"><a href="fichier-tra.html#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(data_had<span class="sc">$</span>acdi,  tra, <span class="at">champ =</span> <span class="st">&quot;had&quot;</span>) <span class="ot">-&gt;</span> data_had<span class="sc">$</span>acdi</span>
-<span id="cb24-11"><a href="fichier-tra.html#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(data_had<span class="sc">$</span>ght,   tra, <span class="at">champ =</span> <span class="st">&quot;had&quot;</span>) <span class="ot">-&gt;</span> data_had<span class="sc">$</span>ght</span></code></pre></div>
+<div id="colonnes-stream" class="section level3" number="4.1.3">
+<h3><span class="header-section-number">4.1.3</span> Colonnes stream</h3>
+<p><strong>Exemples sur quelques rsa</strong> :</p>
+<ul>
+<li>actes : Actes CCAM du Rsa</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Cle RSA</th>
+<th align="left">actes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0000000001</td>
+<td align="left">EDSF004, EDSF004, JQGA004, JQGA004</td>
+</tr>
+<tr class="even">
+<td align="right">0000000002</td>
+<td align="left">EPLF002, DEQP003, DEQP007, DZQM006</td>
+</tr>
+<tr class="odd">
+<td align="right">0000000003</td>
+<td align="left">EBQH002, EEQH002, YYYY180</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>dpdrum : zones diagnostics des passages UM du Rsa</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Cle RSA</th>
+<th align="left">dpdrum</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0000000004</td>
+<td align="left">Z098 I671</td>
+</tr>
+<tr class="even">
+<td align="right">0000000005</td>
+<td align="left">Z380, P741, Z380</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>das : zones diagnostics associes du Rsa</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Cle RSA</th>
+<th align="left">das</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0000000006</td>
+<td align="left">Z9580, Z9588</td>
+</tr>
+<tr class="even">
+<td align="right">0000000007</td>
+<td align="left">P011, P032, P036, P011, P032, P700, P011, P032, P036</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>um : types autorisations T2A des um de passage par ordre chronologique</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Cle RSA</th>
+<th align="left">um</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0000000009</td>
+<td align="left">01AC, 53 C</td>
+</tr>
+<tr class="even">
+<td align="right">0000000010</td>
+<td align="left">51 C</td>
+</tr>
+<tr class="odd">
+<td align="right">0000000011</td>
+<td align="left">71 C, 04 C, 71 C</td>
+</tr>
+</tbody>
+</table>
+<div class="figure">
+<img src="images/rsa_stream.png" alt="" />
+<p class="caption">Capture des zones <em>stream</em> de la table <code>rsa15$rsa</code></p>
 </div>
-<div id="ajout-du-tra-en-ssr" class="section level2" number="7.3">
-<h2><span class="header-section-number">7.3</span> Ajout du TRA en SSR</h2>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="fichier-tra.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import du TRA SSR</span></span>
-<span id="cb25-2"><a href="fichier-tra.html#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">itra</span>(<span class="at">finess =</span> <span class="dv">750712184</span>,</span>
-<span id="cb25-3"><a href="fichier-tra.html#cb25-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">annee =</span> <span class="dv">2015</span>,</span>
-<span id="cb25-4"><a href="fichier-tra.html#cb25-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">mois =</span> <span class="dv">12</span>,</span>
-<span id="cb25-5"><a href="fichier-tra.html#cb25-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">path =</span> <span class="st">&#39;~/Documents/data/ssr&#39;</span>, </span>
-<span id="cb25-6"><a href="fichier-tra.html#cb25-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">champ =</span> <span class="st">&quot;ssr&quot;</span>) <span class="ot">-&gt;</span> tra</span>
-<span id="cb25-7"><a href="fichier-tra.html#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-8"><a href="fichier-tra.html#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajout du tra</span></span>
-<span id="cb25-9"><a href="fichier-tra.html#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(data_ssr<span class="sc">$</span>rha,  tra, <span class="at">champ =</span> <span class="st">&quot;ssr&quot;</span>) <span class="ot">-&gt;</span> data_ssr<span class="sc">$</span>rha</span>
-<span id="cb25-10"><a href="fichier-tra.html#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(data_ssr<span class="sc">$</span>acdi, tra, <span class="at">champ =</span> <span class="st">&quot;ssr&quot;</span>) <span class="ot">-&gt;</span> data_ssr<span class="sc">$</span>acdi</span></code></pre></div>
+<p>Pour les quatre autres champs PMSI, seules les données du <em>out</em> sont prises en charge par le package pour le moment.</p>
+<p>Les fonctions d’imports pour ces champs PMSI reposent sur le même principe qu’en MCO.</p>
 </div>
-<div id="ajout-du-tra-en-psy" class="section level2" number="7.4">
-<h2><span class="header-section-number">7.4</span> Ajout du TRA en PSY</h2>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="fichier-tra.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import du TRA PSY : fichiers RPSA</span></span>
-<span id="cb26-2"><a href="fichier-tra.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">itra</span>(<span class="at">finess =</span> <span class="dv">750803454</span>,</span>
-<span id="cb26-3"><a href="fichier-tra.html#cb26-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">annee =</span> <span class="dv">2015</span>,</span>
-<span id="cb26-4"><a href="fichier-tra.html#cb26-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">mois =</span> <span class="dv">12</span>,</span>
-<span id="cb26-5"><a href="fichier-tra.html#cb26-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">path =</span> <span class="st">&#39;~/Documents/data/psy&#39;</span>, </span>
-<span id="cb26-6"><a href="fichier-tra.html#cb26-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">champ =</span> <span class="st">&quot;tra_psy_rpsa&quot;</span>) <span class="ot">-&gt;</span> tra</span>
-<span id="cb26-7"><a href="fichier-tra.html#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-8"><a href="fichier-tra.html#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajout du tra</span></span>
-<span id="cb26-9"><a href="fichier-tra.html#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(rpsa_psy<span class="sc">$</span>rpsa, tra, <span class="at">champ =</span> <span class="st">&quot;psyrpsa&quot;</span>) <span class="ot">-&gt;</span> rpsa_psy<span class="sc">$</span>rpsa</span>
-<span id="cb26-10"><a href="fichier-tra.html#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(rpsa_psy<span class="sc">$</span>das,  tra, <span class="at">champ =</span> <span class="st">&quot;psyrpsa&quot;</span>) <span class="ot">-&gt;</span> rpsa_psy<span class="sc">$</span>das</span></code></pre></div>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="fichier-tra.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import du TRA PSY : fichiers R3A</span></span>
-<span id="cb27-2"><a href="fichier-tra.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">itra</span>(<span class="at">finess =</span> <span class="dv">750803454</span>,</span>
-<span id="cb27-3"><a href="fichier-tra.html#cb27-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">annee =</span> <span class="dv">2015</span>,</span>
-<span id="cb27-4"><a href="fichier-tra.html#cb27-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">mois =</span> <span class="dv">12</span>,</span>
-<span id="cb27-5"><a href="fichier-tra.html#cb27-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">path =</span> <span class="st">&#39;~/Documents/data/psy&#39;</span>, </span>
-<span id="cb27-6"><a href="fichier-tra.html#cb27-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">champ =</span> <span class="st">&quot;tra_psy_r3a&quot;</span>) <span class="ot">-&gt;</span> tra</span>
-<span id="cb27-7"><a href="fichier-tra.html#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-8"><a href="fichier-tra.html#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajout du tra</span></span>
-<span id="cb27-9"><a href="fichier-tra.html#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(r3a_psy<span class="sc">$</span>r3a, tra, <span class="at">champ =</span> <span class="st">&quot;psyr3a&quot;</span>) <span class="ot">-&gt;</span> r3a_psy<span class="sc">$</span>r3a</span>
-<span id="cb27-10"><a href="fichier-tra.html#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(r3a_psy<span class="sc">$</span>das, tra, <span class="at">champ =</span> <span class="st">&quot;psyr3a&quot;</span>) <span class="ot">-&gt;</span> r3a_psy<span class="sc">$</span>das</span></code></pre></div>
+</div>
+<div id="had" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> HAD</h2>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Nom</th>
+<th align="left">Fonction</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><a href="https://guillaumepressiat.github.io/pmeasyr/reference/iano_had.html">iano_had</a></td>
+<td align="left">~ HAD - Import des Anohosp</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="https://guillaumepressiat.github.io/pmeasyr/reference/imed_had.html">imed_had</a></td>
+<td align="left">~ HAD - Import des Med</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="https://guillaumepressiat.github.io/pmeasyr/reference/irapss.html">irapss</a></td>
+<td align="left">~ HAD - Import des RAPSS</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="https://guillaumepressiat.github.io/pmeasyr/reference/ileg_had.html">ileg_had</a></td>
+<td align="left">~ HAD - Import des erreurs LEG</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="import-des-données.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pmeasyr)</span>
+<span id="cb10-2"><a href="import-des-données.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Import des rapss 2015</span></span>
+<span id="cb10-3"><a href="import-des-données.html#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">irapss</span>(<span class="at">finess =</span> <span class="dv">750712184</span>,</span>
+<span id="cb10-4"><a href="import-des-données.html#cb10-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">annee =</span> <span class="dv">2015</span>,</span>
+<span id="cb10-5"><a href="import-des-données.html#cb10-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">mois =</span> <span class="dv">12</span>,</span>
+<span id="cb10-6"><a href="import-des-données.html#cb10-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">path =</span> <span class="st">&#39;~/Documents/data/had&#39;</span>) <span class="ot">-&gt;</span> data_had</span></code></pre></div>
+</div>
+<div id="ssr" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> SSR</h2>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Nom</th>
+<th align="left">Fonction</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><a href="https://guillaumepressiat.github.io/pmeasyr/reference/iano_ssr.html">iano_ssr</a></td>
+<td align="left">~ SSR - Import des Anohosp</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="https://guillaumepressiat.github.io/pmeasyr/reference/irha.html">irha</a></td>
+<td align="left">~ SSR - Import des RHA</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="https://guillaumepressiat.github.io/pmeasyr/reference/issrha.html">issrha</a></td>
+<td align="left">~ SSR - Import des SSRHA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="https://guillaumepressiat.github.io/pmeasyr/reference/imed_ssr.html">imed_ssr</a></td>
+<td align="left">~ SSR - Import des MED</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="https://guillaumepressiat.github.io/pmeasyr/reference/iium_ssr.html">iium_ssr</a></td>
+<td align="left">~ SSR - Import des UM</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="https://guillaumepressiat.github.io/pmeasyr/reference/ileg_ssr.html">ileg_ssr</a></td>
+<td align="left">~ SSR - Import des erreurs LEG</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="import-des-données.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import des rha 2015</span></span>
+<span id="cb11-2"><a href="import-des-données.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">irha</span>(<span class="at">finess =</span> <span class="dv">750041543</span>,</span>
+<span id="cb11-3"><a href="import-des-données.html#cb11-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">annee =</span> <span class="dv">2015</span>,</span>
+<span id="cb11-4"><a href="import-des-données.html#cb11-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">mois =</span> <span class="dv">12</span>,</span>
+<span id="cb11-5"><a href="import-des-données.html#cb11-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">path =</span> <span class="st">&#39;~/Documents/data/ssr&#39;</span>) <span class="ot">-&gt;</span> data_ssr</span></code></pre></div>
+</div>
+<div id="psy" class="section level2" number="4.4">
+<h2><span class="header-section-number">4.4</span> PSY</h2>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Nom</th>
+<th align="left">Fonction</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><a href="https://guillaumepressiat.github.io/pmeasyr/reference/iano_psy.html">iano_psy</a></td>
+<td align="left">~ PSY - Import des Anohosp</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="https://guillaumepressiat.github.io/pmeasyr/reference/ir3a.html">ir3a</a></td>
+<td align="left">~ PSY - Import des R3A</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="https://guillaumepressiat.github.io/pmeasyr/reference/irpsa.html">irpsa</a></td>
+<td align="left">~ PSY - Import des RPSA</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="import-des-données.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import des rpsa 2015</span></span>
+<span id="cb12-2"><a href="import-des-données.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">irpsa</span>(<span class="at">finess =</span> <span class="dv">750803454</span>,</span>
+<span id="cb12-3"><a href="import-des-données.html#cb12-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">annee =</span> <span class="dv">2015</span>,</span>
+<span id="cb12-4"><a href="import-des-données.html#cb12-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">mois =</span> <span class="dv">12</span>,</span>
+<span id="cb12-5"><a href="import-des-données.html#cb12-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">path =</span> <span class="st">&#39;~/Documents/data/psy&#39;</span>) <span class="ot">-&gt;</span> rpsa_psy</span>
+<span id="cb12-6"><a href="import-des-données.html#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="import-des-données.html#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Import des r3a 2015</span></span>
+<span id="cb12-8"><a href="import-des-données.html#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ir3a</span>(<span class="at">finess =</span> <span class="dv">750803454</span>,</span>
+<span id="cb12-9"><a href="import-des-données.html#cb12-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">annee =</span> <span class="dv">2015</span>,</span>
+<span id="cb12-10"><a href="import-des-données.html#cb12-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">mois =</span> <span class="dv">12</span>,</span>
+<span id="cb12-11"><a href="import-des-données.html#cb12-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">path =</span> <span class="st">&#39;~/Documents/data/psy&#39;</span>) <span class="ot">-&gt;</span> r3a_psy</span></code></pre></div>
+</div>
+<div id="rsf" class="section level2" number="4.5">
+<h2><span class="header-section-number">4.5</span> RSF</h2>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Nom</th>
+<th align="left">Fonction</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><a href="https://guillaumepressiat.github.io/pmeasyr/reference/irafael.html">irafael</a></td>
+<td align="left">~ RSF - Import des RSFA / Rafael</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="https://guillaumepressiat.github.io/pmeasyr/reference/iano_rafael.html">iano_rafael</a></td>
+<td align="left">~ RSF - Import des RSFA / ANO</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="import-des-données.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import des rsfa 2015</span></span>
+<span id="cb13-2"><a href="import-des-données.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">irafael</span>(<span class="at">finess =</span> <span class="dv">750712184</span>,</span>
+<span id="cb13-3"><a href="import-des-données.html#cb13-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">annee =</span> <span class="dv">2015</span>,</span>
+<span id="cb13-4"><a href="import-des-données.html#cb13-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">mois =</span> <span class="dv">12</span>,</span>
+<span id="cb13-5"><a href="import-des-données.html#cb13-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">path =</span> <span class="st">&#39;~/Documents/data/rsf&#39;</span>) <span class="ot">-&gt;</span> rsfa</span></code></pre></div>
+</div>
+<div id="dictionnaire-de-variables" class="section level2" number="4.6">
+<h2><span class="header-section-number">4.6</span> Dictionnaire de variables</h2>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="import-des-données.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtenir les noms, labels et types de variables (character, numeric, integer, date, ...)</span></span>
+<span id="cb14-2"><a href="import-des-données.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dico</span>(rsa15<span class="sc">$</span>rsa)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="import-des-données.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Charger les formats de toutes les tables prises en charge par le package</span></span>
+<span id="cb15-2"><a href="import-des-données.html#cb15-2" aria-hidden="true" tabindex="-1"></a>pmeasyr<span class="sc">::</span>formats</span></code></pre></div>
+</div>
+<div id="labels" class="section level2" number="4.7">
+<h2><span class="header-section-number">4.7</span> Labels</h2>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="import-des-données.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtenir le libelle d&#39;une variable du PMSI</span></span>
+<span id="cb16-2"><a href="import-des-données.html#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">labeleasier</span>(rsa15<span class="sc">$</span>rsa<span class="sc">$</span>SEXE, <span class="at">Sexe =</span> T)</span>
+<span id="cb16-3"><a href="import-des-données.html#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">labeleasier</span>(rsa15<span class="sc">$</span>rsa<span class="sc">$</span>ECHPMSI, <span class="at">Mode_entree =</span> T)</span></code></pre></div>
 
 </div>
 </div>
@@ -392,8 +699,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="étude-des-files-actives.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="statistiques-du-pmsi.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="archives.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="requêtes-sur-des-pathologies-actes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

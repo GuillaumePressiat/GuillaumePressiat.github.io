@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>7 Fichier TRA | Traitement des données PMSI avec R</title>
+  <title>16 Exercices (béta) | Traitement des données PMSI avec R</title>
   <meta name="description" content="Ce livre numérique présente des exemples de traitements de données PMSI avec R" />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="7 Fichier TRA | Traitement des données PMSI avec R" />
+  <meta property="og:title" content="16 Exercices (béta) | Traitement des données PMSI avec R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="7 Fichier TRA | Traitement des données PMSI avec R" />
+  <meta name="twitter:title" content="16 Exercices (béta) | Traitement des données PMSI avec R" />
   
   <meta name="twitter:description" content="Ce livre numérique présente des exemples de traitements de données PMSI avec R" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="étude-des-files-actives.html"/>
-<link rel="next" href="statistiques-du-pmsi.html"/>
+<link rel="prev" href="vvr-valoriser-les-rsa.html"/>
+
 <script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -293,107 +293,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="fichier-tra" class="section level1" number="7">
-<h1><span class="header-section-number">7</span> Fichier TRA</h1>
-<p>Le fichier TRA est un fichier du <em>out</em> qui permet de relier les données anonymes du <em>out</em> aux données du <em>in</em>, il comprend un lien entre :</p>
+<div id="exercices-béta" class="section level1" number="16">
+<h1><span class="header-section-number">16</span> Exercices (béta)</h1>
+<p>Cette partie contient quelques exercices pour se familiariser à l’utilisation de <code>dplyr</code> avec les données du PMSI importées avec <code>pmeasyr</code>. Les données sont fictives et très simples, il s’agit simplement d’exercices autour de R.</p>
+<div id="filtrer-des-rsa-en-fonction-d-actes" class="section level4 DCexercise" number="16.0.0.1">
+<h4><span class="header-section-number">16.0.0.1</span> 1. Filtrer des rsa en fonction d’ actes</h4>
+<p>Imaginez que vous disposez de <tt>rsa</tt> importés avec <tt>pmeasyr</tt>.</p>
+<p><strong>Instructions:</strong></p>
 <ul>
-<li>MCO : clé rsa, numéro de rss, numéro de sejour (nas), date d’entrée et date de sortie du séjour</li>
-<li>SSR : numéro séquentiel du séjour + noseqrhs et numéro de séjour + numéro de semaine</li>
-<li>PSY RPSA : ipp, date d’entrée et de fin du sejour, numéro séquentiel du séjour, numéro de séquence et numéro de séjour, dates de début et fin de sequence</li>
-<li>PSY R3A : ipp, date de l’acte, numéro d’ordre, forme activité, um, nature et lieu de l’acte</li>
-<li>HAD : numéro séquentiel de séjour, numéro de séquence, sous-sequence et numéro de séjour, dates de début et fin des séquences et sous-séquences, dates d’entrée et de sortie du séjour, modes d’entrée sortie provenance destination</li>
+<li><p>charger le package dplyr</p></li>
+<li><p>Afficher la table actes des rsa$actes</p></li>
+<li><p>Filtrer cette table pour ne retenir que les lignes contenant l’acte NFKA015.</p></li>
 </ul>
-<table>
-<thead>
-<tr class="header">
-<th align="right">Type</th>
-<th align="left">Import</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="right"><a href="https://im-aphp.github.io/pmeasyr/reference/itra.html">itra</a></td>
-<td align="left">~ TRA - Import du TRA</td>
-</tr>
-<tr class="even">
-<td align="right"><a href="https://im-aphp.github.io/pmeasyr/reference/inner_tra.html">inner_tra</a></td>
-<td align="left">~ TRA - Ajout du TRA aux données Out</td>
-</tr>
-</tbody>
-</table>
-<div id="ajout-du-tra-en-mco" class="section level2" number="7.1">
-<h2><span class="header-section-number">7.1</span> Ajout du TRA en MCO</h2>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="fichier-tra.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># lecture du fichier tra et jointure aux rsa</span></span>
-<span id="cb23-2"><a href="fichier-tra.html#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">itra</span>(<span class="dv">750100042</span>, <span class="dv">2015</span>, <span class="dv">12</span>, <span class="st">&#39;~/Documents/data/mco&#39;</span>) <span class="ot">-&gt;</span> tra</span>
-<span id="cb23-3"><a href="fichier-tra.html#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-4"><a href="fichier-tra.html#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajout du tra aux rsa :</span></span>
-<span id="cb23-5"><a href="fichier-tra.html#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(rsa15<span class="sc">$</span>rsa, tra) <span class="ot">-&gt;</span> rsa15<span class="sc">$</span>rsa</span>
-<span id="cb23-6"><a href="fichier-tra.html#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajout du tra à la partie um des rsa :</span></span>
-<span id="cb23-7"><a href="fichier-tra.html#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(rsa15<span class="sc">$</span>rsa_um, tra) <span class="ot">-&gt;</span> rsa15<span class="sc">$</span>rsa_um</span>
-<span id="cb23-8"><a href="fichier-tra.html#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajout du tra à la partie actes des rsa :</span></span>
-<span id="cb23-9"><a href="fichier-tra.html#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(rsa15<span class="sc">$</span>actes, tra) <span class="ot">-&gt;</span> rsa15<span class="sc">$</span>actes</span>
-<span id="cb23-10"><a href="fichier-tra.html#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajout du tra à la partie das des rsa :</span></span>
-<span id="cb23-11"><a href="fichier-tra.html#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(rsa15<span class="sc">$</span>das, tra) <span class="ot">-&gt;</span> rsa15<span class="sc">$</span>das</span></code></pre></div>
+<iframe src="DCL/ex_1.html" frameborder="0" scrolling="no" style="width:100%;height:340px">
+</iframe>
 </div>
-<div id="ajout-du-tra-en-had" class="section level2" number="7.2">
-<h2><span class="header-section-number">7.2</span> Ajout du TRA en HAD</h2>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="fichier-tra.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import du TRA HAD</span></span>
-<span id="cb24-2"><a href="fichier-tra.html#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">itra</span>(<span class="at">finess =</span> <span class="dv">750712184</span>,</span>
-<span id="cb24-3"><a href="fichier-tra.html#cb24-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">annee =</span> <span class="dv">2015</span>,</span>
-<span id="cb24-4"><a href="fichier-tra.html#cb24-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">mois =</span> <span class="dv">12</span>,</span>
-<span id="cb24-5"><a href="fichier-tra.html#cb24-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">path =</span> <span class="st">&#39;~/Documents/data/had&#39;</span>, </span>
-<span id="cb24-6"><a href="fichier-tra.html#cb24-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">champ =</span> <span class="st">&quot;had&quot;</span>) <span class="ot">-&gt;</span> tra</span>
-<span id="cb24-7"><a href="fichier-tra.html#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-8"><a href="fichier-tra.html#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajout du tra</span></span>
-<span id="cb24-9"><a href="fichier-tra.html#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(data_had<span class="sc">$</span>rapss, tra, <span class="at">champ =</span> <span class="st">&quot;had&quot;</span>) <span class="ot">-&gt;</span> data_had<span class="sc">$</span>rapss</span>
-<span id="cb24-10"><a href="fichier-tra.html#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(data_had<span class="sc">$</span>acdi,  tra, <span class="at">champ =</span> <span class="st">&quot;had&quot;</span>) <span class="ot">-&gt;</span> data_had<span class="sc">$</span>acdi</span>
-<span id="cb24-11"><a href="fichier-tra.html#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(data_had<span class="sc">$</span>ght,   tra, <span class="at">champ =</span> <span class="st">&quot;had&quot;</span>) <span class="ot">-&gt;</span> data_had<span class="sc">$</span>ght</span></code></pre></div>
+<div id="filtrer-sur-les-actes-les-diagnostics-et-croiser-les-deux-informations" class="section level4 DCexercise" number="16.0.0.2">
+<h4><span class="header-section-number">16.0.0.2</span> 2. Filtrer sur les actes, les diagnostics et croiser les deux informations</h4>
+<p><strong>Instructions:</strong></p>
+<ul>
+<li><p>charger le package dplyr</p></li>
+<li><p>Afficher la table actes des rsa$actes</p></li>
+<li><p>Créer une table <tt>a</tt> en filtrer les actes des rsa pour ne retenir que les lignes contenant l’acte NFKA015.</p></li>
+<li><p>Créer une table <tt>b</tt> en filtrant les diagnostics des rsa pour ne retenir que les lignes contenant le code E66.</p></li>
+<li><p>Croiser ces deux tables</p></li>
+</ul>
+<iframe src="DCL/ex_2.html" frameborder="0" scrolling="no" style="width:100%;height:340px">
+</iframe>
 </div>
-<div id="ajout-du-tra-en-ssr" class="section level2" number="7.3">
-<h2><span class="header-section-number">7.3</span> Ajout du TRA en SSR</h2>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="fichier-tra.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import du TRA SSR</span></span>
-<span id="cb25-2"><a href="fichier-tra.html#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">itra</span>(<span class="at">finess =</span> <span class="dv">750712184</span>,</span>
-<span id="cb25-3"><a href="fichier-tra.html#cb25-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">annee =</span> <span class="dv">2015</span>,</span>
-<span id="cb25-4"><a href="fichier-tra.html#cb25-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">mois =</span> <span class="dv">12</span>,</span>
-<span id="cb25-5"><a href="fichier-tra.html#cb25-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">path =</span> <span class="st">&#39;~/Documents/data/ssr&#39;</span>, </span>
-<span id="cb25-6"><a href="fichier-tra.html#cb25-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">champ =</span> <span class="st">&quot;ssr&quot;</span>) <span class="ot">-&gt;</span> tra</span>
-<span id="cb25-7"><a href="fichier-tra.html#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-8"><a href="fichier-tra.html#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajout du tra</span></span>
-<span id="cb25-9"><a href="fichier-tra.html#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(data_ssr<span class="sc">$</span>rha,  tra, <span class="at">champ =</span> <span class="st">&quot;ssr&quot;</span>) <span class="ot">-&gt;</span> data_ssr<span class="sc">$</span>rha</span>
-<span id="cb25-10"><a href="fichier-tra.html#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(data_ssr<span class="sc">$</span>acdi, tra, <span class="at">champ =</span> <span class="st">&quot;ssr&quot;</span>) <span class="ot">-&gt;</span> data_ssr<span class="sc">$</span>acdi</span></code></pre></div>
-</div>
-<div id="ajout-du-tra-en-psy" class="section level2" number="7.4">
-<h2><span class="header-section-number">7.4</span> Ajout du TRA en PSY</h2>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="fichier-tra.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import du TRA PSY : fichiers RPSA</span></span>
-<span id="cb26-2"><a href="fichier-tra.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">itra</span>(<span class="at">finess =</span> <span class="dv">750803454</span>,</span>
-<span id="cb26-3"><a href="fichier-tra.html#cb26-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">annee =</span> <span class="dv">2015</span>,</span>
-<span id="cb26-4"><a href="fichier-tra.html#cb26-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">mois =</span> <span class="dv">12</span>,</span>
-<span id="cb26-5"><a href="fichier-tra.html#cb26-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">path =</span> <span class="st">&#39;~/Documents/data/psy&#39;</span>, </span>
-<span id="cb26-6"><a href="fichier-tra.html#cb26-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">champ =</span> <span class="st">&quot;tra_psy_rpsa&quot;</span>) <span class="ot">-&gt;</span> tra</span>
-<span id="cb26-7"><a href="fichier-tra.html#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-8"><a href="fichier-tra.html#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajout du tra</span></span>
-<span id="cb26-9"><a href="fichier-tra.html#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(rpsa_psy<span class="sc">$</span>rpsa, tra, <span class="at">champ =</span> <span class="st">&quot;psyrpsa&quot;</span>) <span class="ot">-&gt;</span> rpsa_psy<span class="sc">$</span>rpsa</span>
-<span id="cb26-10"><a href="fichier-tra.html#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(rpsa_psy<span class="sc">$</span>das,  tra, <span class="at">champ =</span> <span class="st">&quot;psyrpsa&quot;</span>) <span class="ot">-&gt;</span> rpsa_psy<span class="sc">$</span>das</span></code></pre></div>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="fichier-tra.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import du TRA PSY : fichiers R3A</span></span>
-<span id="cb27-2"><a href="fichier-tra.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">itra</span>(<span class="at">finess =</span> <span class="dv">750803454</span>,</span>
-<span id="cb27-3"><a href="fichier-tra.html#cb27-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">annee =</span> <span class="dv">2015</span>,</span>
-<span id="cb27-4"><a href="fichier-tra.html#cb27-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">mois =</span> <span class="dv">12</span>,</span>
-<span id="cb27-5"><a href="fichier-tra.html#cb27-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">path =</span> <span class="st">&#39;~/Documents/data/psy&#39;</span>, </span>
-<span id="cb27-6"><a href="fichier-tra.html#cb27-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">champ =</span> <span class="st">&quot;tra_psy_r3a&quot;</span>) <span class="ot">-&gt;</span> tra</span>
-<span id="cb27-7"><a href="fichier-tra.html#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-8"><a href="fichier-tra.html#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajout du tra</span></span>
-<span id="cb27-9"><a href="fichier-tra.html#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(r3a_psy<span class="sc">$</span>r3a, tra, <span class="at">champ =</span> <span class="st">&quot;psyr3a&quot;</span>) <span class="ot">-&gt;</span> r3a_psy<span class="sc">$</span>r3a</span>
-<span id="cb27-10"><a href="fichier-tra.html#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(r3a_psy<span class="sc">$</span>das, tra, <span class="at">champ =</span> <span class="st">&quot;psyr3a&quot;</span>) <span class="ot">-&gt;</span> r3a_psy<span class="sc">$</span>das</span></code></pre></div>
 
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="étude-des-files-actives.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="statistiques-du-pmsi.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="vvr-valoriser-les-rsa.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

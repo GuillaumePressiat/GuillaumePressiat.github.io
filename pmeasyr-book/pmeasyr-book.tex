@@ -1,35 +1,46 @@
-\documentclass[]{book}
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{book}
+\usepackage{amsmath,amssymb}
 \usepackage{lmodern}
-\usepackage{amssymb,amsmath}
-\usepackage{ifxetex,ifluatex}
-\usepackage{fixltx2e} % provides \textsubscript
-\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+\usepackage{iftex}
+\ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
-\else % if luatex or xelatex
-  \ifxetex
-    \usepackage{mathspec}
-  \else
-    \usepackage{fontspec}
-  \fi
-  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
-% use upquote if available, for straight quotes in verbatim environments
+% Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-% use microtype if available
-\IfFileExists{microtype.sty}{%
-\usepackage{microtype}
-\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-\usepackage{hyperref}
-\hypersetup{unicode=true,
-            pdftitle={Traitement des données PMSI avec R},
-            pdfauthor={Guillaume Pressiat \textbar{}\textbar{} CHU Brest},
-            pdfborder={0 0 0},
-            breaklinks=true}
-\urlstyle{same}  % don't use monospace font for urls
-\usepackage{natbib}
-\bibliographystyle{plainnat}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Traitement des données PMSI avec R},
+  pdfauthor={Guillaume Pressiat \textbar\textbar{} CHU Brest},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -70,8 +81,17 @@
 \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\usepackage{longtable,booktabs}
-\usepackage{graphicx,grffile}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
@@ -80,67 +100,32 @@
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-\IfFileExists{parskip.sty}{%
-\usepackage{parskip}
-}{% else
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt plus 2pt minus 1pt}
-}
-\setlength{\emergencystretch}{3em}  % prevent overfull lines
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{5}
-% Redefines (sub)paragraphs to behave more like sections
-\ifx\paragraph\undefined\else
-\let\oldparagraph\paragraph
-\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
-\fi
-\ifx\subparagraph\undefined\else
-\let\oldsubparagraph\subparagraph
-\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
-\fi
-
-%%% Use protect on footnotes to avoid problems with footnotes in titles
-\let\rmarkdownfootnote\footnote%
-\def\footnote{\protect\rmarkdownfootnote}
-
-%%% Change title format to be more compact
-\usepackage{titling}
-
-% Create subtitle command for use in maketitle
-\providecommand{\subtitle}[1]{
-  \posttitle{
-    \begin{center}\large#1\end{center}
-    }
-}
-
-\setlength{\droptitle}{-2em}
-
-  \title{Traitement des données PMSI avec R}
-    \pretitle{\vspace{\droptitle}\centering\huge}
-  \posttitle{\par}
-    \author{Guillaume Pressiat \textbar{}\textbar{} CHU Brest}
-    \preauthor{\centering\large\emph}
-  \postauthor{\par}
-      \predate{\centering\large\emph}
-  \postdate{\par}
-    \date{2020-02-01}
-
+%\usepackage{xcolor}
+%\usepackage[usenames, , table]{xcolor}
+% \usepackage{hyperref}
+% \hypersetup{
+%     colorlinks = true,
+%     linkcolor = CadetBlue,
+%     citecolor = CadetBlue,
+%     urlcolor  = Blue,
+%     linkbordercolor = gray,
+%     allbordercolors = CornflowerBlue
+% }
 \usepackage{booktabs}
 \usepackage{amsthm}
 \renewcommand{\familydefault}{\sfdefault}
 \renewcommand{\chaptername}{}
 \renewcommand{\contentsname}{Tables des matières}
-\usepackage{hyperref}
-\usepackage[dvipsnames]{xcolor}
-\hypersetup{
-    colorlinks = true,
-    linkcolor = CadetBlue,
-    citecolor = CadetBlue,
-    urlcolor  = Blue,
-    linkbordercolor = gray,
-    allbordercolors = CornflowerBlue
-}
+
+
 
 \makeatletter
 \def\thm@space@setup{%
@@ -148,6 +133,15 @@
   \thm@postskip=\thm@preskip
 }
 \makeatother
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage[]{natbib}
+\bibliographystyle{plainnat}
+
+\title{Traitement des données PMSI avec R}
+\author{Guillaume Pressiat \textbar\textbar{} CHU Brest}
+\date{2021-11-21}
 
 \begin{document}
 \maketitle
@@ -245,7 +239,7 @@ Il est utilisé depuis un an à l'AP-HP pour des analyses d'activité et la desc
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{devtools}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{'GuillaumePressiat/pmeasyr'}\NormalTok{)}
+\NormalTok{remotes}\SpecialCharTok{::}\FunctionTok{install\_github}\NormalTok{(}\StringTok{\textquotesingle{}GuillaumePressiat/pmeasyr\textquotesingle{}}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -281,10 +275,10 @@ Vous noterez que pour chaque champ PMSI il est conseillé d'utiliser un réperto
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Créer l'arborescence à partir de R}
-\NormalTok{champs =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{'mco'}\NormalTok{, }\StringTok{'ssr'}\NormalTok{, }\StringTok{'had'}\NormalTok{, }\StringTok{'psy'}\NormalTok{, }\StringTok{'rsf'}\NormalTok{)}
-\NormalTok{emplacement <-}\StringTok{ "~/Documents/data"}
-\KeywordTok{sapply}\NormalTok{(champs, }\ControlFlowTok{function}\NormalTok{(x)\{}\KeywordTok{dir.create}\NormalTok{(}\KeywordTok{file.path}\NormalTok{(emplacement, x))\})}
+\CommentTok{\# Créer l\textquotesingle{}arborescence à partir de R}
+\NormalTok{champs }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}mco\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}ssr\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}had\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}psy\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}rsf\textquotesingle{}}\NormalTok{)}
+\NormalTok{emplacement }\OtherTok{\textless{}{-}} \StringTok{"\textasciitilde{}/Documents/data"}
+\FunctionTok{sapply}\NormalTok{(champs, }\ControlFlowTok{function}\NormalTok{(x)\{}\FunctionTok{dir.create}\NormalTok{(}\FunctionTok{file.path}\NormalTok{(emplacement, x))\})}
 \end{Highlighting}
 \end{Shaded}
 
@@ -302,7 +296,7 @@ Mais dans R, le symbole `\textasciitilde{}' utilisé sur windows dans un chemin 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{path.expand}\NormalTok{(}\StringTok{'~'}\NormalTok{)}
+\FunctionTok{path.expand}\NormalTok{(}\StringTok{\textquotesingle{}\textasciitilde{}\textquotesingle{}}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -321,24 +315,24 @@ La fonction \texttt{astat} permet d'éditer des statistiques sommaires sur les f
 
 \begin{longtable}[]{@{}ll@{}}
 \toprule
-Nom & Fonction\tabularnewline
+Nom & Fonction \\
 \midrule
 \endhead
-\href{https://guillaumepressiat.github.io/pmeasyr/reference/astat.html}{astat} & \textasciitilde{} *.zip - Liste et volume des fichiers d'une archive PMSI\tabularnewline
+\href{https://guillaumepressiat.github.io/pmeasyr/reference/astat.html}{astat} & \textasciitilde{} *.zip - Liste et volume des fichiers d'une archive PMSI \\
 \bottomrule
 \end{longtable}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Informations sur les fichiers : Date de creation, Taille}
-\NormalTok{pmeasyr}\OperatorTok{::}\KeywordTok{astat}\NormalTok{(}\DataTypeTok{path =} \StringTok{'~/Documents/data/mco/'}\NormalTok{, }
-               \DataTypeTok{file =} \StringTok{'750100042.2015.12.29012016174032.out.zip'}\NormalTok{, }
-               \DataTypeTok{view =}\NormalTok{ F)}
+\CommentTok{\# Informations sur les fichiers : Date de creation, Taille}
+\NormalTok{pmeasyr}\SpecialCharTok{::}\FunctionTok{astat}\NormalTok{(}\AttributeTok{path =} \StringTok{\textquotesingle{}\textasciitilde{}/Documents/data/mco/\textquotesingle{}}\NormalTok{, }
+               \AttributeTok{file =} \StringTok{\textquotesingle{}750100042.2015.12.29012016174032.out.zip\textquotesingle{}}\NormalTok{, }
+               \AttributeTok{view =}\NormalTok{ F)}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{dezippage}{%
-\section{Dézippage}\label{dezippage}}
+\hypertarget{duxe9zippage}{%
+\section{Dézippage}\label{duxe9zippage}}
 
 Cette partie du package facilite la manipulation des archives PMSI, fichiers de type :
 
@@ -352,38 +346,32 @@ Cette partie du package facilite la manipulation des archives PMSI, fichiers de 
 
 Les fonctions permettent de dézipper les fichiers depuis \texttt{R} en ligne de commande, sans intervention manuelle de l'utilisateur. L'avantage est d'obtenir un processus ne relevant pas d'interventions externes au logiciel \texttt{R} (pour pouvoir garder trace des etapes, et faciliter la reproduction, tout est inscrit dans un programme, dans un flux de processus). Une fois que les traitements et analyses sur les fichiers sont faits, il est possible d'effacer les archives également en ligne de commande.
 
-\begin{longtable}[]{@{}ll@{}}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.1031}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.8969}}@{}}
 \toprule
-\begin{minipage}[b]{0.10\columnwidth}\raggedright
-Nom\strut
-\end{minipage} & \begin{minipage}[b]{0.84\columnwidth}\raggedright
-Fonction\strut
-\end{minipage}\tabularnewline
+\begin{minipage}[b]{\linewidth}\raggedright
+Nom
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Fonction
+\end{minipage} \\
 \midrule
 \endhead
-\begin{minipage}[t]{0.10\columnwidth}\raggedright
-\href{https://guillaumepressiat.github.io/pmeasyr/reference/adezip.html}{adezip}\strut
-\end{minipage} & \begin{minipage}[t]{0.84\columnwidth}\raggedright
-\textasciitilde{} *.zip - Dezippe des fichiers de l'archive PMSI\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.10\columnwidth}\raggedright
-\href{https://guillaumepressiat.github.io/pmeasyr/reference/adezip2.html}{adezip2}\strut
-\end{minipage} & \begin{minipage}[t]{0.84\columnwidth}\raggedright
-\textasciitilde{} *.zip - Dezippe des fichiers de l'archive PMSI, avec en parametre le nom de l'archive\strut
-\end{minipage}\tabularnewline
+\href{https://guillaumepressiat.github.io/pmeasyr/reference/adezip.html}{adezip} & \textasciitilde{} *.zip - Dezippe des fichiers de l'archive PMSI \\
+\href{https://guillaumepressiat.github.io/pmeasyr/reference/adezip2.html}{adezip2} & \textasciitilde{} *.zip - Dezippe des fichiers de l'archive PMSI, avec en parametre le nom de l'archive \\
 \bottomrule
 \end{longtable}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Dezippage uniquement des fichiers rsa, ano et tra du out 2015}
-\CommentTok{# Ex: 750100042.2015.12.20160130.153012.out.zip}
-\NormalTok{pmeasyr}\OperatorTok{::}\KeywordTok{adezip}\NormalTok{(}\DataTypeTok{finess =} \DecValTok{750100042}\NormalTok{, }
-                \DataTypeTok{annee =} \DecValTok{2015}\NormalTok{, }
-                \DataTypeTok{mois =} \DecValTok{12}\NormalTok{, }
-                \DataTypeTok{path =} \StringTok{'~/Documents/data/mco'}\NormalTok{, }
-                \DataTypeTok{liste =} \KeywordTok{c}\NormalTok{(}\StringTok{"rsa"}\NormalTok{, }\StringTok{"ano"}\NormalTok{, }\StringTok{"tra"}\NormalTok{), }
-                \DataTypeTok{type =} \StringTok{"out"}\NormalTok{)}
+\CommentTok{\# Dezippage uniquement des fichiers rsa, ano et tra du out 2015}
+\CommentTok{\# Ex: 750100042.2015.12.20160130.153012.out.zip}
+\NormalTok{pmeasyr}\SpecialCharTok{::}\FunctionTok{adezip}\NormalTok{(}\AttributeTok{finess =} \DecValTok{750100042}\NormalTok{, }
+                \AttributeTok{annee =} \DecValTok{2015}\NormalTok{, }
+                \AttributeTok{mois =} \DecValTok{12}\NormalTok{, }
+                \AttributeTok{path =} \StringTok{\textquotesingle{}\textasciitilde{}/Documents/data/mco\textquotesingle{}}\NormalTok{, }
+                \AttributeTok{liste =} \FunctionTok{c}\NormalTok{(}\StringTok{"rsa"}\NormalTok{, }\StringTok{"ano"}\NormalTok{, }\StringTok{"tra"}\NormalTok{), }
+                \AttributeTok{type =} \StringTok{"out"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -395,14 +383,14 @@ Fonction\strut
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Dezippage uniquement des fichiers rss, dmi et med du in 2015}
-\CommentTok{# Ex: 750100042.2015.12.20160130.153012.out.zip}
-\NormalTok{pmeasyr}\OperatorTok{::}\KeywordTok{adezip}\NormalTok{(}\DataTypeTok{finess =} \DecValTok{750100042}\NormalTok{, }
-                \DataTypeTok{annee =} \DecValTok{2015}\NormalTok{, }
-                \DataTypeTok{mois =} \DecValTok{12}\NormalTok{, }
-                \DataTypeTok{path =} \StringTok{'~/Documents/data/mco'}\NormalTok{, }
-                \DataTypeTok{liste =} \KeywordTok{c}\NormalTok{(}\StringTok{"rss"}\NormalTok{, }\StringTok{"dmi"}\NormalTok{, }\StringTok{"med"}\NormalTok{), }
-                \DataTypeTok{type =} \StringTok{"in"}\NormalTok{)}
+\CommentTok{\# Dezippage uniquement des fichiers rss, dmi et med du in 2015}
+\CommentTok{\# Ex: 750100042.2015.12.20160130.153012.out.zip}
+\NormalTok{pmeasyr}\SpecialCharTok{::}\FunctionTok{adezip}\NormalTok{(}\AttributeTok{finess =} \DecValTok{750100042}\NormalTok{, }
+                \AttributeTok{annee =} \DecValTok{2015}\NormalTok{, }
+                \AttributeTok{mois =} \DecValTok{12}\NormalTok{, }
+                \AttributeTok{path =} \StringTok{\textquotesingle{}\textasciitilde{}/Documents/data/mco\textquotesingle{}}\NormalTok{, }
+                \AttributeTok{liste =} \FunctionTok{c}\NormalTok{(}\StringTok{"rss"}\NormalTok{, }\StringTok{"dmi"}\NormalTok{, }\StringTok{"med"}\NormalTok{), }
+                \AttributeTok{type =} \StringTok{"in"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -419,20 +407,20 @@ Fonction\strut
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Effacer les fichiers}
-\NormalTok{pmeasyr}\OperatorTok{::}\KeywordTok{adelete}\NormalTok{(}\DataTypeTok{finess =} \DecValTok{750100042}\NormalTok{, }
-                 \DataTypeTok{annee =} \DecValTok{2015}\NormalTok{, }
-                 \DataTypeTok{mois =} \DecValTok{12}\NormalTok{, }
-                 \DataTypeTok{path =} \StringTok{'~/Documents/data/mco'}\NormalTok{, }
-                 \DataTypeTok{liste =} \KeywordTok{c}\NormalTok{(}\StringTok{"rsa"}\NormalTok{, }\StringTok{"ano"}\NormalTok{, }\StringTok{"tra"}\NormalTok{), }
-                 \DataTypeTok{type =} \StringTok{"out"}\NormalTok{)}
+\CommentTok{\# Effacer les fichiers}
+\NormalTok{pmeasyr}\SpecialCharTok{::}\FunctionTok{adelete}\NormalTok{(}\AttributeTok{finess =} \DecValTok{750100042}\NormalTok{, }
+                 \AttributeTok{annee =} \DecValTok{2015}\NormalTok{, }
+                 \AttributeTok{mois =} \DecValTok{12}\NormalTok{, }
+                 \AttributeTok{path =} \StringTok{\textquotesingle{}\textasciitilde{}/Documents/data/mco\textquotesingle{}}\NormalTok{, }
+                 \AttributeTok{liste =} \FunctionTok{c}\NormalTok{(}\StringTok{"rsa"}\NormalTok{, }\StringTok{"ano"}\NormalTok{, }\StringTok{"tra"}\NormalTok{), }
+                 \AttributeTok{type =} \StringTok{"out"}\NormalTok{)}
 
-\NormalTok{pmeasyr}\OperatorTok{::}\KeywordTok{adelete}\NormalTok{(}\DataTypeTok{finess =} \DecValTok{750100042}\NormalTok{, }
-                 \DataTypeTok{annee =} \DecValTok{2015}\NormalTok{, }
-                 \DataTypeTok{mois =} \DecValTok{12}\NormalTok{, }
-                 \DataTypeTok{path =} \StringTok{'~/Documents/data/mco'}\NormalTok{, }
-                 \DataTypeTok{liste =} \KeywordTok{c}\NormalTok{(}\StringTok{"rss"}\NormalTok{, }\StringTok{"med"}\NormalTok{, }\StringTok{"dmi"}\NormalTok{), }
-                 \DataTypeTok{type =} \StringTok{"in"}\NormalTok{)}
+\NormalTok{pmeasyr}\SpecialCharTok{::}\FunctionTok{adelete}\NormalTok{(}\AttributeTok{finess =} \DecValTok{750100042}\NormalTok{, }
+                 \AttributeTok{annee =} \DecValTok{2015}\NormalTok{, }
+                 \AttributeTok{mois =} \DecValTok{12}\NormalTok{, }
+                 \AttributeTok{path =} \StringTok{\textquotesingle{}\textasciitilde{}/Documents/data/mco\textquotesingle{}}\NormalTok{, }
+                 \AttributeTok{liste =} \FunctionTok{c}\NormalTok{(}\StringTok{"rss"}\NormalTok{, }\StringTok{"med"}\NormalTok{, }\StringTok{"dmi"}\NormalTok{), }
+                 \AttributeTok{type =} \StringTok{"in"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -442,26 +430,26 @@ Fonction\strut
 \caption{Après éxécution de \texttt{adelete()}}
 \end{figure}
 
-\hypertarget{import-des-donnees}{%
-\chapter{Import des données}\label{import-des-donnees}}
+\hypertarget{import-des-donnuxe9es}{%
+\chapter{Import des données}\label{import-des-donnuxe9es}}
 
 \hypertarget{mco}{%
 \section{MCO}\label{mco}}
 
 \begin{longtable}[]{@{}ll@{}}
 \toprule
-Nom & Fonction\tabularnewline
+Nom & Fonction \\
 \midrule
 \endhead
-\href{https://guillaumepressiat.github.io/pmeasyr/reference/irsa.html}{irsa} & \textasciitilde{} MCO - Import des RSA\tabularnewline
-\href{https://guillaumepressiat.github.io/pmeasyr/reference/irum.html}{irum} & \textasciitilde{} MCO - Import des RUM\tabularnewline
-\href{https://guillaumepressiat.github.io/pmeasyr/reference/idiap.html}{idiap} & \textasciitilde{} MCO - Import des DIAP\tabularnewline
-\href{https://guillaumepressiat.github.io/pmeasyr/reference/idmi_mco.html}{idmi\_mco} & \textasciitilde{} MCO - Import des DMI\tabularnewline
-\href{https://guillaumepressiat.github.io/pmeasyr/reference/iium.html}{iium} & \textasciitilde{} MCO - Import des donnees UM\tabularnewline
-\href{https://guillaumepressiat.github.io/pmeasyr/reference/ileg_mco.html}{ileg\_mco} & \textasciitilde{} MCO - Import des erreurs Leg\tabularnewline
-\href{https://guillaumepressiat.github.io/pmeasyr/reference/imed_mco.html}{imed\_mco} & \textasciitilde{} MCO - Import des Med\tabularnewline
-\href{https://guillaumepressiat.github.io/pmeasyr/reference/ipo.html}{ipo} & \textasciitilde{} MCO - Import des PO\tabularnewline
-\href{https://guillaumepressiat.github.io/pmeasyr/reference/iano_mco.html}{iano\_mco} & \textasciitilde{} MCO - Import des Anohosp\tabularnewline
+\href{https://guillaumepressiat.github.io/pmeasyr/reference/irsa.html}{irsa} & \textasciitilde{} MCO - Import des RSA \\
+\href{https://guillaumepressiat.github.io/pmeasyr/reference/irum.html}{irum} & \textasciitilde{} MCO - Import des RUM \\
+\href{https://guillaumepressiat.github.io/pmeasyr/reference/idiap.html}{idiap} & \textasciitilde{} MCO - Import des DIAP \\
+\href{https://guillaumepressiat.github.io/pmeasyr/reference/idmi_mco.html}{idmi\_mco} & \textasciitilde{} MCO - Import des DMI \\
+\href{https://guillaumepressiat.github.io/pmeasyr/reference/iium.html}{iium} & \textasciitilde{} MCO - Import des donnees UM \\
+\href{https://guillaumepressiat.github.io/pmeasyr/reference/ileg_mco.html}{ileg\_mco} & \textasciitilde{} MCO - Import des erreurs Leg \\
+\href{https://guillaumepressiat.github.io/pmeasyr/reference/imed_mco.html}{imed\_mco} & \textasciitilde{} MCO - Import des Med \\
+\href{https://guillaumepressiat.github.io/pmeasyr/reference/ipo.html}{ipo} & \textasciitilde{} MCO - Import des PO \\
+\href{https://guillaumepressiat.github.io/pmeasyr/reference/iano_mco.html}{iano\_mco} & \textasciitilde{} MCO - Import des Anohosp \\
 \bottomrule
 \end{longtable}
 
@@ -472,61 +460,39 @@ Les données in / out sont prises en charge.
 
 Selon la nature des analyses à produire, plusieurs types d'imports sont possibles :
 
-\begin{longtable}[]{@{}rl@{}}
+\begin{longtable}[]{@{}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.0556}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.9444}}@{}}
 \toprule
-\begin{minipage}[b]{0.05\columnwidth}\raggedleft
-Type\strut
-\end{minipage} & \begin{minipage}[b]{0.89\columnwidth}\raggedright
-Import\strut
-\end{minipage}\tabularnewline
+\begin{minipage}[b]{\linewidth}\raggedleft
+Type
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Import
+\end{minipage} \\
 \midrule
 \endhead
-\begin{minipage}[t]{0.05\columnwidth}\raggedleft
-1\strut
-\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright
-Light : Partie fixe\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.05\columnwidth}\raggedleft
-2\strut
-\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright
-Light+ : Partie fixe + stream en ligne (+) actes et das\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.05\columnwidth}\raggedleft
-3\strut
-\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright
-Light++ : Partie fixe + stream en ligne (++) actes, das, typaut um et dpdr des um\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.05\columnwidth}\raggedleft
-4\strut
-\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright
-Standard : Partie fixe + creation des tables actes, das et rsa\_um\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.05\columnwidth}\raggedleft
-5\strut
-\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright
-Standard+ : Partie fixe + creation des tables actes, das et rsa\_um + stream (+)\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.05\columnwidth}\raggedleft
-6\strut
-\end{minipage} & \begin{minipage}[t]{0.89\columnwidth}\raggedright
-Standard++ : Partie fixe + creation des tables actes, das et rsa\_um + stream (++)\strut
-\end{minipage}\tabularnewline
+1 & Light : Partie fixe \\
+2 & Light+ : Partie fixe + stream en ligne (+) actes et das \\
+3 & Light++ : Partie fixe + stream en ligne (++) actes, das, typaut um et dpdr des um \\
+4 & Standard : Partie fixe + creation des tables actes, das et rsa\_um \\
+5 & Standard+ : Partie fixe + creation des tables actes, das et rsa\_um + stream (+) \\
+6 & Standard++ : Partie fixe + creation des tables actes, das et rsa\_um + stream (++) \\
 \bottomrule
 \end{longtable}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(pmeasyr)}
-\CommentTok{# Import des rsa 2015 type 6}
-\KeywordTok{irsa}\NormalTok{(}\DataTypeTok{finess =} \DecValTok{750100042}\NormalTok{, }
-     \DataTypeTok{annee =} \DecValTok{2015}\NormalTok{, }
-     \DataTypeTok{mois =} \DecValTok{12}\NormalTok{, }
-     \DataTypeTok{path =} \StringTok{'~/Documents/data/mco'}\NormalTok{, }
-     \DataTypeTok{typi =} \DecValTok{6}\NormalTok{) ->}\StringTok{ }\NormalTok{rsa15}
-\KeywordTok{View}\NormalTok{(rsa15}\OperatorTok{$}\NormalTok{rsa)}
-\KeywordTok{View}\NormalTok{(rsa15}\OperatorTok{$}\NormalTok{rsa_um)}
-\KeywordTok{View}\NormalTok{(rsa15}\OperatorTok{$}\NormalTok{actes)}
-\KeywordTok{View}\NormalTok{(rsa15}\OperatorTok{$}\NormalTok{das)}
+\FunctionTok{library}\NormalTok{(pmeasyr)}
+\CommentTok{\# Import des rsa 2015 type 6}
+\FunctionTok{irsa}\NormalTok{(}\AttributeTok{finess =} \DecValTok{750100042}\NormalTok{, }
+     \AttributeTok{annee =} \DecValTok{2015}\NormalTok{, }
+     \AttributeTok{mois =} \DecValTok{12}\NormalTok{, }
+     \AttributeTok{path =} \StringTok{\textquotesingle{}\textasciitilde{}/Documents/data/mco\textquotesingle{}}\NormalTok{, }
+     \AttributeTok{typi =} \DecValTok{6}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ rsa15}
+\FunctionTok{View}\NormalTok{(rsa15}\SpecialCharTok{$}\NormalTok{rsa)}
+\FunctionTok{View}\NormalTok{(rsa15}\SpecialCharTok{$}\NormalTok{rsa\_um)}
+\FunctionTok{View}\NormalTok{(rsa15}\SpecialCharTok{$}\NormalTok{actes)}
+\FunctionTok{View}\NormalTok{(rsa15}\SpecialCharTok{$}\NormalTok{das)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -543,11 +509,11 @@ Les tables sont par défaut avec des libellés :
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Import des rum 2015}
-\KeywordTok{irum}\NormalTok{(}\DataTypeTok{finess =} \DecValTok{750100042}\NormalTok{, }
-     \DataTypeTok{annee =} \DecValTok{2015}\NormalTok{, }
-     \DataTypeTok{mois =} \DecValTok{12}\NormalTok{, }
-     \DataTypeTok{path =} \StringTok{'~/Documents/data/mco'}\NormalTok{)}
+\CommentTok{\# Import des rum 2015}
+\FunctionTok{irum}\NormalTok{(}\AttributeTok{finess =} \DecValTok{750100042}\NormalTok{, }
+     \AttributeTok{annee =} \DecValTok{2015}\NormalTok{, }
+     \AttributeTok{mois =} \DecValTok{12}\NormalTok{, }
+     \AttributeTok{path =} \StringTok{\textquotesingle{}\textasciitilde{}/Documents/data/mco\textquotesingle{}}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -555,13 +521,13 @@ Selon la nature des analyses à produire, plusieurs types d'imports sont possibl
 
 \begin{longtable}[]{@{}rl@{}}
 \toprule
-Type & Import\tabularnewline
+Type & Import \\
 \midrule
 \endhead
-1 & XLight : Partie fixe\tabularnewline
-2 & Light : Partie fixe + stream en ligne des actes, das et dad\tabularnewline
-3 & Standard : Partie fixe + table actes, das, dad\tabularnewline
-4 & Standard+ : Partie fixe + stream + table actes, das, dad\tabularnewline
+1 & XLight : Partie fixe \\
+2 & Light : Partie fixe + stream en ligne des actes, das et dad \\
+3 & Standard : Partie fixe + table actes, das, dad \\
+4 & Standard+ : Partie fixe + stream + table actes, das, dad \\
 \bottomrule
 \end{longtable}
 
@@ -578,12 +544,12 @@ Type & Import\tabularnewline
 
 \begin{longtable}[]{@{}rl@{}}
 \toprule
-Cle RSA & actes\tabularnewline
+Cle RSA & actes \\
 \midrule
 \endhead
-0000000001 & EDSF004, EDSF004, JQGA004, JQGA004\tabularnewline
-0000000002 & EPLF002, DEQP003, DEQP007, DZQM006\tabularnewline
-0000000003 & EBQH002, EEQH002, YYYY180\tabularnewline
+0000000001 & EDSF004, EDSF004, JQGA004, JQGA004 \\
+0000000002 & EPLF002, DEQP003, DEQP007, DZQM006 \\
+0000000003 & EBQH002, EEQH002, YYYY180 \\
 \bottomrule
 \end{longtable}
 
@@ -595,11 +561,11 @@ Cle RSA & actes\tabularnewline
 
 \begin{longtable}[]{@{}rl@{}}
 \toprule
-Cle RSA & dpdrum\tabularnewline
+Cle RSA & dpdrum \\
 \midrule
 \endhead
-0000000004 & Z098 I671\tabularnewline
-0000000005 & Z380, P741, Z380\tabularnewline
+0000000004 & Z098 I671 \\
+0000000005 & Z380, P741, Z380 \\
 \bottomrule
 \end{longtable}
 
@@ -611,11 +577,11 @@ Cle RSA & dpdrum\tabularnewline
 
 \begin{longtable}[]{@{}rl@{}}
 \toprule
-Cle RSA & das\tabularnewline
+Cle RSA & das \\
 \midrule
 \endhead
-0000000006 & Z9580, Z9588\tabularnewline
-0000000007 & P011, P032, P036, P011, P032, P700, P011, P032, P036\tabularnewline
+0000000006 & Z9580, Z9588 \\
+0000000007 & P011, P032, P036, P011, P032, P700, P011, P032, P036 \\
 \bottomrule
 \end{longtable}
 
@@ -627,12 +593,12 @@ Cle RSA & das\tabularnewline
 
 \begin{longtable}[]{@{}rl@{}}
 \toprule
-Cle RSA & um\tabularnewline
+Cle RSA & um \\
 \midrule
 \endhead
-0000000009 & 01AC, 53 C\tabularnewline
-0000000010 & 51 C\tabularnewline
-0000000011 & 71 C, 04 C, 71 C\tabularnewline
+0000000009 & 01AC, 53 C \\
+0000000010 & 51 C \\
+0000000011 & 71 C, 04 C, 71 C \\
 \bottomrule
 \end{longtable}
 
@@ -651,24 +617,24 @@ Les fonctions d'imports pour ces champs PMSI reposent sur le même principe qu'e
 
 \begin{longtable}[]{@{}ll@{}}
 \toprule
-Nom & Fonction\tabularnewline
+Nom & Fonction \\
 \midrule
 \endhead
-\href{https://guillaumepressiat.github.io/pmeasyr/reference/iano_had.html}{iano\_had} & \textasciitilde{} HAD - Import des Anohosp\tabularnewline
-\href{https://guillaumepressiat.github.io/pmeasyr/reference/imed_had.html}{imed\_had} & \textasciitilde{} HAD - Import des Med\tabularnewline
-\href{https://guillaumepressiat.github.io/pmeasyr/reference/irapss.html}{irapss} & \textasciitilde{} HAD - Import des RAPSS\tabularnewline
-\href{https://guillaumepressiat.github.io/pmeasyr/reference/ileg_had.html}{ileg\_had} & \textasciitilde{} HAD - Import des erreurs LEG\tabularnewline
+\href{https://guillaumepressiat.github.io/pmeasyr/reference/iano_had.html}{iano\_had} & \textasciitilde{} HAD - Import des Anohosp \\
+\href{https://guillaumepressiat.github.io/pmeasyr/reference/imed_had.html}{imed\_had} & \textasciitilde{} HAD - Import des Med \\
+\href{https://guillaumepressiat.github.io/pmeasyr/reference/irapss.html}{irapss} & \textasciitilde{} HAD - Import des RAPSS \\
+\href{https://guillaumepressiat.github.io/pmeasyr/reference/ileg_had.html}{ileg\_had} & \textasciitilde{} HAD - Import des erreurs LEG \\
 \bottomrule
 \end{longtable}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(pmeasyr)}
-\CommentTok{# Import des rapss 2015}
-\KeywordTok{irapss}\NormalTok{(}\DataTypeTok{finess =} \DecValTok{750712184}\NormalTok{,}
-       \DataTypeTok{annee =} \DecValTok{2015}\NormalTok{,}
-       \DataTypeTok{mois =} \DecValTok{12}\NormalTok{,}
-       \DataTypeTok{path =} \StringTok{'~/Documents/data/had'}\NormalTok{) ->}\StringTok{ }\NormalTok{data_had}
+\FunctionTok{library}\NormalTok{(pmeasyr)}
+\CommentTok{\# Import des rapss 2015}
+\FunctionTok{irapss}\NormalTok{(}\AttributeTok{finess =} \DecValTok{750712184}\NormalTok{,}
+       \AttributeTok{annee =} \DecValTok{2015}\NormalTok{,}
+       \AttributeTok{mois =} \DecValTok{12}\NormalTok{,}
+       \AttributeTok{path =} \StringTok{\textquotesingle{}\textasciitilde{}/Documents/data/had\textquotesingle{}}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ data\_had}
 \end{Highlighting}
 \end{Shaded}
 
@@ -677,25 +643,25 @@ Nom & Fonction\tabularnewline
 
 \begin{longtable}[]{@{}ll@{}}
 \toprule
-Nom & Fonction\tabularnewline
+Nom & Fonction \\
 \midrule
 \endhead
-\href{https://guillaumepressiat.github.io/pmeasyr/reference/iano_ssr.html}{iano\_ssr} & \textasciitilde{} SSR - Import des Anohosp\tabularnewline
-\href{https://guillaumepressiat.github.io/pmeasyr/reference/irha.html}{irha} & \textasciitilde{} SSR - Import des RHA\tabularnewline
-\href{https://guillaumepressiat.github.io/pmeasyr/reference/issrha.html}{issrha} & \textasciitilde{} SSR - Import des SSRHA\tabularnewline
-\href{https://guillaumepressiat.github.io/pmeasyr/reference/imed_ssr.html}{imed\_ssr} & \textasciitilde{} SSR - Import des MED\tabularnewline
-\href{https://guillaumepressiat.github.io/pmeasyr/reference/iium_ssr.html}{iium\_ssr} & \textasciitilde{} SSR - Import des UM\tabularnewline
-\href{https://guillaumepressiat.github.io/pmeasyr/reference/ileg_ssr.html}{ileg\_ssr} & \textasciitilde{} SSR - Import des erreurs LEG\tabularnewline
+\href{https://guillaumepressiat.github.io/pmeasyr/reference/iano_ssr.html}{iano\_ssr} & \textasciitilde{} SSR - Import des Anohosp \\
+\href{https://guillaumepressiat.github.io/pmeasyr/reference/irha.html}{irha} & \textasciitilde{} SSR - Import des RHA \\
+\href{https://guillaumepressiat.github.io/pmeasyr/reference/issrha.html}{issrha} & \textasciitilde{} SSR - Import des SSRHA \\
+\href{https://guillaumepressiat.github.io/pmeasyr/reference/imed_ssr.html}{imed\_ssr} & \textasciitilde{} SSR - Import des MED \\
+\href{https://guillaumepressiat.github.io/pmeasyr/reference/iium_ssr.html}{iium\_ssr} & \textasciitilde{} SSR - Import des UM \\
+\href{https://guillaumepressiat.github.io/pmeasyr/reference/ileg_ssr.html}{ileg\_ssr} & \textasciitilde{} SSR - Import des erreurs LEG \\
 \bottomrule
 \end{longtable}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Import des rha 2015}
-\KeywordTok{irha}\NormalTok{(}\DataTypeTok{finess =} \DecValTok{750041543}\NormalTok{,}
-     \DataTypeTok{annee =} \DecValTok{2015}\NormalTok{,}
-     \DataTypeTok{mois =} \DecValTok{12}\NormalTok{,}
-     \DataTypeTok{path =} \StringTok{'~/Documents/data/ssr'}\NormalTok{) ->}\StringTok{ }\NormalTok{data_ssr}
+\CommentTok{\# Import des rha 2015}
+\FunctionTok{irha}\NormalTok{(}\AttributeTok{finess =} \DecValTok{750041543}\NormalTok{,}
+     \AttributeTok{annee =} \DecValTok{2015}\NormalTok{,}
+     \AttributeTok{mois =} \DecValTok{12}\NormalTok{,}
+     \AttributeTok{path =} \StringTok{\textquotesingle{}\textasciitilde{}/Documents/data/ssr\textquotesingle{}}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ data\_ssr}
 \end{Highlighting}
 \end{Shaded}
 
@@ -704,28 +670,28 @@ Nom & Fonction\tabularnewline
 
 \begin{longtable}[]{@{}ll@{}}
 \toprule
-Nom & Fonction\tabularnewline
+Nom & Fonction \\
 \midrule
 \endhead
-\href{https://guillaumepressiat.github.io/pmeasyr/reference/iano_psy.html}{iano\_psy} & \textasciitilde{} PSY - Import des Anohosp\tabularnewline
-\href{https://guillaumepressiat.github.io/pmeasyr/reference/ir3a.html}{ir3a} & \textasciitilde{} PSY - Import des R3A\tabularnewline
-\href{https://guillaumepressiat.github.io/pmeasyr/reference/irpsa.html}{irpsa} & \textasciitilde{} PSY - Import des RPSA\tabularnewline
+\href{https://guillaumepressiat.github.io/pmeasyr/reference/iano_psy.html}{iano\_psy} & \textasciitilde{} PSY - Import des Anohosp \\
+\href{https://guillaumepressiat.github.io/pmeasyr/reference/ir3a.html}{ir3a} & \textasciitilde{} PSY - Import des R3A \\
+\href{https://guillaumepressiat.github.io/pmeasyr/reference/irpsa.html}{irpsa} & \textasciitilde{} PSY - Import des RPSA \\
 \bottomrule
 \end{longtable}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Import des rpsa 2015}
-\KeywordTok{irpsa}\NormalTok{(}\DataTypeTok{finess =} \DecValTok{750803454}\NormalTok{,}
-      \DataTypeTok{annee =} \DecValTok{2015}\NormalTok{,}
-      \DataTypeTok{mois =} \DecValTok{12}\NormalTok{,}
-      \DataTypeTok{path =} \StringTok{'~/Documents/data/psy'}\NormalTok{) ->}\StringTok{ }\NormalTok{rpsa_psy}
+\CommentTok{\# Import des rpsa 2015}
+\FunctionTok{irpsa}\NormalTok{(}\AttributeTok{finess =} \DecValTok{750803454}\NormalTok{,}
+      \AttributeTok{annee =} \DecValTok{2015}\NormalTok{,}
+      \AttributeTok{mois =} \DecValTok{12}\NormalTok{,}
+      \AttributeTok{path =} \StringTok{\textquotesingle{}\textasciitilde{}/Documents/data/psy\textquotesingle{}}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ rpsa\_psy}
 
-\CommentTok{# Import des r3a 2015}
-\KeywordTok{ir3a}\NormalTok{(}\DataTypeTok{finess =} \DecValTok{750803454}\NormalTok{,}
-      \DataTypeTok{annee =} \DecValTok{2015}\NormalTok{,}
-      \DataTypeTok{mois =} \DecValTok{12}\NormalTok{,}
-      \DataTypeTok{path =} \StringTok{'~/Documents/data/psy'}\NormalTok{) ->}\StringTok{ }\NormalTok{r3a_psy}
+\CommentTok{\# Import des r3a 2015}
+\FunctionTok{ir3a}\NormalTok{(}\AttributeTok{finess =} \DecValTok{750803454}\NormalTok{,}
+      \AttributeTok{annee =} \DecValTok{2015}\NormalTok{,}
+      \AttributeTok{mois =} \DecValTok{12}\NormalTok{,}
+      \AttributeTok{path =} \StringTok{\textquotesingle{}\textasciitilde{}/Documents/data/psy\textquotesingle{}}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ r3a\_psy}
 \end{Highlighting}
 \end{Shaded}
 
@@ -734,21 +700,21 @@ Nom & Fonction\tabularnewline
 
 \begin{longtable}[]{@{}ll@{}}
 \toprule
-Nom & Fonction\tabularnewline
+Nom & Fonction \\
 \midrule
 \endhead
-\href{https://guillaumepressiat.github.io/pmeasyr/reference/irafael.html}{irafael} & \textasciitilde{} RSF - Import des RSFA / Rafael\tabularnewline
-\href{https://guillaumepressiat.github.io/pmeasyr/reference/iano_rafael.html}{iano\_rafael} & \textasciitilde{} RSF - Import des RSFA / ANO\tabularnewline
+\href{https://guillaumepressiat.github.io/pmeasyr/reference/irafael.html}{irafael} & \textasciitilde{} RSF - Import des RSFA / Rafael \\
+\href{https://guillaumepressiat.github.io/pmeasyr/reference/iano_rafael.html}{iano\_rafael} & \textasciitilde{} RSF - Import des RSFA / ANO \\
 \bottomrule
 \end{longtable}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Import des rsfa 2015}
-\KeywordTok{irafael}\NormalTok{(}\DataTypeTok{finess =} \DecValTok{750712184}\NormalTok{,}
-        \DataTypeTok{annee =} \DecValTok{2015}\NormalTok{,}
-        \DataTypeTok{mois =} \DecValTok{12}\NormalTok{,}
-        \DataTypeTok{path =} \StringTok{'~/Documents/data/rsf'}\NormalTok{) ->}\StringTok{ }\NormalTok{rsfa}
+\CommentTok{\# Import des rsfa 2015}
+\FunctionTok{irafael}\NormalTok{(}\AttributeTok{finess =} \DecValTok{750712184}\NormalTok{,}
+        \AttributeTok{annee =} \DecValTok{2015}\NormalTok{,}
+        \AttributeTok{mois =} \DecValTok{12}\NormalTok{,}
+        \AttributeTok{path =} \StringTok{\textquotesingle{}\textasciitilde{}/Documents/data/rsf\textquotesingle{}}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ rsfa}
 \end{Highlighting}
 \end{Shaded}
 
@@ -757,15 +723,15 @@ Nom & Fonction\tabularnewline
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Obtenir les noms, labels et types de variables (character, numeric, integer, date, ...)}
-\KeywordTok{dico}\NormalTok{(rsa15}\OperatorTok{$}\NormalTok{rsa)}
+\CommentTok{\# Obtenir les noms, labels et types de variables (character, numeric, integer, date, ...)}
+\FunctionTok{dico}\NormalTok{(rsa15}\SpecialCharTok{$}\NormalTok{rsa)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Charger les formats de toutes les tables prises en charge par le package}
-\NormalTok{pmeasyr}\OperatorTok{::}\NormalTok{formats}
+\CommentTok{\# Charger les formats de toutes les tables prises en charge par le package}
+\NormalTok{pmeasyr}\SpecialCharTok{::}\NormalTok{formats}
 \end{Highlighting}
 \end{Shaded}
 
@@ -774,14 +740,14 @@ Nom & Fonction\tabularnewline
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Obtenir le libelle d'une variable du PMSI}
-\KeywordTok{labeleasier}\NormalTok{(rsa15}\OperatorTok{$}\NormalTok{rsa}\OperatorTok{$}\NormalTok{SEXE, }\DataTypeTok{Sexe =}\NormalTok{ T)}
-\KeywordTok{labeleasier}\NormalTok{(rsa15}\OperatorTok{$}\NormalTok{rsa}\OperatorTok{$}\NormalTok{ECHPMSI, }\DataTypeTok{Mode_entree =}\NormalTok{ T)}
+\CommentTok{\# Obtenir le libelle d\textquotesingle{}une variable du PMSI}
+\FunctionTok{labeleasier}\NormalTok{(rsa15}\SpecialCharTok{$}\NormalTok{rsa}\SpecialCharTok{$}\NormalTok{SEXE, }\AttributeTok{Sexe =}\NormalTok{ T)}
+\FunctionTok{labeleasier}\NormalTok{(rsa15}\SpecialCharTok{$}\NormalTok{rsa}\SpecialCharTok{$}\NormalTok{ECHPMSI, }\AttributeTok{Mode\_entree =}\NormalTok{ T)}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{requetes-sur-des-pathologies-actes}{%
-\chapter{Requêtes sur des pathologies / actes}\label{requetes-sur-des-pathologies-actes}}
+\hypertarget{requuxeates-sur-des-pathologies-actes}{%
+\chapter{Requêtes sur des pathologies / actes}\label{requuxeates-sur-des-pathologies-actes}}
 
 \hypertarget{transposition-des-codes-diagnostics}{%
 \section{Transposition des codes diagnostics}\label{transposition-des-codes-diagnostics}}
@@ -790,12 +756,12 @@ Les analyses sur les diagnostics CIM-10 sont parfois fastidieuses du fait des mu
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Pour les objets rsa et rum du MCO}
-\CommentTok{# Transbahuter tous les diagnostics dans une seule table}
-\KeywordTok{tdiag}\NormalTok{(rsa15) ->}\StringTok{ }\NormalTok{rsa15 }\CommentTok{# "Tidy diagnostics"}
-\KeywordTok{View}\NormalTok{(rsa15}\OperatorTok{$}\NormalTok{diags)}
-\CommentTok{# Tous les diagnostics sont dans une table, avec un numero selon leur position  }
-\CommentTok{# 1:DP, 2:DR, 3:DPUM, 4:DRUM, 5:DAS}
+\CommentTok{\# Pour les objets rsa et rum du MCO}
+\CommentTok{\# Transbahuter tous les diagnostics dans une seule table}
+\FunctionTok{tdiag}\NormalTok{(rsa15) }\OtherTok{{-}\textgreater{}}\NormalTok{ rsa15 }\CommentTok{\# "Tidy diagnostics"}
+\FunctionTok{View}\NormalTok{(rsa15}\SpecialCharTok{$}\NormalTok{diags)}
+\CommentTok{\# Tous les diagnostics sont dans une table, avec un numero selon leur position  }
+\CommentTok{\# 1:DP, 2:DR, 3:DPUM, 4:DRUM, 5:DAS}
 \end{Highlighting}
 \end{Shaded}
 
@@ -803,15 +769,15 @@ Exemple de résultat :
 
 \begin{longtable}[]{@{}llll@{}}
 \toprule
-CLE\_RSA & NSEQRUM & position & diag\tabularnewline
+CLE\_RSA & NSEQRUM & position & diag \\
 \midrule
 \endhead
-0000000001 & 01 & 1 & Z511\tabularnewline
-0000000001 & 01 & 2 & C18\tabularnewline
-0000000002 & 01 & 1 & C501\tabularnewline
-0000000002 & 01 & 3 & C501\tabularnewline
-0000000002 & 02 & 1 & D051\tabularnewline
-0000000002 & 02 & 5 & E109\tabularnewline
+0000000001 & 01 & 1 & Z511 \\
+0000000001 & 01 & 2 & C18 \\
+0000000002 & 01 & 1 & C501 \\
+0000000002 & 01 & 3 & C501 \\
+0000000002 & 02 & 1 & D051 \\
+0000000002 & 02 & 5 & E109 \\
 \bottomrule
 \end{longtable}
 
@@ -822,32 +788,32 @@ L'objectif est de récupérer les séjours présentant un code diagnostic de la 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Liste D-0103 de la fonction groupage 2016 : Epilepsies}
-\NormalTok{liste_diag =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{'F803'}\NormalTok{, }\StringTok{'G400'}\NormalTok{, }\StringTok{'G401'}\NormalTok{, }\StringTok{'G402'}\NormalTok{, }\StringTok{'G403'}\NormalTok{, }\StringTok{'G404'}\NormalTok{, }
-               \StringTok{'G405'}\NormalTok{, }\StringTok{'G406'}\NormalTok{, }\StringTok{'G407'}\NormalTok{, }\StringTok{'G408'}\NormalTok{, }\StringTok{'G409'}\NormalTok{, }\StringTok{'G410'}\NormalTok{, }
-               \StringTok{'G411'}\NormalTok{, }\StringTok{'G412'}\NormalTok{, }\StringTok{'G418'}\NormalTok{, }\StringTok{'G419'}\NormalTok{, }\StringTok{'R568'}\NormalTok{)}
+\CommentTok{\# Liste D{-}0103 de la fonction groupage 2016 : Epilepsies}
+\NormalTok{liste\_diag }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}F803\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}G400\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}G401\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}G402\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}G403\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}G404\textquotesingle{}}\NormalTok{, }
+               \StringTok{\textquotesingle{}G405\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}G406\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}G407\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}G408\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}G409\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}G410\textquotesingle{}}\NormalTok{, }
+               \StringTok{\textquotesingle{}G411\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}G412\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}G418\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}G419\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}R568\textquotesingle{}}\NormalTok{)}
 
-\CommentTok{# En passant par la table diags}
-\KeywordTok{tdiag}\NormalTok{(rsa15) ->}\StringTok{ }\NormalTok{rsa15}
+\CommentTok{\# En passant par la table diags}
+\FunctionTok{tdiag}\NormalTok{(rsa15) }\OtherTok{{-}\textgreater{}}\NormalTok{ rsa15}
 
-\KeywordTok{library}\NormalTok{(dplyr)}
-\CommentTok{# quelle que soit la position du diagnostic}
-\NormalTok{rsa15}\OperatorTok{$}\NormalTok{diags }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(diag }\OperatorTok{%in%}\StringTok{ }\NormalTok{liste_diag)}
-\CommentTok{# position en das}
-\NormalTok{rsa15}\OperatorTok{$}\NormalTok{diags }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(diag }\OperatorTok{%in%}\StringTok{ }\NormalTok{liste_diag, position }\OperatorTok{==}\StringTok{ }\DecValTok{5}\NormalTok{)}
-\CommentTok{# position en dp dr}
-\NormalTok{rsa15}\OperatorTok{$}\NormalTok{diags }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(diag }\OperatorTok{%in%}\StringTok{ }\NormalTok{liste_diag, position }\OperatorTok{<}\StringTok{ }\DecValTok{5}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(dplyr)}
+\CommentTok{\# quelle que soit la position du diagnostic}
+\NormalTok{rsa15}\SpecialCharTok{$}\NormalTok{diags }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(diag }\SpecialCharTok{\%in\%}\NormalTok{ liste\_diag)}
+\CommentTok{\# position en das}
+\NormalTok{rsa15}\SpecialCharTok{$}\NormalTok{diags }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(diag }\SpecialCharTok{\%in\%}\NormalTok{ liste\_diag, position }\SpecialCharTok{==} \DecValTok{5}\NormalTok{)}
+\CommentTok{\# position en dp dr}
+\NormalTok{rsa15}\SpecialCharTok{$}\NormalTok{diags }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(diag }\SpecialCharTok{\%in\%}\NormalTok{ liste\_diag, position }\SpecialCharTok{\textless{}} \DecValTok{5}\NormalTok{)}
 
-\CommentTok{# En passant par les zones stream}
-\NormalTok{string_diags =}\StringTok{ }
-\StringTok{  'F803|G400|G401|G402|G403|G404|G405|G406|G407|G408|G409|G410|G411|G412|G418|G419|R568'}
+\CommentTok{\# En passant par les zones stream}
+\NormalTok{string\_diags }\OtherTok{=} 
+  \StringTok{\textquotesingle{}F803|G400|G401|G402|G403|G404|G405|G406|G407|G408|G409|G410|G411|G412|G418|G419|R568\textquotesingle{}}
 
-\CommentTok{# quelle que soit la position du diagnostic}
-\NormalTok{rsa15}\OperatorTok{$}\NormalTok{rsa }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(}\KeywordTok{grepl}\NormalTok{(string_diags, dpdrum)}\OperatorTok{|}\KeywordTok{grepl}\NormalTok{(string_diags, das))}
-\CommentTok{# position en das}
-\NormalTok{rsa15}\OperatorTok{$}\NormalTok{rsa }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(}\KeywordTok{grepl}\NormalTok{(string_diags, das))}
-\CommentTok{# position en dpdr}
-\NormalTok{rsa15}\OperatorTok{$}\NormalTok{rsa }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(}\KeywordTok{grepl}\NormalTok{(string_diags, dpdrum))}
+\CommentTok{\# quelle que soit la position du diagnostic}
+\NormalTok{rsa15}\SpecialCharTok{$}\NormalTok{rsa }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(}\FunctionTok{grepl}\NormalTok{(string\_diags, dpdrum)}\SpecialCharTok{|}\FunctionTok{grepl}\NormalTok{(string\_diags, das))}
+\CommentTok{\# position en das}
+\NormalTok{rsa15}\SpecialCharTok{$}\NormalTok{rsa }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(}\FunctionTok{grepl}\NormalTok{(string\_diags, das))}
+\CommentTok{\# position en dpdr}
+\NormalTok{rsa15}\SpecialCharTok{$}\NormalTok{rsa }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(}\FunctionTok{grepl}\NormalTok{(string\_diags, dpdrum))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -856,36 +822,36 @@ L'objectif est de récupérer les séjours présentant un code diagnostic de la 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Code EBLA003}
+\CommentTok{\# Code EBLA003}
 
-\KeywordTok{library}\NormalTok{(dplyr)}
-\CommentTok{# En passant par la table actes}
-\NormalTok{rsa15}\OperatorTok{$}\NormalTok{actes }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(CDCCAM }\OperatorTok{==}\StringTok{ 'EBLA003'}\NormalTok{)}
-\CommentTok{# En passant par la zone stream}
-\NormalTok{rsa15}\OperatorTok{$}\NormalTok{rsa }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(}\KeywordTok{grepl}\NormalTok{(}\StringTok{'EBLA003'}\NormalTok{, actes))}
+\FunctionTok{library}\NormalTok{(dplyr)}
+\CommentTok{\# En passant par la table actes}
+\NormalTok{rsa15}\SpecialCharTok{$}\NormalTok{actes }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(CDCCAM }\SpecialCharTok{==} \StringTok{\textquotesingle{}EBLA003\textquotesingle{}}\NormalTok{)}
+\CommentTok{\# En passant par la zone stream}
+\NormalTok{rsa15}\SpecialCharTok{$}\NormalTok{rsa }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(}\FunctionTok{grepl}\NormalTok{(}\StringTok{\textquotesingle{}EBLA003\textquotesingle{}}\NormalTok{, actes))}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{etude-des-files-actives}{%
-\chapter{Étude des files actives}\label{etude-des-files-actives}}
+\hypertarget{uxe9tude-des-files-actives}{%
+\chapter{Étude des files actives}\label{uxe9tude-des-files-actives}}
 
-\hypertarget{import-des-donnees-anohosp}{%
-\section{Import des données Anohosp}\label{import-des-donnees-anohosp}}
+\hypertarget{import-des-donnuxe9es-anohosp}{%
+\section{Import des données Anohosp}\label{import-des-donnuxe9es-anohosp}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Import des données anohosp du out}
-\KeywordTok{iano_mco}\NormalTok{(}\DataTypeTok{finess =} \DecValTok{750100042}\NormalTok{, }
-         \DataTypeTok{annee =} \DecValTok{2015}\NormalTok{,}
-         \DataTypeTok{mois =} \DecValTok{12}\NormalTok{,}
-         \DataTypeTok{path =} \StringTok{'~/Documents/data/mco'}\NormalTok{) ->}\StringTok{ }\NormalTok{ano}
+\CommentTok{\# Import des données anohosp du out}
+\FunctionTok{iano\_mco}\NormalTok{(}\AttributeTok{finess =} \DecValTok{750100042}\NormalTok{, }
+         \AttributeTok{annee =} \DecValTok{2015}\NormalTok{,}
+         \AttributeTok{mois =} \DecValTok{12}\NormalTok{,}
+         \AttributeTok{path =} \StringTok{\textquotesingle{}\textasciitilde{}/Documents/data/mco\textquotesingle{}}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ ano}
 
-\CommentTok{# Filtrer sur les patients chainables avec la variable cok}
-\KeywordTok{library}\NormalTok{(dplyr)}
-\NormalTok{ano }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(cok) ->}\StringTok{ }\NormalTok{ano}
+\CommentTok{\# Filtrer sur les patients chainables avec la variable cok}
+\FunctionTok{library}\NormalTok{(dplyr)}
+\NormalTok{ano }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(cok) }\OtherTok{{-}\textgreater{}}\NormalTok{ ano}
 
-\CommentTok{# File active globale établissement}
-\KeywordTok{distinct}\NormalTok{(ano, NOANON) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{nrow}\NormalTok{()}
+\CommentTok{\# File active globale établissement}
+\FunctionTok{distinct}\NormalTok{(ano, NOANON) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{nrow}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -894,16 +860,16 @@ L'objectif est de récupérer les séjours présentant un code diagnostic de la 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Codes diagnostics obésité }
-\NormalTok{string_diags =}\StringTok{ 'E66'}
+\CommentTok{\# Codes diagnostics obésité }
+\NormalTok{string\_diags }\OtherTok{=} \StringTok{\textquotesingle{}E66\textquotesingle{}}
 
-\KeywordTok{library}\NormalTok{(dplyr)}
-\CommentTok{# position en dpdr}
-\NormalTok{rsa15}\OperatorTok{$}\NormalTok{rsa }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(}\KeywordTok{grepl}\NormalTok{(string_diags, dpdrum)) ->}\StringTok{ }\NormalTok{ob}
+\FunctionTok{library}\NormalTok{(dplyr)}
+\CommentTok{\# position en dpdr}
+\NormalTok{rsa15}\SpecialCharTok{$}\NormalTok{rsa }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(}\FunctionTok{grepl}\NormalTok{(string\_diags, dpdrum)) }\OtherTok{{-}\textgreater{}}\NormalTok{ ob}
 
-\CommentTok{# File active obésité globale établissement}
-\KeywordTok{inner_join}\NormalTok{(ano, ob, }\DataTypeTok{by =} \KeywordTok{c}\NormalTok{(}\StringTok{'CLE_RSA'}\NormalTok{)) ->}\StringTok{ }\NormalTok{patients_ob}
-\KeywordTok{distinct}\NormalTok{(patients_ob, NOANON) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{nrow}\NormalTok{()}
+\CommentTok{\# File active obésité globale établissement}
+\FunctionTok{inner\_join}\NormalTok{(ano, ob, }\AttributeTok{by =} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}CLE\_RSA\textquotesingle{}}\NormalTok{)) }\OtherTok{{-}\textgreater{}}\NormalTok{ patients\_ob}
+\FunctionTok{distinct}\NormalTok{(patients\_ob, NOANON) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{nrow}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -912,19 +878,19 @@ L'objectif est de récupérer les séjours présentant un code diagnostic de la 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Codes actes chirurgie bariatrique}
-\NormalTok{liste_actes =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{'HFCA001'}\NormalTok{, }\StringTok{'HFCC003'}\NormalTok{, }\StringTok{'HFFC004'}\NormalTok{, }\StringTok{'HFFA001'}\NormalTok{, }\StringTok{'HFMA009'}\NormalTok{,}
-                \StringTok{'HFMC007'}\NormalTok{, }\StringTok{'HFKA001'}\NormalTok{, }\StringTok{'HFKC001'}\NormalTok{, }\StringTok{'HFKA002'}\NormalTok{, }\StringTok{'HFMA011'}\NormalTok{,}
-                \StringTok{'HFMC008'}\NormalTok{, }\StringTok{'HFMA010'}\NormalTok{, }\StringTok{'HFMC006'}\NormalTok{, }\StringTok{'HFLE002'}\NormalTok{, }\StringTok{'HFGC900'}\NormalTok{,}
-                \StringTok{'HFLC900'}\NormalTok{, }\StringTok{'HFFA011'}\NormalTok{, }\StringTok{'HFFC018'}\NormalTok{, }\StringTok{'HGCA009'}\NormalTok{, }\StringTok{'HGCC027'}\NormalTok{)}
+\CommentTok{\# Codes actes chirurgie bariatrique}
+\NormalTok{liste\_actes }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}HFCA001\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}HFCC003\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}HFFC004\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}HFFA001\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}HFMA009\textquotesingle{}}\NormalTok{,}
+                \StringTok{\textquotesingle{}HFMC007\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}HFKA001\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}HFKC001\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}HFKA002\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}HFMA011\textquotesingle{}}\NormalTok{,}
+                \StringTok{\textquotesingle{}HFMC008\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}HFMA010\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}HFMC006\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}HFLE002\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}HFGC900\textquotesingle{}}\NormalTok{,}
+                \StringTok{\textquotesingle{}HFLC900\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}HFFA011\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}HFFC018\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}HGCA009\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}HGCC027\textquotesingle{}}\NormalTok{)}
 
-\KeywordTok{library}\NormalTok{(dplyr)}
-\CommentTok{# acte codé activité 1 (chirurgical)}
-\NormalTok{rsa15}\OperatorTok{$}\NormalTok{actes }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(CDCCAM }\OperatorTok{%in%}\StringTok{ }\NormalTok{liste_actes, ACT }\OperatorTok{==}\StringTok{ '1'}\NormalTok{) ->}\StringTok{ }\NormalTok{cob}
+\FunctionTok{library}\NormalTok{(dplyr)}
+\CommentTok{\# acte codé activité 1 (chirurgical)}
+\NormalTok{rsa15}\SpecialCharTok{$}\NormalTok{actes }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(CDCCAM }\SpecialCharTok{\%in\%}\NormalTok{ liste\_actes, ACT }\SpecialCharTok{==} \StringTok{\textquotesingle{}1\textquotesingle{}}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ cob}
 
-\CommentTok{# File active chirurgie bariatrique globale établissement}
-\KeywordTok{inner_join}\NormalTok{(ano, cob, }\DataTypeTok{by =} \KeywordTok{c}\NormalTok{(}\StringTok{'CLE_RSA'}\NormalTok{)) ->}\StringTok{ }\NormalTok{patients_cob}
-\KeywordTok{distinct}\NormalTok{(patients_cob, NOANON) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{nrow}\NormalTok{()}
+\CommentTok{\# File active chirurgie bariatrique globale établissement}
+\FunctionTok{inner\_join}\NormalTok{(ano, cob, }\AttributeTok{by =} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}CLE\_RSA\textquotesingle{}}\NormalTok{)) }\OtherTok{{-}\textgreater{}}\NormalTok{ patients\_cob}
+\FunctionTok{distinct}\NormalTok{(patients\_cob, NOANON) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{nrow}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -949,11 +915,11 @@ Le fichier TRA est un fichier du \emph{out} qui permet de relier les données an
 
 \begin{longtable}[]{@{}rl@{}}
 \toprule
-Type & Import\tabularnewline
+Type & Import \\
 \midrule
 \endhead
-\href{https://im-aphp.github.io/pmeasyr/reference/itra.html}{itra} & \textasciitilde{} TRA - Import du TRA\tabularnewline
-\href{https://im-aphp.github.io/pmeasyr/reference/inner_tra.html}{inner\_tra} & \textasciitilde{} TRA - Ajout du TRA aux données Out\tabularnewline
+\href{https://im-aphp.github.io/pmeasyr/reference/itra.html}{itra} & \textasciitilde{} TRA - Import du TRA \\
+\href{https://im-aphp.github.io/pmeasyr/reference/inner_tra.html}{inner\_tra} & \textasciitilde{} TRA - Ajout du TRA aux données Out \\
 \bottomrule
 \end{longtable}
 
@@ -962,17 +928,17 @@ Type & Import\tabularnewline
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# lecture du fichier tra et jointure aux rsa}
-\KeywordTok{itra}\NormalTok{(}\DecValTok{750100042}\NormalTok{, }\DecValTok{2015}\NormalTok{, }\DecValTok{12}\NormalTok{, }\StringTok{'~/Documents/data/mco'}\NormalTok{) ->}\StringTok{ }\NormalTok{tra}
+\CommentTok{\# lecture du fichier tra et jointure aux rsa}
+\FunctionTok{itra}\NormalTok{(}\DecValTok{750100042}\NormalTok{, }\DecValTok{2015}\NormalTok{, }\DecValTok{12}\NormalTok{, }\StringTok{\textquotesingle{}\textasciitilde{}/Documents/data/mco\textquotesingle{}}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ tra}
 
-\CommentTok{# Ajout du tra aux rsa :}
-\KeywordTok{inner_tra}\NormalTok{(rsa15}\OperatorTok{$}\NormalTok{rsa, tra) ->}\StringTok{ }\NormalTok{rsa15}\OperatorTok{$}\NormalTok{rsa}
-\CommentTok{# Ajout du tra à la partie um des rsa :}
-\KeywordTok{inner_tra}\NormalTok{(rsa15}\OperatorTok{$}\NormalTok{rsa_um, tra) ->}\StringTok{ }\NormalTok{rsa15}\OperatorTok{$}\NormalTok{rsa_um}
-\CommentTok{# Ajout du tra à la partie actes des rsa :}
-\KeywordTok{inner_tra}\NormalTok{(rsa15}\OperatorTok{$}\NormalTok{actes, tra) ->}\StringTok{ }\NormalTok{rsa15}\OperatorTok{$}\NormalTok{actes}
-\CommentTok{# Ajout du tra à la partie das des rsa :}
-\KeywordTok{inner_tra}\NormalTok{(rsa15}\OperatorTok{$}\NormalTok{das, tra) ->}\StringTok{ }\NormalTok{rsa15}\OperatorTok{$}\NormalTok{das}
+\CommentTok{\# Ajout du tra aux rsa :}
+\FunctionTok{inner\_tra}\NormalTok{(rsa15}\SpecialCharTok{$}\NormalTok{rsa, tra) }\OtherTok{{-}\textgreater{}}\NormalTok{ rsa15}\SpecialCharTok{$}\NormalTok{rsa}
+\CommentTok{\# Ajout du tra à la partie um des rsa :}
+\FunctionTok{inner\_tra}\NormalTok{(rsa15}\SpecialCharTok{$}\NormalTok{rsa\_um, tra) }\OtherTok{{-}\textgreater{}}\NormalTok{ rsa15}\SpecialCharTok{$}\NormalTok{rsa\_um}
+\CommentTok{\# Ajout du tra à la partie actes des rsa :}
+\FunctionTok{inner\_tra}\NormalTok{(rsa15}\SpecialCharTok{$}\NormalTok{actes, tra) }\OtherTok{{-}\textgreater{}}\NormalTok{ rsa15}\SpecialCharTok{$}\NormalTok{actes}
+\CommentTok{\# Ajout du tra à la partie das des rsa :}
+\FunctionTok{inner\_tra}\NormalTok{(rsa15}\SpecialCharTok{$}\NormalTok{das, tra) }\OtherTok{{-}\textgreater{}}\NormalTok{ rsa15}\SpecialCharTok{$}\NormalTok{das}
 \end{Highlighting}
 \end{Shaded}
 
@@ -981,17 +947,17 @@ Type & Import\tabularnewline
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Import du TRA HAD}
-\KeywordTok{itra}\NormalTok{(}\DataTypeTok{finess =} \DecValTok{750712184}\NormalTok{,}
-     \DataTypeTok{annee =} \DecValTok{2015}\NormalTok{,}
-     \DataTypeTok{mois =} \DecValTok{12}\NormalTok{,}
-     \DataTypeTok{path =} \StringTok{'~/Documents/data/had'}\NormalTok{, }
-     \DataTypeTok{champ =} \StringTok{"had"}\NormalTok{) ->}\StringTok{ }\NormalTok{tra}
+\CommentTok{\# Import du TRA HAD}
+\FunctionTok{itra}\NormalTok{(}\AttributeTok{finess =} \DecValTok{750712184}\NormalTok{,}
+     \AttributeTok{annee =} \DecValTok{2015}\NormalTok{,}
+     \AttributeTok{mois =} \DecValTok{12}\NormalTok{,}
+     \AttributeTok{path =} \StringTok{\textquotesingle{}\textasciitilde{}/Documents/data/had\textquotesingle{}}\NormalTok{, }
+     \AttributeTok{champ =} \StringTok{"had"}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ tra}
 
-\CommentTok{# Ajout du tra}
-\KeywordTok{inner_tra}\NormalTok{(data_had}\OperatorTok{$}\NormalTok{rapss, tra, }\DataTypeTok{champ =} \StringTok{"had"}\NormalTok{) ->}\StringTok{ }\NormalTok{data_had}\OperatorTok{$}\NormalTok{rapss}
-\KeywordTok{inner_tra}\NormalTok{(data_had}\OperatorTok{$}\NormalTok{acdi,  tra, }\DataTypeTok{champ =} \StringTok{"had"}\NormalTok{) ->}\StringTok{ }\NormalTok{data_had}\OperatorTok{$}\NormalTok{acdi}
-\KeywordTok{inner_tra}\NormalTok{(data_had}\OperatorTok{$}\NormalTok{ght,   tra, }\DataTypeTok{champ =} \StringTok{"had"}\NormalTok{) ->}\StringTok{ }\NormalTok{data_had}\OperatorTok{$}\NormalTok{ght}
+\CommentTok{\# Ajout du tra}
+\FunctionTok{inner\_tra}\NormalTok{(data\_had}\SpecialCharTok{$}\NormalTok{rapss, tra, }\AttributeTok{champ =} \StringTok{"had"}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ data\_had}\SpecialCharTok{$}\NormalTok{rapss}
+\FunctionTok{inner\_tra}\NormalTok{(data\_had}\SpecialCharTok{$}\NormalTok{acdi,  tra, }\AttributeTok{champ =} \StringTok{"had"}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ data\_had}\SpecialCharTok{$}\NormalTok{acdi}
+\FunctionTok{inner\_tra}\NormalTok{(data\_had}\SpecialCharTok{$}\NormalTok{ght,   tra, }\AttributeTok{champ =} \StringTok{"had"}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ data\_had}\SpecialCharTok{$}\NormalTok{ght}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1000,16 +966,16 @@ Type & Import\tabularnewline
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Import du TRA SSR}
-\KeywordTok{itra}\NormalTok{(}\DataTypeTok{finess =} \DecValTok{750712184}\NormalTok{,}
-     \DataTypeTok{annee =} \DecValTok{2015}\NormalTok{,}
-     \DataTypeTok{mois =} \DecValTok{12}\NormalTok{,}
-     \DataTypeTok{path =} \StringTok{'~/Documents/data/ssr'}\NormalTok{, }
-     \DataTypeTok{champ =} \StringTok{"ssr"}\NormalTok{) ->}\StringTok{ }\NormalTok{tra}
+\CommentTok{\# Import du TRA SSR}
+\FunctionTok{itra}\NormalTok{(}\AttributeTok{finess =} \DecValTok{750712184}\NormalTok{,}
+     \AttributeTok{annee =} \DecValTok{2015}\NormalTok{,}
+     \AttributeTok{mois =} \DecValTok{12}\NormalTok{,}
+     \AttributeTok{path =} \StringTok{\textquotesingle{}\textasciitilde{}/Documents/data/ssr\textquotesingle{}}\NormalTok{, }
+     \AttributeTok{champ =} \StringTok{"ssr"}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ tra}
 
-\CommentTok{# Ajout du tra}
-\KeywordTok{inner_tra}\NormalTok{(data_ssr}\OperatorTok{$}\NormalTok{rha,  tra, }\DataTypeTok{champ =} \StringTok{"ssr"}\NormalTok{) ->}\StringTok{ }\NormalTok{data_ssr}\OperatorTok{$}\NormalTok{rha}
-\KeywordTok{inner_tra}\NormalTok{(data_ssr}\OperatorTok{$}\NormalTok{acdi, tra, }\DataTypeTok{champ =} \StringTok{"ssr"}\NormalTok{) ->}\StringTok{ }\NormalTok{data_ssr}\OperatorTok{$}\NormalTok{acdi}
+\CommentTok{\# Ajout du tra}
+\FunctionTok{inner\_tra}\NormalTok{(data\_ssr}\SpecialCharTok{$}\NormalTok{rha,  tra, }\AttributeTok{champ =} \StringTok{"ssr"}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ data\_ssr}\SpecialCharTok{$}\NormalTok{rha}
+\FunctionTok{inner\_tra}\NormalTok{(data\_ssr}\SpecialCharTok{$}\NormalTok{acdi, tra, }\AttributeTok{champ =} \StringTok{"ssr"}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ data\_ssr}\SpecialCharTok{$}\NormalTok{acdi}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1018,67 +984,67 @@ Type & Import\tabularnewline
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Import du TRA PSY : fichiers RPSA}
-\KeywordTok{itra}\NormalTok{(}\DataTypeTok{finess =} \DecValTok{750803454}\NormalTok{,}
-     \DataTypeTok{annee =} \DecValTok{2015}\NormalTok{,}
-     \DataTypeTok{mois =} \DecValTok{12}\NormalTok{,}
-     \DataTypeTok{path =} \StringTok{'~/Documents/data/psy'}\NormalTok{, }
-     \DataTypeTok{champ =} \StringTok{"tra_psy_rpsa"}\NormalTok{) ->}\StringTok{ }\NormalTok{tra}
+\CommentTok{\# Import du TRA PSY : fichiers RPSA}
+\FunctionTok{itra}\NormalTok{(}\AttributeTok{finess =} \DecValTok{750803454}\NormalTok{,}
+     \AttributeTok{annee =} \DecValTok{2015}\NormalTok{,}
+     \AttributeTok{mois =} \DecValTok{12}\NormalTok{,}
+     \AttributeTok{path =} \StringTok{\textquotesingle{}\textasciitilde{}/Documents/data/psy\textquotesingle{}}\NormalTok{, }
+     \AttributeTok{champ =} \StringTok{"tra\_psy\_rpsa"}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ tra}
 
-\CommentTok{# Ajout du tra}
-\KeywordTok{inner_tra}\NormalTok{(rpsa_psy}\OperatorTok{$}\NormalTok{rpsa, tra, }\DataTypeTok{champ =} \StringTok{"psyrpsa"}\NormalTok{) ->}\StringTok{ }\NormalTok{rpsa_psy}\OperatorTok{$}\NormalTok{rpsa}
-\KeywordTok{inner_tra}\NormalTok{(rpsa_psy}\OperatorTok{$}\NormalTok{das,  tra, }\DataTypeTok{champ =} \StringTok{"psyrpsa"}\NormalTok{) ->}\StringTok{ }\NormalTok{rpsa_psy}\OperatorTok{$}\NormalTok{das}
+\CommentTok{\# Ajout du tra}
+\FunctionTok{inner\_tra}\NormalTok{(rpsa\_psy}\SpecialCharTok{$}\NormalTok{rpsa, tra, }\AttributeTok{champ =} \StringTok{"psyrpsa"}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ rpsa\_psy}\SpecialCharTok{$}\NormalTok{rpsa}
+\FunctionTok{inner\_tra}\NormalTok{(rpsa\_psy}\SpecialCharTok{$}\NormalTok{das,  tra, }\AttributeTok{champ =} \StringTok{"psyrpsa"}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ rpsa\_psy}\SpecialCharTok{$}\NormalTok{das}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Import du TRA PSY : fichiers R3A}
-\KeywordTok{itra}\NormalTok{(}\DataTypeTok{finess =} \DecValTok{750803454}\NormalTok{,}
-     \DataTypeTok{annee =} \DecValTok{2015}\NormalTok{,}
-     \DataTypeTok{mois =} \DecValTok{12}\NormalTok{,}
-     \DataTypeTok{path =} \StringTok{'~/Documents/data/psy'}\NormalTok{, }
-     \DataTypeTok{champ =} \StringTok{"tra_psy_r3a"}\NormalTok{) ->}\StringTok{ }\NormalTok{tra}
+\CommentTok{\# Import du TRA PSY : fichiers R3A}
+\FunctionTok{itra}\NormalTok{(}\AttributeTok{finess =} \DecValTok{750803454}\NormalTok{,}
+     \AttributeTok{annee =} \DecValTok{2015}\NormalTok{,}
+     \AttributeTok{mois =} \DecValTok{12}\NormalTok{,}
+     \AttributeTok{path =} \StringTok{\textquotesingle{}\textasciitilde{}/Documents/data/psy\textquotesingle{}}\NormalTok{, }
+     \AttributeTok{champ =} \StringTok{"tra\_psy\_r3a"}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ tra}
 
-\CommentTok{# Ajout du tra}
-\KeywordTok{inner_tra}\NormalTok{(r3a_psy}\OperatorTok{$}\NormalTok{r3a, tra, }\DataTypeTok{champ =} \StringTok{"psyr3a"}\NormalTok{) ->}\StringTok{ }\NormalTok{r3a_psy}\OperatorTok{$}\NormalTok{r3a}
-\KeywordTok{inner_tra}\NormalTok{(r3a_psy}\OperatorTok{$}\NormalTok{das, tra, }\DataTypeTok{champ =} \StringTok{"psyr3a"}\NormalTok{) ->}\StringTok{ }\NormalTok{r3a_psy}\OperatorTok{$}\NormalTok{das}
+\CommentTok{\# Ajout du tra}
+\FunctionTok{inner\_tra}\NormalTok{(r3a\_psy}\SpecialCharTok{$}\NormalTok{r3a, tra, }\AttributeTok{champ =} \StringTok{"psyr3a"}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ r3a\_psy}\SpecialCharTok{$}\NormalTok{r3a}
+\FunctionTok{inner\_tra}\NormalTok{(r3a\_psy}\SpecialCharTok{$}\NormalTok{das, tra, }\AttributeTok{champ =} \StringTok{"psyr3a"}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ r3a\_psy}\SpecialCharTok{$}\NormalTok{das}
 \end{Highlighting}
 \end{Shaded}
 
 \hypertarget{statistiques-du-pmsi}{%
 \chapter{Statistiques du PMSI}\label{statistiques-du-pmsi}}
 
-\hypertarget{age-et-duree-de-sejour}{%
-\section{Âge et durée de séjour}\label{age-et-duree-de-sejour}}
+\hypertarget{uxe2ge-et-duruxe9e-de-suxe9jour}{%
+\section{Âge et durée de séjour}\label{uxe2ge-et-duruxe9e-de-suxe9jour}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(dplyr)}
+\FunctionTok{library}\NormalTok{(dplyr)}
 
-\CommentTok{# Age moyen et DMS sur les plus de 0 jour}
-\NormalTok{rsa15}\OperatorTok{$}\NormalTok{rsa }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{age_moyen =} \KeywordTok{mean}\NormalTok{(AGEAN, }\DataTypeTok{na.rm =}\NormalTok{ T),}
-            \DataTypeTok{dms =} \KeywordTok{mean}\NormalTok{(DUREE[DUREE }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{]),}
-            \DataTypeTok{effectif =} \KeywordTok{n}\NormalTok{(),}
-            \DataTypeTok{effectif_sup0 =} \KeywordTok{sum}\NormalTok{(DUREE }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{))}
+\CommentTok{\# Age moyen et DMS sur les plus de 0 jour}
+\NormalTok{rsa15}\SpecialCharTok{$}\NormalTok{rsa }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{age\_moyen =} \FunctionTok{mean}\NormalTok{(AGEAN, }\AttributeTok{na.rm =}\NormalTok{ T),}
+            \AttributeTok{dms =} \FunctionTok{mean}\NormalTok{(DUREE[DUREE }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{]),}
+            \AttributeTok{effectif =} \FunctionTok{n}\NormalTok{(),}
+            \AttributeTok{effectif\_sup0 =} \FunctionTok{sum}\NormalTok{(DUREE }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{))}
 
-\CommentTok{# Age moyen en prenant en compte les séjours des bébés }
-\CommentTok{# (variable age en jour) }
-\NormalTok{rsa15}\OperatorTok{$}\NormalTok{rsa }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Age =} \KeywordTok{if_else}\NormalTok{(}\KeywordTok{is.na}\NormalTok{(AGEAN), }\KeywordTok{as.integer}\NormalTok{(AGEJR) }\OperatorTok{/}\StringTok{ }\FloatTok{365.25}\NormalTok{, }\KeywordTok{as.numeric}\NormalTok{(AGEAN))) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{age_moyen =} \KeywordTok{mean}\NormalTok{(Age),}
-            \DataTypeTok{effectif =} \KeywordTok{n}\NormalTok{())}
+\CommentTok{\# Age moyen en prenant en compte les séjours des bébés }
+\CommentTok{\# (variable age en jour) }
+\NormalTok{rsa15}\SpecialCharTok{$}\NormalTok{rsa }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Age =} \FunctionTok{if\_else}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(AGEAN), }\FunctionTok{as.integer}\NormalTok{(AGEJR) }\SpecialCharTok{/} \FloatTok{365.25}\NormalTok{, }\FunctionTok{as.numeric}\NormalTok{(AGEAN))) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{age\_moyen =} \FunctionTok{mean}\NormalTok{(Age),}
+            \AttributeTok{effectif =} \FunctionTok{n}\NormalTok{())}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{nombre-de-sejours-par-categorie-majeure-de-diagnostics}{%
-\section{Nombre de séjours par catégorie majeure de diagnostics}\label{nombre-de-sejours-par-categorie-majeure-de-diagnostics}}
+\hypertarget{nombre-de-suxe9jours-par-catuxe9gorie-majeure-de-diagnostics}{%
+\section{Nombre de séjours par catégorie majeure de diagnostics}\label{nombre-de-suxe9jours-par-catuxe9gorie-majeure-de-diagnostics}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Nombre de séjours par catégorie majeure de diagnostics}
-\NormalTok{rsa15}\OperatorTok{$}\NormalTok{rsa }\OperatorTok{%>%}\StringTok{ }\KeywordTok{count}\NormalTok{(RSACMD)}
+\CommentTok{\# Nombre de séjours par catégorie majeure de diagnostics}
+\NormalTok{rsa15}\SpecialCharTok{$}\NormalTok{rsa }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{count}\NormalTok{(RSACMD)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1087,22 +1053,22 @@ Type & Import\tabularnewline
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Construire la variable GHM}
-\NormalTok{rsa15}\OperatorTok{$}\NormalTok{rsa }\OperatorTok{%>%}\StringTok{ }\NormalTok{tidyr}\OperatorTok{::}\KeywordTok{unite}\NormalTok{(GHM, }
+\CommentTok{\# Construire la variable GHM}
+\NormalTok{rsa15}\SpecialCharTok{$}\NormalTok{rsa }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ tidyr}\SpecialCharTok{::}\FunctionTok{unite}\NormalTok{(GHM, }
 \NormalTok{                           RSACMD, RSATYPE, RSANUM, RSACOMPX,}
-                           \DataTypeTok{sep =} \StringTok{""}\NormalTok{) ->}\StringTok{ }\NormalTok{rsa15}\OperatorTok{$}\NormalTok{rsa}
+                           \AttributeTok{sep =} \StringTok{""}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ rsa15}\SpecialCharTok{$}\NormalTok{rsa}
 
-\CommentTok{# Case-mix par GHM}
-\NormalTok{rsa15}\OperatorTok{$}\NormalTok{rsa }\OperatorTok{%>%}\StringTok{ }\KeywordTok{count}\NormalTok{(GHM)}
+\CommentTok{\# Case{-}mix par GHM}
+\NormalTok{rsa15}\SpecialCharTok{$}\NormalTok{rsa }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{count}\NormalTok{(GHM)}
 
-\CommentTok{# Case-mix par GHM / GHS}
-\NormalTok{rsa15}\OperatorTok{$}\NormalTok{rsa }\OperatorTok{%>%}\StringTok{ }\KeywordTok{count}\NormalTok{(GHM, NOGHS)}
+\CommentTok{\# Case{-}mix par GHM / GHS}
+\NormalTok{rsa15}\SpecialCharTok{$}\NormalTok{rsa }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{count}\NormalTok{(GHM, NOGHS)}
 
-\CommentTok{# DMS par GHM / GHS}
-\NormalTok{rsa15}\OperatorTok{$}\NormalTok{rsa }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(GHM, NOGHS) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{dms =} \KeywordTok{mean}\NormalTok{(DUREE[DUREE }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{]),}
-            \DataTypeTok{effectif =} \KeywordTok{n}\NormalTok{(),}
-            \DataTypeTok{effectif_sup0 =} \KeywordTok{sum}\NormalTok{(DUREE }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{))}
+\CommentTok{\# DMS par GHM / GHS}
+\NormalTok{rsa15}\SpecialCharTok{$}\NormalTok{rsa }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{group\_by}\NormalTok{(GHM, NOGHS) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{dms =} \FunctionTok{mean}\NormalTok{(DUREE[DUREE }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{]),}
+            \AttributeTok{effectif =} \FunctionTok{n}\NormalTok{(),}
+            \AttributeTok{effectif\_sup0 =} \FunctionTok{sum}\NormalTok{(DUREE }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1113,18 +1079,18 @@ Toutes les fonctions du package ont une page d'aide :
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Exemple : aide sur la fonction d'import des rsa}
+\CommentTok{\# Exemple : aide sur la fonction d\textquotesingle{}import des rsa}
 \NormalTok{?irsa}
 \end{Highlighting}
 \end{Shaded}
 
 L'aide en ligne est disponible \href{https://guillaumepressiat.github.io/pmeasyr}{ici}.
 
-\hypertarget{noyau-de-parametres}{%
-\chapter{Noyau de paramètres}\label{noyau-de-parametres}}
+\hypertarget{noyau-de-paramuxe8tres}{%
+\chapter{Noyau de paramètres}\label{noyau-de-paramuxe8tres}}
 
-\hypertarget{quatre-parametres}{%
-\section{Quatre paramètres}\label{quatre-parametres}}
+\hypertarget{quatre-paramuxe8tres}{%
+\section{Quatre paramètres}\label{quatre-paramuxe8tres}}
 
 Les fonctions de dézippage et d'import de pmeasyr ont en commun quatre paramètres :
 
@@ -1146,72 +1112,72 @@ Ces paramètres sont toujours nécessaires : définir un noyau de paramètres pe
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Exemple}
-\KeywordTok{library}\NormalTok{(pmeasyr)}
+\CommentTok{\# Exemple}
+\FunctionTok{library}\NormalTok{(pmeasyr)}
 
-\CommentTok{# Dézipper}
-\KeywordTok{adezip}\NormalTok{(}\DataTypeTok{finess =} \StringTok{'750712184'}\NormalTok{, }
-       \DataTypeTok{annee  =} \DecValTok{2015}\NormalTok{, }
-       \DataTypeTok{mois   =} \DecValTok{12}\NormalTok{, }
-       \DataTypeTok{path   =} \StringTok{'~/Documents/data/mco/'}\NormalTok{,}
-       \DataTypeTok{type   =} \StringTok{"out"}\NormalTok{, }
-       \DataTypeTok{liste  =} \KeywordTok{c}\NormalTok{(}\StringTok{"rsa"}\NormalTok{, }\StringTok{"ano"}\NormalTok{, }\StringTok{"tra"}\NormalTok{))}
+\CommentTok{\# Dézipper}
+\FunctionTok{adezip}\NormalTok{(}\AttributeTok{finess =} \StringTok{\textquotesingle{}750712184\textquotesingle{}}\NormalTok{, }
+       \AttributeTok{annee  =} \DecValTok{2015}\NormalTok{, }
+       \AttributeTok{mois   =} \DecValTok{12}\NormalTok{, }
+       \AttributeTok{path   =} \StringTok{\textquotesingle{}\textasciitilde{}/Documents/data/mco/\textquotesingle{}}\NormalTok{,}
+       \AttributeTok{type   =} \StringTok{"out"}\NormalTok{, }
+       \AttributeTok{liste  =} \FunctionTok{c}\NormalTok{(}\StringTok{"rsa"}\NormalTok{, }\StringTok{"ano"}\NormalTok{, }\StringTok{"tra"}\NormalTok{))}
 
-\CommentTok{# Table ano}
-\KeywordTok{iano_mco}\NormalTok{(}\DataTypeTok{finess =} \StringTok{'750712184'}\NormalTok{, }
-         \DataTypeTok{annee  =} \DecValTok{2015}\NormalTok{, }
-         \DataTypeTok{mois   =} \DecValTok{12}\NormalTok{, }
-         \DataTypeTok{path   =} \StringTok{'~/Documents/data/mco/'}\NormalTok{) ->}\StringTok{ }\NormalTok{ano}
+\CommentTok{\# Table ano}
+\FunctionTok{iano\_mco}\NormalTok{(}\AttributeTok{finess =} \StringTok{\textquotesingle{}750712184\textquotesingle{}}\NormalTok{, }
+         \AttributeTok{annee  =} \DecValTok{2015}\NormalTok{, }
+         \AttributeTok{mois   =} \DecValTok{12}\NormalTok{, }
+         \AttributeTok{path   =} \StringTok{\textquotesingle{}\textasciitilde{}/Documents/data/mco/\textquotesingle{}}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ ano}
 
-\CommentTok{# Tables rsa}
-\KeywordTok{irsa}\NormalTok{(}\DataTypeTok{finess =} \StringTok{'750712184'}\NormalTok{, }
-     \DataTypeTok{annee  =} \DecValTok{2015}\NormalTok{, }
-     \DataTypeTok{mois   =} \DecValTok{12}\NormalTok{, }
-     \DataTypeTok{path   =} \StringTok{'~/Documents/data/mco/'}\NormalTok{, }
-     \DataTypeTok{typi   =} \DecValTok{4}\NormalTok{) ->}\StringTok{ }\NormalTok{rsa}
+\CommentTok{\# Tables rsa}
+\FunctionTok{irsa}\NormalTok{(}\AttributeTok{finess =} \StringTok{\textquotesingle{}750712184\textquotesingle{}}\NormalTok{, }
+     \AttributeTok{annee  =} \DecValTok{2015}\NormalTok{, }
+     \AttributeTok{mois   =} \DecValTok{12}\NormalTok{, }
+     \AttributeTok{path   =} \StringTok{\textquotesingle{}\textasciitilde{}/Documents/data/mco/\textquotesingle{}}\NormalTok{, }
+     \AttributeTok{typi   =} \DecValTok{4}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ rsa}
 
-\CommentTok{# Table tra}
-\KeywordTok{itra}\NormalTok{(}\DataTypeTok{finess =} \StringTok{'750712184'}\NormalTok{, }
-     \DataTypeTok{annee  =} \DecValTok{2015}\NormalTok{, }
-     \DataTypeTok{mois   =} \DecValTok{12}\NormalTok{, }
-     \DataTypeTok{path   =} \StringTok{'~/Documents/data/mco/'}\NormalTok{) ->}\StringTok{ }\NormalTok{tra}
+\CommentTok{\# Table tra}
+\FunctionTok{itra}\NormalTok{(}\AttributeTok{finess =} \StringTok{\textquotesingle{}750712184\textquotesingle{}}\NormalTok{, }
+     \AttributeTok{annee  =} \DecValTok{2015}\NormalTok{, }
+     \AttributeTok{mois   =} \DecValTok{12}\NormalTok{, }
+     \AttributeTok{path   =} \StringTok{\textquotesingle{}\textasciitilde{}/Documents/data/mco/\textquotesingle{}}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ tra}
 \end{Highlighting}
 \end{Shaded}
 
 \hypertarget{solution-avec-noyau_pmeasyr}{%
 \section{\texorpdfstring{Solution avec \texttt{noyau\_pmeasyr()}}{Solution avec noyau\_pmeasyr()}}\label{solution-avec-noyau_pmeasyr}}
 
-\hypertarget{definir-le-noyau-de-parametres}{%
-\subsection{Définir le noyau de paramètres}\label{definir-le-noyau-de-parametres}}
+\hypertarget{duxe9finir-le-noyau-de-paramuxe8tres}{%
+\subsection{Définir le noyau de paramètres}\label{duxe9finir-le-noyau-de-paramuxe8tres}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(pmeasyr)}
-\NormalTok{p <-}\StringTok{ }\KeywordTok{noyau_pmeasyr}\NormalTok{(}\DataTypeTok{finess =} \StringTok{'750712184'}\NormalTok{, }
-                   \DataTypeTok{annee =} \DecValTok{2015}\NormalTok{, }
-                   \DataTypeTok{mois =} \DecValTok{12}\NormalTok{, }
-                   \DataTypeTok{path   =} \StringTok{'~/Documents/data/mco/'}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(pmeasyr)}
+\NormalTok{p }\OtherTok{\textless{}{-}} \FunctionTok{noyau\_pmeasyr}\NormalTok{(}\AttributeTok{finess =} \StringTok{\textquotesingle{}750712184\textquotesingle{}}\NormalTok{, }
+                   \AttributeTok{annee =} \DecValTok{2015}\NormalTok{, }
+                   \AttributeTok{mois =} \DecValTok{12}\NormalTok{, }
+                   \AttributeTok{path   =} \StringTok{\textquotesingle{}\textasciitilde{}/Documents/data/mco/\textquotesingle{}}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{utiliser-le-noyau-de-parametres}{%
-\subsection{Utiliser le noyau de paramètres}\label{utiliser-le-noyau-de-parametres}}
+\hypertarget{utiliser-le-noyau-de-paramuxe8tres}{%
+\subsection{Utiliser le noyau de paramètres}\label{utiliser-le-noyau-de-paramuxe8tres}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Tout dézipper}
-\CommentTok{# out}
-\NormalTok{p }\OperatorTok{%>%}\StringTok{ }\KeywordTok{adezip}\NormalTok{(}\DataTypeTok{type =} \StringTok{"out"}\NormalTok{)}
-\CommentTok{# in}
-\NormalTok{p }\OperatorTok{%>%}\StringTok{ }\KeywordTok{adezip}\NormalTok{(}\DataTypeTok{type =} \StringTok{"in"}\NormalTok{)}
+\CommentTok{\# Tout dézipper}
+\CommentTok{\# out}
+\NormalTok{p }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{adezip}\NormalTok{(}\AttributeTok{type =} \StringTok{"out"}\NormalTok{)}
+\CommentTok{\# in}
+\NormalTok{p }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{adezip}\NormalTok{(}\AttributeTok{type =} \StringTok{"in"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{p }\OperatorTok{%>%}\StringTok{ }\KeywordTok{irsa}\NormalTok{()     ->}\StringTok{ }\NormalTok{rsa}
-\NormalTok{p }\OperatorTok{%>%}\StringTok{ }\KeywordTok{iano_mco}\NormalTok{() ->}\StringTok{ }\NormalTok{ano_out}
-\NormalTok{p }\OperatorTok{%>%}\StringTok{ }\KeywordTok{itra}\NormalTok{()     ->}\StringTok{ }\NormalTok{tra}
+\NormalTok{p }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{irsa}\NormalTok{()     }\OtherTok{{-}\textgreater{}}\NormalTok{ rsa}
+\NormalTok{p }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{iano\_mco}\NormalTok{() }\OtherTok{{-}\textgreater{}}\NormalTok{ ano\_out}
+\NormalTok{p }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{itra}\NormalTok{()     }\OtherTok{{-}\textgreater{}}\NormalTok{ tra}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1224,8 +1190,8 @@ La fonction \texttt{noyau\_skeleton()} permet d'obtenir dans la console R le squ
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(pmeasyr)}
-\KeywordTok{noyau_skeleton}\NormalTok{()}
+\FunctionTok{library}\NormalTok{(pmeasyr)}
+\FunctionTok{noyau\_skeleton}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1249,10 +1215,10 @@ La fonction \texttt{enrobeur()} permet de structurer une liste de diagnostics, d
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(magrittr)}
-\NormalTok{li <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{'QEFA003'}\NormalTok{, }\StringTok{'QEFA005'}\NormalTok{, }\StringTok{'QEFA010'}\NormalTok{, }\StringTok{'QEFA013'}\NormalTok{, }\StringTok{'QEFA015'}\NormalTok{, }\StringTok{'QEFA019'}\NormalTok{, }\StringTok{'QEFA020'}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(magrittr)}
+\NormalTok{li }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}QEFA003\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}QEFA005\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}QEFA010\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}QEFA013\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}QEFA015\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}QEFA019\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}QEFA020\textquotesingle{}}\NormalTok{)}
 
-\KeywordTok{enrobeur}\NormalTok{(li, }\DataTypeTok{robe=}\StringTok{"}\CharTok{\textbackslash{}'}\StringTok{%"}\NormalTok{, }\DataTypeTok{interstice=}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\DataTypeTok{symetrique =}\NormalTok{ T) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{cat}\NormalTok{()}
+\FunctionTok{enrobeur}\NormalTok{(li, }\AttributeTok{robe=}\StringTok{"}\SpecialCharTok{\textbackslash{}\textquotesingle{}}\StringTok{\%"}\NormalTok{, }\AttributeTok{interstice=}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\AttributeTok{symetrique =}\NormalTok{ T) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{cat}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1272,7 +1238,7 @@ La fonction \texttt{enrobeur()} permet de structurer une liste de diagnostics, d
 \begin{longtable}[]{@{}l@{}}
 \toprule
 \endhead
-à venir\tabularnewline
+à venir \\
 \bottomrule
 \end{longtable}
 
@@ -1282,7 +1248,7 @@ La fonction \texttt{enrobeur()} permet de structurer une liste de diagnostics, d
 \begin{longtable}[]{@{}l@{}}
 \toprule
 \endhead
-à venir\tabularnewline
+à venir \\
 \bottomrule
 \end{longtable}
 
@@ -1291,9 +1257,9 @@ La fonction \texttt{enrobeur()} permet de structurer une liste de diagnostics, d
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{li <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{'QEFA003'}\NormalTok{, }\StringTok{'QEFA005'}\NormalTok{, }\StringTok{'QEFA010'}\NormalTok{, }\StringTok{'QEFA013'}\NormalTok{, }\StringTok{'QEFA015'}\NormalTok{, }\StringTok{'QEFA019'}\NormalTok{, }\StringTok{'QEFA020'}\NormalTok{)}
+\NormalTok{li }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}QEFA003\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}QEFA005\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}QEFA010\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}QEFA013\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}QEFA015\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}QEFA019\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}QEFA020\textquotesingle{}}\NormalTok{)}
 
-\KeywordTok{enrobeur}\NormalTok{(li, }\DataTypeTok{robe=}\StringTok{""}\NormalTok{, }\DataTypeTok{interstice=}\StringTok{"|"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{cat}\NormalTok{()}
+\FunctionTok{enrobeur}\NormalTok{(li, }\AttributeTok{robe=}\StringTok{""}\NormalTok{, }\AttributeTok{interstice=}\StringTok{"|"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{cat}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1306,9 +1272,9 @@ La fonction \texttt{enrobeur()} permet de structurer une liste de diagnostics, d
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{li <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{'QEFA003'}\NormalTok{, }\StringTok{'QEFA005'}\NormalTok{, }\StringTok{'QEFA010'}\NormalTok{, }\StringTok{'QEFA013'}\NormalTok{, }\StringTok{'QEFA015'}\NormalTok{, }\StringTok{'QEFA019'}\NormalTok{, }\StringTok{'QEFA020'}\NormalTok{)}
+\NormalTok{li }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}QEFA003\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}QEFA005\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}QEFA010\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}QEFA013\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}QEFA015\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}QEFA019\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}QEFA020\textquotesingle{}}\NormalTok{)}
 
-\KeywordTok{enrobeur}\NormalTok{(li, }\DataTypeTok{robe=}\StringTok{"}\CharTok{\textbackslash{}'}\StringTok{"}\NormalTok{, }\DataTypeTok{interstice=}\StringTok{", "}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{cat}\NormalTok{()}
+\FunctionTok{enrobeur}\NormalTok{(li, }\AttributeTok{robe=}\StringTok{"}\SpecialCharTok{\textbackslash{}\textquotesingle{}}\StringTok{"}\NormalTok{, }\AttributeTok{interstice=}\StringTok{", "}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{cat}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1325,23 +1291,23 @@ Par homogénéité avec le format jusqu'alors, la valeur par défaut de ce param
 
 \textbf{N.B. : Pour utiliser les fonctions \texttt{requete}, \texttt{requete\_db}, \texttt{lancer\_requete} et \texttt{lancer\_requete\_db}, il est nécessaire d'avoir choisi un import avec noms de variables en minuscule : \texttt{tolower\_names\ =\ TRUE}.}
 
-\hypertarget{vers-la-base-de-donnees-avec-pmeasyr}{%
-\chapter{\texorpdfstring{Vers la base de données avec \texttt{pmeasyr}}{Vers la base de données avec pmeasyr}}\label{vers-la-base-de-donnees-avec-pmeasyr}}
+\hypertarget{vers-la-base-de-donnuxe9es-avec-pmeasyr}{%
+\chapter{\texorpdfstring{Vers la base de données avec \texttt{pmeasyr}}{Vers la base de données avec pmeasyr}}\label{vers-la-base-de-donnuxe9es-avec-pmeasyr}}
 
 Constatant que chaque étude avec \texttt{pmeasyr} commence par un import de données, nous proposons une nouvelle approche : intégrer une fois pour toutes les données M12 dans une base de données managée et accessible avec \texttt{pmeasyr}. Les données en cours d'année pouvant également y être intégrées.
 
 Nous décrivons ici l'import de données MCO 2016 dans une base de données tel qu'il est possible de le réaliser à l'aide de \texttt{pmeasyr}.
 
-\hypertarget{connexion-a-une-base-de-donnees}{%
-\section{Connexion à une base de données}\label{connexion-a-une-base-de-donnees}}
+\hypertarget{connexion-uxe0-une-base-de-donnuxe9es}{%
+\section{Connexion à une base de données}\label{connexion-uxe0-une-base-de-donnuxe9es}}
 
 \hypertarget{monetdb}{%
 \subsection{monetdb}\label{monetdb}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dbdir <-}\StringTok{ "~/Documents/data/monetdb"}
-\NormalTok{con <-}\StringTok{ }\NormalTok{MonetDBLite}\OperatorTok{::}\KeywordTok{src_monetdblite}\NormalTok{(dbdir)}
+\NormalTok{dbdir }\OtherTok{\textless{}{-}} \StringTok{"\textasciitilde{}/Documents/data/monetdb"}
+\NormalTok{con }\OtherTok{\textless{}{-}}\NormalTok{ MonetDBLite}\SpecialCharTok{::}\FunctionTok{src\_monetdblite}\NormalTok{(dbdir)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1350,8 +1316,8 @@ Nous décrivons ici l'import de données MCO 2016 dans une base de données tel 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dbdir <-}\StringTok{ "~/Documents/data/sqlite/pmsi.sqlite"}
-\NormalTok{con <-}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{src_sqlite}\NormalTok{(dbdir)}
+\NormalTok{dbdir }\OtherTok{\textless{}{-}} \StringTok{"\textasciitilde{}/Documents/data/sqlite/pmsi.sqlite"}
+\NormalTok{con }\OtherTok{\textless{}{-}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{src\_sqlite}\NormalTok{(dbdir)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1360,29 +1326,29 @@ Nous décrivons ici l'import de données MCO 2016 dans une base de données tel 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{con <-}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{src_postgres}\NormalTok{(}\DataTypeTok{user =} \StringTok{"gui"}\NormalTok{, }\DataTypeTok{password =} \StringTok{"gui"}\NormalTok{, }\DataTypeTok{dbname =} \StringTok{"aphp"}\NormalTok{,}
-                    \DataTypeTok{host =} \StringTok{"localhost"}\NormalTok{, }\DataTypeTok{port =} \DecValTok{5432}\NormalTok{)}
+\NormalTok{con }\OtherTok{\textless{}{-}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{src\_postgres}\NormalTok{(}\AttributeTok{user =} \StringTok{"gui"}\NormalTok{, }\AttributeTok{password =} \StringTok{"gui"}\NormalTok{, }\AttributeTok{dbname =} \StringTok{"aphp"}\NormalTok{,}
+                    \AttributeTok{host =} \StringTok{"localhost"}\NormalTok{, }\AttributeTok{port =} \DecValTok{5432}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{integration-en-base}{%
-\section{Intégration en base}\label{integration-en-base}}
+\hypertarget{intuxe9gration-en-base}{%
+\section{Intégration en base}\label{intuxe9gration-en-base}}
 
-\hypertarget{definition-des-parametres}{%
-\subsection{Définition des paramètres}\label{definition-des-parametres}}
+\hypertarget{duxe9finition-des-paramuxe8tres}{%
+\subsection{Définition des paramètres}\label{duxe9finition-des-paramuxe8tres}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# noyau_skeleton()}
-\NormalTok{p <-}\StringTok{ }\KeywordTok{noyau_pmeasyr}\NormalTok{(}
-  \DataTypeTok{finess   =} \StringTok{'750712184'}\NormalTok{,}
-  \DataTypeTok{mois     =} \DecValTok{12}\NormalTok{,}
-  \DataTypeTok{path     =} \StringTok{'~/Documents/data/mco'}\NormalTok{,}
-  \DataTypeTok{progress =}\NormalTok{ F, }
-  \DataTypeTok{tolower_names =}\NormalTok{ T, }\CommentTok{# choix de noms de colonnes minuscules : T / F}
-  \DataTypeTok{n_max =} \FloatTok{1e4}\NormalTok{, }\CommentTok{# on limite la lecture a un petit nombre de lignes pour tester d'abord }
-  \CommentTok{# on importera tout dans un second temps}
-  \DataTypeTok{lib =}\NormalTok{ F) }\CommentTok{# pas de libellés de colonnes (inutile ici)}
+\CommentTok{\# noyau\_skeleton()}
+\NormalTok{p }\OtherTok{\textless{}{-}} \FunctionTok{noyau\_pmeasyr}\NormalTok{(}
+  \AttributeTok{finess   =} \StringTok{\textquotesingle{}750712184\textquotesingle{}}\NormalTok{,}
+  \AttributeTok{mois     =} \DecValTok{12}\NormalTok{,}
+  \AttributeTok{path     =} \StringTok{\textquotesingle{}\textasciitilde{}/Documents/data/mco\textquotesingle{}}\NormalTok{,}
+  \AttributeTok{progress =}\NormalTok{ F, }
+  \AttributeTok{tolower\_names =}\NormalTok{ T, }\CommentTok{\# choix de noms de colonnes minuscules : T / F}
+  \AttributeTok{n\_max =} \FloatTok{1e4}\NormalTok{, }\CommentTok{\# on limite la lecture a un petit nombre de lignes pour tester d\textquotesingle{}abord }
+  \CommentTok{\# on importera tout dans un second temps}
+  \AttributeTok{lib =}\NormalTok{ F) }\CommentTok{\# pas de libellés de colonnes (inutile ici)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1391,7 +1357,7 @@ Nous décrivons ici l'import de données MCO 2016 dans une base de données tel 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{purrr}\OperatorTok{::}\KeywordTok{quietly}\NormalTok{(db_mco_out)(con,  p, }\DataTypeTok{annee =} \DecValTok{2016}\NormalTok{) ->}\StringTok{ }\NormalTok{ok }
+\NormalTok{purrr}\SpecialCharTok{::}\FunctionTok{quietly}\NormalTok{(db\_mco\_out)(con,  p, }\AttributeTok{annee =} \DecValTok{2016}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ ok }
 \end{Highlighting}
 \end{Shaded}
 
@@ -1411,12 +1377,12 @@ Après plusieurs imports dans la base de données, se déconnecter :
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{DBI}\OperatorTok{::}\KeywordTok{dbDisconnect}\NormalTok{(con}\OperatorTok{$}\NormalTok{con)}
+\NormalTok{DBI}\SpecialCharTok{::}\FunctionTok{dbDisconnect}\NormalTok{(con}\SpecialCharTok{$}\NormalTok{con)}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{acceder-aux-donnees-dans-la-base}{%
-\section{Accéder aux données dans la base}\label{acceder-aux-donnees-dans-la-base}}
+\hypertarget{accuxe9der-aux-donnuxe9es-dans-la-base}{%
+\section{Accéder aux données dans la base}\label{accuxe9der-aux-donnuxe9es-dans-la-base}}
 
 Se reconnecter à la base en redéfinissant l'objet \texttt{con}.
 
@@ -1427,42 +1393,42 @@ Poursuivons l'exemple sur le mco out 2016.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{db_liste_tables}\NormalTok{(con)}
+\FunctionTok{db\_liste\_tables}\NormalTok{(con)}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{acceder-aux-tables-mco-out}{%
-\subsection{Accéder aux tables mco out}\label{acceder-aux-tables-mco-out}}
+\hypertarget{accuxe9der-aux-tables-mco-out}{%
+\subsection{Accéder aux tables mco out}\label{accuxe9der-aux-tables-mco-out}}
 
 Les lignes suivantes permettent de se connecter aux tables dans la base. Pour la suite il pourra être intéressant de lire \href{http://db.rstudio.com/dplyr/}{l'aide du package dplyr}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{tbl_mco}\NormalTok{(con, }\DecValTok{16}\NormalTok{, }\StringTok{'rsa_rsa'}\NormalTok{) }\CommentTok{# Table rsa}
-\KeywordTok{tbl_mco}\NormalTok{(con, }\DecValTok{16}\NormalTok{, }\StringTok{'rsa_actes'}\NormalTok{) }\CommentTok{# Table actes des rsa}
-\KeywordTok{tbl_mco}\NormalTok{(con, }\DecValTok{16}\NormalTok{, }\StringTok{'rsa_diags'}\NormalTok{) }\CommentTok{# Table diags des rsa (après `tdiag`)}
-\KeywordTok{tbl_mco}\NormalTok{(con, }\DecValTok{16}\NormalTok{, }\StringTok{'rsa_um'}\NormalTok{) }\CommentTok{# Table um des rsa }
+\FunctionTok{tbl\_mco}\NormalTok{(con, }\DecValTok{16}\NormalTok{, }\StringTok{\textquotesingle{}rsa\_rsa\textquotesingle{}}\NormalTok{) }\CommentTok{\# Table rsa}
+\FunctionTok{tbl\_mco}\NormalTok{(con, }\DecValTok{16}\NormalTok{, }\StringTok{\textquotesingle{}rsa\_actes\textquotesingle{}}\NormalTok{) }\CommentTok{\# Table actes des rsa}
+\FunctionTok{tbl\_mco}\NormalTok{(con, }\DecValTok{16}\NormalTok{, }\StringTok{\textquotesingle{}rsa\_diags\textquotesingle{}}\NormalTok{) }\CommentTok{\# Table diags des rsa (après \textasciigrave{}tdiag\textasciigrave{})}
+\FunctionTok{tbl\_mco}\NormalTok{(con, }\DecValTok{16}\NormalTok{, }\StringTok{\textquotesingle{}rsa\_um\textquotesingle{}}\NormalTok{) }\CommentTok{\# Table um des rsa }
 \end{Highlighting}
 \end{Shaded}
 
 D'autres fonctions \texttt{tbl\_ssr}, \texttt{tbl\_had}, \texttt{tbl\_had}, \texttt{tbl\_psy}, \texttt{tbl\_rsf} facilitent la connexion à ces ``remote table''.
 
-\hypertarget{requetr-rediger-executer-des-requetes-pmsi}{%
-\chapter{requetr : rédiger, exécuter des requêtes pmsi}\label{requetr-rediger-executer-des-requetes-pmsi}}
+\hypertarget{requetr-ruxe9diger-exuxe9cuter-des-requuxeates-pmsi}{%
+\chapter{requetr : rédiger, exécuter des requêtes pmsi}\label{requetr-ruxe9diger-exuxe9cuter-des-requuxeates-pmsi}}
 
 Cette partie de \texttt{pmeasyr} concerne la rédaction et l'exécution de requêtes pmsi. Quelques exemples d'abord puis une présentation de ce qu'il est possible de faire avec (et, de manière complémentaire, de ce qu'il n'est pas possible de faire).
 
-\hypertarget{definir-une-requete}{%
-\section{Définir une requête}\label{definir-une-requete}}
+\hypertarget{duxe9finir-une-requuxeate}{%
+\section{Définir une requête}\label{duxe9finir-une-requuxeate}}
 
 \hypertarget{exemple-simple}{%
 \subsection{Exemple simple}\label{exemple-simple}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{requete_simple <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}
-  \DataTypeTok{actes =} \StringTok{"EPLF002"}\NormalTok{, }
-  \DataTypeTok{activites_actes =} \StringTok{"1"}
+\NormalTok{requete\_simple }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}
+  \AttributeTok{actes =} \StringTok{"EPLF002"}\NormalTok{, }
+  \AttributeTok{activites\_actes =} \StringTok{"1"}
 \NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -1474,28 +1440,28 @@ Ici on cherchera tous les séjours avec un acte EPLF002 codé en activité 1.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{requete_complexe =}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DataTypeTok{diags =} \StringTok{"E66"}\NormalTok{, }
-                        \DataTypeTok{positions_diags =} \DecValTok{5}\NormalTok{, }
-                        \DataTypeTok{dureemax =} \DecValTok{0}\NormalTok{,}
-                        \DataTypeTok{ghm =} \StringTok{'28Z'}\NormalTok{,}
-                        \DataTypeTok{agemax =} \DecValTok{18}\NormalTok{,}
-                        \DataTypeTok{diags_exclus =} \StringTok{"C"}\NormalTok{)}
+\NormalTok{requete\_complexe }\OtherTok{=} \FunctionTok{list}\NormalTok{(}\AttributeTok{diags =} \StringTok{"E66"}\NormalTok{, }
+                        \AttributeTok{positions\_diags =} \DecValTok{5}\NormalTok{, }
+                        \AttributeTok{dureemax =} \DecValTok{0}\NormalTok{,}
+                        \AttributeTok{ghm =} \StringTok{\textquotesingle{}28Z\textquotesingle{}}\NormalTok{,}
+                        \AttributeTok{agemax =} \DecValTok{18}\NormalTok{,}
+                        \AttributeTok{diags\_exclus =} \StringTok{"C"}\NormalTok{)}
 
-\CommentTok{# positions_diags : 1 dp rsa, 2 dr rsa, 3 dp um, 4 dr um, 5 das}
+\CommentTok{\# positions\_diags : 1 dp rsa, 2 dr rsa, 3 dp um, 4 dr um, 5 das}
 \end{Highlighting}
 \end{Shaded}
 
 Ici on cherchera tous les séjours avec un diagnostic E66 en das, d'une durée de 0 jour, avec un ghm en 28Z, où l'âge du patient est au maximum 18 ans, et sans aucun diagnostic commençant par C.
 
-\hypertarget{requetes-sur-des-rsa-importes-avec-irsa}{%
-\section{\texorpdfstring{Requêtes sur des rsa importés avec \texttt{irsa}}{Requêtes sur des rsa importés avec irsa}}\label{requetes-sur-des-rsa-importes-avec-irsa}}
+\hypertarget{requuxeates-sur-des-rsa-importuxe9s-avec-irsa}{%
+\section{\texorpdfstring{Requêtes sur des rsa importés avec \texttt{irsa}}{Requêtes sur des rsa importés avec irsa}}\label{requuxeates-sur-des-rsa-importuxe9s-avec-irsa}}
 
 Il faut d'abord importer les rsa avec un type d'import 6 et ``préparer les rsa'' avec la fonction \texttt{prepare\_rsa()} :
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{irsa}\NormalTok{(p, }\DataTypeTok{typi =} \DecValTok{6}\NormalTok{) ->}\StringTok{ }\NormalTok{rsa}
-\KeywordTok{prepare_rsa}\NormalTok{(rsa) ->}\StringTok{ }\NormalTok{rsa}
+\FunctionTok{irsa}\NormalTok{(p, }\AttributeTok{typi =} \DecValTok{6}\NormalTok{) }\OtherTok{{-}\textgreater{}}\NormalTok{ rsa}
+\FunctionTok{prepare\_rsa}\NormalTok{(rsa) }\OtherTok{{-}\textgreater{}}\NormalTok{ rsa}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1503,8 +1469,8 @@ Exemple de requêtes :
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{exemple_requete <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}
-  \DataTypeTok{actes =} \KeywordTok{c}\NormalTok{(}\StringTok{'QEFA003'}\NormalTok{,}\StringTok{'QEFA005'}\NormalTok{,}\StringTok{'QEFA010'}\NormalTok{,}\StringTok{'QEFA013'}\NormalTok{,}\StringTok{'QEFA015'}\NormalTok{,}\StringTok{'QEFA019'}\NormalTok{,}\StringTok{'QEFA020'}\NormalTok{)}
+\NormalTok{exemple\_requete }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}
+  \AttributeTok{actes =} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}QEFA003\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}QEFA005\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}QEFA010\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}QEFA013\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}QEFA015\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}QEFA019\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}QEFA020\textquotesingle{}}\NormalTok{)}
 \NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -1513,7 +1479,7 @@ La commande suivante renvoie un \texttt{tibble} (tableau) contenant les clés rs
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{requete}\NormalTok{(rsa, exemple_requete)}
+\FunctionTok{requete}\NormalTok{(rsa, exemple\_requete)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1521,23 +1487,23 @@ Il est possible de retourner d'autres variables que la clé rsa uniquement, en l
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{requete}\NormalTok{(rsa, exemple_requete, }\DataTypeTok{vars =} \KeywordTok{c}\NormalTok{(}\StringTok{'nas'}\NormalTok{, }\StringTok{'agean'}\NormalTok{, }\StringTok{'actes'}\NormalTok{, }\StringTok{'diags'}\NormalTok{, }\StringTok{'ghm'}\NormalTok{))}
+\FunctionTok{requete}\NormalTok{(rsa, exemple\_requete, }\AttributeTok{vars =} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}nas\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}agean\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}actes\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}diags\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}ghm\textquotesingle{}}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{requetes-sur-des-rsa-dans-la-base-de-donnees}{%
-\section{Requêtes sur des rsa dans la base de données}\label{requetes-sur-des-rsa-dans-la-base-de-donnees}}
+\hypertarget{requuxeates-sur-des-rsa-dans-la-base-de-donnuxe9es}{%
+\section{Requêtes sur des rsa dans la base de données}\label{requuxeates-sur-des-rsa-dans-la-base-de-donnuxe9es}}
 
 C'est le même principe seulement il faut spécifier la connexion à la table et l'année de la requête plutôt que l'objet rsa :
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{requete_db}\NormalTok{(con, }\DecValTok{16}\NormalTok{, exemple_requete, }\DataTypeTok{vars =} \KeywordTok{c}\NormalTok{(}\StringTok{'nas'}\NormalTok{, }\StringTok{'agean'}\NormalTok{, }\StringTok{'actes'}\NormalTok{, }\StringTok{'diags'}\NormalTok{, }\StringTok{'ghm'}\NormalTok{))}
+\FunctionTok{requete\_db}\NormalTok{(con, }\DecValTok{16}\NormalTok{, exemple\_requete, }\AttributeTok{vars =} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}nas\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}agean\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}actes\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}diags\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}ghm\textquotesingle{}}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{elements-possibles-pour-une-requete}{%
-\section{Éléments possibles pour une requête}\label{elements-possibles-pour-une-requete}}
+\hypertarget{uxe9luxe9ments-possibles-pour-une-requuxeate}{%
+\section{Éléments possibles pour une requête}\label{uxe9luxe9ments-possibles-pour-une-requuxeate}}
 
 \begin{tabular}{l|l}
 \hline
@@ -1577,18 +1543,18 @@ activites\_actes & Activité pour laquelle chercher les actes\\
 \hline
 \end{tabular}
 
-\hypertarget{lancer-plusieurs-requetes}{%
-\section{Lancer plusieurs requêtes}\label{lancer-plusieurs-requetes}}
+\hypertarget{lancer-plusieurs-requuxeates}{%
+\section{Lancer plusieurs requêtes}\label{lancer-plusieurs-requuxeates}}
 
 Les fonctions \texttt{lancer\_requete()} et \texttt{lancer\_requete\_db()} permettent de lancer une ou plusieurs requêtes lorsque l'on a défini une liste de requêtes.
 
-\hypertarget{exemple-de-liste-de-requetes}{%
-\subsection{Exemple de liste de requêtes}\label{exemple-de-liste-de-requetes}}
+\hypertarget{exemple-de-liste-de-requuxeates}{%
+\subsection{Exemple de liste de requêtes}\label{exemple-de-liste-de-requuxeates}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{deux_requetes <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DataTypeTok{requete_1 =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{actes =} \StringTok{"EBLA003"}\NormalTok{, }\DataTypeTok{nom =} \StringTok{"pac"}\NormalTok{, }\DataTypeTok{thematique =} \StringTok{"pac"}\NormalTok{),}
-                      \DataTypeTok{requete_2 =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{ghm =} \StringTok{"28Z"}\NormalTok{, }\DataTypeTok{nom =} \StringTok{"seances"}\NormalTok{, }\DataTypeTok{thematique =} \StringTok{"CMD 28"}\NormalTok{)}
+\NormalTok{deux\_requetes }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\AttributeTok{requete\_1 =} \FunctionTok{list}\NormalTok{(}\AttributeTok{actes =} \StringTok{"EBLA003"}\NormalTok{, }\AttributeTok{nom =} \StringTok{"pac"}\NormalTok{, }\AttributeTok{thematique =} \StringTok{"pac"}\NormalTok{),}
+                      \AttributeTok{requete\_2 =} \FunctionTok{list}\NormalTok{(}\AttributeTok{ghm =} \StringTok{"28Z"}\NormalTok{, }\AttributeTok{nom =} \StringTok{"seances"}\NormalTok{, }\AttributeTok{thematique =} \StringTok{"CMD 28"}\NormalTok{)}
 \NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -1598,11 +1564,11 @@ Les fonctions \texttt{lancer\_requete()} et \texttt{lancer\_requete\_db()} perme
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Pour des rsa importés avec irsa}
-\KeywordTok{lancer_requete}\NormalTok{(rsa, deux_requetes, }\DataTypeTok{vars =} \KeywordTok{c}\NormalTok{(}\StringTok{'nas'}\NormalTok{, }\StringTok{'duree'}\NormalTok{, }\StringTok{'ghm'}\NormalTok{))}
+\CommentTok{\# Pour des rsa importés avec irsa}
+\FunctionTok{lancer\_requete}\NormalTok{(rsa, deux\_requetes, }\AttributeTok{vars =} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}nas\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}duree\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}ghm\textquotesingle{}}\NormalTok{))}
 
-\CommentTok{# Pour des rsa dans une base de données}
-\KeywordTok{lancer_requete_db}\NormalTok{(con, }\DecValTok{16}\NormalTok{, deux_requetes, }\DataTypeTok{vars =} \KeywordTok{c}\NormalTok{(}\StringTok{'nas'}\NormalTok{, }\StringTok{'duree'}\NormalTok{, }\StringTok{'ghm'}\NormalTok{))}
+\CommentTok{\# Pour des rsa dans une base de données}
+\FunctionTok{lancer\_requete\_db}\NormalTok{(con, }\DecValTok{16}\NormalTok{, deux\_requetes, }\AttributeTok{vars =} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}nas\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}duree\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}ghm\textquotesingle{}}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1637,8 +1603,8 @@ Trois étapes sont distinguées pour reproduire la valorisation d'un rsa :
 
 Pour ces deux dernières étapes, la logique retenue a été la suivante : deux fonctions permettent de constituer une table séjour (rsa) et une table facture (ano) contenant les variables utiles.
 
-\hypertarget{acceder-aux-tarifs-depuis-r}{%
-\section{Accéder aux tarifs depuis R}\label{acceder-aux-tarifs-depuis-r}}
+\hypertarget{accuxe9der-aux-tarifs-depuis-r}{%
+\section{Accéder aux tarifs depuis R}\label{accuxe9der-aux-tarifs-depuis-r}}
 
 Le package intitulé \href{https://guillaumepressiat.github.io/nomensland/index.html}{nomensland} contient un ensemble de référentiels utiles dans le PMSI, parmi lesquels les tarifs GHS et suppléments du MCO pour les établissements publics.
 
@@ -1646,119 +1612,119 @@ Il est nécessaire d'installer ce package ou de disposer de tables dont la struc
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{tarifs      <-}\StringTok{ }\NormalTok{nomensland}\OperatorTok{::}\KeywordTok{get_table}\NormalTok{(}\StringTok{'tarifs_mco_ghs'}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{distinct}\NormalTok{(ghs, anseqta, }\DataTypeTok{.keep_all =} \OtherTok{TRUE}\NormalTok{)}
-\NormalTok{supplements <-}\StringTok{ }\NormalTok{nomensland}\OperatorTok{::}\KeywordTok{get_table}\NormalTok{(}\StringTok{'tarifs_mco_supplements'}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate_if}\NormalTok{(is.numeric, tidyr}\OperatorTok{::}\NormalTok{replace_na, }\DecValTok{0}\NormalTok{)}
+\NormalTok{tarifs      }\OtherTok{\textless{}{-}}\NormalTok{ nomensland}\SpecialCharTok{::}\FunctionTok{get\_table}\NormalTok{(}\StringTok{\textquotesingle{}tarifs\_mco\_ghs\textquotesingle{}}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{distinct}\NormalTok{(ghs, anseqta, }\AttributeTok{.keep\_all =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{supplements }\OtherTok{\textless{}{-}}\NormalTok{ nomensland}\SpecialCharTok{::}\FunctionTok{get\_table}\NormalTok{(}\StringTok{\textquotesingle{}tarifs\_mco\_supplements\textquotesingle{}}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate\_if}\NormalTok{(is.numeric, tidyr}\SpecialCharTok{::}\NormalTok{replace\_na, }\DecValTok{0}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{etape-sejour}{%
-\section{Étape séjour}\label{etape-sejour}}
+\hypertarget{uxe9tape-suxe9jour}{%
+\section{Étape séjour}\label{uxe9tape-suxe9jour}}
 
 Il y a plusieurs possibilités pour cette étape : valoriser uniquement les GHS + bornes extrêmes, ou bien valoriser l'intégralité des rubriques de valorisation.
 
 Mais il faut d'abord préparer la table rsa spécifique à la valorisation.
 
-\hypertarget{preparation-des-rsa}{%
-\subsection{Préparation des rsa}\label{preparation-des-rsa}}
+\hypertarget{pruxe9paration-des-rsa}{%
+\subsection{Préparation des rsa}\label{pruxe9paration-des-rsa}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# avec un noyau pmeasyr (importer les données)}
-\NormalTok{annee <-}\StringTok{ }\DecValTok{18}
-\NormalTok{p <-}\StringTok{ }\KeywordTok{noyau_pmeasyr}\NormalTok{(}
-  \DataTypeTok{finess   =} \StringTok{'750712184'}\NormalTok{,}
-  \DataTypeTok{annee    =} \DecValTok{2000} \OperatorTok{+}\StringTok{ }\NormalTok{annee,}
-  \DataTypeTok{mois     =} \DecValTok{6}\NormalTok{,}
-  \DataTypeTok{path     =} \StringTok{'~/Documents/data/mco'}\NormalTok{,}
-  \DataTypeTok{progress =} \OtherTok{FALSE}\NormalTok{,}
-  \DataTypeTok{n_max    =} \OtherTok{Inf}\NormalTok{,}
-  \DataTypeTok{lib      =} \OtherTok{FALSE}\NormalTok{,}
-  \DataTypeTok{tolower_names =} \OtherTok{TRUE}\NormalTok{)}
+\CommentTok{\# avec un noyau pmeasyr (importer les données)}
+\NormalTok{annee }\OtherTok{\textless{}{-}} \DecValTok{18}
+\NormalTok{p }\OtherTok{\textless{}{-}} \FunctionTok{noyau\_pmeasyr}\NormalTok{(}
+  \AttributeTok{finess   =} \StringTok{\textquotesingle{}750712184\textquotesingle{}}\NormalTok{,}
+  \AttributeTok{annee    =} \DecValTok{2000} \SpecialCharTok{+}\NormalTok{ annee,}
+  \AttributeTok{mois     =} \DecValTok{6}\NormalTok{,}
+  \AttributeTok{path     =} \StringTok{\textquotesingle{}\textasciitilde{}/Documents/data/mco\textquotesingle{}}\NormalTok{,}
+  \AttributeTok{progress =} \ConstantTok{FALSE}\NormalTok{,}
+  \AttributeTok{n\_max    =} \ConstantTok{Inf}\NormalTok{,}
+  \AttributeTok{lib      =} \ConstantTok{FALSE}\NormalTok{,}
+  \AttributeTok{tolower\_names =} \ConstantTok{TRUE}\NormalTok{)}
 
-\NormalTok{vrsa <-}\StringTok{ }\KeywordTok{vvr_rsa}\NormalTok{(p)}
+\NormalTok{vrsa }\OtherTok{\textless{}{-}} \FunctionTok{vvr\_rsa}\NormalTok{(p)}
 
-\CommentTok{# depuis une base de données (collecter les données)}
-\NormalTok{dbdir <-}\StringTok{ "~/Documents/data/monetdb"}
-\NormalTok{con <-}\StringTok{ }\KeywordTok{src_monetdblite}\NormalTok{(dbdir)}
+\CommentTok{\# depuis une base de données (collecter les données)}
+\NormalTok{dbdir }\OtherTok{\textless{}{-}} \StringTok{"\textasciitilde{}/Documents/data/monetdb"}
+\NormalTok{con }\OtherTok{\textless{}{-}} \FunctionTok{src\_monetdblite}\NormalTok{(dbdir)}
 
-\NormalTok{vrsa <-}\StringTok{ }\KeywordTok{vvr_rsa}\NormalTok{(con, annee)}
+\NormalTok{vrsa }\OtherTok{\textless{}{-}} \FunctionTok{vvr\_rsa}\NormalTok{(con, annee)}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{calculer-la-valorisation-ghs-borne-extreme-haut-extreme-bas}{%
-\subsection{Calculer la valorisation GHS borne extrême haut + extrême bas}\label{calculer-la-valorisation-ghs-borne-extreme-haut-extreme-bas}}
+\hypertarget{calculer-la-valorisation-ghs-borne-extruxeame-haut-extruxeame-bas}{%
+\subsection{Calculer la valorisation GHS borne extrême haut + extrême bas}\label{calculer-la-valorisation-ghs-borne-extruxeame-haut-extruxeame-bas}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Recette GHS de base et suppléments EXB, EXH}
-\NormalTok{rsa_v <-}\StringTok{ }\KeywordTok{vvr_ghs_supp}\NormalTok{(}\DataTypeTok{rsa =}\NormalTok{ vrsa, }\DataTypeTok{tarifs =}\NormalTok{ tarifs)}
+\CommentTok{\# Recette GHS de base et suppléments EXB, EXH}
+\NormalTok{rsa\_v }\OtherTok{\textless{}{-}} \FunctionTok{vvr\_ghs\_supp}\NormalTok{(}\AttributeTok{rsa =}\NormalTok{ vrsa, }\AttributeTok{tarifs =}\NormalTok{ tarifs)}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{calculer-la-valorisation-ghs-borne-extreme-haut-extreme-bas-et-supplements}{%
-\subsection{Calculer la valorisation GHS borne extrême haut + extrême bas et suppléments}\label{calculer-la-valorisation-ghs-borne-extreme-haut-extreme-bas-et-supplements}}
+\hypertarget{calculer-la-valorisation-ghs-borne-extruxeame-haut-extruxeame-bas-et-suppluxe9ments}{%
+\subsection{Calculer la valorisation GHS borne extrême haut + extrême bas et suppléments}\label{calculer-la-valorisation-ghs-borne-extruxeame-haut-extruxeame-bas-et-suppluxe9ments}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Recette GHS de base, EXB, EXH, et suppléments}
-\NormalTok{rsa_v <-}\StringTok{ }\KeywordTok{vvr_ghs_supp}\NormalTok{(vrsa, tarifs, supplements, vano, }\KeywordTok{ipo}\NormalTok{(p), }\KeywordTok{idiap}\NormalTok{(p), }\DataTypeTok{pie =} \KeywordTok{ipie}\NormalTok{(p), }\DataTypeTok{bee =} \OtherTok{FALSE}\NormalTok{)}
+\CommentTok{\# Recette GHS de base, EXB, EXH, et suppléments}
+\NormalTok{rsa\_v }\OtherTok{\textless{}{-}} \FunctionTok{vvr\_ghs\_supp}\NormalTok{(vrsa, tarifs, supplements, vano, }\FunctionTok{ipo}\NormalTok{(p), }\FunctionTok{idiap}\NormalTok{(p), }\AttributeTok{pie =} \FunctionTok{ipie}\NormalTok{(p), }\AttributeTok{bee =} \ConstantTok{FALSE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{etape-facture}{%
-\section{Étape facture}\label{etape-facture}}
+\hypertarget{uxe9tape-facture}{%
+\section{Étape facture}\label{uxe9tape-facture}}
 
-\hypertarget{preparation-des-ano}{%
-\subsection{Préparation des ano}\label{preparation-des-ano}}
+\hypertarget{pruxe9paration-des-ano}{%
+\subsection{Préparation des ano}\label{pruxe9paration-des-ano}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{## Not run: }
-\CommentTok{# avec un noyau pmeasyr (importer les données)}
-\NormalTok{p <-}\StringTok{ }\KeywordTok{noyau_pmeasyr}\NormalTok{(}
-  \DataTypeTok{finess   =} \StringTok{'750712184'}\NormalTok{,}
-  \DataTypeTok{annee    =} \DecValTok{2000} \OperatorTok{+}\StringTok{ }\DecValTok{18}\NormalTok{,}
-  \DataTypeTok{mois     =} \DecValTok{4}\NormalTok{,}
-  \DataTypeTok{path     =} \StringTok{'~/Documents/data/mco'}\NormalTok{,}
-  \DataTypeTok{progress =} \OtherTok{FALSE}\NormalTok{,}
-  \DataTypeTok{n_max    =} \OtherTok{Inf}\NormalTok{,}
-  \DataTypeTok{lib      =} \OtherTok{FALSE}\NormalTok{,}
-  \DataTypeTok{tolower_names =} \OtherTok{TRUE}\NormalTok{)}
+\DocumentationTok{\#\# Not run: }
+\CommentTok{\# avec un noyau pmeasyr (importer les données)}
+\NormalTok{p }\OtherTok{\textless{}{-}} \FunctionTok{noyau\_pmeasyr}\NormalTok{(}
+  \AttributeTok{finess   =} \StringTok{\textquotesingle{}750712184\textquotesingle{}}\NormalTok{,}
+  \AttributeTok{annee    =} \DecValTok{2000} \SpecialCharTok{+} \DecValTok{18}\NormalTok{,}
+  \AttributeTok{mois     =} \DecValTok{4}\NormalTok{,}
+  \AttributeTok{path     =} \StringTok{\textquotesingle{}\textasciitilde{}/Documents/data/mco\textquotesingle{}}\NormalTok{,}
+  \AttributeTok{progress =} \ConstantTok{FALSE}\NormalTok{,}
+  \AttributeTok{n\_max    =} \ConstantTok{Inf}\NormalTok{,}
+  \AttributeTok{lib      =} \ConstantTok{FALSE}\NormalTok{,}
+  \AttributeTok{tolower\_names =} \ConstantTok{TRUE}\NormalTok{)}
 
-\NormalTok{vano <-}\StringTok{ }\KeywordTok{vvr_ano_mco}\NormalTok{(p)}
+\NormalTok{vano }\OtherTok{\textless{}{-}} \FunctionTok{vvr\_ano\_mco}\NormalTok{(p)}
 
-\CommentTok{# depuis une base de données (collecter les données)}
-\NormalTok{dbdir <-}\StringTok{ "~/Documents/data/monetdb"}
-\NormalTok{con <-}\StringTok{ }\KeywordTok{src_monetdblite}\NormalTok{(dbdir)}
+\CommentTok{\# depuis une base de données (collecter les données)}
+\NormalTok{dbdir }\OtherTok{\textless{}{-}} \StringTok{"\textasciitilde{}/Documents/data/monetdb"}
+\NormalTok{con }\OtherTok{\textless{}{-}} \FunctionTok{src\_monetdblite}\NormalTok{(dbdir)}
 
-\NormalTok{vano <-}\StringTok{ }\KeywordTok{vvr_ano_mco}\NormalTok{(con, }\DecValTok{18}\NormalTok{)}
+\NormalTok{vano }\OtherTok{\textless{}{-}} \FunctionTok{vvr\_ano\_mco}\NormalTok{(con, }\DecValTok{18}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{attribuer-le-caractere-facturable-du-sejour-tel-que-sur-epmsi-tableau-sv}{%
-\subsection{Attribuer le caractère facturable du séjour tel que sur epmsi (tableau sv)}\label{attribuer-le-caractere-facturable-du-sejour-tel-que-sur-epmsi-tableau-sv}}
+\hypertarget{attribuer-le-caractuxe8re-facturable-du-suxe9jour-tel-que-sur-epmsi-tableau-sv}{%
+\subsection{Attribuer le caractère facturable du séjour tel que sur epmsi (tableau sv)}\label{attribuer-le-caractuxe8re-facturable-du-suxe9jour-tel-que-sur-epmsi-tableau-sv}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{## Not run: }
-\CommentTok{# Tenir compte des porg}
-\NormalTok{ano_sv <-}\StringTok{ }\KeywordTok{vvr_mco_sv}\NormalTok{(vrsa, vano, }\DataTypeTok{porg =} \KeywordTok{ipo}\NormalTok{(p))}
+\DocumentationTok{\#\# Not run: }
+\CommentTok{\# Tenir compte des porg}
+\NormalTok{ano\_sv }\OtherTok{\textless{}{-}} \FunctionTok{vvr\_mco\_sv}\NormalTok{(vrsa, vano, }\AttributeTok{porg =} \FunctionTok{ipo}\NormalTok{(p))}
 
-\CommentTok{# ne pas tenir compte des porg}
-\NormalTok{ano_sv <-}\StringTok{ }\KeywordTok{vvr_mco_sv}\NormalTok{(vrsa, vano)}
+\CommentTok{\# ne pas tenir compte des porg}
+\NormalTok{ano\_sv }\OtherTok{\textless{}{-}} \FunctionTok{vvr\_mco\_sv}\NormalTok{(vrsa, vano)}
 
-\CommentTok{## End(Not run)}
+\DocumentationTok{\#\# End(Not run)}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{conjuguer-la-valorisation-des-sejours-a-leur-caractere-facturable}{%
-\section{Conjuguer la valorisation des séjours à leur caractère facturable}\label{conjuguer-la-valorisation-des-sejours-a-leur-caractere-facturable}}
+\hypertarget{conjuguer-la-valorisation-des-suxe9jours-uxe0-leur-caractuxe8re-facturable}{%
+\section{Conjuguer la valorisation des séjours à leur caractère facturable}\label{conjuguer-la-valorisation-des-suxe9jours-uxe0-leur-caractuxe8re-facturable}}
 
 Une fois que les éléments sont prêts, on peut les rassembler :
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{valo_rsa <-}\StringTok{ }\KeywordTok{vvr_mco}\NormalTok{(rsa_v, ano_sv)}
+\NormalTok{valo\_rsa }\OtherTok{\textless{}{-}} \FunctionTok{vvr\_mco}\NormalTok{(rsa\_v, ano\_sv)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1766,19 +1732,19 @@ Ou tout calculer en un seul appel à ces différentes fonctions :
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{resu <-}\StringTok{ }\KeywordTok{vvr_mco}\NormalTok{(}
-\KeywordTok{vvr_ghs_supp}\NormalTok{(}\DataTypeTok{rsa =}\NormalTok{ vrsa, }
-             \DataTypeTok{tarifs =}\NormalTok{ tarifs_ghs, }
-             \DataTypeTok{supplements =}\NormalTok{  tarifs_supp, }
-             \DataTypeTok{ano =}\NormalTok{ vano, }
-             \DataTypeTok{porg =} \KeywordTok{ipo}\NormalTok{(p), }
-             \DataTypeTok{diap =} \KeywordTok{idiap}\NormalTok{(p), }
-             \DataTypeTok{pie =} \KeywordTok{ipie}\NormalTok{(p), }
-             \DataTypeTok{full =} \OtherTok{FALSE}\NormalTok{,}
-             \DataTypeTok{cgeo =} \FloatTok{1.07}\NormalTok{, }
-             \DataTypeTok{prudent =} \OtherTok{NULL}\NormalTok{,}
-             \DataTypeTok{bee =} \OtherTok{FALSE}\NormalTok{),}
-\KeywordTok{vvr_mco_sv}\NormalTok{(vrsa, vano, }\KeywordTok{ipo}\NormalTok{(p))}
+\NormalTok{resu }\OtherTok{\textless{}{-}} \FunctionTok{vvr\_mco}\NormalTok{(}
+\FunctionTok{vvr\_ghs\_supp}\NormalTok{(}\AttributeTok{rsa =}\NormalTok{ vrsa, }
+             \AttributeTok{tarifs =}\NormalTok{ tarifs\_ghs, }
+             \AttributeTok{supplements =}\NormalTok{  tarifs\_supp, }
+             \AttributeTok{ano =}\NormalTok{ vano, }
+             \AttributeTok{porg =} \FunctionTok{ipo}\NormalTok{(p), }
+             \AttributeTok{diap =} \FunctionTok{idiap}\NormalTok{(p), }
+             \AttributeTok{pie =} \FunctionTok{ipie}\NormalTok{(p), }
+             \AttributeTok{full =} \ConstantTok{FALSE}\NormalTok{,}
+             \AttributeTok{cgeo =} \FloatTok{1.07}\NormalTok{, }
+             \AttributeTok{prudent =} \ConstantTok{NULL}\NormalTok{,}
+             \AttributeTok{bee =} \ConstantTok{FALSE}\NormalTok{),}
+\FunctionTok{vvr\_mco\_sv}\NormalTok{(vrsa, vano, }\FunctionTok{ipo}\NormalTok{(p))}
 \NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -1798,25 +1764,25 @@ Deux fonctions permettent de produire des tableaux importants sur epmsi : cela p
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{epmsi_mco_sv}\NormalTok{(valo_rsa, }\DataTypeTok{knit =} \OtherTok{TRUE}\NormalTok{)}
+\FunctionTok{epmsi\_mco\_sv}\NormalTok{(valo\_rsa, }\AttributeTok{knit =} \ConstantTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{epmsi_mco_rav}\NormalTok{(valo, }\DataTypeTok{knit =} \OtherTok{TRUE}\NormalTok{)}
+\FunctionTok{epmsi\_mco\_rav}\NormalTok{(valo, }\AttributeTok{knit =} \ConstantTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 Ce dernier tableau contient à la fois le RAE et le RAV.
 
-\hypertarget{vignette-presentant-ces-fonctions}{%
-\section{Vignette présentant ces fonctions}\label{vignette-presentant-ces-fonctions}}
+\hypertarget{vignette-pruxe9sentant-ces-fonctions}{%
+\section{Vignette présentant ces fonctions}\label{vignette-pruxe9sentant-ces-fonctions}}
 
 Un concentré de l'utilisation de ces fonctions, ainsi qu'un dictionnaire des variables présentes dans les tables produites sont disponibles dans l'\href{https://im-aphp.github.io/pmeasyr/articles/vignette4.html}{une des vignettes} du package.
 
-\hypertarget{exercices-beta}{%
-\chapter{Exercices (béta)}\label{exercices-beta}}
+\hypertarget{exercices-buxe9ta}{%
+\chapter{Exercices (béta)}\label{exercices-buxe9ta}}
 
 Cette partie contient quelques exercices pour se familiariser à l'utilisation de \texttt{dplyr} avec les données du PMSI importées avec \texttt{pmeasyr}. Les données sont fictives et très simples, il s'agit simplement d'exercices autour de R.
 
@@ -1853,6 +1819,5 @@ Imaginez que vous disposez de rsa importés avec pmeasyr.
 \item
   Croiser ces deux tables
 \end{itemize}
-
 
 \end{document}

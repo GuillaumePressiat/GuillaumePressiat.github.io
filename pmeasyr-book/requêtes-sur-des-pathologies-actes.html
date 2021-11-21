@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>7 Fichier TRA | Traitement des données PMSI avec R</title>
+  <title>5 Requêtes sur des pathologies / actes | Traitement des données PMSI avec R</title>
   <meta name="description" content="Ce livre numérique présente des exemples de traitements de données PMSI avec R" />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="7 Fichier TRA | Traitement des données PMSI avec R" />
+  <meta property="og:title" content="5 Requêtes sur des pathologies / actes | Traitement des données PMSI avec R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="7 Fichier TRA | Traitement des données PMSI avec R" />
+  <meta name="twitter:title" content="5 Requêtes sur des pathologies / actes | Traitement des données PMSI avec R" />
   
   <meta name="twitter:description" content="Ce livre numérique présente des exemples de traitements de données PMSI avec R" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="étude-des-files-actives.html"/>
-<link rel="next" href="statistiques-du-pmsi.html"/>
+<link rel="prev" href="import-des-données.html"/>
+<link rel="next" href="étude-des-files-actives.html"/>
 <script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -293,97 +293,106 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="fichier-tra" class="section level1" number="7">
-<h1><span class="header-section-number">7</span> Fichier TRA</h1>
-<p>Le fichier TRA est un fichier du <em>out</em> qui permet de relier les données anonymes du <em>out</em> aux données du <em>in</em>, il comprend un lien entre :</p>
-<ul>
-<li>MCO : clé rsa, numéro de rss, numéro de sejour (nas), date d’entrée et date de sortie du séjour</li>
-<li>SSR : numéro séquentiel du séjour + noseqrhs et numéro de séjour + numéro de semaine</li>
-<li>PSY RPSA : ipp, date d’entrée et de fin du sejour, numéro séquentiel du séjour, numéro de séquence et numéro de séjour, dates de début et fin de sequence</li>
-<li>PSY R3A : ipp, date de l’acte, numéro d’ordre, forme activité, um, nature et lieu de l’acte</li>
-<li>HAD : numéro séquentiel de séjour, numéro de séquence, sous-sequence et numéro de séjour, dates de début et fin des séquences et sous-séquences, dates d’entrée et de sortie du séjour, modes d’entrée sortie provenance destination</li>
-</ul>
+<div id="requêtes-sur-des-pathologies-actes" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> Requêtes sur des pathologies / actes</h1>
+<div id="transposition-des-codes-diagnostics" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Transposition des codes diagnostics</h2>
+<p>Les analyses sur les diagnostics CIM-10 sont parfois fastidieuses du fait des multiples positions de diagnostics : DP principal du séjour, DR principal du séjour, DPUM, DRUM, DAS. La fonction <em>tdiag</em> permet de rassembler tous les diagnostics dans une seule table.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="requêtes-sur-des-pathologies-actes.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pour les objets rsa et rum du MCO</span></span>
+<span id="cb17-2"><a href="requêtes-sur-des-pathologies-actes.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Transbahuter tous les diagnostics dans une seule table</span></span>
+<span id="cb17-3"><a href="requêtes-sur-des-pathologies-actes.html#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tdiag</span>(rsa15) <span class="ot">-&gt;</span> rsa15 <span class="co"># &quot;Tidy diagnostics&quot;</span></span>
+<span id="cb17-4"><a href="requêtes-sur-des-pathologies-actes.html#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(rsa15<span class="sc">$</span>diags)</span>
+<span id="cb17-5"><a href="requêtes-sur-des-pathologies-actes.html#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Tous les diagnostics sont dans une table, avec un numero selon leur position  </span></span>
+<span id="cb17-6"><a href="requêtes-sur-des-pathologies-actes.html#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 1:DP, 2:DR, 3:DPUM, 4:DRUM, 5:DAS</span></span></code></pre></div>
+<p>Exemple de résultat :</p>
 <table>
 <thead>
 <tr class="header">
-<th align="right">Type</th>
-<th align="left">Import</th>
+<th align="left">CLE_RSA</th>
+<th align="left">NSEQRUM</th>
+<th>position</th>
+<th>diag</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="right"><a href="https://im-aphp.github.io/pmeasyr/reference/itra.html">itra</a></td>
-<td align="left">~ TRA - Import du TRA</td>
+<td align="left">0000000001</td>
+<td align="left">01</td>
+<td>1</td>
+<td>Z511</td>
 </tr>
 <tr class="even">
-<td align="right"><a href="https://im-aphp.github.io/pmeasyr/reference/inner_tra.html">inner_tra</a></td>
-<td align="left">~ TRA - Ajout du TRA aux données Out</td>
+<td align="left">0000000001</td>
+<td align="left">01</td>
+<td>2</td>
+<td>C18</td>
+</tr>
+<tr class="odd">
+<td align="left">0000000002</td>
+<td align="left">01</td>
+<td>1</td>
+<td>C501</td>
+</tr>
+<tr class="even">
+<td align="left">0000000002</td>
+<td align="left">01</td>
+<td>3</td>
+<td>C501</td>
+</tr>
+<tr class="odd">
+<td align="left">0000000002</td>
+<td align="left">02</td>
+<td>1</td>
+<td>D051</td>
+</tr>
+<tr class="even">
+<td align="left">0000000002</td>
+<td align="left">02</td>
+<td>5</td>
+<td>E109</td>
 </tr>
 </tbody>
 </table>
-<div id="ajout-du-tra-en-mco" class="section level2" number="7.1">
-<h2><span class="header-section-number">7.1</span> Ajout du TRA en MCO</h2>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="fichier-tra.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># lecture du fichier tra et jointure aux rsa</span></span>
-<span id="cb23-2"><a href="fichier-tra.html#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">itra</span>(<span class="dv">750100042</span>, <span class="dv">2015</span>, <span class="dv">12</span>, <span class="st">&#39;~/Documents/data/mco&#39;</span>) <span class="ot">-&gt;</span> tra</span>
-<span id="cb23-3"><a href="fichier-tra.html#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-4"><a href="fichier-tra.html#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajout du tra aux rsa :</span></span>
-<span id="cb23-5"><a href="fichier-tra.html#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(rsa15<span class="sc">$</span>rsa, tra) <span class="ot">-&gt;</span> rsa15<span class="sc">$</span>rsa</span>
-<span id="cb23-6"><a href="fichier-tra.html#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajout du tra à la partie um des rsa :</span></span>
-<span id="cb23-7"><a href="fichier-tra.html#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(rsa15<span class="sc">$</span>rsa_um, tra) <span class="ot">-&gt;</span> rsa15<span class="sc">$</span>rsa_um</span>
-<span id="cb23-8"><a href="fichier-tra.html#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajout du tra à la partie actes des rsa :</span></span>
-<span id="cb23-9"><a href="fichier-tra.html#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(rsa15<span class="sc">$</span>actes, tra) <span class="ot">-&gt;</span> rsa15<span class="sc">$</span>actes</span>
-<span id="cb23-10"><a href="fichier-tra.html#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajout du tra à la partie das des rsa :</span></span>
-<span id="cb23-11"><a href="fichier-tra.html#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(rsa15<span class="sc">$</span>das, tra) <span class="ot">-&gt;</span> rsa15<span class="sc">$</span>das</span></code></pre></div>
 </div>
-<div id="ajout-du-tra-en-had" class="section level2" number="7.2">
-<h2><span class="header-section-number">7.2</span> Ajout du TRA en HAD</h2>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="fichier-tra.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import du TRA HAD</span></span>
-<span id="cb24-2"><a href="fichier-tra.html#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">itra</span>(<span class="at">finess =</span> <span class="dv">750712184</span>,</span>
-<span id="cb24-3"><a href="fichier-tra.html#cb24-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">annee =</span> <span class="dv">2015</span>,</span>
-<span id="cb24-4"><a href="fichier-tra.html#cb24-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">mois =</span> <span class="dv">12</span>,</span>
-<span id="cb24-5"><a href="fichier-tra.html#cb24-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">path =</span> <span class="st">&#39;~/Documents/data/had&#39;</span>, </span>
-<span id="cb24-6"><a href="fichier-tra.html#cb24-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">champ =</span> <span class="st">&quot;had&quot;</span>) <span class="ot">-&gt;</span> tra</span>
-<span id="cb24-7"><a href="fichier-tra.html#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-8"><a href="fichier-tra.html#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajout du tra</span></span>
-<span id="cb24-9"><a href="fichier-tra.html#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(data_had<span class="sc">$</span>rapss, tra, <span class="at">champ =</span> <span class="st">&quot;had&quot;</span>) <span class="ot">-&gt;</span> data_had<span class="sc">$</span>rapss</span>
-<span id="cb24-10"><a href="fichier-tra.html#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(data_had<span class="sc">$</span>acdi,  tra, <span class="at">champ =</span> <span class="st">&quot;had&quot;</span>) <span class="ot">-&gt;</span> data_had<span class="sc">$</span>acdi</span>
-<span id="cb24-11"><a href="fichier-tra.html#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(data_had<span class="sc">$</span>ght,   tra, <span class="at">champ =</span> <span class="st">&quot;had&quot;</span>) <span class="ot">-&gt;</span> data_had<span class="sc">$</span>ght</span></code></pre></div>
+<div id="recherche-de-codes-diagnostics" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> Recherche de codes diagnostics</h2>
+<p>L’objectif est de récupérer les séjours présentant un code diagnostic de la liste</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="requêtes-sur-des-pathologies-actes.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Liste D-0103 de la fonction groupage 2016 : Epilepsies</span></span>
+<span id="cb18-2"><a href="requêtes-sur-des-pathologies-actes.html#cb18-2" aria-hidden="true" tabindex="-1"></a>liste_diag <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;F803&#39;</span>, <span class="st">&#39;G400&#39;</span>, <span class="st">&#39;G401&#39;</span>, <span class="st">&#39;G402&#39;</span>, <span class="st">&#39;G403&#39;</span>, <span class="st">&#39;G404&#39;</span>, </span>
+<span id="cb18-3"><a href="requêtes-sur-des-pathologies-actes.html#cb18-3" aria-hidden="true" tabindex="-1"></a>               <span class="st">&#39;G405&#39;</span>, <span class="st">&#39;G406&#39;</span>, <span class="st">&#39;G407&#39;</span>, <span class="st">&#39;G408&#39;</span>, <span class="st">&#39;G409&#39;</span>, <span class="st">&#39;G410&#39;</span>, </span>
+<span id="cb18-4"><a href="requêtes-sur-des-pathologies-actes.html#cb18-4" aria-hidden="true" tabindex="-1"></a>               <span class="st">&#39;G411&#39;</span>, <span class="st">&#39;G412&#39;</span>, <span class="st">&#39;G418&#39;</span>, <span class="st">&#39;G419&#39;</span>, <span class="st">&#39;R568&#39;</span>)</span>
+<span id="cb18-5"><a href="requêtes-sur-des-pathologies-actes.html#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="requêtes-sur-des-pathologies-actes.html#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co"># En passant par la table diags</span></span>
+<span id="cb18-7"><a href="requêtes-sur-des-pathologies-actes.html#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="fu">tdiag</span>(rsa15) <span class="ot">-&gt;</span> rsa15</span>
+<span id="cb18-8"><a href="requêtes-sur-des-pathologies-actes.html#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="requêtes-sur-des-pathologies-actes.html#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb18-10"><a href="requêtes-sur-des-pathologies-actes.html#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co"># quelle que soit la position du diagnostic</span></span>
+<span id="cb18-11"><a href="requêtes-sur-des-pathologies-actes.html#cb18-11" aria-hidden="true" tabindex="-1"></a>rsa15<span class="sc">$</span>diags <span class="sc">%&gt;%</span> <span class="fu">filter</span>(diag <span class="sc">%in%</span> liste_diag)</span>
+<span id="cb18-12"><a href="requêtes-sur-des-pathologies-actes.html#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="co"># position en das</span></span>
+<span id="cb18-13"><a href="requêtes-sur-des-pathologies-actes.html#cb18-13" aria-hidden="true" tabindex="-1"></a>rsa15<span class="sc">$</span>diags <span class="sc">%&gt;%</span> <span class="fu">filter</span>(diag <span class="sc">%in%</span> liste_diag, position <span class="sc">==</span> <span class="dv">5</span>)</span>
+<span id="cb18-14"><a href="requêtes-sur-des-pathologies-actes.html#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="co"># position en dp dr</span></span>
+<span id="cb18-15"><a href="requêtes-sur-des-pathologies-actes.html#cb18-15" aria-hidden="true" tabindex="-1"></a>rsa15<span class="sc">$</span>diags <span class="sc">%&gt;%</span> <span class="fu">filter</span>(diag <span class="sc">%in%</span> liste_diag, position <span class="sc">&lt;</span> <span class="dv">5</span>)</span>
+<span id="cb18-16"><a href="requêtes-sur-des-pathologies-actes.html#cb18-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-17"><a href="requêtes-sur-des-pathologies-actes.html#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="co"># En passant par les zones stream</span></span>
+<span id="cb18-18"><a href="requêtes-sur-des-pathologies-actes.html#cb18-18" aria-hidden="true" tabindex="-1"></a>string_diags <span class="ot">=</span> </span>
+<span id="cb18-19"><a href="requêtes-sur-des-pathologies-actes.html#cb18-19" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;F803|G400|G401|G402|G403|G404|G405|G406|G407|G408|G409|G410|G411|G412|G418|G419|R568&#39;</span></span>
+<span id="cb18-20"><a href="requêtes-sur-des-pathologies-actes.html#cb18-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-21"><a href="requêtes-sur-des-pathologies-actes.html#cb18-21" aria-hidden="true" tabindex="-1"></a><span class="co"># quelle que soit la position du diagnostic</span></span>
+<span id="cb18-22"><a href="requêtes-sur-des-pathologies-actes.html#cb18-22" aria-hidden="true" tabindex="-1"></a>rsa15<span class="sc">$</span>rsa <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">grepl</span>(string_diags, dpdrum)<span class="sc">|</span><span class="fu">grepl</span>(string_diags, das))</span>
+<span id="cb18-23"><a href="requêtes-sur-des-pathologies-actes.html#cb18-23" aria-hidden="true" tabindex="-1"></a><span class="co"># position en das</span></span>
+<span id="cb18-24"><a href="requêtes-sur-des-pathologies-actes.html#cb18-24" aria-hidden="true" tabindex="-1"></a>rsa15<span class="sc">$</span>rsa <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">grepl</span>(string_diags, das))</span>
+<span id="cb18-25"><a href="requêtes-sur-des-pathologies-actes.html#cb18-25" aria-hidden="true" tabindex="-1"></a><span class="co"># position en dpdr</span></span>
+<span id="cb18-26"><a href="requêtes-sur-des-pathologies-actes.html#cb18-26" aria-hidden="true" tabindex="-1"></a>rsa15<span class="sc">$</span>rsa <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">grepl</span>(string_diags, dpdrum))</span></code></pre></div>
 </div>
-<div id="ajout-du-tra-en-ssr" class="section level2" number="7.3">
-<h2><span class="header-section-number">7.3</span> Ajout du TRA en SSR</h2>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="fichier-tra.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import du TRA SSR</span></span>
-<span id="cb25-2"><a href="fichier-tra.html#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">itra</span>(<span class="at">finess =</span> <span class="dv">750712184</span>,</span>
-<span id="cb25-3"><a href="fichier-tra.html#cb25-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">annee =</span> <span class="dv">2015</span>,</span>
-<span id="cb25-4"><a href="fichier-tra.html#cb25-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">mois =</span> <span class="dv">12</span>,</span>
-<span id="cb25-5"><a href="fichier-tra.html#cb25-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">path =</span> <span class="st">&#39;~/Documents/data/ssr&#39;</span>, </span>
-<span id="cb25-6"><a href="fichier-tra.html#cb25-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">champ =</span> <span class="st">&quot;ssr&quot;</span>) <span class="ot">-&gt;</span> tra</span>
-<span id="cb25-7"><a href="fichier-tra.html#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-8"><a href="fichier-tra.html#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajout du tra</span></span>
-<span id="cb25-9"><a href="fichier-tra.html#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(data_ssr<span class="sc">$</span>rha,  tra, <span class="at">champ =</span> <span class="st">&quot;ssr&quot;</span>) <span class="ot">-&gt;</span> data_ssr<span class="sc">$</span>rha</span>
-<span id="cb25-10"><a href="fichier-tra.html#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(data_ssr<span class="sc">$</span>acdi, tra, <span class="at">champ =</span> <span class="st">&quot;ssr&quot;</span>) <span class="ot">-&gt;</span> data_ssr<span class="sc">$</span>acdi</span></code></pre></div>
-</div>
-<div id="ajout-du-tra-en-psy" class="section level2" number="7.4">
-<h2><span class="header-section-number">7.4</span> Ajout du TRA en PSY</h2>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="fichier-tra.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import du TRA PSY : fichiers RPSA</span></span>
-<span id="cb26-2"><a href="fichier-tra.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">itra</span>(<span class="at">finess =</span> <span class="dv">750803454</span>,</span>
-<span id="cb26-3"><a href="fichier-tra.html#cb26-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">annee =</span> <span class="dv">2015</span>,</span>
-<span id="cb26-4"><a href="fichier-tra.html#cb26-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">mois =</span> <span class="dv">12</span>,</span>
-<span id="cb26-5"><a href="fichier-tra.html#cb26-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">path =</span> <span class="st">&#39;~/Documents/data/psy&#39;</span>, </span>
-<span id="cb26-6"><a href="fichier-tra.html#cb26-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">champ =</span> <span class="st">&quot;tra_psy_rpsa&quot;</span>) <span class="ot">-&gt;</span> tra</span>
-<span id="cb26-7"><a href="fichier-tra.html#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-8"><a href="fichier-tra.html#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajout du tra</span></span>
-<span id="cb26-9"><a href="fichier-tra.html#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(rpsa_psy<span class="sc">$</span>rpsa, tra, <span class="at">champ =</span> <span class="st">&quot;psyrpsa&quot;</span>) <span class="ot">-&gt;</span> rpsa_psy<span class="sc">$</span>rpsa</span>
-<span id="cb26-10"><a href="fichier-tra.html#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(rpsa_psy<span class="sc">$</span>das,  tra, <span class="at">champ =</span> <span class="st">&quot;psyrpsa&quot;</span>) <span class="ot">-&gt;</span> rpsa_psy<span class="sc">$</span>das</span></code></pre></div>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="fichier-tra.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import du TRA PSY : fichiers R3A</span></span>
-<span id="cb27-2"><a href="fichier-tra.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">itra</span>(<span class="at">finess =</span> <span class="dv">750803454</span>,</span>
-<span id="cb27-3"><a href="fichier-tra.html#cb27-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">annee =</span> <span class="dv">2015</span>,</span>
-<span id="cb27-4"><a href="fichier-tra.html#cb27-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">mois =</span> <span class="dv">12</span>,</span>
-<span id="cb27-5"><a href="fichier-tra.html#cb27-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">path =</span> <span class="st">&#39;~/Documents/data/psy&#39;</span>, </span>
-<span id="cb27-6"><a href="fichier-tra.html#cb27-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">champ =</span> <span class="st">&quot;tra_psy_r3a&quot;</span>) <span class="ot">-&gt;</span> tra</span>
-<span id="cb27-7"><a href="fichier-tra.html#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-8"><a href="fichier-tra.html#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajout du tra</span></span>
-<span id="cb27-9"><a href="fichier-tra.html#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(r3a_psy<span class="sc">$</span>r3a, tra, <span class="at">champ =</span> <span class="st">&quot;psyr3a&quot;</span>) <span class="ot">-&gt;</span> r3a_psy<span class="sc">$</span>r3a</span>
-<span id="cb27-10"><a href="fichier-tra.html#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(r3a_psy<span class="sc">$</span>das, tra, <span class="at">champ =</span> <span class="st">&quot;psyr3a&quot;</span>) <span class="ot">-&gt;</span> r3a_psy<span class="sc">$</span>das</span></code></pre></div>
+<div id="recherche-de-codes-actes" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> Recherche de codes actes</h2>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="requêtes-sur-des-pathologies-actes.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code EBLA003</span></span>
+<span id="cb19-2"><a href="requêtes-sur-des-pathologies-actes.html#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="requêtes-sur-des-pathologies-actes.html#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb19-4"><a href="requêtes-sur-des-pathologies-actes.html#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># En passant par la table actes</span></span>
+<span id="cb19-5"><a href="requêtes-sur-des-pathologies-actes.html#cb19-5" aria-hidden="true" tabindex="-1"></a>rsa15<span class="sc">$</span>actes <span class="sc">%&gt;%</span> <span class="fu">filter</span>(CDCCAM <span class="sc">==</span> <span class="st">&#39;EBLA003&#39;</span>)</span>
+<span id="cb19-6"><a href="requêtes-sur-des-pathologies-actes.html#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># En passant par la zone stream</span></span>
+<span id="cb19-7"><a href="requêtes-sur-des-pathologies-actes.html#cb19-7" aria-hidden="true" tabindex="-1"></a>rsa15<span class="sc">$</span>rsa <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">&#39;EBLA003&#39;</span>, actes))</span></code></pre></div>
 
 </div>
 </div>
@@ -392,8 +401,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="étude-des-files-actives.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="statistiques-du-pmsi.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="import-des-données.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="étude-des-files-actives.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

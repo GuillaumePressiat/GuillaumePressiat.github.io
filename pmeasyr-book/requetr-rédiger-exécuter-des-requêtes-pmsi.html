@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>7 Fichier TRA | Traitement des données PMSI avec R</title>
+  <title>14 requetr : rédiger, exécuter des requêtes pmsi | Traitement des données PMSI avec R</title>
   <meta name="description" content="Ce livre numérique présente des exemples de traitements de données PMSI avec R" />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="7 Fichier TRA | Traitement des données PMSI avec R" />
+  <meta property="og:title" content="14 requetr : rédiger, exécuter des requêtes pmsi | Traitement des données PMSI avec R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="7 Fichier TRA | Traitement des données PMSI avec R" />
+  <meta name="twitter:title" content="14 requetr : rédiger, exécuter des requêtes pmsi | Traitement des données PMSI avec R" />
   
   <meta name="twitter:description" content="Ce livre numérique présente des exemples de traitements de données PMSI avec R" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="étude-des-files-actives.html"/>
-<link rel="next" href="statistiques-du-pmsi.html"/>
+<link rel="prev" href="vers-la-base-de-données-avec-pmeasyr.html"/>
+<link rel="next" href="vvr-valoriser-les-rsa.html"/>
 <script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -293,98 +293,151 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="fichier-tra" class="section level1" number="7">
-<h1><span class="header-section-number">7</span> Fichier TRA</h1>
-<p>Le fichier TRA est un fichier du <em>out</em> qui permet de relier les données anonymes du <em>out</em> aux données du <em>in</em>, il comprend un lien entre :</p>
-<ul>
-<li>MCO : clé rsa, numéro de rss, numéro de sejour (nas), date d’entrée et date de sortie du séjour</li>
-<li>SSR : numéro séquentiel du séjour + noseqrhs et numéro de séjour + numéro de semaine</li>
-<li>PSY RPSA : ipp, date d’entrée et de fin du sejour, numéro séquentiel du séjour, numéro de séquence et numéro de séjour, dates de début et fin de sequence</li>
-<li>PSY R3A : ipp, date de l’acte, numéro d’ordre, forme activité, um, nature et lieu de l’acte</li>
-<li>HAD : numéro séquentiel de séjour, numéro de séquence, sous-sequence et numéro de séjour, dates de début et fin des séquences et sous-séquences, dates d’entrée et de sortie du séjour, modes d’entrée sortie provenance destination</li>
-</ul>
+<div id="requetr-rédiger-exécuter-des-requêtes-pmsi" class="section level1" number="14">
+<h1><span class="header-section-number">14</span> requetr : rédiger, exécuter des requêtes pmsi</h1>
+<p>Cette partie de <code>pmeasyr</code> concerne la rédaction et l’exécution de requêtes pmsi. Quelques exemples d’abord puis une présentation de ce qu’il est possible de faire avec (et, de manière complémentaire, de ce qu’il n’est pas possible de faire).</p>
+<div id="définir-une-requête" class="section level2" number="14.1">
+<h2><span class="header-section-number">14.1</span> Définir une requête</h2>
+<div id="exemple-simple" class="section level3" number="14.1.1">
+<h3><span class="header-section-number">14.1.1</span> Exemple simple</h3>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb55-1" aria-hidden="true" tabindex="-1"></a>requete_simple <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb55-2"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb55-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">actes =</span> <span class="st">&quot;EPLF002&quot;</span>, </span>
+<span id="cb55-3"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">activites_actes =</span> <span class="st">&quot;1&quot;</span></span>
+<span id="cb55-4"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb55-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>Ici on cherchera tous les séjours avec un acte EPLF002 codé en activité 1.</p>
+</div>
+<div id="exemple-plus-complexe" class="section level3" number="14.1.2">
+<h3><span class="header-section-number">14.1.2</span> Exemple plus complexe</h3>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb56-1" aria-hidden="true" tabindex="-1"></a>requete_complexe <span class="ot">=</span> <span class="fu">list</span>(<span class="at">diags =</span> <span class="st">&quot;E66&quot;</span>, </span>
+<span id="cb56-2"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb56-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">positions_diags =</span> <span class="dv">5</span>, </span>
+<span id="cb56-3"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb56-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">dureemax =</span> <span class="dv">0</span>,</span>
+<span id="cb56-4"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb56-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">ghm =</span> <span class="st">&#39;28Z&#39;</span>,</span>
+<span id="cb56-5"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb56-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">agemax =</span> <span class="dv">18</span>,</span>
+<span id="cb56-6"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb56-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">diags_exclus =</span> <span class="st">&quot;C&quot;</span>)</span>
+<span id="cb56-7"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb56-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-8"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb56-8" aria-hidden="true" tabindex="-1"></a><span class="co"># positions_diags : 1 dp rsa, 2 dr rsa, 3 dp um, 4 dr um, 5 das</span></span></code></pre></div>
+<p>Ici on cherchera tous les séjours avec un diagnostic E66 en das, d’une durée de 0 jour, avec un ghm en 28Z, où l’âge du patient est au maximum 18 ans, et sans aucun diagnostic commençant par C.</p>
+</div>
+</div>
+<div id="requêtes-sur-des-rsa-importés-avec-irsa" class="section level2" number="14.2">
+<h2><span class="header-section-number">14.2</span> Requêtes sur des rsa importés avec <code>irsa</code></h2>
+<p>Il faut d’abord importer les rsa avec un type d’import 6 et “préparer les rsa” avec la fonction <code>prepare_rsa()</code> :</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">irsa</span>(p, <span class="at">typi =</span> <span class="dv">6</span>) <span class="ot">-&gt;</span> rsa</span>
+<span id="cb57-2"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">prepare_rsa</span>(rsa) <span class="ot">-&gt;</span> rsa</span></code></pre></div>
+<p>Exemple de requêtes :</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb58-1" aria-hidden="true" tabindex="-1"></a>exemple_requete <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb58-2"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb58-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">actes =</span> <span class="fu">c</span>(<span class="st">&#39;QEFA003&#39;</span>,<span class="st">&#39;QEFA005&#39;</span>,<span class="st">&#39;QEFA010&#39;</span>,<span class="st">&#39;QEFA013&#39;</span>,<span class="st">&#39;QEFA015&#39;</span>,<span class="st">&#39;QEFA019&#39;</span>,<span class="st">&#39;QEFA020&#39;</span>)</span>
+<span id="cb58-3"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb58-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>La commande suivante renvoie un <code>tibble</code> (tableau) contenant les clés rsa correspondants à cette requête :</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">requete</span>(rsa, exemple_requete)</span></code></pre></div>
+<p>Il est possible de retourner d’autres variables que la clé rsa uniquement, en les spécifiant :</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">requete</span>(rsa, exemple_requete, <span class="at">vars =</span> <span class="fu">c</span>(<span class="st">&#39;nas&#39;</span>, <span class="st">&#39;agean&#39;</span>, <span class="st">&#39;actes&#39;</span>, <span class="st">&#39;diags&#39;</span>, <span class="st">&#39;ghm&#39;</span>))</span></code></pre></div>
+</div>
+<div id="requêtes-sur-des-rsa-dans-la-base-de-données" class="section level2" number="14.3">
+<h2><span class="header-section-number">14.3</span> Requêtes sur des rsa dans la base de données</h2>
+<p>C’est le même principe seulement il faut spécifier la connexion à la table et l’année de la requête plutôt que l’objet rsa :</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">requete_db</span>(con, <span class="dv">16</span>, exemple_requete, <span class="at">vars =</span> <span class="fu">c</span>(<span class="st">&#39;nas&#39;</span>, <span class="st">&#39;agean&#39;</span>, <span class="st">&#39;actes&#39;</span>, <span class="st">&#39;diags&#39;</span>, <span class="st">&#39;ghm&#39;</span>))</span></code></pre></div>
+</div>
+<div id="éléments-possibles-pour-une-requête" class="section level2" number="14.4">
+<h2><span class="header-section-number">14.4</span> Éléments possibles pour une requête</h2>
 <table>
+<colgroup>
+<col width="15%" />
+<col width="84%" />
+</colgroup>
 <thead>
 <tr class="header">
-<th align="right">Type</th>
-<th align="left">Import</th>
+<th align="left">Élément</th>
+<th align="left">Commentaire</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="right"><a href="https://im-aphp.github.io/pmeasyr/reference/itra.html">itra</a></td>
-<td align="left">~ TRA - Import du TRA</td>
+<td align="left">agemin</td>
+<td align="left">Âge minimum en années (inclus)</td>
 </tr>
 <tr class="even">
-<td align="right"><a href="https://im-aphp.github.io/pmeasyr/reference/inner_tra.html">inner_tra</a></td>
-<td align="left">~ TRA - Ajout du TRA aux données Out</td>
+<td align="left">agejrmin</td>
+<td align="left">Âge minimum en jours (inclus)</td>
+</tr>
+<tr class="odd">
+<td align="left">agejrmax</td>
+<td align="left">Âge maximum en jours (inclus)</td>
+</tr>
+<tr class="even">
+<td align="left">agemax</td>
+<td align="left">Âge maximum en années (inclus)</td>
+</tr>
+<tr class="odd">
+<td align="left">dureemin</td>
+<td align="left">Durée minimum en jours (inclus)</td>
+</tr>
+<tr class="even">
+<td align="left">dureemax</td>
+<td align="left">Durée maximum en jours (inclus)</td>
+</tr>
+<tr class="odd">
+<td align="left">ghm</td>
+<td align="left">Liste de ghm ou racine de ghm : exemple : 08C24, 08C241</td>
+</tr>
+<tr class="even">
+<td align="left">diags_exclus</td>
+<td align="left">Diagnostics à exclure en toutes positions</td>
+</tr>
+<tr class="odd">
+<td align="left">poidsmin</td>
+<td align="left">Poids minimum (inclus)</td>
+</tr>
+<tr class="even">
+<td align="left">poidsmax</td>
+<td align="left">Poids maximum (inclus</td>
+</tr>
+<tr class="odd">
+<td align="left">ghm_exclus</td>
+<td align="left">ghm à exclure en toutes positions</td>
+</tr>
+<tr class="even">
+<td align="left">autres</td>
+<td align="left">Autres éléments de requête au niveau rsa partie fixe, exemple ‘agegest &lt; 37’</td>
+</tr>
+<tr class="odd">
+<td align="left">diags</td>
+<td align="left">Diagnostic ou liste de diagnostics à rechercher</td>
+</tr>
+<tr class="even">
+<td align="left">positions_diags</td>
+<td align="left">Positions des diagnostics à chercher, voir les positions de la table diags (de 1 à 5)</td>
+</tr>
+<tr class="odd">
+<td align="left">actes</td>
+<td align="left">Acte ou liste d’actes à rechercher</td>
+</tr>
+<tr class="even">
+<td align="left">activites_actes</td>
+<td align="left">Activité pour laquelle chercher les actes</td>
 </tr>
 </tbody>
 </table>
-<div id="ajout-du-tra-en-mco" class="section level2" number="7.1">
-<h2><span class="header-section-number">7.1</span> Ajout du TRA en MCO</h2>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="fichier-tra.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># lecture du fichier tra et jointure aux rsa</span></span>
-<span id="cb23-2"><a href="fichier-tra.html#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">itra</span>(<span class="dv">750100042</span>, <span class="dv">2015</span>, <span class="dv">12</span>, <span class="st">&#39;~/Documents/data/mco&#39;</span>) <span class="ot">-&gt;</span> tra</span>
-<span id="cb23-3"><a href="fichier-tra.html#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-4"><a href="fichier-tra.html#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajout du tra aux rsa :</span></span>
-<span id="cb23-5"><a href="fichier-tra.html#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(rsa15<span class="sc">$</span>rsa, tra) <span class="ot">-&gt;</span> rsa15<span class="sc">$</span>rsa</span>
-<span id="cb23-6"><a href="fichier-tra.html#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajout du tra à la partie um des rsa :</span></span>
-<span id="cb23-7"><a href="fichier-tra.html#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(rsa15<span class="sc">$</span>rsa_um, tra) <span class="ot">-&gt;</span> rsa15<span class="sc">$</span>rsa_um</span>
-<span id="cb23-8"><a href="fichier-tra.html#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajout du tra à la partie actes des rsa :</span></span>
-<span id="cb23-9"><a href="fichier-tra.html#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(rsa15<span class="sc">$</span>actes, tra) <span class="ot">-&gt;</span> rsa15<span class="sc">$</span>actes</span>
-<span id="cb23-10"><a href="fichier-tra.html#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajout du tra à la partie das des rsa :</span></span>
-<span id="cb23-11"><a href="fichier-tra.html#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(rsa15<span class="sc">$</span>das, tra) <span class="ot">-&gt;</span> rsa15<span class="sc">$</span>das</span></code></pre></div>
 </div>
-<div id="ajout-du-tra-en-had" class="section level2" number="7.2">
-<h2><span class="header-section-number">7.2</span> Ajout du TRA en HAD</h2>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="fichier-tra.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import du TRA HAD</span></span>
-<span id="cb24-2"><a href="fichier-tra.html#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">itra</span>(<span class="at">finess =</span> <span class="dv">750712184</span>,</span>
-<span id="cb24-3"><a href="fichier-tra.html#cb24-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">annee =</span> <span class="dv">2015</span>,</span>
-<span id="cb24-4"><a href="fichier-tra.html#cb24-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">mois =</span> <span class="dv">12</span>,</span>
-<span id="cb24-5"><a href="fichier-tra.html#cb24-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">path =</span> <span class="st">&#39;~/Documents/data/had&#39;</span>, </span>
-<span id="cb24-6"><a href="fichier-tra.html#cb24-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">champ =</span> <span class="st">&quot;had&quot;</span>) <span class="ot">-&gt;</span> tra</span>
-<span id="cb24-7"><a href="fichier-tra.html#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-8"><a href="fichier-tra.html#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajout du tra</span></span>
-<span id="cb24-9"><a href="fichier-tra.html#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(data_had<span class="sc">$</span>rapss, tra, <span class="at">champ =</span> <span class="st">&quot;had&quot;</span>) <span class="ot">-&gt;</span> data_had<span class="sc">$</span>rapss</span>
-<span id="cb24-10"><a href="fichier-tra.html#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(data_had<span class="sc">$</span>acdi,  tra, <span class="at">champ =</span> <span class="st">&quot;had&quot;</span>) <span class="ot">-&gt;</span> data_had<span class="sc">$</span>acdi</span>
-<span id="cb24-11"><a href="fichier-tra.html#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(data_had<span class="sc">$</span>ght,   tra, <span class="at">champ =</span> <span class="st">&quot;had&quot;</span>) <span class="ot">-&gt;</span> data_had<span class="sc">$</span>ght</span></code></pre></div>
+<div id="lancer-plusieurs-requêtes" class="section level2" number="14.5">
+<h2><span class="header-section-number">14.5</span> Lancer plusieurs requêtes</h2>
+<p>Les fonctions <code>lancer_requete()</code> et <code>lancer_requete_db()</code> permettent de lancer une ou plusieurs requêtes lorsque l’on a défini une liste de requêtes.</p>
+<div id="exemple-de-liste-de-requêtes" class="section level3" number="14.5.1">
+<h3><span class="header-section-number">14.5.1</span> Exemple de liste de requêtes</h3>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb62-1" aria-hidden="true" tabindex="-1"></a>deux_requetes <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">requete_1 =</span> <span class="fu">list</span>(<span class="at">actes =</span> <span class="st">&quot;EBLA003&quot;</span>, <span class="at">nom =</span> <span class="st">&quot;pac&quot;</span>, <span class="at">thematique =</span> <span class="st">&quot;pac&quot;</span>),</span>
+<span id="cb62-2"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb62-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">requete_2 =</span> <span class="fu">list</span>(<span class="at">ghm =</span> <span class="st">&quot;28Z&quot;</span>, <span class="at">nom =</span> <span class="st">&quot;seances&quot;</span>, <span class="at">thematique =</span> <span class="st">&quot;CMD 28&quot;</span>)</span>
+<span id="cb62-3"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb62-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
-<div id="ajout-du-tra-en-ssr" class="section level2" number="7.3">
-<h2><span class="header-section-number">7.3</span> Ajout du TRA en SSR</h2>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="fichier-tra.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import du TRA SSR</span></span>
-<span id="cb25-2"><a href="fichier-tra.html#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">itra</span>(<span class="at">finess =</span> <span class="dv">750712184</span>,</span>
-<span id="cb25-3"><a href="fichier-tra.html#cb25-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">annee =</span> <span class="dv">2015</span>,</span>
-<span id="cb25-4"><a href="fichier-tra.html#cb25-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">mois =</span> <span class="dv">12</span>,</span>
-<span id="cb25-5"><a href="fichier-tra.html#cb25-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">path =</span> <span class="st">&#39;~/Documents/data/ssr&#39;</span>, </span>
-<span id="cb25-6"><a href="fichier-tra.html#cb25-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">champ =</span> <span class="st">&quot;ssr&quot;</span>) <span class="ot">-&gt;</span> tra</span>
-<span id="cb25-7"><a href="fichier-tra.html#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-8"><a href="fichier-tra.html#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajout du tra</span></span>
-<span id="cb25-9"><a href="fichier-tra.html#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(data_ssr<span class="sc">$</span>rha,  tra, <span class="at">champ =</span> <span class="st">&quot;ssr&quot;</span>) <span class="ot">-&gt;</span> data_ssr<span class="sc">$</span>rha</span>
-<span id="cb25-10"><a href="fichier-tra.html#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(data_ssr<span class="sc">$</span>acdi, tra, <span class="at">champ =</span> <span class="st">&quot;ssr&quot;</span>) <span class="ot">-&gt;</span> data_ssr<span class="sc">$</span>acdi</span></code></pre></div>
-</div>
-<div id="ajout-du-tra-en-psy" class="section level2" number="7.4">
-<h2><span class="header-section-number">7.4</span> Ajout du TRA en PSY</h2>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="fichier-tra.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import du TRA PSY : fichiers RPSA</span></span>
-<span id="cb26-2"><a href="fichier-tra.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">itra</span>(<span class="at">finess =</span> <span class="dv">750803454</span>,</span>
-<span id="cb26-3"><a href="fichier-tra.html#cb26-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">annee =</span> <span class="dv">2015</span>,</span>
-<span id="cb26-4"><a href="fichier-tra.html#cb26-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">mois =</span> <span class="dv">12</span>,</span>
-<span id="cb26-5"><a href="fichier-tra.html#cb26-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">path =</span> <span class="st">&#39;~/Documents/data/psy&#39;</span>, </span>
-<span id="cb26-6"><a href="fichier-tra.html#cb26-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">champ =</span> <span class="st">&quot;tra_psy_rpsa&quot;</span>) <span class="ot">-&gt;</span> tra</span>
-<span id="cb26-7"><a href="fichier-tra.html#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-8"><a href="fichier-tra.html#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajout du tra</span></span>
-<span id="cb26-9"><a href="fichier-tra.html#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(rpsa_psy<span class="sc">$</span>rpsa, tra, <span class="at">champ =</span> <span class="st">&quot;psyrpsa&quot;</span>) <span class="ot">-&gt;</span> rpsa_psy<span class="sc">$</span>rpsa</span>
-<span id="cb26-10"><a href="fichier-tra.html#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(rpsa_psy<span class="sc">$</span>das,  tra, <span class="at">champ =</span> <span class="st">&quot;psyrpsa&quot;</span>) <span class="ot">-&gt;</span> rpsa_psy<span class="sc">$</span>das</span></code></pre></div>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="fichier-tra.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import du TRA PSY : fichiers R3A</span></span>
-<span id="cb27-2"><a href="fichier-tra.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">itra</span>(<span class="at">finess =</span> <span class="dv">750803454</span>,</span>
-<span id="cb27-3"><a href="fichier-tra.html#cb27-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">annee =</span> <span class="dv">2015</span>,</span>
-<span id="cb27-4"><a href="fichier-tra.html#cb27-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">mois =</span> <span class="dv">12</span>,</span>
-<span id="cb27-5"><a href="fichier-tra.html#cb27-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">path =</span> <span class="st">&#39;~/Documents/data/psy&#39;</span>, </span>
-<span id="cb27-6"><a href="fichier-tra.html#cb27-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">champ =</span> <span class="st">&quot;tra_psy_r3a&quot;</span>) <span class="ot">-&gt;</span> tra</span>
-<span id="cb27-7"><a href="fichier-tra.html#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-8"><a href="fichier-tra.html#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajout du tra</span></span>
-<span id="cb27-9"><a href="fichier-tra.html#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(r3a_psy<span class="sc">$</span>r3a, tra, <span class="at">champ =</span> <span class="st">&quot;psyr3a&quot;</span>) <span class="ot">-&gt;</span> r3a_psy<span class="sc">$</span>r3a</span>
-<span id="cb27-10"><a href="fichier-tra.html#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(r3a_psy<span class="sc">$</span>das, tra, <span class="at">champ =</span> <span class="st">&quot;psyr3a&quot;</span>) <span class="ot">-&gt;</span> r3a_psy<span class="sc">$</span>das</span></code></pre></div>
+<div id="lancement" class="section level3" number="14.5.2">
+<h3><span class="header-section-number">14.5.2</span> Lancement</h3>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pour des rsa importés avec irsa</span></span>
+<span id="cb63-2"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lancer_requete</span>(rsa, deux_requetes, <span class="at">vars =</span> <span class="fu">c</span>(<span class="st">&#39;nas&#39;</span>, <span class="st">&#39;duree&#39;</span>, <span class="st">&#39;ghm&#39;</span>))</span>
+<span id="cb63-3"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb63-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-4"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb63-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Pour des rsa dans une base de données</span></span>
+<span id="cb63-5"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb63-5" aria-hidden="true" tabindex="-1"></a><span class="fu">lancer_requete_db</span>(con, <span class="dv">16</span>, deux_requetes, <span class="at">vars =</span> <span class="fu">c</span>(<span class="st">&#39;nas&#39;</span>, <span class="st">&#39;duree&#39;</span>, <span class="st">&#39;ghm&#39;</span>))</span></code></pre></div>
+<p>La commande suivante renvoie un <code>tibble</code> (tableau) contenant les clés rsa correspondants à ces requêtes avec deux variables identifiant le nom et la thématique de la requête correspondante.</p>
 
+</div>
 </div>
 </div>
             </section>
@@ -392,8 +445,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="étude-des-files-actives.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="statistiques-du-pmsi.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="vers-la-base-de-données-avec-pmeasyr.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="vvr-valoriser-les-rsa.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

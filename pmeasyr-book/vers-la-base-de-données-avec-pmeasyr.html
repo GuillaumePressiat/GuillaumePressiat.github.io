@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>7 Fichier TRA | Traitement des données PMSI avec R</title>
+  <title>13 Vers la base de données avec pmeasyr | Traitement des données PMSI avec R</title>
   <meta name="description" content="Ce livre numérique présente des exemples de traitements de données PMSI avec R" />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="7 Fichier TRA | Traitement des données PMSI avec R" />
+  <meta property="og:title" content="13 Vers la base de données avec pmeasyr | Traitement des données PMSI avec R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="7 Fichier TRA | Traitement des données PMSI avec R" />
+  <meta name="twitter:title" content="13 Vers la base de données avec pmeasyr | Traitement des données PMSI avec R" />
   
   <meta name="twitter:description" content="Ce livre numérique présente des exemples de traitements de données PMSI avec R" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="étude-des-files-actives.html"/>
-<link rel="next" href="statistiques-du-pmsi.html"/>
+<link rel="prev" href="noms-de-colonnes-en-minuscules.html"/>
+<link rel="next" href="requetr-rédiger-exécuter-des-requêtes-pmsi.html"/>
 <script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -293,98 +293,72 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="fichier-tra" class="section level1" number="7">
-<h1><span class="header-section-number">7</span> Fichier TRA</h1>
-<p>Le fichier TRA est un fichier du <em>out</em> qui permet de relier les données anonymes du <em>out</em> aux données du <em>in</em>, il comprend un lien entre :</p>
-<ul>
-<li>MCO : clé rsa, numéro de rss, numéro de sejour (nas), date d’entrée et date de sortie du séjour</li>
-<li>SSR : numéro séquentiel du séjour + noseqrhs et numéro de séjour + numéro de semaine</li>
-<li>PSY RPSA : ipp, date d’entrée et de fin du sejour, numéro séquentiel du séjour, numéro de séquence et numéro de séjour, dates de début et fin de sequence</li>
-<li>PSY R3A : ipp, date de l’acte, numéro d’ordre, forme activité, um, nature et lieu de l’acte</li>
-<li>HAD : numéro séquentiel de séjour, numéro de séquence, sous-sequence et numéro de séjour, dates de début et fin des séquences et sous-séquences, dates d’entrée et de sortie du séjour, modes d’entrée sortie provenance destination</li>
-</ul>
-<table>
-<thead>
-<tr class="header">
-<th align="right">Type</th>
-<th align="left">Import</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="right"><a href="https://im-aphp.github.io/pmeasyr/reference/itra.html">itra</a></td>
-<td align="left">~ TRA - Import du TRA</td>
-</tr>
-<tr class="even">
-<td align="right"><a href="https://im-aphp.github.io/pmeasyr/reference/inner_tra.html">inner_tra</a></td>
-<td align="left">~ TRA - Ajout du TRA aux données Out</td>
-</tr>
-</tbody>
-</table>
-<div id="ajout-du-tra-en-mco" class="section level2" number="7.1">
-<h2><span class="header-section-number">7.1</span> Ajout du TRA en MCO</h2>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="fichier-tra.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># lecture du fichier tra et jointure aux rsa</span></span>
-<span id="cb23-2"><a href="fichier-tra.html#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">itra</span>(<span class="dv">750100042</span>, <span class="dv">2015</span>, <span class="dv">12</span>, <span class="st">&#39;~/Documents/data/mco&#39;</span>) <span class="ot">-&gt;</span> tra</span>
-<span id="cb23-3"><a href="fichier-tra.html#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-4"><a href="fichier-tra.html#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajout du tra aux rsa :</span></span>
-<span id="cb23-5"><a href="fichier-tra.html#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(rsa15<span class="sc">$</span>rsa, tra) <span class="ot">-&gt;</span> rsa15<span class="sc">$</span>rsa</span>
-<span id="cb23-6"><a href="fichier-tra.html#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajout du tra à la partie um des rsa :</span></span>
-<span id="cb23-7"><a href="fichier-tra.html#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(rsa15<span class="sc">$</span>rsa_um, tra) <span class="ot">-&gt;</span> rsa15<span class="sc">$</span>rsa_um</span>
-<span id="cb23-8"><a href="fichier-tra.html#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajout du tra à la partie actes des rsa :</span></span>
-<span id="cb23-9"><a href="fichier-tra.html#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(rsa15<span class="sc">$</span>actes, tra) <span class="ot">-&gt;</span> rsa15<span class="sc">$</span>actes</span>
-<span id="cb23-10"><a href="fichier-tra.html#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajout du tra à la partie das des rsa :</span></span>
-<span id="cb23-11"><a href="fichier-tra.html#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(rsa15<span class="sc">$</span>das, tra) <span class="ot">-&gt;</span> rsa15<span class="sc">$</span>das</span></code></pre></div>
+<div id="vers-la-base-de-données-avec-pmeasyr" class="section level1" number="13">
+<h1><span class="header-section-number">13</span> Vers la base de données avec <code>pmeasyr</code></h1>
+<p>Constatant que chaque étude avec <code>pmeasyr</code> commence par un import de données, nous proposons une nouvelle approche : intégrer une fois pour toutes les données M12 dans une base de données managée et accessible avec <code>pmeasyr</code>. Les données en cours d’année pouvant également y être intégrées.</p>
+<p>Nous décrivons ici l’import de données MCO 2016 dans une base de données tel qu’il est possible de le réaliser à l’aide de <code>pmeasyr</code>.</p>
+<div id="connexion-à-une-base-de-données" class="section level2" number="13.1">
+<h2><span class="header-section-number">13.1</span> Connexion à une base de données</h2>
+<div id="monetdb" class="section level3" number="13.1.1">
+<h3><span class="header-section-number">13.1.1</span> monetdb</h3>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb46-1" aria-hidden="true" tabindex="-1"></a>dbdir <span class="ot">&lt;-</span> <span class="st">&quot;~/Documents/data/monetdb&quot;</span></span>
+<span id="cb46-2"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb46-2" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> MonetDBLite<span class="sc">::</span><span class="fu">src_monetdblite</span>(dbdir)</span></code></pre></div>
 </div>
-<div id="ajout-du-tra-en-had" class="section level2" number="7.2">
-<h2><span class="header-section-number">7.2</span> Ajout du TRA en HAD</h2>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="fichier-tra.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import du TRA HAD</span></span>
-<span id="cb24-2"><a href="fichier-tra.html#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">itra</span>(<span class="at">finess =</span> <span class="dv">750712184</span>,</span>
-<span id="cb24-3"><a href="fichier-tra.html#cb24-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">annee =</span> <span class="dv">2015</span>,</span>
-<span id="cb24-4"><a href="fichier-tra.html#cb24-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">mois =</span> <span class="dv">12</span>,</span>
-<span id="cb24-5"><a href="fichier-tra.html#cb24-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">path =</span> <span class="st">&#39;~/Documents/data/had&#39;</span>, </span>
-<span id="cb24-6"><a href="fichier-tra.html#cb24-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">champ =</span> <span class="st">&quot;had&quot;</span>) <span class="ot">-&gt;</span> tra</span>
-<span id="cb24-7"><a href="fichier-tra.html#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-8"><a href="fichier-tra.html#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajout du tra</span></span>
-<span id="cb24-9"><a href="fichier-tra.html#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(data_had<span class="sc">$</span>rapss, tra, <span class="at">champ =</span> <span class="st">&quot;had&quot;</span>) <span class="ot">-&gt;</span> data_had<span class="sc">$</span>rapss</span>
-<span id="cb24-10"><a href="fichier-tra.html#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(data_had<span class="sc">$</span>acdi,  tra, <span class="at">champ =</span> <span class="st">&quot;had&quot;</span>) <span class="ot">-&gt;</span> data_had<span class="sc">$</span>acdi</span>
-<span id="cb24-11"><a href="fichier-tra.html#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(data_had<span class="sc">$</span>ght,   tra, <span class="at">champ =</span> <span class="st">&quot;had&quot;</span>) <span class="ot">-&gt;</span> data_had<span class="sc">$</span>ght</span></code></pre></div>
+<div id="sqlite" class="section level3" number="13.1.2">
+<h3><span class="header-section-number">13.1.2</span> SQLite</h3>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb47-1" aria-hidden="true" tabindex="-1"></a>dbdir <span class="ot">&lt;-</span> <span class="st">&quot;~/Documents/data/sqlite/pmsi.sqlite&quot;</span></span>
+<span id="cb47-2"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb47-2" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">src_sqlite</span>(dbdir)</span></code></pre></div>
 </div>
-<div id="ajout-du-tra-en-ssr" class="section level2" number="7.3">
-<h2><span class="header-section-number">7.3</span> Ajout du TRA en SSR</h2>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="fichier-tra.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import du TRA SSR</span></span>
-<span id="cb25-2"><a href="fichier-tra.html#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">itra</span>(<span class="at">finess =</span> <span class="dv">750712184</span>,</span>
-<span id="cb25-3"><a href="fichier-tra.html#cb25-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">annee =</span> <span class="dv">2015</span>,</span>
-<span id="cb25-4"><a href="fichier-tra.html#cb25-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">mois =</span> <span class="dv">12</span>,</span>
-<span id="cb25-5"><a href="fichier-tra.html#cb25-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">path =</span> <span class="st">&#39;~/Documents/data/ssr&#39;</span>, </span>
-<span id="cb25-6"><a href="fichier-tra.html#cb25-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">champ =</span> <span class="st">&quot;ssr&quot;</span>) <span class="ot">-&gt;</span> tra</span>
-<span id="cb25-7"><a href="fichier-tra.html#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-8"><a href="fichier-tra.html#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajout du tra</span></span>
-<span id="cb25-9"><a href="fichier-tra.html#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(data_ssr<span class="sc">$</span>rha,  tra, <span class="at">champ =</span> <span class="st">&quot;ssr&quot;</span>) <span class="ot">-&gt;</span> data_ssr<span class="sc">$</span>rha</span>
-<span id="cb25-10"><a href="fichier-tra.html#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(data_ssr<span class="sc">$</span>acdi, tra, <span class="at">champ =</span> <span class="st">&quot;ssr&quot;</span>) <span class="ot">-&gt;</span> data_ssr<span class="sc">$</span>acdi</span></code></pre></div>
+<div id="postgres" class="section level3" number="13.1.3">
+<h3><span class="header-section-number">13.1.3</span> PostGres</h3>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb48-1" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">src_postgres</span>(<span class="at">user =</span> <span class="st">&quot;gui&quot;</span>, <span class="at">password =</span> <span class="st">&quot;gui&quot;</span>, <span class="at">dbname =</span> <span class="st">&quot;aphp&quot;</span>,</span>
+<span id="cb48-2"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb48-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">host =</span> <span class="st">&quot;localhost&quot;</span>, <span class="at">port =</span> <span class="dv">5432</span>)</span></code></pre></div>
 </div>
-<div id="ajout-du-tra-en-psy" class="section level2" number="7.4">
-<h2><span class="header-section-number">7.4</span> Ajout du TRA en PSY</h2>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="fichier-tra.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import du TRA PSY : fichiers RPSA</span></span>
-<span id="cb26-2"><a href="fichier-tra.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">itra</span>(<span class="at">finess =</span> <span class="dv">750803454</span>,</span>
-<span id="cb26-3"><a href="fichier-tra.html#cb26-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">annee =</span> <span class="dv">2015</span>,</span>
-<span id="cb26-4"><a href="fichier-tra.html#cb26-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">mois =</span> <span class="dv">12</span>,</span>
-<span id="cb26-5"><a href="fichier-tra.html#cb26-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">path =</span> <span class="st">&#39;~/Documents/data/psy&#39;</span>, </span>
-<span id="cb26-6"><a href="fichier-tra.html#cb26-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">champ =</span> <span class="st">&quot;tra_psy_rpsa&quot;</span>) <span class="ot">-&gt;</span> tra</span>
-<span id="cb26-7"><a href="fichier-tra.html#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-8"><a href="fichier-tra.html#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajout du tra</span></span>
-<span id="cb26-9"><a href="fichier-tra.html#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(rpsa_psy<span class="sc">$</span>rpsa, tra, <span class="at">champ =</span> <span class="st">&quot;psyrpsa&quot;</span>) <span class="ot">-&gt;</span> rpsa_psy<span class="sc">$</span>rpsa</span>
-<span id="cb26-10"><a href="fichier-tra.html#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(rpsa_psy<span class="sc">$</span>das,  tra, <span class="at">champ =</span> <span class="st">&quot;psyrpsa&quot;</span>) <span class="ot">-&gt;</span> rpsa_psy<span class="sc">$</span>das</span></code></pre></div>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="fichier-tra.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import du TRA PSY : fichiers R3A</span></span>
-<span id="cb27-2"><a href="fichier-tra.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">itra</span>(<span class="at">finess =</span> <span class="dv">750803454</span>,</span>
-<span id="cb27-3"><a href="fichier-tra.html#cb27-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">annee =</span> <span class="dv">2015</span>,</span>
-<span id="cb27-4"><a href="fichier-tra.html#cb27-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">mois =</span> <span class="dv">12</span>,</span>
-<span id="cb27-5"><a href="fichier-tra.html#cb27-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">path =</span> <span class="st">&#39;~/Documents/data/psy&#39;</span>, </span>
-<span id="cb27-6"><a href="fichier-tra.html#cb27-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">champ =</span> <span class="st">&quot;tra_psy_r3a&quot;</span>) <span class="ot">-&gt;</span> tra</span>
-<span id="cb27-7"><a href="fichier-tra.html#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-8"><a href="fichier-tra.html#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajout du tra</span></span>
-<span id="cb27-9"><a href="fichier-tra.html#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(r3a_psy<span class="sc">$</span>r3a, tra, <span class="at">champ =</span> <span class="st">&quot;psyr3a&quot;</span>) <span class="ot">-&gt;</span> r3a_psy<span class="sc">$</span>r3a</span>
-<span id="cb27-10"><a href="fichier-tra.html#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_tra</span>(r3a_psy<span class="sc">$</span>das, tra, <span class="at">champ =</span> <span class="st">&quot;psyr3a&quot;</span>) <span class="ot">-&gt;</span> r3a_psy<span class="sc">$</span>das</span></code></pre></div>
+</div>
+<div id="intégration-en-base" class="section level2" number="13.2">
+<h2><span class="header-section-number">13.2</span> Intégration en base</h2>
+<div id="définition-des-paramètres" class="section level3" number="13.2.1">
+<h3><span class="header-section-number">13.2.1</span> Définition des paramètres</h3>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># noyau_skeleton()</span></span>
+<span id="cb49-2"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb49-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">noyau_pmeasyr</span>(</span>
+<span id="cb49-3"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">finess   =</span> <span class="st">&#39;750712184&#39;</span>,</span>
+<span id="cb49-4"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb49-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mois     =</span> <span class="dv">12</span>,</span>
+<span id="cb49-5"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb49-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">path     =</span> <span class="st">&#39;~/Documents/data/mco&#39;</span>,</span>
+<span id="cb49-6"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb49-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">progress =</span> F, </span>
+<span id="cb49-7"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb49-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">tolower_names =</span> T, <span class="co"># choix de noms de colonnes minuscules : T / F</span></span>
+<span id="cb49-8"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb49-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_max =</span> <span class="fl">1e4</span>, <span class="co"># on limite la lecture a un petit nombre de lignes pour tester d&#39;abord </span></span>
+<span id="cb49-9"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb49-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># on importera tout dans un second temps</span></span>
+<span id="cb49-10"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb49-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">lib =</span> F) <span class="co"># pas de libellés de colonnes (inutile ici)</span></span></code></pre></div>
+</div>
+<div id="exemple-dimport" class="section level3" number="13.2.2">
+<h3><span class="header-section-number">13.2.2</span> Exemple d’import</h3>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb50-1" aria-hidden="true" tabindex="-1"></a>purrr<span class="sc">::</span><span class="fu">quietly</span>(db_mco_out)(con,  p, <span class="at">annee =</span> <span class="dv">2016</span>) <span class="ot">-&gt;</span> ok </span></code></pre></div>
+<p><code>ok</code> contient toutes les sorties de l’éxécution de la fonction : vérifier qu’il n’y a pas d’erreur ou d’avertissement anormal avant de poursuivre. Ok ? Voyons ce que contient <code>ok</code> :</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb51-1" aria-hidden="true" tabindex="-1"></a>ok</span></code></pre></div>
+<p>Nous avons présenté la ligne pour importer les données MCO out 2016, mais il est possible de la faire pour le MCO in (<code>db_mco_in</code>), le SSR out (<code>db_ssr_out</code>), l’HAD (<code>db_had_out</code>), la Psy (<code>db_psy_out</code>) et les rsf (<code>db_rsf_out</code>).</p>
+<p>Une fonction pour importer une autre table est également disponible (<code>db_generique</code>).</p>
+<p>Après plusieurs imports dans la base de données, se déconnecter :</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb52-1" aria-hidden="true" tabindex="-1"></a>DBI<span class="sc">::</span><span class="fu">dbDisconnect</span>(con<span class="sc">$</span>con)</span></code></pre></div>
+</div>
+</div>
+<div id="accéder-aux-données-dans-la-base" class="section level2" number="13.3">
+<h2><span class="header-section-number">13.3</span> Accéder aux données dans la base</h2>
+<p>Se reconnecter à la base en redéfinissant l’objet <code>con</code>.</p>
+<p>Poursuivons l’exemple sur le mco out 2016.</p>
+<div id="lister-les-tables-dans-la-base" class="section level3" number="13.3.1">
+<h3><span class="header-section-number">13.3.1</span> Lister les tables dans la base</h3>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">db_liste_tables</span>(con)</span></code></pre></div>
+</div>
+<div id="accéder-aux-tables-mco-out" class="section level3" number="13.3.2">
+<h3><span class="header-section-number">13.3.2</span> Accéder aux tables mco out</h3>
+<p>Les lignes suivantes permettent de se connecter aux tables dans la base. Pour la suite il pourra être intéressant de lire <a href="http://db.rstudio.com/dplyr/">l’aide du package dplyr</a>.</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_mco</span>(con, <span class="dv">16</span>, <span class="st">&#39;rsa_rsa&#39;</span>) <span class="co"># Table rsa</span></span>
+<span id="cb54-2"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_mco</span>(con, <span class="dv">16</span>, <span class="st">&#39;rsa_actes&#39;</span>) <span class="co"># Table actes des rsa</span></span>
+<span id="cb54-3"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_mco</span>(con, <span class="dv">16</span>, <span class="st">&#39;rsa_diags&#39;</span>) <span class="co"># Table diags des rsa (après `tdiag`)</span></span>
+<span id="cb54-4"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_mco</span>(con, <span class="dv">16</span>, <span class="st">&#39;rsa_um&#39;</span>) <span class="co"># Table um des rsa </span></span></code></pre></div>
+<p>D’autres fonctions <code>tbl_ssr</code>, <code>tbl_had</code>, <code>tbl_had</code>, <code>tbl_psy</code>, <code>tbl_rsf</code> facilitent la connexion à ces “remote table”.</p>
 
+</div>
 </div>
 </div>
             </section>
@@ -392,8 +366,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="étude-des-files-actives.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="statistiques-du-pmsi.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="noms-de-colonnes-en-minuscules.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
