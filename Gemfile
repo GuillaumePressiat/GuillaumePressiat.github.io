@@ -26,3 +26,5 @@ gem "jekyll-feed"
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "kramdown-parser-gfm"
+
+gem "webrick", "~> 1.7"
