@@ -56,6 +56,12 @@ We now have a big component of the connection string.
 
 If your Oracle client is 32bit, you have to switch to R 32bits, otherwhise it doesn't work (at least for me).
 
+
+
+![RStudio global options 32bit R version for windows](/images/rw32b.png)
+
+
+
 ## Connection string 
 
 Then stackoverflow history helped me[^3] to structure the entire string:
