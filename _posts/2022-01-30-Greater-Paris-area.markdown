@@ -19,7 +19,7 @@ At this time I was interested to reproduce this map in R with official datas/sha
 
 <!--more-->
 
-I replace this code story here to let it somewhere other than my head (I have lost part of the code since 2016) and to share.
+I put this code story here to let it somewhere else than my head (I have lost part of the code since 2016) and to share.
 
 
 ## Here is the map from APUR:
@@ -32,7 +32,7 @@ I replace this code story here to let it somewhere other than my head (I have lo
 
 ## Trying to mimick with ggplot2
 
-First thing was to define T1 to T12 areas and use french national geographic institute ([IGN](https://www.ign.fr)) shapefiles to plot a beginning ggplot2 map:
+First thing was to define T1 to T12 areas (groups of cities) and use french national geographic institute ([IGN](https://www.ign.fr)) shapefiles to plot a beginning ggplot2 map:
 
 
 <img src = "/assets/files/grand_paris/gp1.png" width = "40%" alt="first ggplot2">
