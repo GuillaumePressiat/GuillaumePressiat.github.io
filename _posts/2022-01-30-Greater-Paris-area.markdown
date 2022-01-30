@@ -52,7 +52,7 @@ Fortunately, I have found a shapefile from [APUR website](https://opendata.apur.
 
 With this data, I have been able to show La Seine, La Marne, le Port de Gennevilliers and Paris canals.
 
-Here I have plotted Grand Paris with "carbon like" colors to highlight this new area and because I find it's pretty cool like this!
+Here I have plotted Grand Paris with "carbon like" colors to highlight this new area and because I find it's pretty cool like that!
 
 R is really a nice environment.
 
