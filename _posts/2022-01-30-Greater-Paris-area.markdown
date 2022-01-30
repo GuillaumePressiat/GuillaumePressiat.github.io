@@ -32,7 +32,7 @@ I replace this code story here to let it somewhere other than my head (I have lo
 
 ## Trying to mimick with ggplot2
 
-First thing was to define T1 from T12 areas and use french national geographic institute shapefiles to plot a beginning ggplot2 map:
+First thing was to define T1 to T12 areas and use french national geographic institute ([IGN](https://www.ign.fr)) shapefiles to plot a beginning ggplot2 map:
 
 
 <img src = "/assets/files/grand_paris/gp1.png" width = "40%" alt="first ggplot2">
