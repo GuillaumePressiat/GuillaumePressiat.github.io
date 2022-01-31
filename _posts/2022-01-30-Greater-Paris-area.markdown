@@ -90,11 +90,6 @@ Last map to mimick APUR map can be seen here in [pdf](https://guillaumepressiat.
 
 @media only screen and (min-width: 500px) {
 
-body {
-  margin-top: 3%;
-  margin-bottom: 3%;
-    background-color: #ffffff;
-}
 
 .gallery {
     display: flex;
