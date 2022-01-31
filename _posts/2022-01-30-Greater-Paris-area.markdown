@@ -81,4 +81,146 @@ In this code, there are several steps:
 
 Last map to mimick APUR map can be seen here in [pdf](https://guillaumepressiat.github.io/assets/files/grand_paris/test_gp_apur_like.pdf).
 
+<br>
+<hr>
+<br>
 
+
+<style>
+
+@media only screen and (min-width: 500px) {
+
+body {
+  margin-top: 3%;
+  margin-bottom: 3%;
+    background-color: #ffffff;
+}
+
+.gallery {
+    display: flex;
+    width: 80%;
+    flex-flow: row wrap;
+    /*margin-left: -4px;*/
+    margin: auto;
+}
+
+.gallery div {
+    overflow: hidden;
+    margin: 0 0 8px 8px;
+    flex: auto;
+    height: 250px;
+    min-width: 150px;
+}
+
+.gallery div:nth-child(8n+1) {
+    width: 210px;
+}
+
+.gallery div:nth-child(8n+2) {
+    width: 200px;
+}
+
+.gallery div:nth-child(8n+3) {
+    width: 200px;
+}
+
+.gallery div.wide {
+    width: 450px;
+}
+
+.gallery div.tall {
+    width: 650px;
+    height: 165px;
+}
+
+/*.gallery div.narrow {
+    width: 250px;
+}*/
+
+.gallery img {
+  border-radius: 7px;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+
+.gallery div.narrow {
+        width: 187px;
+}
+
+ .overlay {
+  /* Display over the entire page */
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  left: 0;
+  margin:auto;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,10,0.9);
+
+  /* Horizontal and vertical centering of the image */
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  /* We hide all this by default */
+  display: flex;
+  visibility: hidden;
+    /*opacity: 0;*/
+  transition: opacity .3s;
+}
+
+.overlay img{
+  /*image-orientation: from-image;*/
+  /* Maximum image size */
+  max-width: 90%;
+  max-height: 90%;
+  margin:auto;
+  /* We keep the ratio of the image */
+  width: auto;
+  height: auto;
+  transform: scale(0.93);
+  transition: transform .3s;
+}
+
+.overlay:target {
+  visibility: visible;
+  outline: none;
+  cursor: default;
+}
+
+.overlay:target img {
+    transform: scale(1);
+}
+
+.gallery div.narrow {
+        width: 187px;
+}
+
+
+}
+
+</style>
+
+
+<div class="gallery">
+
+
+
+
+<div>
+  <img src = "{{'/assets/files/grand_paris/gp_cite_st_louis.png'  | prepend: site.baseurl}}" loading="lazy" title=""/>
+</div>
+<div>
+  <img src = "{{'/assets/files/grand_paris/gp_genevilliers.png' | prepend: site.baseurl}}" loading="lazy" title=""/>
+</div>
+<div>
+  <img src = "{{'/assets/files/grand_paris/gp_boucle_m.png' | prepend: site.baseurl}}" loading="lazy" title=""/>
+</div>
+</div>
+
+<br>
+<hr>
+<br>
