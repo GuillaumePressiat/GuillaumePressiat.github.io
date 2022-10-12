@@ -18,6 +18,7 @@ table, th {
 
 Dans une année de collecte des informations du PMSI dans un hôpital,  
 il y a des périodes où l'on cherche particulièrement à concentrer l'optimisation des envois.   
+  
 Lorsque ces efforts semblent porter leurs *fruits*, il peut être intéréssant de détailler : 
   
   - sur quels types de séjours
