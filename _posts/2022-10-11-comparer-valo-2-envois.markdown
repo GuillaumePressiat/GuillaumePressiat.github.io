@@ -297,9 +297,19 @@ comparaisons %>%
 
 **Enfin, voici un exemple de graphique ggplot2 représentant des évolution de sévérités entre deux envois, avec des données fictives :**
 
-![evol sev](/images/evol_sev.png)
+
+<img src = "/images/evol_sev.png" width = "75%" alt="evol sev">
+
+
+avec l'exemple de lecture suivant :
+
+- 165 RSS de niveau 1 en v1 ont basculé en niveau 2 en v2
+- 12 RSS en niveau 2 passent en niveau 3
+- 6 RSS passent du niveau 1 au niveau 4 
+- 100 RSS en niveau Z (non codés probablement) sont passés en niveau 1, 20 en niveau 2, etc
 
 
 
-La même chose est faisable sur les fichcomp.
+Le même genre d'analyse est faisable sur les recettes liées aux fichcomp.
+
 
