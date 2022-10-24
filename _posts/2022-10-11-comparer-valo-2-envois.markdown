@@ -295,6 +295,9 @@ comparaisons %>%
 {% endhighlight %}
 
 
+<br>
+<br>
+
 **Enfin, voici un exemple de graphique ggplot2 représentant des évolution de sévérités entre deux envois, avec des données fictives :**
 
 
@@ -309,6 +312,7 @@ avec l'exemple de lecture suivant :
 - 100 RSS en niveau Z (non codés probablement) sont passés en niveau 1, 20 en niveau 2, etc
 
 
+<br>
 
 Le même genre d'analyse est faisable sur les recettes liées aux fichcomp.
 
