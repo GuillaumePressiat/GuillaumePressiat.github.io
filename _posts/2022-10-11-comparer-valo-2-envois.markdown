@@ -295,5 +295,11 @@ comparaisons %>%
 {% endhighlight %}
 
 
+**Enfin, voici un exemple de graphique ggplot2 représentant des évolution de sévérités entre deux envois, avec des données fictives :**
+
+![evol sev](/images/evol_sev.png)
+
+
+
 La même chose est faisable sur les fichcomp.
 
