@@ -301,7 +301,7 @@ comparaisons %>%
 **Enfin, voici un exemple de graphique ggplot2 représentant des évolution de sévérités entre deux envois, avec des données fictives :**
 
 
-<img src = "/images/evol_sev.png" width = "75%" alt="evol sev">
+<img src = "/images/evol_sev.png" width = "57%" alt="evol sev">
 
 
 avec l'exemple de lecture suivant :
