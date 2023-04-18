@@ -9,12 +9,17 @@ comments: true
 ---
 
 
-Comment regénérer des in / out sur la version de test de Druides 0.7.4.0 ?
+Comment regénérer avec R des in / out sur la version de test de Druides 0.7.4.0 ?
 
 
 <!--more-->
 
 ## Contexte
+
+Il est attendu que la version officielle de [Druides](https://www.atih.sante.fr/logiciels-espace-de-telechargement/druides) permette de continuer à générer des fichiers "in" et "out". 
+
+Cela dit, il peut paraitre intéressant de voir comment le faire directement avec les fichiers présents dans le AppData de Druides en version de test si jamais
+cette fonctionnalité n'était pas disponible dès M03, ou bien par curiosité.
 
 
 ## Code
@@ -42,7 +47,7 @@ annee  <- basename(liste_in_out)[1] %>% stringr::str_split('\\.') %>% .[[1]] %>%
 mois   <- basename(liste_in_out)[1] %>% stringr::str_split('\\.') %>% .[[1]] %>% .[3]
 
 # générer un timestamp sur la date de création du zip
-# TODO : case when si plateforme unix alors ctime, sinon mtime (windows)
+# TODO : case when si plateforme unix alors ctime, sinon mtime (windows) : à vérifier
 timestamp_druides <- file.info(liste_in_out[1])$mtime %>% format('%d%m%Y%H%M%S')
 # générer deux noms de répertoires type in et out horodaté ; finess.annee.mois.horodate.in et out
 in_repos <- paste0(finess, '.', annee, '.', mois, '.', timestamp_druides, '.in')
