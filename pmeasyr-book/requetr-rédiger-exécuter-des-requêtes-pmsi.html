@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>14 requetr : rédiger, exécuter des requêtes pmsi | Traitement des données PMSI avec R</title>
   <meta name="description" content="Ce livre numérique présente des exemples de traitements de données PMSI avec R" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
   <meta property="og:title" content="14 requetr : rédiger, exécuter des requêtes pmsi | Traitement des données PMSI avec R" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="Ce livre numérique présente des exemples de traitements de données PMSI avec R" />
   
@@ -24,7 +23,7 @@
 <meta name="author" content="Guillaume Pressiat || CHU Brest" />
 
 
-<meta name="date" content="2021-11-21" />
+<meta name="date" content="2023-05-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +32,8 @@
   
 <link rel="prev" href="vers-la-base-de-données-avec-pmeasyr.html"/>
 <link rel="next" href="vvr-valoriser-les-rsa.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,7 +49,9 @@
 
 
 
-
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -91,7 +92,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -104,7 +105,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -117,6 +118,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -293,53 +295,53 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="requetr-rédiger-exécuter-des-requêtes-pmsi" class="section level1" number="14">
-<h1><span class="header-section-number">14</span> requetr : rédiger, exécuter des requêtes pmsi</h1>
+<div id="requetr-rédiger-exécuter-des-requêtes-pmsi" class="section level1 hasAnchor" number="14">
+<h1><span class="header-section-number">14</span> requetr : rédiger, exécuter des requêtes pmsi<a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#requetr-rédiger-exécuter-des-requêtes-pmsi" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Cette partie de <code>pmeasyr</code> concerne la rédaction et l’exécution de requêtes pmsi. Quelques exemples d’abord puis une présentation de ce qu’il est possible de faire avec (et, de manière complémentaire, de ce qu’il n’est pas possible de faire).</p>
-<div id="définir-une-requête" class="section level2" number="14.1">
-<h2><span class="header-section-number">14.1</span> Définir une requête</h2>
-<div id="exemple-simple" class="section level3" number="14.1.1">
-<h3><span class="header-section-number">14.1.1</span> Exemple simple</h3>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb55-1" aria-hidden="true" tabindex="-1"></a>requete_simple <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb55-2"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb55-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">actes =</span> <span class="st">&quot;EPLF002&quot;</span>, </span>
-<span id="cb55-3"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">activites_actes =</span> <span class="st">&quot;1&quot;</span></span>
-<span id="cb55-4"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb55-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div id="définir-une-requête" class="section level2 hasAnchor" number="14.1">
+<h2><span class="header-section-number">14.1</span> Définir une requête<a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#définir-une-requête" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="exemple-simple" class="section level3 hasAnchor" number="14.1.1">
+<h3><span class="header-section-number">14.1.1</span> Exemple simple<a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#exemple-simple" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb53-1" aria-hidden="true" tabindex="-1"></a>requete_simple <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb53-2"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb53-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">actes =</span> <span class="st">&quot;EPLF002&quot;</span>, </span>
+<span id="cb53-3"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">activites_actes =</span> <span class="st">&quot;1&quot;</span></span>
+<span id="cb53-4"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb53-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>Ici on cherchera tous les séjours avec un acte EPLF002 codé en activité 1.</p>
 </div>
-<div id="exemple-plus-complexe" class="section level3" number="14.1.2">
-<h3><span class="header-section-number">14.1.2</span> Exemple plus complexe</h3>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb56-1" aria-hidden="true" tabindex="-1"></a>requete_complexe <span class="ot">=</span> <span class="fu">list</span>(<span class="at">diags =</span> <span class="st">&quot;E66&quot;</span>, </span>
-<span id="cb56-2"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb56-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">positions_diags =</span> <span class="dv">5</span>, </span>
-<span id="cb56-3"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb56-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">dureemax =</span> <span class="dv">0</span>,</span>
-<span id="cb56-4"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb56-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">ghm =</span> <span class="st">&#39;28Z&#39;</span>,</span>
-<span id="cb56-5"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb56-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">agemax =</span> <span class="dv">18</span>,</span>
-<span id="cb56-6"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb56-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">diags_exclus =</span> <span class="st">&quot;C&quot;</span>)</span>
-<span id="cb56-7"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb56-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-8"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb56-8" aria-hidden="true" tabindex="-1"></a><span class="co"># positions_diags : 1 dp rsa, 2 dr rsa, 3 dp um, 4 dr um, 5 das</span></span></code></pre></div>
+<div id="exemple-plus-complexe" class="section level3 hasAnchor" number="14.1.2">
+<h3><span class="header-section-number">14.1.2</span> Exemple plus complexe<a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#exemple-plus-complexe" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb54-1" aria-hidden="true" tabindex="-1"></a>requete_complexe <span class="ot">=</span> <span class="fu">list</span>(<span class="at">diags =</span> <span class="st">&quot;E66&quot;</span>, </span>
+<span id="cb54-2"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb54-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">positions_diags =</span> <span class="dv">5</span>, </span>
+<span id="cb54-3"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb54-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">dureemax =</span> <span class="dv">0</span>,</span>
+<span id="cb54-4"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb54-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">ghm =</span> <span class="st">&#39;28Z&#39;</span>,</span>
+<span id="cb54-5"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb54-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">agemax =</span> <span class="dv">18</span>,</span>
+<span id="cb54-6"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb54-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">diags_exclus =</span> <span class="st">&quot;C&quot;</span>)</span>
+<span id="cb54-7"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb54-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-8"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb54-8" aria-hidden="true" tabindex="-1"></a><span class="co"># positions_diags : 1 dp rsa, 2 dr rsa, 3 dp um, 4 dr um, 5 das</span></span></code></pre></div>
 <p>Ici on cherchera tous les séjours avec un diagnostic E66 en das, d’une durée de 0 jour, avec un ghm en 28Z, où l’âge du patient est au maximum 18 ans, et sans aucun diagnostic commençant par C.</p>
 </div>
 </div>
-<div id="requêtes-sur-des-rsa-importés-avec-irsa" class="section level2" number="14.2">
-<h2><span class="header-section-number">14.2</span> Requêtes sur des rsa importés avec <code>irsa</code></h2>
+<div id="requêtes-sur-des-rsa-importés-avec-irsa" class="section level2 hasAnchor" number="14.2">
+<h2><span class="header-section-number">14.2</span> Requêtes sur des rsa importés avec <code>irsa</code><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#requêtes-sur-des-rsa-importés-avec-irsa" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Il faut d’abord importer les rsa avec un type d’import 6 et “préparer les rsa” avec la fonction <code>prepare_rsa()</code> :</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">irsa</span>(p, <span class="at">typi =</span> <span class="dv">6</span>) <span class="ot">-&gt;</span> rsa</span>
-<span id="cb57-2"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">prepare_rsa</span>(rsa) <span class="ot">-&gt;</span> rsa</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">irsa</span>(p, <span class="at">typi =</span> <span class="dv">6</span>) <span class="ot">-&gt;</span> rsa</span>
+<span id="cb55-2"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">prepare_rsa</span>(rsa) <span class="ot">-&gt;</span> rsa</span></code></pre></div>
 <p>Exemple de requêtes :</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb58-1" aria-hidden="true" tabindex="-1"></a>exemple_requete <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb58-2"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb58-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">actes =</span> <span class="fu">c</span>(<span class="st">&#39;QEFA003&#39;</span>,<span class="st">&#39;QEFA005&#39;</span>,<span class="st">&#39;QEFA010&#39;</span>,<span class="st">&#39;QEFA013&#39;</span>,<span class="st">&#39;QEFA015&#39;</span>,<span class="st">&#39;QEFA019&#39;</span>,<span class="st">&#39;QEFA020&#39;</span>)</span>
-<span id="cb58-3"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb58-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb56-1" aria-hidden="true" tabindex="-1"></a>exemple_requete <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb56-2"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">actes =</span> <span class="fu">c</span>(<span class="st">&#39;QEFA003&#39;</span>,<span class="st">&#39;QEFA005&#39;</span>,<span class="st">&#39;QEFA010&#39;</span>,<span class="st">&#39;QEFA013&#39;</span>,<span class="st">&#39;QEFA015&#39;</span>,<span class="st">&#39;QEFA019&#39;</span>,<span class="st">&#39;QEFA020&#39;</span>)</span>
+<span id="cb56-3"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb56-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>La commande suivante renvoie un <code>tibble</code> (tableau) contenant les clés rsa correspondants à cette requête :</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">requete</span>(rsa, exemple_requete)</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">requete</span>(rsa, exemple_requete)</span></code></pre></div>
 <p>Il est possible de retourner d’autres variables que la clé rsa uniquement, en les spécifiant :</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">requete</span>(rsa, exemple_requete, <span class="at">vars =</span> <span class="fu">c</span>(<span class="st">&#39;nas&#39;</span>, <span class="st">&#39;agean&#39;</span>, <span class="st">&#39;actes&#39;</span>, <span class="st">&#39;diags&#39;</span>, <span class="st">&#39;ghm&#39;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">requete</span>(rsa, exemple_requete, <span class="at">vars =</span> <span class="fu">c</span>(<span class="st">&#39;nas&#39;</span>, <span class="st">&#39;agean&#39;</span>, <span class="st">&#39;actes&#39;</span>, <span class="st">&#39;diags&#39;</span>, <span class="st">&#39;ghm&#39;</span>))</span></code></pre></div>
 </div>
-<div id="requêtes-sur-des-rsa-dans-la-base-de-données" class="section level2" number="14.3">
-<h2><span class="header-section-number">14.3</span> Requêtes sur des rsa dans la base de données</h2>
+<div id="requêtes-sur-des-rsa-dans-la-base-de-données" class="section level2 hasAnchor" number="14.3">
+<h2><span class="header-section-number">14.3</span> Requêtes sur des rsa dans la base de données<a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#requêtes-sur-des-rsa-dans-la-base-de-données" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>C’est le même principe seulement il faut spécifier la connexion à la table et l’année de la requête plutôt que l’objet rsa :</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">requete_db</span>(con, <span class="dv">16</span>, exemple_requete, <span class="at">vars =</span> <span class="fu">c</span>(<span class="st">&#39;nas&#39;</span>, <span class="st">&#39;agean&#39;</span>, <span class="st">&#39;actes&#39;</span>, <span class="st">&#39;diags&#39;</span>, <span class="st">&#39;ghm&#39;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">requete_db</span>(con, <span class="dv">16</span>, exemple_requete, <span class="at">vars =</span> <span class="fu">c</span>(<span class="st">&#39;nas&#39;</span>, <span class="st">&#39;agean&#39;</span>, <span class="st">&#39;actes&#39;</span>, <span class="st">&#39;diags&#39;</span>, <span class="st">&#39;ghm&#39;</span>))</span></code></pre></div>
 </div>
-<div id="éléments-possibles-pour-une-requête" class="section level2" number="14.4">
-<h2><span class="header-section-number">14.4</span> Éléments possibles pour une requête</h2>
+<div id="éléments-possibles-pour-une-requête" class="section level2 hasAnchor" number="14.4">
+<h2><span class="header-section-number">14.4</span> Éléments possibles pour une requête<a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#éléments-possibles-pour-une-requête" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <table>
 <colgroup>
 <col width="15%" />
@@ -419,22 +421,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 </div>
-<div id="lancer-plusieurs-requêtes" class="section level2" number="14.5">
-<h2><span class="header-section-number">14.5</span> Lancer plusieurs requêtes</h2>
+<div id="lancer-plusieurs-requêtes" class="section level2 hasAnchor" number="14.5">
+<h2><span class="header-section-number">14.5</span> Lancer plusieurs requêtes<a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#lancer-plusieurs-requêtes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Les fonctions <code>lancer_requete()</code> et <code>lancer_requete_db()</code> permettent de lancer une ou plusieurs requêtes lorsque l’on a défini une liste de requêtes.</p>
-<div id="exemple-de-liste-de-requêtes" class="section level3" number="14.5.1">
-<h3><span class="header-section-number">14.5.1</span> Exemple de liste de requêtes</h3>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb62-1" aria-hidden="true" tabindex="-1"></a>deux_requetes <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">requete_1 =</span> <span class="fu">list</span>(<span class="at">actes =</span> <span class="st">&quot;EBLA003&quot;</span>, <span class="at">nom =</span> <span class="st">&quot;pac&quot;</span>, <span class="at">thematique =</span> <span class="st">&quot;pac&quot;</span>),</span>
-<span id="cb62-2"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb62-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">requete_2 =</span> <span class="fu">list</span>(<span class="at">ghm =</span> <span class="st">&quot;28Z&quot;</span>, <span class="at">nom =</span> <span class="st">&quot;seances&quot;</span>, <span class="at">thematique =</span> <span class="st">&quot;CMD 28&quot;</span>)</span>
-<span id="cb62-3"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb62-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div id="exemple-de-liste-de-requêtes" class="section level3 hasAnchor" number="14.5.1">
+<h3><span class="header-section-number">14.5.1</span> Exemple de liste de requêtes<a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#exemple-de-liste-de-requêtes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb60-1" aria-hidden="true" tabindex="-1"></a>deux_requetes <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">requete_1 =</span> <span class="fu">list</span>(<span class="at">actes =</span> <span class="st">&quot;EBLA003&quot;</span>, <span class="at">nom =</span> <span class="st">&quot;pac&quot;</span>, <span class="at">thematique =</span> <span class="st">&quot;pac&quot;</span>),</span>
+<span id="cb60-2"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb60-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">requete_2 =</span> <span class="fu">list</span>(<span class="at">ghm =</span> <span class="st">&quot;28Z&quot;</span>, <span class="at">nom =</span> <span class="st">&quot;seances&quot;</span>, <span class="at">thematique =</span> <span class="st">&quot;CMD 28&quot;</span>)</span>
+<span id="cb60-3"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb60-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
-<div id="lancement" class="section level3" number="14.5.2">
-<h3><span class="header-section-number">14.5.2</span> Lancement</h3>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pour des rsa importés avec irsa</span></span>
-<span id="cb63-2"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lancer_requete</span>(rsa, deux_requetes, <span class="at">vars =</span> <span class="fu">c</span>(<span class="st">&#39;nas&#39;</span>, <span class="st">&#39;duree&#39;</span>, <span class="st">&#39;ghm&#39;</span>))</span>
-<span id="cb63-3"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb63-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-4"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb63-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Pour des rsa dans une base de données</span></span>
-<span id="cb63-5"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb63-5" aria-hidden="true" tabindex="-1"></a><span class="fu">lancer_requete_db</span>(con, <span class="dv">16</span>, deux_requetes, <span class="at">vars =</span> <span class="fu">c</span>(<span class="st">&#39;nas&#39;</span>, <span class="st">&#39;duree&#39;</span>, <span class="st">&#39;ghm&#39;</span>))</span></code></pre></div>
+<div id="lancement" class="section level3 hasAnchor" number="14.5.2">
+<h3><span class="header-section-number">14.5.2</span> Lancement<a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#lancement" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pour des rsa importés avec irsa</span></span>
+<span id="cb61-2"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lancer_requete</span>(rsa, deux_requetes, <span class="at">vars =</span> <span class="fu">c</span>(<span class="st">&#39;nas&#39;</span>, <span class="st">&#39;duree&#39;</span>, <span class="st">&#39;ghm&#39;</span>))</span>
+<span id="cb61-3"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb61-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-4"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb61-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Pour des rsa dans une base de données</span></span>
+<span id="cb61-5"><a href="requetr-rédiger-exécuter-des-requêtes-pmsi.html#cb61-5" aria-hidden="true" tabindex="-1"></a><span class="fu">lancer_requete_db</span>(con, <span class="dv">16</span>, deux_requetes, <span class="at">vars =</span> <span class="fu">c</span>(<span class="st">&#39;nas&#39;</span>, <span class="st">&#39;duree&#39;</span>, <span class="st">&#39;ghm&#39;</span>))</span></code></pre></div>
 <p>La commande suivante renvoie un <code>tibble</code> (tableau) contenant les clés rsa correspondants à ces requêtes avec deux variables identifiant le nom et la thématique de la requête correspondante.</p>
 
 </div>
@@ -450,7 +452,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -469,6 +470,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": {},
 "google": false,
 "instapper": false
@@ -490,7 +492,11 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["pmeasyr-book.pdf", "pmeasyr-book.epub"],
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection",
 "scroll_highlight": true

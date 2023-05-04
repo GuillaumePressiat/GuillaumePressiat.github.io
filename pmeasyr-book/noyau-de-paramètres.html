@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>10 Noyau de paramètres | Traitement des données PMSI avec R</title>
   <meta name="description" content="Ce livre numérique présente des exemples de traitements de données PMSI avec R" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
   <meta property="og:title" content="10 Noyau de paramètres | Traitement des données PMSI avec R" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="Ce livre numérique présente des exemples de traitements de données PMSI avec R" />
   
@@ -24,7 +23,7 @@
 <meta name="author" content="Guillaume Pressiat || CHU Brest" />
 
 
-<meta name="date" content="2021-11-21" />
+<meta name="date" content="2023-05-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +32,8 @@
   
 <link rel="prev" href="help.html"/>
 <link rel="next" href="restructurer-des-listes-de-codes-enrobeur.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,7 +49,9 @@
 
 
 
-
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -91,7 +92,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -104,7 +105,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -117,6 +118,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -293,10 +295,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="noyau-de-paramètres" class="section level1" number="10">
-<h1><span class="header-section-number">10</span> Noyau de paramètres</h1>
-<div id="quatre-paramètres" class="section level2" number="10.1">
-<h2><span class="header-section-number">10.1</span> Quatre paramètres</h2>
+<div id="noyau-de-paramètres" class="section level1 hasAnchor" number="10">
+<h1><span class="header-section-number">10</span> Noyau de paramètres<a href="noyau-de-paramètres.html#noyau-de-paramètres" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="quatre-paramètres" class="section level2 hasAnchor" number="10.1">
+<h2><span class="header-section-number">10.1</span> Quatre paramètres<a href="noyau-de-paramètres.html#quatre-paramètres" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Les fonctions de dézippage et d’import de pmeasyr ont en commun quatre paramètres :</p>
 <ul>
 <li>le finess du fichier</li>
@@ -336,18 +338,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb32-28"><a href="noyau-de-paramètres.html#cb32-28" aria-hidden="true" tabindex="-1"></a>     <span class="at">mois   =</span> <span class="dv">12</span>, </span>
 <span id="cb32-29"><a href="noyau-de-paramètres.html#cb32-29" aria-hidden="true" tabindex="-1"></a>     <span class="at">path   =</span> <span class="st">&#39;~/Documents/data/mco/&#39;</span>) <span class="ot">-&gt;</span> tra</span></code></pre></div>
 </div>
-<div id="solution-avec-noyau_pmeasyr" class="section level2" number="10.2">
-<h2><span class="header-section-number">10.2</span> Solution avec <code>noyau_pmeasyr()</code></h2>
-<div id="définir-le-noyau-de-paramètres" class="section level3" number="10.2.1">
-<h3><span class="header-section-number">10.2.1</span> Définir le noyau de paramètres</h3>
+<div id="solution-avec-noyau_pmeasyr" class="section level2 hasAnchor" number="10.2">
+<h2><span class="header-section-number">10.2</span> Solution avec <code>noyau_pmeasyr()</code><a href="noyau-de-paramètres.html#solution-avec-noyau_pmeasyr" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="définir-le-noyau-de-paramètres" class="section level3 hasAnchor" number="10.2.1">
+<h3><span class="header-section-number">10.2.1</span> Définir le noyau de paramètres<a href="noyau-de-paramètres.html#définir-le-noyau-de-paramètres" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="noyau-de-paramètres.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pmeasyr)</span>
 <span id="cb33-2"><a href="noyau-de-paramètres.html#cb33-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">noyau_pmeasyr</span>(<span class="at">finess =</span> <span class="st">&#39;750712184&#39;</span>, </span>
 <span id="cb33-3"><a href="noyau-de-paramètres.html#cb33-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">annee =</span> <span class="dv">2015</span>, </span>
 <span id="cb33-4"><a href="noyau-de-paramètres.html#cb33-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">mois =</span> <span class="dv">12</span>, </span>
 <span id="cb33-5"><a href="noyau-de-paramètres.html#cb33-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">path   =</span> <span class="st">&#39;~/Documents/data/mco/&#39;</span>)</span></code></pre></div>
 </div>
-<div id="utiliser-le-noyau-de-paramètres" class="section level3" number="10.2.2">
-<h3><span class="header-section-number">10.2.2</span> Utiliser le noyau de paramètres</h3>
+<div id="utiliser-le-noyau-de-paramètres" class="section level3 hasAnchor" number="10.2.2">
+<h3><span class="header-section-number">10.2.2</span> Utiliser le noyau de paramètres<a href="noyau-de-paramètres.html#utiliser-le-noyau-de-paramètres" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="noyau-de-paramètres.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tout dézipper</span></span>
 <span id="cb34-2"><a href="noyau-de-paramètres.html#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="co"># out</span></span>
 <span id="cb34-3"><a href="noyau-de-paramètres.html#cb34-3" aria-hidden="true" tabindex="-1"></a>p <span class="sc">%&gt;%</span> <span class="fu">adezip</span>(<span class="at">type =</span> <span class="st">&quot;out&quot;</span>)</span>
@@ -359,8 +361,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>La syntaxe est beaucoup plus lisible désormais.</p>
 </div>
 </div>
-<div id="noyau_skeleton" class="section level2" number="10.3">
-<h2><span class="header-section-number">10.3</span> <code>noyau_skeleton()</code></h2>
+<div id="noyau_skeleton" class="section level2 hasAnchor" number="10.3">
+<h2><span class="header-section-number">10.3</span> <code>noyau_skeleton()</code><a href="noyau-de-paramètres.html#noyau_skeleton" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>La fonction <code>noyau_skeleton()</code> permet d’obtenir dans la console R le squelette pour définir les quatre paramètres d’un noyau <code>pmeasyr</code>.</p>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="noyau-de-paramètres.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pmeasyr)</span>
 <span id="cb36-2"><a href="noyau-de-paramètres.html#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">noyau_skeleton</span>()</span></code></pre></div>
@@ -384,7 +386,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -403,6 +404,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": {},
 "google": false,
 "instapper": false
@@ -424,7 +426,11 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["pmeasyr-book.pdf", "pmeasyr-book.epub"],
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection",
 "scroll_highlight": true

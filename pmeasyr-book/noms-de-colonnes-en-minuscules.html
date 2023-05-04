@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>12 Noms de colonnes en minuscules | Traitement des données PMSI avec R</title>
   <meta name="description" content="Ce livre numérique présente des exemples de traitements de données PMSI avec R" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
   <meta property="og:title" content="12 Noms de colonnes en minuscules | Traitement des données PMSI avec R" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="Ce livre numérique présente des exemples de traitements de données PMSI avec R" />
   
@@ -24,7 +23,7 @@
 <meta name="author" content="Guillaume Pressiat || CHU Brest" />
 
 
-<meta name="date" content="2021-11-21" />
+<meta name="date" content="2023-05-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +32,8 @@
   
 <link rel="prev" href="restructurer-des-listes-de-codes-enrobeur.html"/>
 <link rel="next" href="vers-la-base-de-données-avec-pmeasyr.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,7 +49,9 @@
 
 
 
-
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -91,7 +92,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -104,7 +105,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -117,6 +118,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -293,8 +295,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="noms-de-colonnes-en-minuscules" class="section level1" number="12">
-<h1><span class="header-section-number">12</span> Noms de colonnes en minuscules</h1>
+<div id="noms-de-colonnes-en-minuscules" class="section level1 hasAnchor" number="12">
+<h1><span class="header-section-number">12</span> Noms de colonnes en minuscules<a href="noms-de-colonnes-en-minuscules.html#noms-de-colonnes-en-minuscules" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Dans chaque fonction, un nouveau paramètre est disponible : <code>tolower_names</code>. Il permet à l’utlisateur de choisir entre minuscules et majuscules pour les noms des variables dans les tables.</p>
 <p>Par homogénéité avec le format jusqu’alors, la valeur par défaut de ce paramètre reste <code>FALSE</code>, les noms de variables restent donc en majuscule sans modifier ce paramètre.</p>
 <p><strong>N.B. : Pour utiliser les fonctions <code>requete</code>, <code>requete_db</code>, <code>lancer_requete</code> et <code>lancer_requete_db</code>, il est nécessaire d’avoir choisi un import avec noms de variables en minuscule : <code>tolower_names = TRUE</code>.</strong></p>
@@ -310,7 +312,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -329,6 +330,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": {},
 "google": false,
 "instapper": false
@@ -350,7 +352,11 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["pmeasyr-book.pdf", "pmeasyr-book.epub"],
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection",
 "scroll_highlight": true

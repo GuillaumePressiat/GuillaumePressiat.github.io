@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>13 Vers la base de données avec pmeasyr | Traitement des données PMSI avec R</title>
   <meta name="description" content="Ce livre numérique présente des exemples de traitements de données PMSI avec R" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
   <meta property="og:title" content="13 Vers la base de données avec pmeasyr | Traitement des données PMSI avec R" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="Ce livre numérique présente des exemples de traitements de données PMSI avec R" />
   
@@ -24,7 +23,7 @@
 <meta name="author" content="Guillaume Pressiat || CHU Brest" />
 
 
-<meta name="date" content="2021-11-21" />
+<meta name="date" content="2023-05-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +32,8 @@
   
 <link rel="prev" href="noms-de-colonnes-en-minuscules.html"/>
 <link rel="next" href="requetr-rédiger-exécuter-des-requêtes-pmsi.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,7 +49,9 @@
 
 
 
-
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -91,7 +92,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -104,7 +105,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -117,6 +118,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -293,69 +295,69 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="vers-la-base-de-données-avec-pmeasyr" class="section level1" number="13">
-<h1><span class="header-section-number">13</span> Vers la base de données avec <code>pmeasyr</code></h1>
+<div id="vers-la-base-de-données-avec-pmeasyr" class="section level1 hasAnchor" number="13">
+<h1><span class="header-section-number">13</span> Vers la base de données avec <code>pmeasyr</code><a href="vers-la-base-de-données-avec-pmeasyr.html#vers-la-base-de-données-avec-pmeasyr" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Constatant que chaque étude avec <code>pmeasyr</code> commence par un import de données, nous proposons une nouvelle approche : intégrer une fois pour toutes les données M12 dans une base de données managée et accessible avec <code>pmeasyr</code>. Les données en cours d’année pouvant également y être intégrées.</p>
 <p>Nous décrivons ici l’import de données MCO 2016 dans une base de données tel qu’il est possible de le réaliser à l’aide de <code>pmeasyr</code>.</p>
-<div id="connexion-à-une-base-de-données" class="section level2" number="13.1">
-<h2><span class="header-section-number">13.1</span> Connexion à une base de données</h2>
-<div id="monetdb" class="section level3" number="13.1.1">
-<h3><span class="header-section-number">13.1.1</span> monetdb</h3>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb46-1" aria-hidden="true" tabindex="-1"></a>dbdir <span class="ot">&lt;-</span> <span class="st">&quot;~/Documents/data/monetdb&quot;</span></span>
-<span id="cb46-2"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb46-2" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> MonetDBLite<span class="sc">::</span><span class="fu">src_monetdblite</span>(dbdir)</span></code></pre></div>
+<div id="connexion-à-une-base-de-données" class="section level2 hasAnchor" number="13.1">
+<h2><span class="header-section-number">13.1</span> Connexion à une base de données<a href="vers-la-base-de-données-avec-pmeasyr.html#connexion-à-une-base-de-données" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="monetdb" class="section level3 hasAnchor" number="13.1.1">
+<h3><span class="header-section-number">13.1.1</span> monetdb<a href="vers-la-base-de-données-avec-pmeasyr.html#monetdb" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb44-1" aria-hidden="true" tabindex="-1"></a>dbdir <span class="ot">&lt;-</span> <span class="st">&quot;~/Documents/data/monetdb&quot;</span></span>
+<span id="cb44-2"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb44-2" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> MonetDBLite<span class="sc">::</span><span class="fu">src_monetdblite</span>(dbdir)</span></code></pre></div>
 </div>
-<div id="sqlite" class="section level3" number="13.1.2">
-<h3><span class="header-section-number">13.1.2</span> SQLite</h3>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb47-1" aria-hidden="true" tabindex="-1"></a>dbdir <span class="ot">&lt;-</span> <span class="st">&quot;~/Documents/data/sqlite/pmsi.sqlite&quot;</span></span>
-<span id="cb47-2"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb47-2" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">src_sqlite</span>(dbdir)</span></code></pre></div>
+<div id="sqlite" class="section level3 hasAnchor" number="13.1.2">
+<h3><span class="header-section-number">13.1.2</span> SQLite<a href="vers-la-base-de-données-avec-pmeasyr.html#sqlite" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb45-1" aria-hidden="true" tabindex="-1"></a>dbdir <span class="ot">&lt;-</span> <span class="st">&quot;~/Documents/data/sqlite/pmsi.sqlite&quot;</span></span>
+<span id="cb45-2"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb45-2" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">src_sqlite</span>(dbdir)</span></code></pre></div>
 </div>
-<div id="postgres" class="section level3" number="13.1.3">
-<h3><span class="header-section-number">13.1.3</span> PostGres</h3>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb48-1" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">src_postgres</span>(<span class="at">user =</span> <span class="st">&quot;gui&quot;</span>, <span class="at">password =</span> <span class="st">&quot;gui&quot;</span>, <span class="at">dbname =</span> <span class="st">&quot;aphp&quot;</span>,</span>
-<span id="cb48-2"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb48-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">host =</span> <span class="st">&quot;localhost&quot;</span>, <span class="at">port =</span> <span class="dv">5432</span>)</span></code></pre></div>
+<div id="postgres" class="section level3 hasAnchor" number="13.1.3">
+<h3><span class="header-section-number">13.1.3</span> PostGres<a href="vers-la-base-de-données-avec-pmeasyr.html#postgres" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb46-1" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">src_postgres</span>(<span class="at">user =</span> <span class="st">&quot;gui&quot;</span>, <span class="at">password =</span> <span class="st">&quot;gui&quot;</span>, <span class="at">dbname =</span> <span class="st">&quot;aphp&quot;</span>,</span>
+<span id="cb46-2"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb46-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">host =</span> <span class="st">&quot;localhost&quot;</span>, <span class="at">port =</span> <span class="dv">5432</span>)</span></code></pre></div>
 </div>
 </div>
-<div id="intégration-en-base" class="section level2" number="13.2">
-<h2><span class="header-section-number">13.2</span> Intégration en base</h2>
-<div id="définition-des-paramètres" class="section level3" number="13.2.1">
-<h3><span class="header-section-number">13.2.1</span> Définition des paramètres</h3>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># noyau_skeleton()</span></span>
-<span id="cb49-2"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb49-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">noyau_pmeasyr</span>(</span>
-<span id="cb49-3"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">finess   =</span> <span class="st">&#39;750712184&#39;</span>,</span>
-<span id="cb49-4"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb49-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mois     =</span> <span class="dv">12</span>,</span>
-<span id="cb49-5"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb49-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">path     =</span> <span class="st">&#39;~/Documents/data/mco&#39;</span>,</span>
-<span id="cb49-6"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb49-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">progress =</span> F, </span>
-<span id="cb49-7"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb49-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">tolower_names =</span> T, <span class="co"># choix de noms de colonnes minuscules : T / F</span></span>
-<span id="cb49-8"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb49-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_max =</span> <span class="fl">1e4</span>, <span class="co"># on limite la lecture a un petit nombre de lignes pour tester d&#39;abord </span></span>
-<span id="cb49-9"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb49-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># on importera tout dans un second temps</span></span>
-<span id="cb49-10"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb49-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">lib =</span> F) <span class="co"># pas de libellés de colonnes (inutile ici)</span></span></code></pre></div>
+<div id="intégration-en-base" class="section level2 hasAnchor" number="13.2">
+<h2><span class="header-section-number">13.2</span> Intégration en base<a href="vers-la-base-de-données-avec-pmeasyr.html#intégration-en-base" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="définition-des-paramètres" class="section level3 hasAnchor" number="13.2.1">
+<h3><span class="header-section-number">13.2.1</span> Définition des paramètres<a href="vers-la-base-de-données-avec-pmeasyr.html#définition-des-paramètres" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># noyau_skeleton()</span></span>
+<span id="cb47-2"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb47-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">noyau_pmeasyr</span>(</span>
+<span id="cb47-3"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">finess   =</span> <span class="st">&#39;750712184&#39;</span>,</span>
+<span id="cb47-4"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mois     =</span> <span class="dv">12</span>,</span>
+<span id="cb47-5"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb47-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">path     =</span> <span class="st">&#39;~/Documents/data/mco&#39;</span>,</span>
+<span id="cb47-6"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb47-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">progress =</span> F, </span>
+<span id="cb47-7"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb47-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">tolower_names =</span> T, <span class="co"># choix de noms de colonnes minuscules : T / F</span></span>
+<span id="cb47-8"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb47-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_max =</span> <span class="fl">1e4</span>, <span class="co"># on limite la lecture a un petit nombre de lignes pour tester d&#39;abord </span></span>
+<span id="cb47-9"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb47-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># on importera tout dans un second temps</span></span>
+<span id="cb47-10"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb47-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">lib =</span> F) <span class="co"># pas de libellés de colonnes (inutile ici)</span></span></code></pre></div>
 </div>
-<div id="exemple-dimport" class="section level3" number="13.2.2">
-<h3><span class="header-section-number">13.2.2</span> Exemple d’import</h3>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb50-1" aria-hidden="true" tabindex="-1"></a>purrr<span class="sc">::</span><span class="fu">quietly</span>(db_mco_out)(con,  p, <span class="at">annee =</span> <span class="dv">2016</span>) <span class="ot">-&gt;</span> ok </span></code></pre></div>
+<div id="exemple-dimport" class="section level3 hasAnchor" number="13.2.2">
+<h3><span class="header-section-number">13.2.2</span> Exemple d’import<a href="vers-la-base-de-données-avec-pmeasyr.html#exemple-dimport" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb48-1" aria-hidden="true" tabindex="-1"></a>purrr<span class="sc">::</span><span class="fu">quietly</span>(db_mco_out)(con,  p, <span class="at">annee =</span> <span class="dv">2016</span>) <span class="ot">-&gt;</span> ok </span></code></pre></div>
 <p><code>ok</code> contient toutes les sorties de l’éxécution de la fonction : vérifier qu’il n’y a pas d’erreur ou d’avertissement anormal avant de poursuivre. Ok ? Voyons ce que contient <code>ok</code> :</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb51-1" aria-hidden="true" tabindex="-1"></a>ok</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb49-1" aria-hidden="true" tabindex="-1"></a>ok</span></code></pre></div>
 <p>Nous avons présenté la ligne pour importer les données MCO out 2016, mais il est possible de la faire pour le MCO in (<code>db_mco_in</code>), le SSR out (<code>db_ssr_out</code>), l’HAD (<code>db_had_out</code>), la Psy (<code>db_psy_out</code>) et les rsf (<code>db_rsf_out</code>).</p>
 <p>Une fonction pour importer une autre table est également disponible (<code>db_generique</code>).</p>
 <p>Après plusieurs imports dans la base de données, se déconnecter :</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb52-1" aria-hidden="true" tabindex="-1"></a>DBI<span class="sc">::</span><span class="fu">dbDisconnect</span>(con<span class="sc">$</span>con)</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb50-1" aria-hidden="true" tabindex="-1"></a>DBI<span class="sc">::</span><span class="fu">dbDisconnect</span>(con<span class="sc">$</span>con)</span></code></pre></div>
 </div>
 </div>
-<div id="accéder-aux-données-dans-la-base" class="section level2" number="13.3">
-<h2><span class="header-section-number">13.3</span> Accéder aux données dans la base</h2>
+<div id="accéder-aux-données-dans-la-base" class="section level2 hasAnchor" number="13.3">
+<h2><span class="header-section-number">13.3</span> Accéder aux données dans la base<a href="vers-la-base-de-données-avec-pmeasyr.html#accéder-aux-données-dans-la-base" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Se reconnecter à la base en redéfinissant l’objet <code>con</code>.</p>
 <p>Poursuivons l’exemple sur le mco out 2016.</p>
-<div id="lister-les-tables-dans-la-base" class="section level3" number="13.3.1">
-<h3><span class="header-section-number">13.3.1</span> Lister les tables dans la base</h3>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">db_liste_tables</span>(con)</span></code></pre></div>
+<div id="lister-les-tables-dans-la-base" class="section level3 hasAnchor" number="13.3.1">
+<h3><span class="header-section-number">13.3.1</span> Lister les tables dans la base<a href="vers-la-base-de-données-avec-pmeasyr.html#lister-les-tables-dans-la-base" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">db_liste_tables</span>(con)</span></code></pre></div>
 </div>
-<div id="accéder-aux-tables-mco-out" class="section level3" number="13.3.2">
-<h3><span class="header-section-number">13.3.2</span> Accéder aux tables mco out</h3>
+<div id="accéder-aux-tables-mco-out" class="section level3 hasAnchor" number="13.3.2">
+<h3><span class="header-section-number">13.3.2</span> Accéder aux tables mco out<a href="vers-la-base-de-données-avec-pmeasyr.html#accéder-aux-tables-mco-out" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Les lignes suivantes permettent de se connecter aux tables dans la base. Pour la suite il pourra être intéressant de lire <a href="http://db.rstudio.com/dplyr/">l’aide du package dplyr</a>.</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_mco</span>(con, <span class="dv">16</span>, <span class="st">&#39;rsa_rsa&#39;</span>) <span class="co"># Table rsa</span></span>
-<span id="cb54-2"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_mco</span>(con, <span class="dv">16</span>, <span class="st">&#39;rsa_actes&#39;</span>) <span class="co"># Table actes des rsa</span></span>
-<span id="cb54-3"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_mco</span>(con, <span class="dv">16</span>, <span class="st">&#39;rsa_diags&#39;</span>) <span class="co"># Table diags des rsa (après `tdiag`)</span></span>
-<span id="cb54-4"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_mco</span>(con, <span class="dv">16</span>, <span class="st">&#39;rsa_um&#39;</span>) <span class="co"># Table um des rsa </span></span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_mco</span>(con, <span class="dv">16</span>, <span class="st">&#39;rsa_rsa&#39;</span>) <span class="co"># Table rsa</span></span>
+<span id="cb52-2"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_mco</span>(con, <span class="dv">16</span>, <span class="st">&#39;rsa_actes&#39;</span>) <span class="co"># Table actes des rsa</span></span>
+<span id="cb52-3"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_mco</span>(con, <span class="dv">16</span>, <span class="st">&#39;rsa_diags&#39;</span>) <span class="co"># Table diags des rsa (après `tdiag`)</span></span>
+<span id="cb52-4"><a href="vers-la-base-de-données-avec-pmeasyr.html#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_mco</span>(con, <span class="dv">16</span>, <span class="st">&#39;rsa_um&#39;</span>) <span class="co"># Table um des rsa </span></span></code></pre></div>
 <p>D’autres fonctions <code>tbl_ssr</code>, <code>tbl_had</code>, <code>tbl_had</code>, <code>tbl_psy</code>, <code>tbl_rsf</code> facilitent la connexion à ces “remote table”.</p>
 
 </div>
@@ -371,7 +373,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -390,6 +391,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": {},
 "google": false,
 "instapper": false
@@ -411,7 +413,11 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["pmeasyr-book.pdf", "pmeasyr-book.epub"],
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection",
 "scroll_highlight": true

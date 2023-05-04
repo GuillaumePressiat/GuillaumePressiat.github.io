@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>11 Restructurer des listes de codes : enrobeur | Traitement des données PMSI avec R</title>
   <meta name="description" content="Ce livre numérique présente des exemples de traitements de données PMSI avec R" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
   <meta property="og:title" content="11 Restructurer des listes de codes : enrobeur | Traitement des données PMSI avec R" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="Ce livre numérique présente des exemples de traitements de données PMSI avec R" />
   
@@ -24,7 +23,7 @@
 <meta name="author" content="Guillaume Pressiat || CHU Brest" />
 
 
-<meta name="date" content="2021-11-21" />
+<meta name="date" content="2023-05-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +32,8 @@
   
 <link rel="prev" href="noyau-de-paramètres.html"/>
 <link rel="next" href="noms-de-colonnes-en-minuscules.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,7 +49,9 @@
 
 
 
-
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -91,7 +92,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -104,7 +105,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -117,6 +118,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -293,16 +295,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="restructurer-des-listes-de-codes-enrobeur" class="section level1" number="11">
-<h1><span class="header-section-number">11</span> Restructurer des listes de codes : enrobeur</h1>
+<div id="restructurer-des-listes-de-codes-enrobeur" class="section level1 hasAnchor" number="11">
+<h1><span class="header-section-number">11</span> Restructurer des listes de codes : enrobeur<a href="restructurer-des-listes-de-codes-enrobeur.html#restructurer-des-listes-de-codes-enrobeur" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>La fonction <code>enrobeur()</code> permet de structurer une liste de diagnostics, de ghm ou de codes CCAM sous différents formats, selon le type de requêtes que l’on souhaite effectuer ensuite.</p>
-<div id="pour-du-sql-like-..-left-right" class="section level3" number="11.0.1">
-<h3><span class="header-section-number">11.0.1</span> Pour du SQL %like% %..% (left &amp; right)</h3>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="restructurer-des-listes-de-codes-enrobeur.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span></code></pre></div>
-<pre><code>## Warning: package &#39;magrittr&#39; was built under R version 4.0.2</code></pre>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="restructurer-des-listes-de-codes-enrobeur.html#cb40-1" aria-hidden="true" tabindex="-1"></a>li <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;QEFA003&#39;</span>, <span class="st">&#39;QEFA005&#39;</span>, <span class="st">&#39;QEFA010&#39;</span>, <span class="st">&#39;QEFA013&#39;</span>, <span class="st">&#39;QEFA015&#39;</span>, <span class="st">&#39;QEFA019&#39;</span>, <span class="st">&#39;QEFA020&#39;</span>)</span>
-<span id="cb40-2"><a href="restructurer-des-listes-de-codes-enrobeur.html#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-3"><a href="restructurer-des-listes-de-codes-enrobeur.html#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="fu">enrobeur</span>(li, <span class="at">robe=</span><span class="st">&quot;</span><span class="sc">\&#39;</span><span class="st">%&quot;</span>, <span class="at">interstice=</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>, <span class="at">symetrique =</span> T) <span class="sc">%&gt;%</span> <span class="fu">cat</span>()</span></code></pre></div>
+<div id="pour-du-sql-like-..-left-right" class="section level3 hasAnchor" number="11.0.1">
+<h3><span class="header-section-number">11.0.1</span> Pour du SQL %like% %..% (left &amp; right)<a href="restructurer-des-listes-de-codes-enrobeur.html#pour-du-sql-like-..-left-right" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="restructurer-des-listes-de-codes-enrobeur.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
+<span id="cb38-2"><a href="restructurer-des-listes-de-codes-enrobeur.html#cb38-2" aria-hidden="true" tabindex="-1"></a>li <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;QEFA003&#39;</span>, <span class="st">&#39;QEFA005&#39;</span>, <span class="st">&#39;QEFA010&#39;</span>, <span class="st">&#39;QEFA013&#39;</span>, <span class="st">&#39;QEFA015&#39;</span>, <span class="st">&#39;QEFA019&#39;</span>, <span class="st">&#39;QEFA020&#39;</span>)</span>
+<span id="cb38-3"><a href="restructurer-des-listes-de-codes-enrobeur.html#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="restructurer-des-listes-de-codes-enrobeur.html#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="fu">enrobeur</span>(li, <span class="at">robe=</span><span class="st">&quot;</span><span class="sc">\&#39;</span><span class="st">%&quot;</span>, <span class="at">interstice=</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>, <span class="at">symetrique =</span> T) <span class="sc">%&gt;%</span> <span class="fu">cat</span>()</span></code></pre></div>
 <pre><code>## &#39;%QEFA003%&#39;
 ## &#39;%QEFA005%&#39;
 ## &#39;%QEFA010%&#39;
@@ -311,8 +312,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## &#39;%QEFA019%&#39;
 ## &#39;%QEFA020%&#39;</code></pre>
 </div>
-<div id="sql-like-.." class="section level3" number="11.0.2">
-<h3><span class="header-section-number">11.0.2</span> SQL %like% ..%</h3>
+<div id="sql-like-.." class="section level3 hasAnchor" number="11.0.2">
+<h3><span class="header-section-number">11.0.2</span> SQL %like% ..%<a href="restructurer-des-listes-de-codes-enrobeur.html#sql-like-.." class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <table>
 <tbody>
 <tr class="odd">
@@ -321,8 +322,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 </div>
-<div id="sql-like-..-1" class="section level3" number="11.0.3">
-<h3><span class="header-section-number">11.0.3</span> SQL %like% %..</h3>
+<div id="sql-like-..-1" class="section level3 hasAnchor" number="11.0.3">
+<h3><span class="header-section-number">11.0.3</span> SQL %like% %..<a href="restructurer-des-listes-de-codes-enrobeur.html#sql-like-..-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <table>
 <tbody>
 <tr class="odd">
@@ -331,18 +332,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 </div>
-<div id="pour-du-grepl" class="section level3" number="11.0.4">
-<h3><span class="header-section-number">11.0.4</span> Pour du grepl</h3>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="restructurer-des-listes-de-codes-enrobeur.html#cb42-1" aria-hidden="true" tabindex="-1"></a>li <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;QEFA003&#39;</span>, <span class="st">&#39;QEFA005&#39;</span>, <span class="st">&#39;QEFA010&#39;</span>, <span class="st">&#39;QEFA013&#39;</span>, <span class="st">&#39;QEFA015&#39;</span>, <span class="st">&#39;QEFA019&#39;</span>, <span class="st">&#39;QEFA020&#39;</span>)</span>
-<span id="cb42-2"><a href="restructurer-des-listes-de-codes-enrobeur.html#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-3"><a href="restructurer-des-listes-de-codes-enrobeur.html#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="fu">enrobeur</span>(li, <span class="at">robe=</span><span class="st">&quot;&quot;</span>, <span class="at">interstice=</span><span class="st">&quot;|&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">cat</span>()</span></code></pre></div>
+<div id="pour-du-grepl" class="section level3 hasAnchor" number="11.0.4">
+<h3><span class="header-section-number">11.0.4</span> Pour du grepl<a href="restructurer-des-listes-de-codes-enrobeur.html#pour-du-grepl" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="restructurer-des-listes-de-codes-enrobeur.html#cb40-1" aria-hidden="true" tabindex="-1"></a>li <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;QEFA003&#39;</span>, <span class="st">&#39;QEFA005&#39;</span>, <span class="st">&#39;QEFA010&#39;</span>, <span class="st">&#39;QEFA013&#39;</span>, <span class="st">&#39;QEFA015&#39;</span>, <span class="st">&#39;QEFA019&#39;</span>, <span class="st">&#39;QEFA020&#39;</span>)</span>
+<span id="cb40-2"><a href="restructurer-des-listes-de-codes-enrobeur.html#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-3"><a href="restructurer-des-listes-de-codes-enrobeur.html#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="fu">enrobeur</span>(li, <span class="at">robe=</span><span class="st">&quot;&quot;</span>, <span class="at">interstice=</span><span class="st">&quot;|&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">cat</span>()</span></code></pre></div>
 <pre><code>## QEFA003|QEFA005|QEFA010|QEFA013|QEFA015|QEFA019|QEFA020</code></pre>
 </div>
-<div id="pour-du-listing" class="section level3" number="11.0.5">
-<h3><span class="header-section-number">11.0.5</span> Pour du listing</h3>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="restructurer-des-listes-de-codes-enrobeur.html#cb44-1" aria-hidden="true" tabindex="-1"></a>li <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;QEFA003&#39;</span>, <span class="st">&#39;QEFA005&#39;</span>, <span class="st">&#39;QEFA010&#39;</span>, <span class="st">&#39;QEFA013&#39;</span>, <span class="st">&#39;QEFA015&#39;</span>, <span class="st">&#39;QEFA019&#39;</span>, <span class="st">&#39;QEFA020&#39;</span>)</span>
-<span id="cb44-2"><a href="restructurer-des-listes-de-codes-enrobeur.html#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-3"><a href="restructurer-des-listes-de-codes-enrobeur.html#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="fu">enrobeur</span>(li, <span class="at">robe=</span><span class="st">&quot;</span><span class="sc">\&#39;</span><span class="st">&quot;</span>, <span class="at">interstice=</span><span class="st">&quot;, &quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">cat</span>()</span></code></pre></div>
+<div id="pour-du-listing" class="section level3 hasAnchor" number="11.0.5">
+<h3><span class="header-section-number">11.0.5</span> Pour du listing<a href="restructurer-des-listes-de-codes-enrobeur.html#pour-du-listing" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="restructurer-des-listes-de-codes-enrobeur.html#cb42-1" aria-hidden="true" tabindex="-1"></a>li <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;QEFA003&#39;</span>, <span class="st">&#39;QEFA005&#39;</span>, <span class="st">&#39;QEFA010&#39;</span>, <span class="st">&#39;QEFA013&#39;</span>, <span class="st">&#39;QEFA015&#39;</span>, <span class="st">&#39;QEFA019&#39;</span>, <span class="st">&#39;QEFA020&#39;</span>)</span>
+<span id="cb42-2"><a href="restructurer-des-listes-de-codes-enrobeur.html#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-3"><a href="restructurer-des-listes-de-codes-enrobeur.html#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="fu">enrobeur</span>(li, <span class="at">robe=</span><span class="st">&quot;</span><span class="sc">\&#39;</span><span class="st">&quot;</span>, <span class="at">interstice=</span><span class="st">&quot;, &quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">cat</span>()</span></code></pre></div>
 <pre><code>## &#39;QEFA003&#39;, &#39;QEFA005&#39;, &#39;QEFA010&#39;, &#39;QEFA013&#39;, &#39;QEFA015&#39;, &#39;QEFA019&#39;, &#39;QEFA020&#39;</code></pre>
 
 </div>
@@ -357,7 +358,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -376,6 +376,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": {},
 "google": false,
 "instapper": false
@@ -397,7 +398,11 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["pmeasyr-book.pdf", "pmeasyr-book.epub"],
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection",
 "scroll_highlight": true

@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4 Import des données | Traitement des données PMSI avec R</title>
   <meta name="description" content="Ce livre numérique présente des exemples de traitements de données PMSI avec R" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4 Import des données | Traitement des données PMSI avec R" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="Ce livre numérique présente des exemples de traitements de données PMSI avec R" />
   
@@ -24,7 +23,7 @@
 <meta name="author" content="Guillaume Pressiat || CHU Brest" />
 
 
-<meta name="date" content="2021-11-21" />
+<meta name="date" content="2023-05-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +32,8 @@
   
 <link rel="prev" href="archives.html"/>
 <link rel="next" href="requêtes-sur-des-pathologies-actes.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,7 +49,9 @@
 
 
 
-
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -91,7 +92,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -104,7 +105,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -117,6 +118,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -293,11 +295,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="import-des-données" class="section level1" number="4">
-<h1><span class="header-section-number">4</span> Import des données</h1>
-<div id="mco" class="section level2" number="4.1">
-<h2><span class="header-section-number">4.1</span> MCO</h2>
+<div id="import-des-données" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">4</span> Import des données<a href="import-des-données.html#import-des-données" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="mco" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> MCO<a href="import-des-données.html#mco" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <table>
+<colgroup>
+<col width="22%" />
+<col width="77%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left">Nom</th>
@@ -344,8 +350,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>Les données in / out sont prises en charge.</p>
-<div id="rsa" class="section level3" number="4.1.1">
-<h3><span class="header-section-number">4.1.1</span> RSA</h3>
+<div id="rsa" class="section level3 hasAnchor" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> RSA<a href="import-des-données.html#rsa" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Selon la nature des analyses à produire, plusieurs types d’imports sont possibles :</p>
 <table>
 <colgroup>
@@ -402,8 +408,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p class="caption">Capture d’une portion de la table <code>rsa15$rsa</code></p>
 </div>
 </div>
-<div id="rum" class="section level3" number="4.1.2">
-<h3><span class="header-section-number">4.1.2</span> RUM</h3>
+<div id="rum" class="section level3 hasAnchor" number="4.1.2">
+<h3><span class="header-section-number">4.1.2</span> RUM<a href="import-des-données.html#rum" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="import-des-données.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import des rum 2015</span></span>
 <span id="cb9-2"><a href="import-des-données.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">irum</span>(<span class="at">finess =</span> <span class="dv">750100042</span>, </span>
 <span id="cb9-3"><a href="import-des-données.html#cb9-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">annee =</span> <span class="dv">2015</span>, </span>
@@ -437,8 +443,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 </div>
-<div id="colonnes-stream" class="section level3" number="4.1.3">
-<h3><span class="header-section-number">4.1.3</span> Colonnes stream</h3>
+<div id="colonnes-stream" class="section level3 hasAnchor" number="4.1.3">
+<h3><span class="header-section-number">4.1.3</span> Colonnes stream<a href="import-des-données.html#colonnes-stream" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>Exemples sur quelques rsa</strong> :</p>
 <ul>
 <li>actes : Actes CCAM du Rsa</li>
@@ -540,9 +546,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Les fonctions d’imports pour ces champs PMSI reposent sur le même principe qu’en MCO.</p>
 </div>
 </div>
-<div id="had" class="section level2" number="4.2">
-<h2><span class="header-section-number">4.2</span> HAD</h2>
+<div id="had" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> HAD<a href="import-des-données.html#had" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <table>
+<colgroup>
+<col width="22%" />
+<col width="77%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left">Nom</th>
@@ -575,9 +585,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb10-5"><a href="import-des-données.html#cb10-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">mois =</span> <span class="dv">12</span>,</span>
 <span id="cb10-6"><a href="import-des-données.html#cb10-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">path =</span> <span class="st">&#39;~/Documents/data/had&#39;</span>) <span class="ot">-&gt;</span> data_had</span></code></pre></div>
 </div>
-<div id="ssr" class="section level2" number="4.3">
-<h2><span class="header-section-number">4.3</span> SSR</h2>
+<div id="ssr" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> SSR<a href="import-des-données.html#ssr" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <table>
+<colgroup>
+<col width="22%" />
+<col width="77%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left">Nom</th>
@@ -617,9 +631,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb11-4"><a href="import-des-données.html#cb11-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">mois =</span> <span class="dv">12</span>,</span>
 <span id="cb11-5"><a href="import-des-données.html#cb11-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">path =</span> <span class="st">&#39;~/Documents/data/ssr&#39;</span>) <span class="ot">-&gt;</span> data_ssr</span></code></pre></div>
 </div>
-<div id="psy" class="section level2" number="4.4">
-<h2><span class="header-section-number">4.4</span> PSY</h2>
+<div id="psy" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> PSY<a href="import-des-données.html#psy" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <table>
+<colgroup>
+<col width="22%" />
+<col width="77%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left">Nom</th>
@@ -653,9 +671,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb12-10"><a href="import-des-données.html#cb12-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">mois =</span> <span class="dv">12</span>,</span>
 <span id="cb12-11"><a href="import-des-données.html#cb12-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">path =</span> <span class="st">&#39;~/Documents/data/psy&#39;</span>) <span class="ot">-&gt;</span> r3a_psy</span></code></pre></div>
 </div>
-<div id="rsf" class="section level2" number="4.5">
-<h2><span class="header-section-number">4.5</span> RSF</h2>
+<div id="rsf" class="section level2 hasAnchor" number="4.5">
+<h2><span class="header-section-number">4.5</span> RSF<a href="import-des-données.html#rsf" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <table>
+<colgroup>
+<col width="22%" />
+<col width="77%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left">Nom</th>
@@ -679,15 +701,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb13-4"><a href="import-des-données.html#cb13-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">mois =</span> <span class="dv">12</span>,</span>
 <span id="cb13-5"><a href="import-des-données.html#cb13-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">path =</span> <span class="st">&#39;~/Documents/data/rsf&#39;</span>) <span class="ot">-&gt;</span> rsfa</span></code></pre></div>
 </div>
-<div id="dictionnaire-de-variables" class="section level2" number="4.6">
-<h2><span class="header-section-number">4.6</span> Dictionnaire de variables</h2>
+<div id="dictionnaire-de-variables" class="section level2 hasAnchor" number="4.6">
+<h2><span class="header-section-number">4.6</span> Dictionnaire de variables<a href="import-des-données.html#dictionnaire-de-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="import-des-données.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtenir les noms, labels et types de variables (character, numeric, integer, date, ...)</span></span>
 <span id="cb14-2"><a href="import-des-données.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dico</span>(rsa15<span class="sc">$</span>rsa)</span></code></pre></div>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="import-des-données.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Charger les formats de toutes les tables prises en charge par le package</span></span>
 <span id="cb15-2"><a href="import-des-données.html#cb15-2" aria-hidden="true" tabindex="-1"></a>pmeasyr<span class="sc">::</span>formats</span></code></pre></div>
 </div>
-<div id="labels" class="section level2" number="4.7">
-<h2><span class="header-section-number">4.7</span> Labels</h2>
+<div id="labels" class="section level2 hasAnchor" number="4.7">
+<h2><span class="header-section-number">4.7</span> Labels<a href="import-des-données.html#labels" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="import-des-données.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtenir le libelle d&#39;une variable du PMSI</span></span>
 <span id="cb16-2"><a href="import-des-données.html#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">labeleasier</span>(rsa15<span class="sc">$</span>rsa<span class="sc">$</span>SEXE, <span class="at">Sexe =</span> T)</span>
 <span id="cb16-3"><a href="import-des-données.html#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">labeleasier</span>(rsa15<span class="sc">$</span>rsa<span class="sc">$</span>ECHPMSI, <span class="at">Mode_entree =</span> T)</span></code></pre></div>
@@ -704,7 +726,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -723,6 +744,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": {},
 "google": false,
 "instapper": false
@@ -744,7 +766,11 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["pmeasyr-book.pdf", "pmeasyr-book.epub"],
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection",
 "scroll_highlight": true

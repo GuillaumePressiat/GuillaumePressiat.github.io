@@ -33,14 +33,6 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
-\hypersetup{
-  pdftitle={Traitement des données PMSI avec R},
-  pdfauthor={Guillaume Pressiat \textbar\textbar{} CHU Brest},
-  hidelinks,
-  pdfcreator={LaTeX via pandoc}}
-\urlstyle{same} % disable monospaced font for URLs
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -138,10 +130,18 @@
 \fi
 \usepackage[]{natbib}
 \bibliographystyle{plainnat}
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Traitement des données PMSI avec R},
+  pdfauthor={Guillaume Pressiat \textbar\textbar{} CHU Brest},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
 
 \title{Traitement des données PMSI avec R}
 \author{Guillaume Pressiat \textbar\textbar{} CHU Brest}
-\date{2021-11-21}
+\date{2023-05-04}
 
 \begin{document}
 \maketitle
@@ -313,13 +313,19 @@ Le nom des fonctions dont l'objectif est de manipuler les \textbf{a}rchives comm
 
 La fonction \texttt{astat} permet d'éditer des statistiques sommaires sur les fichiers contenus dans une archive.
 
-\begin{longtable}[]{@{}ll@{}}
-\toprule
-Nom & Fonction \\
-\midrule
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.1031}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.8969}}@{}}
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedright
+Nom
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Fonction
+\end{minipage} \\
+\midrule()
 \endhead
 \href{https://guillaumepressiat.github.io/pmeasyr/reference/astat.html}{astat} & \textasciitilde{} *.zip - Liste et volume des fichiers d'une archive PMSI \\
-\bottomrule
+\bottomrule()
 \end{longtable}
 
 \begin{Shaded}
@@ -349,17 +355,17 @@ Les fonctions permettent de dézipper les fichiers depuis \texttt{R} en ligne de
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.1031}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.8969}}@{}}
-\toprule
+\toprule()
 \begin{minipage}[b]{\linewidth}\raggedright
 Nom
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Fonction
 \end{minipage} \\
-\midrule
+\midrule()
 \endhead
 \href{https://guillaumepressiat.github.io/pmeasyr/reference/adezip.html}{adezip} & \textasciitilde{} *.zip - Dezippe des fichiers de l'archive PMSI \\
 \href{https://guillaumepressiat.github.io/pmeasyr/reference/adezip2.html}{adezip2} & \textasciitilde{} *.zip - Dezippe des fichiers de l'archive PMSI, avec en parametre le nom de l'archive \\
-\bottomrule
+\bottomrule()
 \end{longtable}
 
 \begin{Shaded}
@@ -436,10 +442,16 @@ Fonction
 \hypertarget{mco}{%
 \section{MCO}\label{mco}}
 
-\begin{longtable}[]{@{}ll@{}}
-\toprule
-Nom & Fonction \\
-\midrule
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.2222}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.7778}}@{}}
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedright
+Nom
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Fonction
+\end{minipage} \\
+\midrule()
 \endhead
 \href{https://guillaumepressiat.github.io/pmeasyr/reference/irsa.html}{irsa} & \textasciitilde{} MCO - Import des RSA \\
 \href{https://guillaumepressiat.github.io/pmeasyr/reference/irum.html}{irum} & \textasciitilde{} MCO - Import des RUM \\
@@ -450,7 +462,7 @@ Nom & Fonction \\
 \href{https://guillaumepressiat.github.io/pmeasyr/reference/imed_mco.html}{imed\_mco} & \textasciitilde{} MCO - Import des Med \\
 \href{https://guillaumepressiat.github.io/pmeasyr/reference/ipo.html}{ipo} & \textasciitilde{} MCO - Import des PO \\
 \href{https://guillaumepressiat.github.io/pmeasyr/reference/iano_mco.html}{iano\_mco} & \textasciitilde{} MCO - Import des Anohosp \\
-\bottomrule
+\bottomrule()
 \end{longtable}
 
 Les données in / out sont prises en charge.
@@ -463,13 +475,13 @@ Selon la nature des analyses à produire, plusieurs types d'imports sont possibl
 \begin{longtable}[]{@{}
   >{\raggedleft\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.0556}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.9444}}@{}}
-\toprule
+\toprule()
 \begin{minipage}[b]{\linewidth}\raggedleft
 Type
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Import
 \end{minipage} \\
-\midrule
+\midrule()
 \endhead
 1 & Light : Partie fixe \\
 2 & Light+ : Partie fixe + stream en ligne (+) actes et das \\
@@ -477,7 +489,7 @@ Import
 4 & Standard : Partie fixe + creation des tables actes, das et rsa\_um \\
 5 & Standard+ : Partie fixe + creation des tables actes, das et rsa\_um + stream (+) \\
 6 & Standard++ : Partie fixe + creation des tables actes, das et rsa\_um + stream (++) \\
-\bottomrule
+\bottomrule()
 \end{longtable}
 
 \begin{Shaded}
@@ -520,15 +532,15 @@ Les tables sont par défaut avec des libellés :
 Selon la nature des analyses à produire, plusieurs types d'imports sont possibles :
 
 \begin{longtable}[]{@{}rl@{}}
-\toprule
+\toprule()
 Type & Import \\
-\midrule
+\midrule()
 \endhead
 1 & XLight : Partie fixe \\
 2 & Light : Partie fixe + stream en ligne des actes, das et dad \\
 3 & Standard : Partie fixe + table actes, das, dad \\
 4 & Standard+ : Partie fixe + stream + table actes, das, dad \\
-\bottomrule
+\bottomrule()
 \end{longtable}
 
 \hypertarget{colonnes-stream}{%
@@ -543,14 +555,14 @@ Type & Import \\
 \end{itemize}
 
 \begin{longtable}[]{@{}rl@{}}
-\toprule
+\toprule()
 Cle RSA & actes \\
-\midrule
+\midrule()
 \endhead
 0000000001 & EDSF004, EDSF004, JQGA004, JQGA004 \\
 0000000002 & EPLF002, DEQP003, DEQP007, DZQM006 \\
 0000000003 & EBQH002, EEQH002, YYYY180 \\
-\bottomrule
+\bottomrule()
 \end{longtable}
 
 \begin{itemize}
@@ -560,13 +572,13 @@ Cle RSA & actes \\
 \end{itemize}
 
 \begin{longtable}[]{@{}rl@{}}
-\toprule
+\toprule()
 Cle RSA & dpdrum \\
-\midrule
+\midrule()
 \endhead
 0000000004 & Z098 I671 \\
 0000000005 & Z380, P741, Z380 \\
-\bottomrule
+\bottomrule()
 \end{longtable}
 
 \begin{itemize}
@@ -576,13 +588,13 @@ Cle RSA & dpdrum \\
 \end{itemize}
 
 \begin{longtable}[]{@{}rl@{}}
-\toprule
+\toprule()
 Cle RSA & das \\
-\midrule
+\midrule()
 \endhead
 0000000006 & Z9580, Z9588 \\
 0000000007 & P011, P032, P036, P011, P032, P700, P011, P032, P036 \\
-\bottomrule
+\bottomrule()
 \end{longtable}
 
 \begin{itemize}
@@ -592,14 +604,14 @@ Cle RSA & das \\
 \end{itemize}
 
 \begin{longtable}[]{@{}rl@{}}
-\toprule
+\toprule()
 Cle RSA & um \\
-\midrule
+\midrule()
 \endhead
 0000000009 & 01AC, 53 C \\
 0000000010 & 51 C \\
 0000000011 & 71 C, 04 C, 71 C \\
-\bottomrule
+\bottomrule()
 \end{longtable}
 
 \begin{figure}
@@ -615,16 +627,22 @@ Les fonctions d'imports pour ces champs PMSI reposent sur le même principe qu'e
 \hypertarget{had}{%
 \section{HAD}\label{had}}
 
-\begin{longtable}[]{@{}ll@{}}
-\toprule
-Nom & Fonction \\
-\midrule
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.2245}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.7755}}@{}}
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedright
+Nom
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Fonction
+\end{minipage} \\
+\midrule()
 \endhead
 \href{https://guillaumepressiat.github.io/pmeasyr/reference/iano_had.html}{iano\_had} & \textasciitilde{} HAD - Import des Anohosp \\
 \href{https://guillaumepressiat.github.io/pmeasyr/reference/imed_had.html}{imed\_had} & \textasciitilde{} HAD - Import des Med \\
 \href{https://guillaumepressiat.github.io/pmeasyr/reference/irapss.html}{irapss} & \textasciitilde{} HAD - Import des RAPSS \\
 \href{https://guillaumepressiat.github.io/pmeasyr/reference/ileg_had.html}{ileg\_had} & \textasciitilde{} HAD - Import des erreurs LEG \\
-\bottomrule
+\bottomrule()
 \end{longtable}
 
 \begin{Shaded}
@@ -641,10 +659,16 @@ Nom & Fonction \\
 \hypertarget{ssr}{%
 \section{SSR}\label{ssr}}
 
-\begin{longtable}[]{@{}ll@{}}
-\toprule
-Nom & Fonction \\
-\midrule
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.2245}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.7755}}@{}}
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedright
+Nom
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Fonction
+\end{minipage} \\
+\midrule()
 \endhead
 \href{https://guillaumepressiat.github.io/pmeasyr/reference/iano_ssr.html}{iano\_ssr} & \textasciitilde{} SSR - Import des Anohosp \\
 \href{https://guillaumepressiat.github.io/pmeasyr/reference/irha.html}{irha} & \textasciitilde{} SSR - Import des RHA \\
@@ -652,7 +676,7 @@ Nom & Fonction \\
 \href{https://guillaumepressiat.github.io/pmeasyr/reference/imed_ssr.html}{imed\_ssr} & \textasciitilde{} SSR - Import des MED \\
 \href{https://guillaumepressiat.github.io/pmeasyr/reference/iium_ssr.html}{iium\_ssr} & \textasciitilde{} SSR - Import des UM \\
 \href{https://guillaumepressiat.github.io/pmeasyr/reference/ileg_ssr.html}{ileg\_ssr} & \textasciitilde{} SSR - Import des erreurs LEG \\
-\bottomrule
+\bottomrule()
 \end{longtable}
 
 \begin{Shaded}
@@ -668,15 +692,21 @@ Nom & Fonction \\
 \hypertarget{psy}{%
 \section{PSY}\label{psy}}
 
-\begin{longtable}[]{@{}ll@{}}
-\toprule
-Nom & Fonction \\
-\midrule
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.2245}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.7755}}@{}}
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedright
+Nom
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Fonction
+\end{minipage} \\
+\midrule()
 \endhead
 \href{https://guillaumepressiat.github.io/pmeasyr/reference/iano_psy.html}{iano\_psy} & \textasciitilde{} PSY - Import des Anohosp \\
 \href{https://guillaumepressiat.github.io/pmeasyr/reference/ir3a.html}{ir3a} & \textasciitilde{} PSY - Import des R3A \\
 \href{https://guillaumepressiat.github.io/pmeasyr/reference/irpsa.html}{irpsa} & \textasciitilde{} PSY - Import des RPSA \\
-\bottomrule
+\bottomrule()
 \end{longtable}
 
 \begin{Shaded}
@@ -698,14 +728,20 @@ Nom & Fonction \\
 \hypertarget{rsf}{%
 \section{RSF}\label{rsf}}
 
-\begin{longtable}[]{@{}ll@{}}
-\toprule
-Nom & Fonction \\
-\midrule
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.2245}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.7755}}@{}}
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedright
+Nom
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Fonction
+\end{minipage} \\
+\midrule()
 \endhead
 \href{https://guillaumepressiat.github.io/pmeasyr/reference/irafael.html}{irafael} & \textasciitilde{} RSF - Import des RSFA / Rafael \\
 \href{https://guillaumepressiat.github.io/pmeasyr/reference/iano_rafael.html}{iano\_rafael} & \textasciitilde{} RSF - Import des RSFA / ANO \\
-\bottomrule
+\bottomrule()
 \end{longtable}
 
 \begin{Shaded}
@@ -768,9 +804,9 @@ Les analyses sur les diagnostics CIM-10 sont parfois fastidieuses du fait des mu
 Exemple de résultat :
 
 \begin{longtable}[]{@{}llll@{}}
-\toprule
+\toprule()
 CLE\_RSA & NSEQRUM & position & diag \\
-\midrule
+\midrule()
 \endhead
 0000000001 & 01 & 1 & Z511 \\
 0000000001 & 01 & 2 & C18 \\
@@ -778,7 +814,7 @@ CLE\_RSA & NSEQRUM & position & diag \\
 0000000002 & 01 & 3 & C501 \\
 0000000002 & 02 & 1 & D051 \\
 0000000002 & 02 & 5 & E109 \\
-\bottomrule
+\bottomrule()
 \end{longtable}
 
 \hypertarget{recherche-de-codes-diagnostics}{%
@@ -913,14 +949,20 @@ Le fichier TRA est un fichier du \emph{out} qui permet de relier les données an
   HAD : numéro séquentiel de séjour, numéro de séquence, sous-sequence et numéro de séjour, dates de début et fin des séquences et sous-séquences, dates d'entrée et de sortie du séjour, modes d'entrée sortie provenance destination
 \end{itemize}
 
-\begin{longtable}[]{@{}rl@{}}
-\toprule
-Type & Import \\
-\midrule
+\begin{longtable}[]{@{}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.2174}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.7826}}@{}}
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedleft
+Type
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Import
+\end{minipage} \\
+\midrule()
 \endhead
 \href{https://im-aphp.github.io/pmeasyr/reference/itra.html}{itra} & \textasciitilde{} TRA - Import du TRA \\
 \href{https://im-aphp.github.io/pmeasyr/reference/inner_tra.html}{inner\_tra} & \textasciitilde{} TRA - Ajout du TRA aux données Out \\
-\bottomrule
+\bottomrule()
 \end{longtable}
 
 \hypertarget{ajout-du-tra-en-mco}{%
@@ -1236,20 +1278,20 @@ La fonction \texttt{enrobeur()} permet de structurer une liste de diagnostics, d
 \subsection{SQL \%like\% ..\%}\label{sql-like-..}}
 
 \begin{longtable}[]{@{}l@{}}
-\toprule
+\toprule()
 \endhead
 à venir \\
-\bottomrule
+\bottomrule()
 \end{longtable}
 
 \hypertarget{sql-like-..-1}{%
 \subsection{SQL \%like\% \%..}\label{sql-like-..-1}}
 
 \begin{longtable}[]{@{}l@{}}
-\toprule
+\toprule()
 \endhead
 à venir \\
-\bottomrule
+\bottomrule()
 \end{longtable}
 
 \hypertarget{pour-du-grepl}{%
