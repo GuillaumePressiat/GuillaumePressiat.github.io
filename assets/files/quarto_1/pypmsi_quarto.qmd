@@ -1,0 +1,127 @@
+---
+title: "Test pypmsi with Quarto"
+format: html
+editor: visual
+jupyter: python3
+---
+
+## Chargement des packages
+
+```{python}
+
+# Charger les packages
+import polars as pl
+import pypmsi as pm
+import datetime
+
+```
+
+## Lecture des données
+
+```{python}
+#| echo: true
+now = datetime.datetime.now()
+
+rsa = pm.irsa(290000017, 
+              2020, 
+              12, 
+              '~/Documents/data/mco',  
+              # n_rows = 1, 
+              typi = 4)
+
+(datetime.datetime.now() - now).total_seconds()
+```
+
+La lecture de 130 000 RSA prend environ 4 secondes en découpant les parties variables.
+
+La lecture de la partie fixe uniquement se fait en environ 1 seconde.
+
+La lecture complète avec les parties dites "stream" prend environ 15 secondes.
+
+```{python}
+rsa['rsa'].describe()
+```
+
+```{python}
+rsa['actes'].describe()
+```
+
+```{python}
+rsa['diags'].describe()
+```
+
+```{python}
+rsa['rsa_um'].describe()
+```
+
+## Case-mix GHM / GHS et DMS
+
+*on écrit to_pandas() à la fin pour un meilleur affichage dans le notebook Quarto*.
+
+```{python}
+
+(
+  rsa['rsa']
+  # à la volée on ajoute des colonnes utiles au calcul (ghm, duree hors 0 nuit, nb de 0 nuit)
+  .with_columns(
+    pl.concat_str(['rsacmd', 'rsatype', 'rsanum', 'rsacompx']).alias('ghm'),
+    pl.when(pl.col('duree') > 0).then(pl.col('duree')).otherwise(None).alias('duree1'),
+    pl.when(pl.col('duree') == 0).then(True).otherwise(False).alias('flag0')
+  )
+  .groupby(['ghm', 'noghs'])
+  .agg(pl.col('duree').mean().alias('DMS avec 0 nuitée').round(1),
+       pl.col('duree1').mean().alias('DMS 1 nuit et +').round(1),
+       pl.col('duree').count().alias('Nb séjours'),
+       pl.col('flag0').sum().alias('Nb séjours 0 nuitée'))
+  .sort(pl.col('ghm'))
+  .head(5)
+  .to_pandas()
+)
+```
+
+## Requête actes / diags
+
+On cherche à dénombrer rapidement les prises en charge avec un acte CCAM commençant par HFCC et les ventiler par diagnostic principal du séjour.
+
+*on écrit to_pandas() à la fin pour un meilleur affichage dans le notebook Quarto*.
+
+```{python}
+(
+  rsa['actes']
+  .filter(pl.col('cdccam').str.contains('HFCC'))
+  .filter(pl.col('act') == '1')
+  .join(rsa['rsa'].select(['cle_rsa', 'duree', 'dp']), how = 'inner', on = 'cle_rsa')
+  .groupby('dp', 'cdccam')
+  .agg(pl.col('duree').count().alias('nb_rsa'),
+       pl.col('duree').mean().round(1).alias('DMS'))
+  .sort(pl.col('nb_rsa'), descending = True)
+  .head(5)
+  .to_pandas()
+)
+```
+
+## Compter les erreurs de la fonction groupage
+
+```{python}
+# Sélectionner des colonnes avec une regexp : 
+# on trouve rsacdretr qui est la colonne que l'on cherche
+(
+rsa['rsa']
+  .select(pl.col('^rsa.*$'), 'duree')
+  .head(5)
+  .to_pandas()
+)
+```
+
+```{python}
+(
+rsa['rsa']
+  .select(pl.col('^rsa.*$'), 'duree')
+  .groupby('rsacdretr')
+  .agg(pl.col('duree').count().alias('nb_rsa'))
+  .filter(~pl.col('rsacdretr').str.contains('000'))
+  .sort('nb_rsa', descending = True)
+  .head(5)
+  .to_pandas()
+)
+```

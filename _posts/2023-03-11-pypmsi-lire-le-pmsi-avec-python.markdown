@@ -3,7 +3,7 @@ layout: post
 title: "pypmsi : lire des fichiers PMSI avec python / polars"
 date: 2023-03-11 09:05:50 +0100
 author: Guillaume Pressiat
-tags: pypmsi, python
+tags: pypmsi python
 categories: Programmation
 comments: true
 ---
