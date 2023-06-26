@@ -35,8 +35,8 @@ table, th {
 
 Le découpage d'un fichier .rsa de 130 000 RSA prend selon les types d'imports :
 
-  - <= 1 seconde, découpage partie fixe
-  - <= 4 secondes, découpage partie fixe + parties variables actes, diags, ums
+  - <= 1 seconde, découpage partie fixe (< 300 ms avec puce silicon)
+  - <= 4 secondes, découpage partie fixe + parties variables actes, diags, ums (< 1 seconde avec puce silicon)
 
 
 <!-- ```
