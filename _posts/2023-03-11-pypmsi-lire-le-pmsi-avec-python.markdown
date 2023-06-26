@@ -42,14 +42,14 @@ Le découpage d'un fichier .rsa de 130 000 RSA prend selon les types d'imports :
 
 <center>
 <figure>
-  <img src="/images/pypmsi_silicon1.png" alt = "" />
+  <img src="/images/pypmsi_silicon1.png" alt = "" width = "40%"/>
 </figure>  
 </center>
 
 
 <center>
 <figure>
-  <img src="/images/pypmsi_silicon2.png" alt = "" />
+  <img src="/images/pypmsi_silicon2.png" alt = "" width = "40%"/>
 </figure>  
 </center>
 
