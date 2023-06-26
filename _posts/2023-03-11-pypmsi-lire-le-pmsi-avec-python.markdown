@@ -42,16 +42,21 @@ Le découpage d'un fichier .rsa de 130 000 RSA prend selon les types d'imports :
 
 <center>
 <figure>
-  <img src="/images/pypmsi_silicon1.png" alt = "" width = "40%"/>
+  <img src="/images/pypmsi_silicon1.png" alt = "" width = "55%"/>
 </figure>  
 </center>
 
 
 <center>
 <figure>
-  <img src="/images/pypmsi_silicon2.png" alt = "" width = "40%"/>
+  <img src="/images/pypmsi_silicon2.png" alt = "" width = "55%"/>
 </figure>  
 </center>
+
+Le découpage d'un fichier .rss de 140 000 ligners prend selon les types d'imports :
+
+  - <= 1 seconde, découpage partie fixe (~ 150 ms avec puce silicon)
+  - <= 3 secondes, découpage partie fixe + parties variables actes, diags (< 600 ms seconde avec puce silicon)
 
 
 <!-- ```
