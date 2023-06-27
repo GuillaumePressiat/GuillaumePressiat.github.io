@@ -58,7 +58,7 @@ Le découpage d'un fichier .rss de 140 000 lignes prend selon les types d'import
   - <= 1 seconde, découpage partie fixe (~ 150 ms avec puce silicon)
   - <= 3 secondes, découpage partie fixe + parties variables actes, diags (< 600 ms seconde avec puce silicon)
 
-Le découpage d'un fichier .rsfa avec polars sur puce silicon met : 
+Le découpage d'un fichier .rsfa avec pypmsi sur puce silicon met : 
 
 - 773 ms pour 1 million de lignes rafael
 - 1,4 secondes pour 2 millions
