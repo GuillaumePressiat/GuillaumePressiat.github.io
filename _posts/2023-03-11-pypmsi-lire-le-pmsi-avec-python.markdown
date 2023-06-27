@@ -88,7 +88,7 @@ b - a
 ## Installation
 
 {% highlight sh %}
-pip install https://github.com/GuillaumePressiat/pypmsi/releases/latest/download/pypmsi-0.1.0-py3-none-any.whl
+pip install https://github.com/GuillaumePressiat/pypmsi/releases/latest/download/pypmsi-0.5.0-py3-none-any.whl
 {% endhighlight %}
 
 ou télécharger la dernière version directement sur github avec votre navigateur et l'installer ainsi :
@@ -103,6 +103,10 @@ en remplaçant X Y et Z par ce qu'il faut.
 ### Dépôt
 
 <a href="https://github.com/GuillaumePressiat/pypmsi" target="_blank">https://github.com/GuillaumePressiat/pypmsi</a>
+
+### Documentation
+
+<a href="https://guillaumepressiat.github.io/pypmsi/" target="_blank">https://guillaumepressiat.github.io/pypmsi/</a>
 
 ## pola.rs ?
 
@@ -365,21 +369,8 @@ import polars as pl
 # 4          : partie fixe + partie variable + zones streams actes, das, dad
 ```
 
-## Fichiers pris en charge
-
-- MCO
-  - rss (irum) - de 2012 à 2023
-  - rsa (irsa) - de 2011 à 2023
-  - ano in et out (iano_mco) - de 2012 à 2023
-  - med in et out (imed_mco) - de 2012 à 2023
-  - rsf (irsf) - de 2011 à 2023
-  - rsfa (irsfa) - de 2011 à 2023
 
 
 
-## à poursuivre
-
-
-<a href="https://github.com/GuillaumePressiat/pypmsi/issues/9" target="_blank">https://github.com/GuillaumePressiat/pypmsi/issues/9</a>
 
 
