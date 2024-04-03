@@ -1,0 +1,45 @@
+---
+layout: post
+title: "pmeasyr au congrès EMOIS 2024"
+date: 2024-04-03 11:32:00 +0100
+author: Guillaume Pressiat
+tags: pmsi pmeasyr pypmsi
+categories: Présentation
+comments: true
+---
+
+
+<br>
+
+Un poster "pmeasyr / pypmsi : des communs en santé pour l’information
+médicale des établissements, *et plus si affinités*" sera présenté au congrès EMOIS 2024 qui se déroulera au Grand Palais de Lille les 4 et 5 avril 2024.
+
+Retrouvez l'intégralité du programme ici :
+
+<a href="https://www.emois.org" target="_blank">https://www.emois.org</a>
+
+Un atelier nommé "R pour le PMSI" aura également lieu vendredi matin.
+
+<!--more-->
+
+
+Voici deux liens pour visualiser : 
+
+- le [poster](https://guillaumepressiat.github.io/emois-2024/assets/poster/poster-pmeasyr-etc-unie-A0-v5.3.pdf)
+- [la présentation support de l'atelier](https://guillaumepressiat.github.io/emois-2024/#1)
+
+<br>
+
+### Poster
+
+<center>
+<iframe src="https://guillaumepressiat.github.io/emois-2024/assets/poster/poster-pmeasyr-etc-unie-A0-v5.3.pdf" width="95%" height = "550"></iframe>
+</center>
+
+<br>
+
+### Atelier
+
+<center>
+<iframe src="https://guillaumepressiat.github.io/emois-2024/#1" width="95%" height = "550"></iframe>
+</center>

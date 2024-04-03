@@ -1,0 +1,101 @@
+---
+layout: post
+title: "pmsi::io : un nouveau logiciel pour lire les in / out du PMSi et les exporter en csv, xlsx, txt, json et parquet"
+date: 2024-04-03 10:32:00 +0100
+author: Guillaume Pressiat
+tags: pmsi rust
+categories: Application Programmation
+comments: true
+---
+
+
+<center>
+<a href = "" target = "_blank">
+<img src="/images/apercu-pmsi-io.png" width = "85%"/>
+</a>
+</center>
+
+<!--more-->
+
+
+## Contexte / objectifs
+
+Depuis 2017, pmeasyr est une bibliothèque R accessible à tous qui permet de lire les fichiers PMSI et dont l'objectif est de pouvoir partager les connaissances autour de ces données. 
+
+En 2023, avec pypmsi, l'équivalent de pmeasyr en python, j'ai souhaité reproduire ce travail avec un autre langage, pour rendre possible les échanges avec un communauté plus large d'utilisateurs, parfois plus tournés vers le versant (bio-)informatique des choses, les entrepôts de données de santé, ou bien, plus prosaïquement, rebutés par R. 
+
+pypmsi utilise la bibliothèque pola.rs, qui est codée en Rust avec un portage en python éponyme. 
+
+Par curiosité et pour poursuivre l'extension d'une communauté autour du PMSI riche par sa diversité d'acteurs et de disciplines, je me suis intéressé au langage Rust, un langage compilé.
+
+
+pmsio::io est justement codé en Rust en arrière-plan et son interface repose sur le framework SvelteKit. 
+
+L'objectif de cette application est de permettre un accès facilité et à visée pédagogique aux données PMSI en sortie de GenRSA et de Druides, les logiciels de l'ATIH, via une interface graphique simple en particulier pour ceux qui n'ont pas d'appétence particulière pour les lignes de codes.
+
+Avec cet outil, les fichiers in/out sont découpés en plusieurs tables (partie fixe, actes, diagnostics, passages RUM) exportées dans des formats plus accessibles que les in/out (csv, parquet, txt, json et même xlsx). Pour les non codeurs, cette étape pourrait faciliter la compréhension des résultats d'e-PMSI ou des atypies qui y sont relevées (un code retour FG, une atypie de mouvement, un code indication incorrect, une variable de facturation mal renseignée, etc.).
+
+Dans le nom pmsi::io, io fait donc référence à :
+
+- in/out, les fichiers en entrée/sortie des logiciels de l'ATIH
+- input / output car on produit de ces in/out une nouvelle sortie, de nouveaux out.
+
+
+## Résultat 
+
+Un exemple ci-dessous avec le découpage des RSS et RSA partie fixe et variables et l'ajout du fichier tra aux données 2023 M12 du CHU de Brest.
+
+À noter : les traitements sont très rapides pour toutes les sorties hormis les fichiers xlsx qui sont un peu plus exigeants à écrire.
+
+<br>
+
+
+<center>
+<img src="/images/pmsi-io-2.png" width = "85%"/>
+</center>
+
+<br>
+
+À ce stade, l'application permet de :
+
+- dézipper les fichiers in / out en deux clics
+- convertir les fichiers PMSi in / out du champ MCO en tableaux de données (csv, Excel, parquet, txt, json)
+- ajouter le fichier tra aux données anonymisées du *out*
+- les fichiers pris en charge sont : 
+	- RSS (fixe et variable)
+	- RSA (fixe et variable)
+	- anohosp (in / out)
+	- dmi (in / out)
+	- med / medatu (in / out)
+	- porg (in / out)
+	- diap (out)
+	- tra
+
+
+## Installation
+
+L'application est disponible pour Windows, Ubuntu et Mac.
+
+
+Télécharger l'application ici
+
+- [Mac Silicon](https://github.com/GuillaumePressiat/pmsi-io/releases/download/v0.1.5/pmsi-io_0.1.5_aarch64.dmg) &bull;&bull;&bull; [Mac Intel](https://github.com/GuillaumePressiat/pmsi-io/releases/download/v0.1.5/pmsi-io_0.1.5_x64.dmg) &bull;&bull;&bull; [Mac Universal](https://github.com/GuillaumePressiat/pmsi-io/releases/download/v0.1.5/pmsi-io_0.1.5_universal.dmg)
+- [Windows exe](https://github.com/GuillaumePressiat/pmsi-io/releases/download/v0.1.5/pmsi-io_0.1.5_x64-setup.exe) &bull;&bull;&bull; [Windows msi](https://github.com/GuillaumePressiat/pmsi-io/releases/download/v0.1.5/pmsi-io_0.1.5_x64_fr-FR.msi)
+- [Ubuntu deb](https://github.com/GuillaumePressiat/pmsi-io/releases/download/v0.1.5/pmsi-io_0.1.5_amd64.deb) &bull;&bull;&bull; [Ubuntu AppImage](https://github.com/GuillaumePressiat/pmsi-io/releases/download/v0.1.5/pmsi-io_0.1.5_amd64.AppImage)
+
+Lancer l'installation en fonction du système d'exploitation.
+
+
+## Discussion
+
+Si un tel outil s'avérait utile, au moins dans certains établissements, je n'aurai pas découvert Rust pour rien ! 
+
+Et si tel était le cas, Druides ne devrait-il pas intégrer ces fonctionnalités ? 
+
+À long terme, si la solution en Rust se confirme, il est possible que pmeasyr et pypmsi l'utilisent directement comme dépendance.
+
+## Contact
+
+N'hésitez pas à me contacter en cas de problème. Cela reste un logiciel jeune et gratuit, il n'est pas exempt de bugs.
+
+
