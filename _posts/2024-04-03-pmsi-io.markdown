@@ -40,6 +40,36 @@ Dans le nom pmsi::io, io fait donc référence à :
 - in/out, les fichiers en entrée/sortie des logiciels de l'ATIH
 - input / output car on produit de ces in/out une nouvelle sortie, de nouveaux out.
 
+## Vidéo 
+
+<style media="screen" type="text/css">
+.container {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+}
+.video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+</style>
+
+<div class="container">
+<div id="video_youtube" align="center">
+          <iframe id="pmsi-io" src="https://www.youtube.com/embed/sDyYsXLEjx4?vq=hd2160" class="video" allowfullscreen frameborder="0" > </iframe>
+</div>
+</div>
+
+
+<br>
+<hr>
+
+[https://www.youtube.com/watch?v=sDyYsXLEjx4](https://www.youtube.com/watch?v=sDyYsXLEjx4)
 
 ## Résultat 
 
