@@ -25,7 +25,7 @@ Dans cet article, je pointe vers le code que j'ai écrit pour intégrer les donn
 
 À l'heure actuelle, tout l'écosystème pola.rs / delta lake n'est pas encore parfaitement stabilisé. Sans fichier requirements mais juste en listing voici les packages utilisés :
 
-```sh
+{% highlight text %}
 polars==1.6.0
 pypmsi=0.2.6
 delta==0.4.2
@@ -33,7 +33,8 @@ delta-spark==2.4.0
 deltalake==0.19.2
 pyspark==3.4.3
 pandas==2.0.2
-```
+{% endhighlight %}
+
 
 ## Notebook 
 
@@ -59,6 +60,8 @@ Le voici embarqué dans cette page :
 <center>
 <iframe src="https://guillaumepressiat.github.io/pmsi_rsa_for_deltalake/" width="95%" height = "750"></iframe>
 </center>
+
+<br>
 
 ---
 [^1]: ACID : Atomicité, cohérence, isolation et durabilité
