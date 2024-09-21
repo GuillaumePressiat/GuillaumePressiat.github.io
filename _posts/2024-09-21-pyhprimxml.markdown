@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Lire des fichiers H'XML / HPRIM-XML avec python et pola.rs"
+title: "Lire des fichiers H'XML / HPRIM-XML avec python/pola.rs ou R"
 date: 2024-09-21 11:00:00 +0100
 author: Guillaume Pressiat
 tags: python interopérabilité HPRIM-XML
