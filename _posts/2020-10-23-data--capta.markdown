@@ -72,7 +72,7 @@ Autre point délicat : le format des données hospitalières (PMSI, voir plus ba
 ## Données ou obtenues ?
 
 
-Mais revenons sur le concept de donnée. Je reprends ici des éléments d'un article d'[Arthur Perret](http://arthurperret.fr/documentarite-et-donnees.html) dont le paragraphe [Épistémologie des données](http://arthurperret.fr/documentarite-et-donnees.html#épistémologie-des-données) mérite, je crois, le détour.
+Mais revenons sur le concept de donnée. Je reprends ici des éléments d'un article d'[Arthur Perret](http://arthurperret.fr/documentarite-et-donnees.html) dont le paragraphe [Épistémologie des données](http://arthurperret.fr/documentarite-et-donnees.html#epistemologie-des-donnees) mérite, je crois, le détour.
 
 ### De la mesure au big data
 
