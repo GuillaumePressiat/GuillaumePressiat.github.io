@@ -3,7 +3,7 @@ layout: post
 title: "Découverte de delta lake avec pola.rs et pypmsi"
 date: 2024-09-21 10:00:00 +0100
 author: Guillaume Pressiat
-tags: pmsi pypmsi
+tags: pmsi pypmsi python
 categories: Programmation
 comments: true
 ---
