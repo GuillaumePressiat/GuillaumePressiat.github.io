@@ -123,7 +123,7 @@ Une présentation de ce package est faite ici :
 
 <a href="https://guillaumepressiat.github.io/pyhprimxml/" target="_blank">https://guillaumepressiat.github.io/pyhprimxml/</a>
 
-Le voici embarqué dans cette page :
+La voici embarquée dans cette page :
 
 <center>
 <iframe src="https://guillaumepressiat.github.io/pyhprimxml/" width="95%" height = "750"></iframe>
