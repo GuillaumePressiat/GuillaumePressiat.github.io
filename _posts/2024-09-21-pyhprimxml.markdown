@@ -36,7 +36,7 @@ Afin que ces échanges entre logiciels se passent le mieux possible, des standar
 En termes de format informatique, les données peuvent prendre la forme de fichiers texte où l'information est séparée par des barres verticales, de fichiers json mais aussi, souvent, de fichiers XML.
 
 C'est ce dernier point qui est abordé dans ce billet avec le cas des fichiers HPRIM-XML. 
-Les objectifs de cette norme tiennent dans ces 2 axes originellement en lien avec la FIDES Séjours[^5] : 
+Les objectifs de cette norme tiennent dans les deux axes suivants, originellement en lien avec la FIDES Séjours[^5] : 
 
 - Remontée des informations d’activité vers le DIM (exhaustivité, qualité et validation des informations médicales)
 - Alimentation du processus de facturation individuelle des séjours (exhaustivité, qualité et validation des informations de facturation)
