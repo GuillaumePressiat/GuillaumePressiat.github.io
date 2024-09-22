@@ -31,12 +31,12 @@ Par exemple :
 
 Les enjeux sont importants et on parle d'interopérabilité, de logique évenementielle, d'atomicité de l'information. Bref, tout cela rentre dans un cadre plus large que l'on appelle l'urbanisation d'un système d'information.
 
-Afin que ces échanges entre logiciels se passent le mieux possible, des standards ont été mis en place au niveau international (il y a un jargon, on citera HL7[^1], IHE[^2]) mais également au niveau national avec HPRIM[^3] car certaines données sont propres au cadre réglementaire français, notamment les spécificités du PMSI[^4].
+Afin que ces échanges entre logiciels se passent le mieux possible, des normes, standards et recommandations ont été mis en place au niveau international (il y a un jargon, on citera HL7[^1], IHE[^2]) mais également au niveau national avec HPRIM[^3] car certaines données sont propres au cadre réglementaire français, notamment les spécificités du PMSI[^4].
 
 En termes de format informatique, les données peuvent prendre la forme de fichiers texte où l'information est séparée par des barres verticales, de fichiers json mais aussi, souvent, de fichiers XML.
 
 C'est ce dernier point qui est abordé dans ce billet avec le cas des fichiers HPRIM-XML. 
-Les objectifs de cette norme tiennent dans les deux axes suivants, originellement en lien avec la FIDES Séjours[^5] : 
+Les objectifs de ce standard tiennent dans les deux axes suivants, originellement en lien avec la FIDES Séjours[^5] : 
 
 - Remontée des informations d’activité vers le DIM (exhaustivité, qualité et validation des informations médicales)
 - Alimentation du processus de facturation individuelle des séjours (exhaustivité, qualité et validation des informations de facturation)
