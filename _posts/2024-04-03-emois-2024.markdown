@@ -33,7 +33,7 @@ Voici deux liens pour visualiser :
 ### Poster
 
 <center>
-<iframe src="https://guillaumepressiat.github.io/emois-2024/assets/poster/poster-pmeasyr-etc-unie-A4-v5.3.pdf" width="95%" height = "550"></iframe>
+<iframe src="https://guillaumepressiat.github.io/emois-2024/assets/poster/poster-pmeasyr-etc-unie-A4-v5.3.pdf#view=FitH" width="95%" height = "550"></iframe>
 </center>
 
 <br>
