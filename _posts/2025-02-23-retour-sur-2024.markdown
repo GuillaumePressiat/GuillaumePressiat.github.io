@@ -1,0 +1,60 @@
+---
+layout: post
+title: "Retour sur les communications réalisées en 2024"
+date: 2025-02-23 11:00:00 +0100
+author: Guillaume Pressiat
+tags: vidéo pmsi
+categories: Présentation
+comments: true
+excerpt_separator: <!--more-->
+---
+
+
+L’année 2024 étant achevée, il est peut-être temps de faire le bilan des présentations et de l’atelier que j’ai eu l’occasion de faire cette année. 
+
+La dernière, communication lors d’un « meetup du Health Data Hub » #22, est disponible en ligne.
+
+<!--more-->
+
+
+Point de départ, fin 2023, le comité scientifique du congrès EMOIS m’a proposé de réaliser un poster et d’animer un atelier sur la manipulation de données PMSI avec R dans le cadre du congrès EMOIS 2024 à Lille. 
+
+C'était l'occasion de mettre en valeur les travaux, et cela a fait boule de neige puisque j’ai finalement fait 4 déplacements.
+ 
+Cela a permis de parler des travaux réalisés autour de R, Python et Rust sur le PMSI en y ajoutant certains messages :
+
+- à l'échelle des établissements : le lien fort qui existe entre information médicale et données de santé (autrement dit DIM + EDS)
+- à l'échelle nationale : mettre en avant l’importance de considérer les données comme des « obtenues », des informations qui viennent du « terrain », et donc l’intérêt qu’il y a à considérer tous les acteurs et toutes les expertises autour de la donnée de santé à différentes échelles du territoire (agences nationales et établissements de santé). Ce point avait déjà été abordé dans un [précédent billet](https://guillaumepressiat.github.io/blog/2020/10/data-capta) de ce blog.
+
+Voici le lien vers les supports des communications :
+
+- [présentation](https://guillaumepressiat.github.io/saint-jacut-de-la-mer-2024/#0) à la rencontre des EDS du Grand Ouest organisée cette année par le CHU de Brest, à Saint Jacut de la Mer, le 26/03/2024
+- [Poster](https://guillaumepressiat.github.io/emois-2024/assets/poster/poster-pmeasyr-etc-unie-A4-v5.3.pdf) et [atelier](https://guillaumepressiat.github.io/emois-2024/#1) au congrès d’information médicale EMOIS 2024 à Lille le 05/04/2024
+- [Communication](https://guillaumepressiat.github.io/abimes-2024/#0) à la journée de l’association d’information médicale bretonne ABIMES à Quimper le 11/10/2024
+- Communication au « [meetup #22](https://entraide.health-data-hub.fr/t/meetup-22-7-novembre-2024-de-17h30-a-19h30/2602) SNDS / HDH » le 07/11/2024, dont voici la présentation en [pdf](https://guillaumepressiat.github.io/meetup-hdh-22--2024/pmeasyr-pypmsi-2024-11-07-fin.pdf) mais elle a aussi été enregistrée en [vidéo](https://www.youtube.com/watch?v=0H4aM_J__Dk&t=1653s).. (le meetup était retransmis en direct en streaming)
+
+
+ <style media="screen" type="text/css">
+	.container1 {
+	    position: relative;
+	    width: 100%;
+	    height: 0;
+	    padding-bottom: 56.25%;
+	}
+	.video1 {
+	    position: absolute;
+	    top: 0;
+	    left: 0;
+	    width: 100%;
+	    height: 100%;
+	}
+
+</style>
+
+<br>
+
+<div class="container1">
+<div id="video_youtube" align="center">
+          <iframe id="hdh-22" src="https://www.youtube.com/embed/0H4aM_J__Dk?start=1657" class="video1" allowfullscreen frameborder="0" > </iframe>
+</div>
+</div>
