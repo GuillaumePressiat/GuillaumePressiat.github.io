@@ -1,0 +1,74 @@
+---
+layout: post
+title:  "Mise à jour des outils, février en attendant... 2025, M01 & M02"
+date:   2025-02-23 14:05:50 +0100
+author: Guillaume Pressiat
+tags: pmeasyr pypmsi rust
+categories: Mise&nbsp;à&nbsp;jour
+---
+
+
+*Utiliser les outils sur les données M01 et M02 2025, en attendant M03.*
+
+Le package pmeasyr, pypmsi, pmsi-io permettent d'intégrer les données 2025 M01 et M02, il faut pour cela les mettre à jour.
+
+<!--more-->
+
+## pmeasyr
+
+[https://github.com/GuillaumePressiat/pmeasyr](https://github.com/GuillaumePressiat/pmeasyr)
+
+**Version 0.4.1**
+
+Au plus simple :
+{% highlight r %}
+install.packages('pmeasyr', repos = 'https://guillaumepressiat.r-universe.dev')
+{% endhighlight %}
+
+En attendant la prochaine mise à jour liée à l'envoi M03 où il faudra de nouveau faire la mise à jour.
+
+<br>
+
+## pypmsi 
+
+[https://github.com/GuillaumePressiat/pypmsi](https://github.com/GuillaumePressiat/pypmsi)
+
+**Version 0.2.8**
+
+{% highlight bash %}
+pip install https://github.com/GuillaumePressiat/pypmsi/releases/latest/download/pypmsi-0.2.8-py3-none-any.whl
+{% endhighlight %}
+
+Astuce :
+
+Télécharger automatiquement la dernière roue python (latest github release, wheel artifact) :  
+
+{% highlight bash %}
+pip install "git+https://github.com/GuillaumePressiat/pypmsi@$(curl -s https://api.github.com/repos/GuillaumePressiat/pypmsi/releases/latest | jq -r ".tag_name")" 
+{% endhighlight %}
+
+<br>
+
+## pmsi-io / pmsi-clio
+
+voir sur cette page.
+
+[https://github.com/GuillaumePressiat/pmsi-io](https://github.com/GuillaumePressiat/pmsi-io)
+
+**Version 0.1.8**
+
+### pmsi-io
+
+<center>
+<a href = "" target = "_blank">
+<img src="/images/apercu-pmsi-io.png" width = "100%"/>
+</a>
+</center>
+
+### pmsi-clio
+
+<center>
+<a href = "" target = "_blank">
+<img src="/images/apercu-pmsi-clio.png" width = "100%"/>
+</a>
+</center>
