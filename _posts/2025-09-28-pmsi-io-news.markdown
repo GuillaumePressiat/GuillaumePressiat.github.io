@@ -8,9 +8,9 @@ categories: Mise&nbsp;à&nbsp;jour
 ---
 
 
-*Utiliser les outils sur les données M01 et M12 2025, en attendant 2026.*
+*Utiliser les outils sur les données M01 à M12 2025, en attendant 2026.*
 
-Le package pmeasyr, pypmsi, pmsi-io permettent d'intégrer les données 2025 M01 et M12, il faut pour cela les mettre à jour.
+Le package pmeasyr, pypmsi, pmsi-io permettent d'intégrer les données 2025 M01 à M12, il faut pour cela les mettre à jour.
 
 <!--more-->
 
