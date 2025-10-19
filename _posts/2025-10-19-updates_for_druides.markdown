@@ -1,0 +1,77 @@
+---
+layout: post
+title:  "Mise à jour des outils pour s'adapter aux sorties de Druides"
+date:   2025-10-19 16:00:00 +0100
+author: Guillaume Pressiat
+tags: pmeasyr pypmsi rust
+categories: Mise&nbsp;à&nbsp;jour
+---
+
+
+*Utiliser les outils sur les données en sortie de Druides de manière transparente*
+
+Le package pmeasyr, pypmsi, pmsi-io permettent d'intégrer les données 2025 M01 et M12, et fonctionnent encore sur les données passées de manière fluide. Pour profiter de cela, il faut les mettre à jour.
+
+<!--more-->
+
+## pmeasyr
+
+[https://github.com/GuillaumePressiat/pmeasyr](https://github.com/GuillaumePressiat/pmeasyr)
+
+**Version 0.5.0**
+
+Au plus simple :
+{% highlight r %}
+install.packages('pmeasyr', repos = 'https://guillaumepressiat.r-universe.dev')
+{% endhighlight %}
+
+En attendant la prochaine mise à jour liée à l'actualité 2026 qui ne se fait pas attendre, et où il faudra de nouveau faire la mise à jour.
+
+<br>
+
+## pypmsi 
+
+[https://github.com/GuillaumePressiat/pypmsi](https://github.com/GuillaumePressiat/pypmsi)
+
+**Version 0.3.0**
+
+{% highlight bash %}
+pip install https://github.com/GuillaumePressiat/pypmsi/releases/latest/download/pypmsi-0.2.8-py3-none-any.whl
+{% endhighlight %}
+
+Astuce :
+
+Télécharger automatiquement la dernière roue python (latest github release, wheel artifact) :  
+
+{% highlight bash %}
+pip install "git+https://github.com/GuillaumePressiat/pypmsi@$(curl -s https://api.github.com/repos/GuillaumePressiat/pypmsi/releases/latest | jq -r ".tag_name")" 
+{% endhighlight %}
+
+<br>
+
+## pmsi-io / pmsi-clio
+
+voir sur cette page.
+
+[https://github.com/GuillaumePressiat/pmsi-io](https://github.com/GuillaumePressiat/pmsi-io)
+
+**Version 0.2.0**
+
+
+### pmsi-io
+
+Cette version embarque quelques améliorations (sauvegarde des paramètres d'une session à une autre).
+
+<center>
+<a href = "" target = "_blank">
+<img src="/images/apercu-pmsi-io.png" width = "100%"/>
+</a>
+</center>
+
+### pmsi-clio
+
+<center>
+<a href = "" target = "_blank">
+<img src="/images/apercu-pmsi-clio.png" width = "100%"/>
+</a>
+</center>
