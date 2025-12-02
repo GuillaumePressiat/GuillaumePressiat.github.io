@@ -9,7 +9,7 @@ comments: true
 
 
 
-In a pretty old [post](https://guillaumepressiat.github.io/blog/2019/11/oraclyr) on this blog, I wrote about an Oracle database connection from R on Windows with ODBC when you have old Oracle clients (32 bit version) installed in an enterprise setup.
+In a rather old [post](https://guillaumepressiat.github.io/blog/2019/11/oraclyr) on this blog, I wrote about an Oracle database connection from R on Windows with ODBC when you have old Oracle clients (32 bit version) installed in an enterprise setup.
 
 It's still working on R 32 bit. But now R new releases are only delivered in 64 bit version. Hard to stay with a R 4.1 (last 32bit) when we are now at R 4.5...
 
