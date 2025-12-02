@@ -19,7 +19,7 @@ In such a situation, are there any alternatives?
 
 ## An alternative with JDBC
 
-**Java on the rescue?**
+**Java to the rescue?**
 
 With JDBC clients and jar files, DBeaver is able to connect to all types of databases, so R should also be able to do so, both in 32b or 64b and on the most recent versions only with JDBC drivers?
 
