@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "logrittr: A Verbose Pipe Operator for logging dplyr Pipelines"
+title: "logrittr: A Verbose Pipe Operator for Logging dplyr Pipelines"
 date: 2026-04-15 10:10:05 +0100
 author: Guillaume Pressiat
 tags: R
@@ -33,7 +33,6 @@ comments: true
 </center>
 
 <br>
-<hr width = '50%'>
 <br>
 
 ## Motivation
