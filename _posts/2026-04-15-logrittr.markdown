@@ -165,7 +165,7 @@ nycflights13::flights %>=%
 
 
 [tidylog](https://github.com/elbersb/tidylog) is a really neat package that gives me motivation for this one.
-`tidylog` works by masking dplyr functions, not ideal te me. 
+`tidylog` works by masking dplyr functions, not ideal to me. 
 
 Anyway this also was a moment for me to test a new programmer tool that 
 is used a lot for programming at this time.
