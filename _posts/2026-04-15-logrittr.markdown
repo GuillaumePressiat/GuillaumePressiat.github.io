@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "logrittr: A Verbose Pipe Operator for Logging dplyr Pipelines"
-date: 2026-04-15 09:05:50 +0100
+title: "logrittr: A Verbose Pipe Operator for logging dplyr Pipelines"
+date: 2026-04-15 10:10:05 +0100
 author: Guillaume Pressiat
 tags: R
 comments: true
@@ -28,7 +28,7 @@ comments: true
 
 <center>
 <a href = "https://github.com/guillaumepressiat/logrittr" target = "_blank">
-<img src="/images/pastels_example.png" width = "85%"/>
+<img src="/images/pastels_example.png"/>
 </a>
 </center>
 
@@ -138,7 +138,7 @@ iris %>=%
 
 <center>
 <a href = "https://guillaumepressiat.r-universe.dev/logrittr" target = "_blank">
-<img src="/images/nycflights13_example.png" width = "85%"/>
+<img src="/images/nycflights13_example.png"/>
 </a>
 </center>
 
