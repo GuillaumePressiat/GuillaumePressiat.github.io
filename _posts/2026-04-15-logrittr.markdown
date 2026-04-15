@@ -93,7 +93,9 @@ install.packages('logrittr', repos = 'https://guillaumepressiat.r-universe.dev')
 # devtools::install_github("GuillaumePressiat/logrittr")
 {%endhighlight%}
 
-See https://guillaumepressiat.r-universe.dev/logrittr
+
+See <a href = "https://github.com/guillaumepressiat/logrittr" target = "_blank">github</a> or <a href = "https://guillaumepressiat.r-universe.dev/logrittr" target = "_blank">r-universe</a>.
+
 
 ## Usage
 
