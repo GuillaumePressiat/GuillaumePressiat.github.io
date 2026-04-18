@@ -13,7 +13,7 @@ comments: true
 
 <br>
 
-This wonderful post from [Jonathan Caroll](https://jcarroll.com.au/2026/04/17/schotter-plots-in-r/) give me idea to play with [ggplot2](https://ggplot2.tidyverse.org) code and 
+This wonderful post from [Jonathan Carroll](https://jcarroll.com.au/2026/04/17/schotter-plots-in-r/) give me idea to play with [ggplot2](https://ggplot2.tidyverse.org) code and 
 [scico](https://github.com/thomasp85/scico) color palettes: 
 
 Also see this [toot](https://mastodon.social/@safest_integer/114296256313964335) from 
@@ -222,6 +222,6 @@ Many thanks to:
 
 - Thomas Lin Pedersen for this package: [thomasp85/scico](https://github.com/thomasp85/scico) and [Fabio Crameri](https://www.fabiocrameri.ch/colourmaps/) for the palettes.
 - [Stefan Siegert](https://mastodon.social/@safest_integer/114296256313964335)
-- [Jonathan Caroll](https://jcarroll.com.au/2026/04/17/schotter-plots-in-r/)
+- [Jonathan Carroll](https://jcarroll.com.au/2026/04/17/schotter-plots-in-r/)
 - ggplot2 author and maintainers.
 
