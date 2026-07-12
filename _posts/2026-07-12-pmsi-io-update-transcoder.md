@@ -3,7 +3,7 @@ layout: post
 title: "pmsi-io 0.4.1 et Transcoder 0.2.0"
 date: 2026-07-12 15:05:05 +0100
 author: Guillaume Pressiat
-categories: [Application, "Mise à jour"]
+categories: [Application, Mise&nbsp;à&nbsp;jour]
 tags: [rust, pmsi, shiny, "cim & ccam", finess]
 comments: true
 ---
